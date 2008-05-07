@@ -106,7 +106,7 @@
       <Output TaskParameter="Include" ItemName="zipOutput" />
     </CreateItem>
 
-    <Zip Files="@(zipOutput)" ZipFileName="$(buildDir)\$(projectName).zip" Flatten="true" />
+    <Zip Files="@(zipOutput)" ZipFileName="$(buildDir)\$(projectName)_v$(major).$(minor).zip" Flatten="true" />
   </Target>
 
 

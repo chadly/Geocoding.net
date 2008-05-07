@@ -23,4 +23,5 @@ Generate AssemblyInfoCommon file
 Service tests
 ==============
 You will need to generate API keys for each respective service to run the service tests.
-Make a copy of App.config.temp in Services.Tests folder and put in your API keys.
+Make a copy of App.config.temp and rename it to App.Config in Services.Tests folder
+and put in your API keys.
