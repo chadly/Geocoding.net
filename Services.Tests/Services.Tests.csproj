@@ -47,6 +47,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfoCommon.cs">
+      <Link>Properties\AssemblyInfoCommon.cs</Link>
+    </Compile>
     <Compile Include="GeoCoderTest.cs" />
     <Compile Include="GoogleGeoCoderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

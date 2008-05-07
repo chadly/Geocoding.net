@@ -38,6 +38,9 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfoCommon.cs">
+      <Link>Properties\AssemblyInfoCommon.cs</Link>
+    </Compile>
     <Compile Include="Google\GoogleAddressAccuracy.cs" />
     <Compile Include="Google\GoogleGeoCoder.cs" />
     <Compile Include="Google\GoogleStatusCode.cs" />

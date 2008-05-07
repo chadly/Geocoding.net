@@ -36,6 +36,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfoCommon.cs">
+      <Link>Properties\AssemblyInfoCommon.cs</Link>
+    </Compile>
     <Compile Include="Address.cs" />
     <Compile Include="AddressAccuracy.cs" />
     <Compile Include="Country.cs" />

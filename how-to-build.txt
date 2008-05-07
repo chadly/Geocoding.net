@@ -1,0 +1,26 @@
+Build using MSBuild (either 3.5 or 2.0 version should work).
+
+For basic Debug build, just run build.bat.
+
+How to Build from Visual Studio 2008 (or 2005) Command Prompt
+==============================================================
+Here are some sample build commands:
+
+Debug Build
+  > msbuild geocoding.build
+  
+Release Build
+  > msbuild geocoding.build /p:Configuration=Release
+
+Zip Debug Build to Output Dir (no tests)
+  > msbuild geocoding.build /t:Zip
+  
+Generate AssemblyInfoCommon file
+  > msbuild geocoding.build /t:Version
+
+
+
+Service tests
+==============
+You will need to generate API keys for each respective service to run the service tests.
+Make a copy of App.config.temp in Services.Tests folder and put in your API keys.
