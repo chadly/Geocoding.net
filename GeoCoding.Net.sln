@@ -13,6 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Tests", "Services.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{891021E5-7521-4F93-9946-B7B630DF3192}"
 	ProjectSection(SolutionItems) = preProject
+		build-release.bat = build-release.bat
 		build.bat = build.bat
 		geocoding.build = geocoding.build
 		how-to-build.txt = how-to-build.txt
