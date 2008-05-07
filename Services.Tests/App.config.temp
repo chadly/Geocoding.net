@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="googleAccessKey" value="your-access-key-here" />
+    <add key="yahooAppId" value="your-app-id-here" />
+  </appSettings>
+</configuration>

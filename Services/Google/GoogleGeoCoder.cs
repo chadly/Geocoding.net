@@ -154,7 +154,12 @@ namespace GeoCoding.Services.Google
 
         public Address[] GeoCode(string street, string city, string state, string postalCode, Country country)
         {
-            string address = String.Format("{0} {1}, {2} {3}, {4}", street, city, state, postalCode, country);
+            string address;
+            if (country != Country.Unspecified)
+                address = String.Format("{0} {1}, {2} {3}, {4}", street, city, state, postalCode, country);
+            else
+                address = String.Format("{0} {1}, {2} {3}", street, city, state, postalCode);
+
             return GeoCode(address);
         }
 
