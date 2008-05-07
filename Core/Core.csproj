@@ -43,7 +43,6 @@
     </Compile>
     <Compile Include="Address.cs" />
     <Compile Include="AddressAccuracy.cs" />
-    <Compile Include="Country.cs" />
     <Compile Include="Distance.cs" />
     <Compile Include="DistanceUnits.cs" />
     <Compile Include="Location.cs" />

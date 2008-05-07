@@ -19,7 +19,7 @@ namespace GeoCoding.Tests
             string city = "AnyTown";
             string state = "CA";
             string postalCode = "12345";
-            Country country = Country.US;
+            string country = "US";
 
             Address a = new Address(street, city, state, postalCode, country);
 
@@ -36,8 +36,8 @@ namespace GeoCoding.Tests
         [Fact]
         public void CanCompareForEquality()
         {
-            Address address1 = new Address("123 Main Street", "Anytown", "CA", "12345", Country.US);
-            Address address2 = new Address("123 Main Street", "Anytown", "CA", "12345", Country.US);
+            Address address1 = new Address("123 Main Street", "Anytown", "CA", "12345", "US");
+            Address address2 = new Address("123 Main Street", "Anytown", "CA", "12345", "US");
 
             Assert.True(address1.Equals(address2));
             Assert.Equal(address1.GetHashCode(), address2.GetHashCode());
@@ -58,8 +58,8 @@ namespace GeoCoding.Tests
         [Fact]
         public void CanCalculateHaversineDistanceBetweenTwoAddresses()
         {
-            Address address1 = new Address(null, null, null, null, Country.Unspecified, new Location(0, 0), AddressAccuracy.Unknown);
-            Address address2 = new Address(null, null, null, null, Country.Unspecified, new Location(40, 20), AddressAccuracy.Unknown);
+            Address address1 = new Address(null, null, null, null, null, new Location(0, 0), AddressAccuracy.Unknown);
+            Address address2 = new Address(null, null, null, null, null, new Location(40, 20), AddressAccuracy.Unknown);
 
             Distance distance1 = address1.DistanceBetween(address2);
             Distance distance2 = address2.DistanceBetween(address1);

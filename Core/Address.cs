@@ -12,7 +12,7 @@ namespace GeoCoding
         private readonly string _city;
         private readonly string _state;
         private readonly string _postalCode;
-        private readonly Country _country;
+        private readonly string _country;
         private readonly Location _coordinates;
         private readonly AddressAccuracy _accuracy;
 
@@ -36,9 +36,9 @@ namespace GeoCoding
             get { return _postalCode ?? ""; }
         }
 
-        public Country Country
+        public string Country
         {
-            get { return _country; }
+            get { return _country ?? ""; }
         }
 
         public Location Coordinates
@@ -55,10 +55,10 @@ namespace GeoCoding
 
         #region Constructors
 
-        public Address(string street, string city, string state, string postalCode, Country country)
+        public Address(string street, string city, string state, string postalCode, string country)
             : this(street, city, state, postalCode, country, Location.Empty, AddressAccuracy.Unknown) { }
 
-        public Address(string street, string city, string state, string postalCode, Country country, Location coordinates, AddressAccuracy accuracy)
+        public Address(string street, string city, string state, string postalCode, string country, Location coordinates, AddressAccuracy accuracy)
         {
             _street = street;
             _city = city;

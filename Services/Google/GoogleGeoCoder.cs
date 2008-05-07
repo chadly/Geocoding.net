@@ -87,7 +87,7 @@ namespace GeoCoding.Services.Google
             string zip = EvaluateXPath("string(//adr:PostalCodeNumber)", nav);
             string[] coordinates = EvaluateXPath("string(//kml:Point/kml:coordinates)", nav).Split(',');
 
-            return new Address(street, city, state, zip, (Country)Enum.Parse(typeof(Country), country, true), FromCoordinates(coordinates), MapAccuracy(accuracy));
+            return new Address(street, city, state, zip, country, FromCoordinates(coordinates), MapAccuracy(accuracy));
         }
 
         private Address[] ProcessWebResponse(WebResponse response)
@@ -152,14 +152,9 @@ namespace GeoCoding.Services.Google
             }
         }
 
-        public Address[] GeoCode(string street, string city, string state, string postalCode, Country country)
+        public Address[] GeoCode(string street, string city, string state, string postalCode, string country)
         {
-            string address;
-            if (country != Country.Unspecified)
-                address = String.Format("{0} {1}, {2} {3}, {4}", street, city, state, postalCode, country);
-            else
-                address = String.Format("{0} {1}, {2} {3}", street, city, state, postalCode);
-
+            string address = String.Format("{0} {1}, {2} {3}, {4}", street, city, state, postalCode, country);
             return GeoCode(address);
         }
 

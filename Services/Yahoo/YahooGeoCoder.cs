@@ -65,7 +65,7 @@ namespace GeoCoding.Services.Yahoo
             string postalCode = EvaluateXPath("string(y:Zip)", nav);
             string country = EvaluateXPath("string(y:Country)", nav);
 
-            return new Address(street, city, state, postalCode, (Country)Enum.Parse(typeof(Country), country, true), new Location(latitude, longitude), accuracy);
+            return new Address(street, city, state, postalCode, country, new Location(latitude, longitude), accuracy);
         }
 
         private Address[] ProcessWebResponse(WebResponse response)
@@ -154,7 +154,7 @@ namespace GeoCoding.Services.Yahoo
             return GeoCode(request);
         }
 
-        public Address[] GeoCode(string street, string city, string state, string postalCode, Country country)
+        public Address[] GeoCode(string street, string city, string state, string postalCode, string country)
         {
             //ignoring the country parameter since yahoo doesn't accept it
             HttpWebRequest request = BuildWebRequest(street, city, state, postalCode);
