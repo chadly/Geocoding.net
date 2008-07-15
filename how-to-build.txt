@@ -1,5 +1,14 @@
-Build using MSBuild (either 3.5 or 2.0 version should work).
+NOTE: In order to compile the solution in Visual Studio, you must first
+run the build in MSBuild. The build process generates some files that
+are needed to compile in Visual Studio.
 
+NOTE: If you don't have VisualSVN installed, you will need to change
+the path to svnversion.exe in order to successfully run the build. Create a copy
+of settingsOverride.build.temp and and rename it to settingsOverride.build and replace
+the svnToolPath with your custom path to svnversion.exe.
+
+
+Build using MSBuild (either 3.5 or 2.0 version should work).
 For basic Debug build, just run build.bat.
 
 How to Build from Visual Studio 2008 (or 2005) Command Prompt
@@ -17,7 +26,6 @@ Zip Debug Build to Output Dir (no tests)
   
 Generate AssemblyInfoCommon file
   > msbuild geocoding.build /t:Version
-
 
 
 Service tests

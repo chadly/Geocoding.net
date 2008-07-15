@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="settingsOverride.build" Condition="Exists('settingsOverride.build')" />
+
   <PropertyGroup>
     <!-- Assembly Info -->
     <projectName>GeoCoding.Net</projectName>
@@ -16,11 +18,19 @@
     <!-- default build directory is just \build -->
     <buildDir Condition="'$(buildDir)'==''">$(MSBuildProjectDirectory)\build\$(configuration)</buildDir>
     <testOutputDir Condition="'$(testOutputDir)'==''">$(buildDir)\test-results</testOutputDir>
+
+    <!-- this is overrideable by creating a settingsOverride.build file -->
+    <svnToolPath Condition="'$(svnToolPath)'==''">C:\Program Files\VisualSVN\bin</svnToolPath>
   </PropertyGroup>
 
   <!-- Define order of solutions to build -->
   <ItemGroup>
     <vssolutions Include="GeoCoding.Net.sln" />
+  </ItemGroup>
+
+  <!-- Define user-specific files that need to be copied from template -->
+  <ItemGroup>
+    <templateFiles Include="Services.Tests\App.config.temp" />
   </ItemGroup>
 
   <!-- Define tests that should be run as part of the build -->
@@ -68,7 +78,13 @@
     <MSBuild Projects="@(vssolutions)" Targets="Clean" Properties="Configuration=$(configuration)" />
   </Target>
 
-  <Target Name="Compile">
+  <Target Name="CopyTemplateFiles">
+    <Copy SourceFiles="@(templateFiles -> '%(FullPath)')"
+          DestinationFiles="@(templateFiles -> '%(RootDir)%(Directory)%(Filename)')"
+          Condition="!Exists('%(templateFiles.RootDir)%(templateFiles.Directory)%(templateFiles.Filename)')" />
+  </Target>
+
+  <Target Name="Compile" DependsOnTargets="CopyTemplateFiles">
     <MSBuild Projects="@(vssolutions)" Properties="Configuration=$(configuration)" />
   </Target>
 
@@ -76,7 +92,7 @@
     <SvnVersion
       LocalPath="$(MSBuildProjectDirectory)"
       UseLastCommittedRevision="true"
-      ToolPath="C:\Program Files\Collabnet Subversion">
+      ToolPath="$(svnToolPath)">
       <Output TaskParameter="Revision" PropertyName="revision" />
     </SvnVersion>
 
@@ -93,7 +109,7 @@
 
   <Target Name="Test" DependsOnTargets="Compile;_CopyOutputToBuildDir">
     <MakeDir Directories="$(testOutputDir)" />
-    
+
     <!-- run unit tests -->
     <xunit
       Assembly="@(tests -> '%(RootDir)%(Directory)bin\$(configuration)\GeoCoding.%(Filename).dll')"
