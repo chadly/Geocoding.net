@@ -5,7 +5,8 @@ namespace GeoCoding
     public struct Distance
     {
         public const double EarthRadiusInMiles = 3956.545;
-        public const double EarthRadiusInKilometers = 3438.147;
+        public const double EarthRadiusInKilometers = 6378.135;
+		private const double ConversionConstant = 0.621371192;
 
         private readonly double _value;
         private readonly DistanceUnits _units;
@@ -47,15 +48,13 @@ namespace GeoCoding
             if (_units == units) return this;
 
             double newValue;
-            const double conversionConstant = 0.621371192;
-
             switch (units)
             {
                 case DistanceUnits.Miles:
-                    newValue = _value * conversionConstant;
+                    newValue = _value * ConversionConstant;
                     break;
                 case DistanceUnits.Kilometers:
-                    newValue = _value / conversionConstant;
+					newValue = _value / ConversionConstant;
                     break;
                 default:
                     newValue = 0;
