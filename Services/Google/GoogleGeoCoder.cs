@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Web;
@@ -63,8 +64,8 @@ namespace GeoCoding.Services.Google
 
         private Location FromCoordinates(string[] coordinates)
         {
-            double longitude = double.Parse(coordinates[0]);
-            double latitude = double.Parse(coordinates[1]);
+            double longitude = double.Parse(coordinates[0], CultureInfo.InvariantCulture);
+			double latitude = double.Parse(coordinates[1], CultureInfo.InvariantCulture);
             Location gpsCoordinates = new Location(latitude, longitude);
             return gpsCoordinates;
         }

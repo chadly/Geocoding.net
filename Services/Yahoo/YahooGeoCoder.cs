@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Web;
@@ -56,8 +57,8 @@ namespace GeoCoding.Services.Yahoo
         {
             AddressAccuracy accuracy = MapAccuracy(EvaluateXPath("string(@precision)", nav));
 
-            double latitude = double.Parse(EvaluateXPath("string(y:Latitude)", nav));
-            double longitude = double.Parse(EvaluateXPath("string(y:Longitude)", nav));
+            double latitude = double.Parse(EvaluateXPath("string(y:Latitude)", nav), CultureInfo.InvariantCulture);
+			double longitude = double.Parse(EvaluateXPath("string(y:Longitude)", nav), CultureInfo.InvariantCulture);
 
             string street = EvaluateXPath("string(y:Address)", nav);
             string city = EvaluateXPath("string(y:City)", nav);

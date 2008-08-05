@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Threading;
+using System.Globalization;
 using Xunit;
+using XunitExt;
 
 namespace GeoCoding.Services.Tests
 {
@@ -52,5 +55,23 @@ namespace GeoCoding.Services.Tests
             Assert.Equal(1, addresses.Length);
             AssertWhiteHouseAddress(addresses[0]);
         }
+
+		[Theory]
+		[InlineData("en-US")]
+		[InlineData("cs-CZ")]
+		public void CanGeoCodeAddressUnderDifferentCultures(string cultureName)
+		{
+			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(cultureName);
+
+			Address[] addresses = _geoCoder.GeoCode("24 sussex drive ottawa, ontario");
+
+			Assert.Equal(1, addresses.Length);
+			Assert.Equal("24 Sussex Dr", addresses[0].Street);
+			Assert.Equal("Ottawa", addresses[0].City);
+			Assert.Equal("ON", addresses[0].State);
+			Assert.Equal("K1M", addresses[0].PostalCode);
+			Assert.Equal("CA", addresses[0].Country);
+			Assert.Equal(AddressAccuracy.AddressLevel, addresses[0].Accuracy);
+		}
     }
 }
