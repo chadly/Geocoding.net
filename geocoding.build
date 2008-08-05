@@ -96,6 +96,10 @@
       <Output TaskParameter="Revision" PropertyName="revision" />
     </SvnVersion>
 
+    <CreateProperty Value="$(major).$(minor).$(build).$(revision)">
+      <Output TaskParameter="Value" PropertyName="versionString" />
+    </CreateProperty>
+
     <AssemblyInfo
       CodeLanguage="CS"
       OutputFile="AssemblyInfoCommon.cs"
@@ -104,7 +108,7 @@
       AssemblyCopyright="$(copyright)"
       AssemblyConfiguration="$(configuration)"
       ComVisible="false"
-      AssemblyVersion="$(major).$(minor).$(build).$(revision)" />
+      AssemblyVersion="$(versionString)" />
   </Target>
 
   <Target Name="Test" DependsOnTargets="Compile;_CopyOutputToBuildDir">
@@ -122,7 +126,7 @@
       <Output TaskParameter="Include" ItemName="zipOutput" />
     </CreateItem>
 
-    <Zip Files="@(zipOutput)" ZipFileName="$(buildDir)\$(projectName)_v$(major).$(minor).zip" Flatten="true" />
+    <Zip Files="@(zipOutput)" ZipFileName="$(buildDir)\$(projectName)_$(configuration)_v$(versionString).zip" Flatten="true" />
   </Target>
 
 
