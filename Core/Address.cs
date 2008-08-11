@@ -60,11 +60,11 @@ namespace GeoCoding
 
         public Address(string street, string city, string state, string postalCode, string country, Location coordinates, AddressAccuracy accuracy)
         {
-            _street = street;
-            _city = city;
-            _state = state;
-            _postalCode = postalCode;
-            _country = country;
+			_street = !String.IsNullOrEmpty(street) ? street : null;
+			_city = !String.IsNullOrEmpty(city) ? city : null;
+			_state = !String.IsNullOrEmpty(state) ? state : null;
+			_postalCode = !String.IsNullOrEmpty(postalCode) ? postalCode : null;
+			_country = !String.IsNullOrEmpty(country) ? country : null;
             _coordinates = coordinates;
             _accuracy = accuracy;
         }

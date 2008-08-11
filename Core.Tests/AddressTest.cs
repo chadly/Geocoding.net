@@ -6,13 +6,6 @@ namespace GeoCoding.Tests
     public class AddressTest
     {
         [Fact]
-        public void CanCreateEmpty()
-        {
-            Address address = new Address();
-            Assert.Equal(Address.Empty, address);
-        }
-
-        [Fact]
         public void CanCreate()
         {
             string street = "123 Main St.";
@@ -42,6 +35,23 @@ namespace GeoCoding.Tests
             Assert.True(address1.Equals(address2));
             Assert.Equal(address1.GetHashCode(), address2.GetHashCode());
         }
+
+		[Fact]
+		public void CanCompareForEqualityWithNullValues()
+		{
+			Address address1 = new Address(null, null, null, null, null);
+			Address address2 = new Address("", "", "", "", "");
+
+			Assert.True(address1.Equals(address2));
+			Assert.Equal(address1.GetHashCode(), address2.GetHashCode());
+		}
+
+		[Fact]
+		public void CanCreateEmpty()
+		{
+			Address address = new Address();
+			Assert.Equal(Address.Empty, address);
+		}
 
         [Fact]
         public void CanNotHaveNullValues()
