@@ -53,7 +53,6 @@
     <Compile Include="DistanceTest.cs" />
     <Compile Include="LocationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
