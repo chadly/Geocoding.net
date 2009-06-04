@@ -8,7 +8,7 @@
     <company>GeoCoding.Net</company>
     <copyright>Copyright © 2008 GeoCoding.Net</copyright>
     <major>1</major>
-    <minor>0</minor>
+    <minor>01</minor>
     <build Condition="'$(BUILD_NUMBER)'==''">0</build>
     <build Condition="'$(BUILD_NUMBER)'!=''">$(BUILD_NUMBER)</build>
 
@@ -138,5 +138,5 @@
   </PropertyGroup>
   <Import Project="SharedLibs\MsBuild\MSBuild.Community.Tasks.Targets" />
 
-  <UsingTask AssemblyFile="$(MSBuildProjectDirectory)\SharedLibs\xunit\xunitext.runner.msbuild.dll" TaskName="XunitExt.Runner.MSBuild.xunit" />
+  <UsingTask AssemblyFile="$(MSBuildProjectDirectory)\SharedLibs\xunit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
 </Project>

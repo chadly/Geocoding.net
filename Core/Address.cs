@@ -69,7 +69,7 @@ namespace GeoCoding
             return this.Coordinates.DistanceBetween(address.Coordinates, units);
         }
 
-        public void ChangeLocation(Location coordinates, AddressAccuracy accuracy)
+        public virtual void ChangeLocation(Location coordinates, AddressAccuracy accuracy)
         {
             this.coordinates = coordinates;
             this.accuracy = accuracy;
