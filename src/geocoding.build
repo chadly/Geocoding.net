@@ -5,8 +5,8 @@
     <company>GeoCoding.Net</company>
     <copyright>Copyright © 2008 GeoCoding.Net</copyright>
     <major>1</major>
-    <minor>01</minor>
-    <build Condition="'$(BUILD_NUMBER)'==''">0</build>
+    <minor>0</minor>
+    <build Condition="'$(BUILD_NUMBER)'==''">1</build>
     <build Condition="'$(BUILD_NUMBER)'!=''">$(BUILD_NUMBER)</build>
   </PropertyGroup>
 
