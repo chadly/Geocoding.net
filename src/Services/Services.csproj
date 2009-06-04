@@ -57,7 +57,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\geocoding.snk">
+    <None Include="..\..\geocoding.snk">
       <Link>Properties\geocoding.snk</Link>
     </None>
   </ItemGroup>
