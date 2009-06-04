@@ -7,16 +7,17 @@ the path to svnversion.exe in order to successfully run the build. Create a copy
 of settingsOverride.build.temp and and rename it to settingsOverride.build and replace
 the svnToolPath with your custom path to svnversion.exe.
 
+Build geocoding.build using MSBuild. For basic Debug build without running tests, just run build-quick.bat.
 
-Build using MSBuild (either 3.5 or 2.0 version should work).
-For basic Debug build, just run build.bat.
-
-How to Build from Visual Studio 2008 (or 2005) Command Prompt
+How to Build from Visual Studio 2008 Command Prompt
 ==============================================================
-Here are some sample build commands:
+Here are some sample build commands (these should be run from the src directory):
 
-Debug Build
+Debug Build with tests
   > msbuild geocoding.build
+
+Debug Build without tests (only version + compile)
+  > msbuild geocoding.build /t:Version;Compile
   
 Release Build
   > msbuild geocoding.build /p:Configuration=Release
@@ -31,5 +32,4 @@ Generate AssemblyInfoCommon file
 Service tests
 ==============
 You will need to generate API keys for each respective service to run the service tests.
-Make a copy of App.config.temp and rename it to App.Config in Services.Tests folder
-and put in your API keys.
+Edit App.config in Services.Tests and put in your API keys.
