@@ -14,18 +14,20 @@ namespace GeoCoding.Services.Yahoo
         public const string ServiceUrl = "http://local.yahooapis.com/MapsService/V1/geocode?location={0}&appid={1}";
         public const string ServiceUrlNormal = "http://local.yahooapis.com/MapsService/V1/geocode?street={0}&city={1}&state={2}&zip={3}&appid={4}";
 
-        private string _appId;
-        private XmlNamespaceManager _namespaceManager;
+        private readonly string appId;
+        private XmlNamespaceManager namespaceManager;
 
         public string AppId
         {
-            get { return _appId; }
+            get { return appId; }
         }
 
         public YahooGeoCoder(string appId)
         {
-            if (String.IsNullOrEmpty(appId)) throw new ArgumentNullException("appId");
-            _appId = appId;
+            if (String.IsNullOrEmpty(appId))
+                throw new ArgumentNullException("appId");
+
+            this.appId = appId;
         }
 
         #region XML Parsing
@@ -49,7 +51,7 @@ namespace GeoCoding.Services.Yahoo
         private string EvaluateXPath(string xpath, XPathNavigator nav)
         {
             XPathExpression exp = nav.Compile(xpath);
-            exp.SetContext(_namespaceManager);
+            exp.SetContext(namespaceManager);
             return (string)nav.Evaluate(exp);
         }
 
@@ -66,17 +68,19 @@ namespace GeoCoding.Services.Yahoo
             string postalCode = EvaluateXPath("string(y:Zip)", nav);
             string country = EvaluateXPath("string(y:Country)", nav);
 
-            return new Address(street, city, state, postalCode, country, new Location(latitude, longitude), accuracy);
+            var addr = new Address() { Street = street, City = city, State = state, PostalCode = postalCode, Country = country };
+            addr.ChangeLocation(new Location(latitude, longitude), accuracy);
+            return addr;
         }
 
         private Address[] ProcessWebResponse(WebResponse response)
         {
             XPathDocument xmlDoc = LoadXmlResponse(response);
             XPathNavigator nav = xmlDoc.CreateNavigator();
-            _namespaceManager = CreateXmlNamespaceManager(nav);
+            namespaceManager = CreateXmlNamespaceManager(nav);
 
             XPathExpression exp = nav.Compile("y:ResultSet/y:Result");
-            exp.SetContext(_namespaceManager);
+            exp.SetContext(namespaceManager);
             XPathNodeIterator nodes = nav.Select(exp);
 
             List<Address> addresses = new List<Address>();
@@ -108,7 +112,7 @@ namespace GeoCoding.Services.Yahoo
 
         private HttpWebRequest BuildWebRequest(string address)
         {
-            string url = String.Format(ServiceUrl, HttpUtility.UrlEncode(address), _appId);
+            string url = String.Format(ServiceUrl, HttpUtility.UrlEncode(address), appId);
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
             req.Method = "GET";
             return req;
@@ -116,7 +120,7 @@ namespace GeoCoding.Services.Yahoo
 
         private HttpWebRequest BuildWebRequest(string street, string city, string state, string postalCode)
         {
-            string url = String.Format(ServiceUrlNormal, HttpUtility.UrlEncode(street), HttpUtility.UrlEncode(city), HttpUtility.UrlEncode(state), HttpUtility.UrlEncode(postalCode), _appId);
+            string url = String.Format(ServiceUrlNormal, HttpUtility.UrlEncode(street), HttpUtility.UrlEncode(city), HttpUtility.UrlEncode(state), HttpUtility.UrlEncode(postalCode), appId);
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
             req.Method = "GET";
             return req;
@@ -169,7 +173,7 @@ namespace GeoCoding.Services.Yahoo
 
         public override string ToString()
         {
-            return String.Format("Yahoo GeoCoder: {0}", _appId);
+            return String.Format("Yahoo GeoCoder: {0}", appId);
         }
     }
 }

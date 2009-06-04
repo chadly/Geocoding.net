@@ -8,11 +8,11 @@ namespace GeoCoding.Services.Tests
 {
     public abstract class GeoCoderTest
     {
-        private readonly IGeoCoder _geoCoder;
+        private readonly IGeoCoder geoCoder;
 
         public GeoCoderTest()
         {
-            _geoCoder = CreateGeoCoder();
+            geoCoder = CreateGeoCoder();
         }
 
         protected abstract IGeoCoder CreateGeoCoder();
@@ -30,7 +30,7 @@ namespace GeoCoding.Services.Tests
         [Fact]
         public void CanGeoCodeAddress()
         {
-            Address[] addresses = _geoCoder.GeoCode("1600 pennsylvania ave washington dc");
+            Address[] addresses = geoCoder.GeoCode("1600 pennsylvania ave washington dc");
 
             Assert.Equal(1, addresses.Length);
             AssertWhiteHouseAddress(addresses[0]);
@@ -39,7 +39,7 @@ namespace GeoCoding.Services.Tests
         [Fact]
         public void CanGeoCodeNormalizedAddress()
         {
-            Address[] addresses = _geoCoder.GeoCode("1600 pennsylvania ave", "washington", "dc", null, null);
+            Address[] addresses = geoCoder.GeoCode("1600 pennsylvania ave", "washington", "dc", null, null);
 
             Assert.Equal(1, addresses.Length);
             AssertWhiteHouseAddress(addresses[0]);
@@ -48,9 +48,9 @@ namespace GeoCoding.Services.Tests
         [Fact]
         public void CanValidateAddress()
         {
-            Address invalidAddress = new Address("1600 pennsylvania ave", "washington", "dc", null, null);
+            Address invalidAddress = new Address() { Street = "1600 pennsylvania ave", City = "washington", State = "dc" };
 
-            Address[] addresses = _geoCoder.Validate(invalidAddress);
+            Address[] addresses = geoCoder.Validate(invalidAddress);
 
             Assert.Equal(1, addresses.Length);
             AssertWhiteHouseAddress(addresses[0]);
@@ -63,7 +63,7 @@ namespace GeoCoding.Services.Tests
 		{
 			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(cultureName);
 
-			Address[] addresses = _geoCoder.GeoCode("24 sussex drive ottawa, ontario");
+			Address[] addresses = geoCoder.GeoCode("24 sussex drive ottawa, ontario");
 
 			Assert.Equal(1, addresses.Length);
 			Assert.Equal("24 Sussex Dr", addresses[0].Street);

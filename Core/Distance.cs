@@ -6,25 +6,25 @@ namespace GeoCoding
     {
         public const double EarthRadiusInMiles = 3956.545;
         public const double EarthRadiusInKilometers = 6378.135;
-		private const double ConversionConstant = 0.621371192;
+        private const double ConversionConstant = 0.621371192;
 
-        private readonly double _value;
-        private readonly DistanceUnits _units;
+        private readonly double value;
+        private readonly DistanceUnits units;
 
         public double Value
         {
-            get { return _value; }
+            get { return value; }
         }
 
         public DistanceUnits Units
         {
-            get { return _units; }
+            get { return units; }
         }
 
         public Distance(double value, DistanceUnits units)
         {
-            _value = Math.Round(value, 8);
-            _units = units;
+            this.value = Math.Round(value, 8);
+            this.units = units;
         }
 
         #region Helper Factory Methods
@@ -45,16 +45,16 @@ namespace GeoCoding
 
         private Distance ConvertUnits(DistanceUnits units)
         {
-            if (_units == units) return this;
+            if (this.units == units) return this;
 
             double newValue;
             switch (units)
             {
                 case DistanceUnits.Miles:
-                    newValue = _value * ConversionConstant;
+                    newValue = value * ConversionConstant;
                     break;
                 case DistanceUnits.Kilometers:
-					newValue = _value / ConversionConstant;
+                    newValue = value / ConversionConstant;
                     break;
                 default:
                     newValue = 0;
@@ -100,7 +100,7 @@ namespace GeoCoding
 
         public override string ToString()
         {
-            return String.Format("{0} {1}", _value, _units);
+            return String.Format("{0} {1}", value, units);
         }
 
         #region Operators

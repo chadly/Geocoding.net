@@ -6,23 +6,23 @@ namespace GeoCoding
     {
         public static readonly Location Empty = new Location();
 
-        private readonly double _latitude;
-        private readonly double _longitude;
+        private readonly double latitude;
+        private readonly double longitude;
 
         public double Latitude
         {
-            get { return _latitude; }
+            get { return latitude; }
         }
 
         public double Longitude
         {
-            get { return _longitude; }
+            get { return longitude; }
         }
 
         public Location(double latitude, double longitude)
         {
-            _latitude = latitude;
-            _longitude = longitude;
+            this.latitude = latitude;
+            this.longitude = longitude;
         }
 
         private double ToRadian(double val)
@@ -55,7 +55,7 @@ namespace GeoCoding
 
         public override string ToString()
         {
-            return String.Format("{0}, {1}", _latitude, _longitude);
+            return String.Format("{0}, {1}", latitude, longitude);
         }
     }
 }

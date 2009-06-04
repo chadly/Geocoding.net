@@ -1,89 +1,124 @@
 using System;
+using System.Text;
 
 namespace GeoCoding
 {
-    public struct Address
+    public class Address
     {
-        #region Properties
-
-        public static readonly Address Empty = new Address();
-
-        private readonly string _street;
-        private readonly string _city;
-        private readonly string _state;
-        private readonly string _postalCode;
-        private readonly string _country;
-        private readonly Location _coordinates;
-        private readonly AddressAccuracy _accuracy;
+        private string street;
+        private string city;
+        private string state;
+        private string postalCode;
+        private string country;
+        private Location coordinates;
+        private AddressAccuracy accuracy;
 
         public string Street
         {
-            get { return _street ?? ""; }
+            get { return street ?? ""; }
+            set { street = value; }
         }
 
         public string City
         {
-            get { return _city ?? ""; }
+            get { return city ?? ""; }
+            set { city = value; }
         }
 
         public string State
         {
-            get { return _state ?? ""; }
+            get { return state ?? ""; }
+            set { state = value; }
         }
 
         public string PostalCode
         {
-            get { return _postalCode ?? ""; }
+            get { return postalCode ?? ""; }
+            set { postalCode = value; }
         }
 
         public string Country
         {
-            get { return _country ?? ""; }
+            get { return country ?? ""; }
+            set { country = value; }
         }
 
         public Location Coordinates
         {
-            get { return _coordinates; }
+            get { return coordinates; }
         }
 
         public AddressAccuracy Accuracy
         {
-            get { return _accuracy; }
+            get { return accuracy; }
         }
 
-        #endregion
-
-        #region Constructors
-
-        public Address(string street, string city, string state, string postalCode, string country)
-            : this(street, city, state, postalCode, country, Location.Empty, AddressAccuracy.Unknown) { }
-
-        public Address(string street, string city, string state, string postalCode, string country, Location coordinates, AddressAccuracy accuracy)
+        public Address()
         {
-			_street = !String.IsNullOrEmpty(street) ? street : null;
-			_city = !String.IsNullOrEmpty(city) ? city : null;
-			_state = !String.IsNullOrEmpty(state) ? state : null;
-			_postalCode = !String.IsNullOrEmpty(postalCode) ? postalCode : null;
-			_country = !String.IsNullOrEmpty(country) ? country : null;
-            _coordinates = coordinates;
-            _accuracy = accuracy;
+            this.coordinates = Location.Empty;
+            this.accuracy = AddressAccuracy.Unknown;
         }
 
-        #endregion
-
-        public Distance DistanceBetween(Address address)
+        public virtual Distance DistanceBetween(Address address)
         {
             return this.Coordinates.DistanceBetween(address.Coordinates);
         }
 
-        public Distance DistanceBetween(Address address, DistanceUnits units)
+        public virtual Distance DistanceBetween(Address address, DistanceUnits units)
         {
             return this.Coordinates.DistanceBetween(address.Coordinates, units);
         }
 
+        public void ChangeLocation(Location coordinates, AddressAccuracy accuracy)
+        {
+            this.coordinates = coordinates;
+            this.accuracy = accuracy;
+        }
+
         public override string ToString()
         {
-            return String.Format("{0} {1}, {2} {3}, {4}", _street, _city, _state, _postalCode, _country);
+            StringBuilder address = new StringBuilder();
+
+            bool hasStuff = false;
+
+            if (!String.IsNullOrEmpty(street))
+            {
+                address.Append(street);
+                hasStuff = true;
+            }
+
+            if (!String.IsNullOrEmpty(city))
+            {
+                if (hasStuff)
+                    address.Append(", ");
+                address.Append(city);
+                hasStuff = true;
+            }
+
+            if (!String.IsNullOrEmpty(state))
+            {
+                if (hasStuff)
+                    address.Append(", ");
+                address.Append(state);
+                hasStuff = true;
+            }
+
+            if (!String.IsNullOrEmpty(postalCode))
+            {
+                if (hasStuff)
+                    address.Append(" ");
+                address.Append(postalCode);
+                hasStuff = true;
+            }
+
+            if (!String.IsNullOrEmpty(country))
+            {
+                if (hasStuff)
+                    address.Append(", ");
+                address.Append(country);
+            }
+
+            return address.ToString();
         }
     }
 }

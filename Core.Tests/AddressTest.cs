@@ -1,75 +1,45 @@
 using System;
 using Xunit;
 
-namespace GeoCoding.Tests
+namespace GeoCoding.Tests.AddressSpecs
 {
     public class AddressTest
     {
         [Fact]
-        public void CanCreate()
+        public void CanCreateWithDefaultValues()
         {
-            string street = "123 Main St.";
-            string city = "AnyTown";
-            string state = "CA";
-            string postalCode = "12345";
-            string country = "US";
+            Address a = new Address();
 
-            Address a = new Address(street, city, state, postalCode, country);
-
-            Assert.Equal(street, a.Street);
-            Assert.Equal(city, a.City);
-            Assert.Equal(state, a.State);
-            Assert.Equal(postalCode, a.PostalCode);
-            Assert.Equal(country, a.Country);
+            Assert.Equal("", a.Street);
+            Assert.Equal("", a.City);
+            Assert.Equal("", a.State);
+            Assert.Equal("", a.PostalCode);
+            Assert.Equal("", a.Country);
 
             Assert.Equal(Location.Empty, a.Coordinates);
             Assert.Equal(AddressAccuracy.Unknown, a.Accuracy);
         }
 
         [Fact]
-        public void CanCompareForEquality()
+        public void CanChangeAddressLocation()
         {
-            Address address1 = new Address("123 Main Street", "Anytown", "CA", "12345", "US");
-            Address address2 = new Address("123 Main Street", "Anytown", "CA", "12345", "US");
+            Address a = new Address();
+            Location loc = new Location(57.68, 43.23);
 
-            Assert.True(address1.Equals(address2));
-            Assert.Equal(address1.GetHashCode(), address2.GetHashCode());
-        }
+            a.ChangeLocation(loc, AddressAccuracy.CityLevel);
 
-		[Fact]
-		public void CanCompareForEqualityWithNullValues()
-		{
-			Address address1 = new Address(null, null, null, null, null);
-			Address address2 = new Address("", "", "", "", "");
-
-			Assert.True(address1.Equals(address2));
-			Assert.Equal(address1.GetHashCode(), address2.GetHashCode());
-		}
-
-		[Fact]
-		public void CanCreateEmpty()
-		{
-			Address address = new Address();
-			Assert.Equal(Address.Empty, address);
-		}
-
-        [Fact]
-        public void CanNotHaveNullValues()
-        {
-            Address address = new Address();
-
-            Assert.NotNull(address.Street);
-            Assert.NotNull(address.City);
-            Assert.NotNull(address.State);
-            Assert.NotNull(address.PostalCode);
-            Assert.NotNull(address.Country);
+            Assert.Equal(loc, a.Coordinates);
+            Assert.Equal(AddressAccuracy.CityLevel, a.Accuracy);
         }
 
         [Fact]
         public void CanCalculateHaversineDistanceBetweenTwoAddresses()
         {
-            Address address1 = new Address(null, null, null, null, null, new Location(0, 0), AddressAccuracy.Unknown);
-            Address address2 = new Address(null, null, null, null, null, new Location(40, 20), AddressAccuracy.Unknown);
+            Address address1 = new Address();
+            address1.ChangeLocation(new Location(0, 0), AddressAccuracy.Unknown);
+
+            Address address2 = new Address();
+            address2.ChangeLocation(new Location(40, 20), AddressAccuracy.Unknown);
 
             Distance distance1 = address1.DistanceBetween(address2);
             Distance distance2 = address2.DistanceBetween(address1);

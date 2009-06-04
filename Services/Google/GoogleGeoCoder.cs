@@ -13,18 +13,20 @@ namespace GeoCoding.Services.Google
     {
         public const string ServiceUrl = "http://maps.google.com/maps/geo?output=xml&q={0}&key={1}&oe=utf8";
 
-        private string _accessKey;
-        private XmlNamespaceManager _namespaceManager;
+        private readonly string accessKey;
+        private XmlNamespaceManager namespaceManager;
 
         public string AccessKey
         {
-            get { return _accessKey; }
+            get { return accessKey; }
         }
 
         public GoogleGeoCoder(string accessKey)
         {
-            if (String.IsNullOrEmpty(accessKey)) throw new ArgumentNullException("accessKey");
-            _accessKey = accessKey;
+            if (String.IsNullOrEmpty(accessKey))
+                throw new ArgumentNullException("accessKey");
+
+            this.accessKey = accessKey;
         }
 
         #region Xml Parsing
@@ -58,7 +60,7 @@ namespace GeoCoding.Services.Google
         private string EvaluateXPath(string xpath, XPathNavigator nav)
         {
             XPathExpression exp = nav.Compile(xpath);
-            exp.SetContext(_namespaceManager);
+            exp.SetContext(namespaceManager);
             return (string)nav.Evaluate(exp);
         }
 
@@ -88,14 +90,16 @@ namespace GeoCoding.Services.Google
             string zip = EvaluateXPath("string(//adr:PostalCodeNumber)", nav);
             string[] coordinates = EvaluateXPath("string(//kml:Point/kml:coordinates)", nav).Split(',');
 
-            return new Address(street, city, state, zip, country, FromCoordinates(coordinates), MapAccuracy(accuracy));
+            var addr = new Address() { Street = street, City = city, State = state, PostalCode = zip, Country = country };
+            addr.ChangeLocation(FromCoordinates(coordinates), MapAccuracy(accuracy));
+            return addr;
         }
 
         private Address[] ProcessWebResponse(WebResponse response)
         {
             XPathDocument xmlDoc = LoadXmlResponse(response);
             XPathNavigator nav = xmlDoc.CreateNavigator();
-            _namespaceManager = CreateXmlNamespaceManager(nav);
+            namespaceManager = CreateXmlNamespaceManager(nav);
 
             GoogleStatusCode status = (GoogleStatusCode)int.Parse(EvaluateXPath("string(kml:kml/kml:Response/kml:Status/kml:code)", nav));
 
@@ -103,7 +107,7 @@ namespace GeoCoding.Services.Google
             if (status == GoogleStatusCode.Success)
             {
                 XPathExpression exp = nav.Compile("kml:kml/kml:Response/kml:Placemark");
-                exp.SetContext(_namespaceManager);
+                exp.SetContext(namespaceManager);
                 XPathNodeIterator nodes = nav.Select(exp);
 
                 while (nodes.MoveNext())
@@ -136,7 +140,7 @@ namespace GeoCoding.Services.Google
 
         private HttpWebRequest BuildWebRequest(string address)
         {
-            string url = String.Format(ServiceUrl, HttpUtility.UrlEncode(address), _accessKey);
+            string url = String.Format(ServiceUrl, HttpUtility.UrlEncode(address), accessKey);
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
             req.Method = "GET";
             return req;
@@ -166,7 +170,7 @@ namespace GeoCoding.Services.Google
 
         public override string ToString()
         {
-            return String.Format("Google GeoCoder: {0}", _accessKey);
+            return String.Format("Google GeoCoder: {0}", accessKey);
         }
     }
 }
