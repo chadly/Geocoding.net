@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Globalization;
 using Xunit;
-using XunitExt;
+using Xunit.Extensions;
 
 namespace GeoCoding.Services.Tests
 {

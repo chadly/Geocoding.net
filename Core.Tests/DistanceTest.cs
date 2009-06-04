@@ -1,6 +1,6 @@
 ﻿using System;
 using Xunit;
-using XunitExt;
+using Xunit.Extensions;
 
 namespace GeoCoding.Tests
 {
