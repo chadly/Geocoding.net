@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="settingsOverride.build" Condition="Exists('settingsOverride.build')" />
-
   <PropertyGroup>
-    <!-- Assembly Info -->
     <projectName>GeoCoding.Net</projectName>
     <company>GeoCoding.Net</company>
     <copyright>Copyright © 2008 GeoCoding.Net</copyright>
@@ -11,132 +8,25 @@
     <minor>01</minor>
     <build Condition="'$(BUILD_NUMBER)'==''">0</build>
     <build Condition="'$(BUILD_NUMBER)'!=''">$(BUILD_NUMBER)</build>
-
-    <!-- default configuration is "Debug"; the other is "Release" -->
-    <configuration Condition="'$(configuration)'==''">Debug</configuration>
-
-    <!-- default build directory is just \build -->
-    <buildDir Condition="'$(buildDir)'==''">$(MSBuildProjectDirectory)\..\build\$(configuration)</buildDir>
-    <testOutputDir Condition="'$(testOutputDir)'==''">$(buildDir)\test-results</testOutputDir>
-
-    <!-- this is overrideable by creating a settingsOverride.build file -->
-    <svnToolPath Condition="'$(svnToolPath)'==''">C:\Program Files\VisualSVN\bin</svnToolPath>
   </PropertyGroup>
 
-  <!-- Define order of solutions to build -->
   <ItemGroup>
+    <!-- Define order of solutions to build -->
     <vssolutions Include="GeoCoding.Net.sln" />
-  </ItemGroup>
 
-  <!-- Define user-specific files that need to be copied from template -->
-  <ItemGroup>
+    <!-- Define user-specific files that need to be copied from template -->
     <templateFiles Include="Services.Tests\App.config.temp" />
-  </ItemGroup>
 
-  <!-- Define tests that should be run as part of the build -->
-  <ItemGroup>
+    <!-- Define tests that should be run as part of the build -->
     <tests Include="**\*.Tests.csproj" />
   </ItemGroup>
 
-  <!-- Define output projects -->
+  <!-- Define outputs -->
   <ItemGroup>
-    <output Include="Core\Core.csproj" />
-    <output Include="Services\Services.csproj" />
+    <binaryOutput Include="Services\Services.csproj">
+      <zipName>geocoding.net</zipName>
+    </binaryOutput>
   </ItemGroup>
 
-
-
-  <!-- ========= Private Targets ===================================================== -->
-
-  <Target Name="_CopyOutputToBuildDir">
-    <!-- create an item group of files for each output -->
-    <CreateItem Include="@(output -> '%(RootDir)%(Directory)bin\$(configuration)\*.*')">
-      <Output TaskParameter="Include" ItemName="binaryOutput" />
-    </CreateItem>
-
-    <Copy SourceFiles="@(binaryOutput)" DestinationFolder="$(buildDir)" />
-  </Target>
-
-  <Target Name="_CleanBuildDir">
-    <RemoveDir Directories="$(testOutputDir)" />
-    <RemoveDir Directories="$(buildDir)" />
-  </Target>
-
-
-
-  <!-- ========= Public Targets ===================================================== -->
-
-  <Target Name="Build">
-    <CallTarget Targets="_CleanBuildDir;Version;Compile;_CopyOutputToBuildDir;Test;Zip" />
-  </Target>
-
-  <Target Name="Clean">
-    <!-- Clean the entire build directory -->
-    <CallTarget Targets="_CleanBuildDir" />
-
-    <!-- Call all VS projects to clean up -->
-    <MSBuild Projects="@(vssolutions)" Targets="Clean" Properties="Configuration=$(configuration)" />
-  </Target>
-
-  <Target Name="CopyTemplateFiles">
-    <Copy SourceFiles="@(templateFiles -> '%(FullPath)')"
-          DestinationFiles="@(templateFiles -> '%(RootDir)%(Directory)%(Filename)')"
-          Condition="!Exists('%(templateFiles.RootDir)%(templateFiles.Directory)%(templateFiles.Filename)')" />
-  </Target>
-
-  <Target Name="Compile" DependsOnTargets="CopyTemplateFiles">
-    <MSBuild Projects="@(vssolutions)" Properties="Configuration=$(configuration)" />
-  </Target>
-
-  <Target Name="Version">
-    <SvnVersion
-      LocalPath="$(MSBuildProjectDirectory)"
-      UseLastCommittedRevision="true"
-      ToolPath="$(svnToolPath)">
-      <Output TaskParameter="Revision" PropertyName="revision" />
-    </SvnVersion>
-
-    <CreateProperty Value="$(major).$(minor).$(build).$(revision)">
-      <Output TaskParameter="Value" PropertyName="versionString" />
-    </CreateProperty>
-
-    <AssemblyInfo
-      CodeLanguage="CS"
-      OutputFile="AssemblyInfoCommon.cs"
-      AssemblyProduct="$(projectName)"
-      AssemblyCompany="$(company)"
-      AssemblyCopyright="$(copyright)"
-      AssemblyConfiguration="$(configuration)"
-      ComVisible="false"
-      AssemblyVersion="$(versionString)" />
-  </Target>
-
-  <Target Name="Test" DependsOnTargets="Compile;_CopyOutputToBuildDir">
-    <MakeDir Directories="$(testOutputDir)" />
-
-    <!-- run unit tests -->
-    <xunit
-      Assembly="@(tests -> '%(RootDir)%(Directory)bin\$(configuration)\GeoCoding.%(Filename).dll')"
-      Html="$(testOutputDir)\GeoCoding.%(tests.Filename).html" />
-  </Target>
-
-  <Target Name="Zip" DependsOnTargets="Compile;_CopyOutputToBuildDir">
-    <!-- create an item group of files for each output -->
-    <CreateItem Include="$(buildDir)\*.*">
-      <Output TaskParameter="Include" ItemName="zipOutput" />
-    </CreateItem>
-
-    <Zip Files="@(zipOutput)" ZipFileName="$(buildDir)\$(projectName)_$(configuration)_v$(versionString).zip" Flatten="true" />
-  </Target>
-
-
-
-  <!-- References to external tools -->
-  <PropertyGroup>
-    <!-- override path to MsBuildCommunityTasks project -->
-    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\..\SharedLibs\MsBuild</MSBuildCommunityTasksPath>
-  </PropertyGroup>
-  <Import Project="..\SharedLibs\MsBuild\MSBuild.Community.Tasks.Targets" />
-
-  <UsingTask AssemblyFile="$(MSBuildProjectDirectory)\..\SharedLibs\xunit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
+  <Import Project="..\common.build" />
 </Project>
