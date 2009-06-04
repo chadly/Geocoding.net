@@ -16,7 +16,7 @@
     <configuration Condition="'$(configuration)'==''">Debug</configuration>
 
     <!-- default build directory is just \build -->
-    <buildDir Condition="'$(buildDir)'==''">$(MSBuildProjectDirectory)\build\$(configuration)</buildDir>
+    <buildDir Condition="'$(buildDir)'==''">$(MSBuildProjectDirectory)\..\build\$(configuration)</buildDir>
     <testOutputDir Condition="'$(testOutputDir)'==''">$(buildDir)\test-results</testOutputDir>
 
     <!-- this is overrideable by creating a settingsOverride.build file -->
@@ -134,9 +134,9 @@
   <!-- References to external tools -->
   <PropertyGroup>
     <!-- override path to MsBuildCommunityTasks project -->
-    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\SharedLibs\MsBuild</MSBuildCommunityTasksPath>
+    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\..\SharedLibs\MsBuild</MSBuildCommunityTasksPath>
   </PropertyGroup>
-  <Import Project="SharedLibs\MsBuild\MSBuild.Community.Tasks.Targets" />
+  <Import Project="..\SharedLibs\MsBuild\MSBuild.Community.Tasks.Targets" />
 
-  <UsingTask AssemblyFile="$(MSBuildProjectDirectory)\SharedLibs\xunit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
+  <UsingTask AssemblyFile="$(MSBuildProjectDirectory)\..\SharedLibs\xunit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
 </Project>

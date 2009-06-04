@@ -1,2 +1,2 @@
-%windir%\Microsoft.NET\Framework\v3.5\MSBuild.exe geocoding.build
+%windir%\Microsoft.NET\Framework\v3.5\MSBuild.exe src\geocoding.build
 pause
