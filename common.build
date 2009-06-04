@@ -5,13 +5,13 @@
     <configuration Condition="'$(configuration)'==''">Debug</configuration>
 
     <buildDir Condition="'$(buildDir)'==''">$(MSBuildProjectDirectory)\..\build\$(configuration)</buildDir>
-    <libDir>$(MSBuildProjectDirectory)\..\SharedLibs</libDir>
+    <libDir>$(MSBuildProjectDirectory)\..\lib</libDir>
 
     <MSBuildCommunityTasksPath>$(libDir)\MsBuild</MSBuildCommunityTasksPath>
     <svnToolPath Condition="'$(svnToolPath)'==''">C:\Program Files (x86)\VisualSVN\bin</svnToolPath>
   </PropertyGroup>
 
-  <Import Project="SharedLibs\MsBuild\MSBuild.Community.Tasks.Targets" />
+  <Import Project="lib\MsBuild\MSBuild.Community.Tasks.Targets" />
   <UsingTask AssemblyFile="$(libDir)\Xunit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
 
   <!-- ========= Private Targets ===================================================== -->
