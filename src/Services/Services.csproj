@@ -3,14 +3,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{654812CF-D009-4420-B9EC-D07B030926A1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GeoCoding.Services</RootNamespace>
     <AssemblyName>GeoCoding.Services</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\geocoding.snk</AssemblyOriginatorKeyFile>
@@ -36,6 +36,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.XML" />
   </ItemGroup>
@@ -48,6 +58,18 @@
     <Compile Include="Google\GoogleStatusCode.cs" />
     <Compile Include="IGeoCoder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\VirtualEarth.Token\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\VirtualEarth\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="VirtualEarth\VirtualEarthGeoCoder.cs" />
+    <Compile Include="VirtualEarth\VirtualEarthServiceFactory.cs" />
     <Compile Include="Yahoo\YahooGeoCoder.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +81,60 @@
   <ItemGroup>
     <None Include="..\..\geocoding.snk">
       <Link>Properties\geocoding.snk</Link>
+    </None>
+    <None Include="Service References\VirtualEarth\GeocodeService.wsdl" />
+    <None Include="Service References\VirtualEarth\GeocodeService.xsd" />
+    <None Include="Service References\VirtualEarth\GeocodeService1.wsdl" />
+    <None Include="Service References\VirtualEarth\GeocodeService1.xsd" />
+    <None Include="Service References\VirtualEarth\GeocodeService2.xsd" />
+    <None Include="Service References\VirtualEarth\GeocodeService3.xsd" />
+    <None Include="Service References\VirtualEarth\GeocodeService4.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\VirtualEarth.Token\" />
+    <WCFMetadataStorage Include="Service References\VirtualEarth\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VirtualEarth\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VirtualEarth\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VirtualEarth.Token\common.wsdl" />
+    <None Include="Service References\VirtualEarth\GeoCoding.Services.VirtualEarth.GeocodeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VirtualEarth\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VirtualEarth.Token\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VirtualEarth.Token\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VirtualEarth.Token\GeoCoding.Services.VirtualEarth.Token.CountryRegionInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VirtualEarth.Token\GeoCoding.Services.VirtualEarth.Token.DataSource.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VirtualEarth.Token\GeoCoding.Services.VirtualEarth.Token.EntityType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VirtualEarth.Token\GeoCoding.Services.VirtualEarth.Token.VersionInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VirtualEarth.Token\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

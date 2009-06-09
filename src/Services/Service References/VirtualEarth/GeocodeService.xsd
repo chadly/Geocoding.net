@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://dev.virtualearth.net/webservices/v1/geocode/contracts" elementFormDefault="qualified" targetNamespace="http://dev.virtualearth.net/webservices/v1/geocode/contracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://dev.virtualearth.net/webservices/v1/metadata/geocodeservice/GeocodeService2.xsd" namespace="http://dev.virtualearth.net/webservices/v1/geocode" />
+  <xs:element name="Geocode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://dev.virtualearth.net/webservices/v1/geocode" minOccurs="0" name="request" nillable="true" type="q1:GeocodeRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GeocodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://dev.virtualearth.net/webservices/v1/geocode" minOccurs="0" name="GeocodeResult" nillable="true" type="q2:GeocodeResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReverseGeocode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://dev.virtualearth.net/webservices/v1/geocode" minOccurs="0" name="request" nillable="true" type="q3:ReverseGeocodeRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReverseGeocodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://dev.virtualearth.net/webservices/v1/geocode" minOccurs="0" name="ReverseGeocodeResult" nillable="true" type="q4:GeocodeResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

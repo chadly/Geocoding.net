@@ -1,12 +1,14 @@
-NOTE: In order to compile the solution in Visual Studio, you must first
+In order to compile the solution in Visual Studio, you must first
 run the build in MSBuild. The build process generates some files that
 are needed to compile in Visual Studio.
+
+The easiest way to run the build is just to run build-quick.bat. This will
+run a basic Debug build without running any tests.
+
 
 NOTE: If you don't have VisualSVN installed (or if you have it installed on a 32-bit system),
 you will need to change the path to svnversion.exe in order to successfully run the build.
 See sample build commands below for example.
-
-Build geocoding.build using MSBuild. For basic Debug build without running tests, just run build-quick.bat.
 
 
 How to Build from Visual Studio 2008 Command Prompt
@@ -16,18 +18,18 @@ Here are some sample build commands (these should be run from the src directory)
 Debug Build with tests
   > msbuild geocoding.build
 
-Debug Build with tests and custom path to svnversion.exe
-  > msbuild geocoding.build /p:svnToolPath=C:\Program Files\Subversion
-
 Debug Build without tests (only version + compile)
   > msbuild geocoding.build /t:Version;Compile
-  
+
+Debug Build without tests and custom path to svnversion.exe
+  > msbuild geocoding.build /t:Version;Compile /p:svnToolPath=C:\Program Files\Subversion
+
 Release Build
   > msbuild geocoding.build /p:Configuration=Release
 
 Zip Debug Build to Output Dir (no tests)
   > msbuild geocoding.build /t:Zip
-  
+
 Generate AssemblyInfoCommon file
   > msbuild geocoding.build /t:Version
 

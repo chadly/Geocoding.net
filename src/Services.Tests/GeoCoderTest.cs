@@ -23,16 +23,14 @@ namespace GeoCoding.Services.Tests
             Assert.Equal("Washington", address.City);
             Assert.Equal("DC", address.State);
             Assert.Equal("20006", address.PostalCode);
-            Assert.Equal("US", address.Country);
-            Assert.Equal(AddressAccuracy.AddressLevel, address.Accuracy);
+			Assert.Equal(AddressAccuracy.AddressLevel, address.Accuracy);
+			Assert.True(address.Country == "US" || address.Country == "United States");
         }
 
         [Fact]
         public void CanGeoCodeAddress()
         {
             Address[] addresses = geoCoder.GeoCode("1600 pennsylvania ave washington dc");
-
-            Assert.Equal(1, addresses.Length);
             AssertWhiteHouseAddress(addresses[0]);
         }
 
@@ -40,8 +38,6 @@ namespace GeoCoding.Services.Tests
         public void CanGeoCodeNormalizedAddress()
         {
             Address[] addresses = geoCoder.GeoCode("1600 pennsylvania ave", "washington", "dc", null, null);
-
-            Assert.Equal(1, addresses.Length);
             AssertWhiteHouseAddress(addresses[0]);
         }
 
@@ -54,12 +50,11 @@ namespace GeoCoding.Services.Tests
 
 			Address[] addresses = geoCoder.GeoCode("24 sussex drive ottawa, ontario");
 
-			Assert.Equal(1, addresses.Length);
 			Assert.Equal("24 Sussex Dr", addresses[0].Street);
 			Assert.Equal("Ottawa", addresses[0].City);
 			Assert.Equal("ON", addresses[0].State);
 			Assert.Equal("K1M", addresses[0].PostalCode);
-			Assert.Equal("CA", addresses[0].Country);
+			Assert.True(addresses[0].Country == "CA" || addresses[0].Country == "Canada");
 			Assert.Equal(AddressAccuracy.AddressLevel, addresses[0].Accuracy);
 		}
     }

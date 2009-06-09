@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://dev.virtualearth.net/webservices/v1/geocode" elementFormDefault="qualified" targetNamespace="http://dev.virtualearth.net/webservices/v1/geocode" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://dev.virtualearth.net/webservices/v1/metadata/geocodeservice/GeocodeService1.xsd" namespace="http://dev.virtualearth.net/webservices/v1/common" />
+  <xs:complexType name="GeocodeRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://dev.virtualearth.net/webservices/v1/common" base="q1:RequestBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Address" nillable="true" type="q1:Address" />
+          <xs:element minOccurs="0" name="Options" nillable="true" type="tns:GeocodeOptions" />
+          <xs:element minOccurs="0" name="Query" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GeocodeRequest" nillable="true" type="tns:GeocodeRequest" />
+  <xs:complexType name="GeocodeOptions">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Count" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Filters" nillable="true" type="tns:ArrayOfFilterBase" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GeocodeOptions" nillable="true" type="tns:GeocodeOptions" />
+  <xs:complexType name="ArrayOfFilterBase">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FilterBase" nillable="true" type="tns:FilterBase" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFilterBase" nillable="true" type="tns:ArrayOfFilterBase" />
+  <xs:complexType name="FilterBase">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="FilterBase" nillable="true" type="tns:FilterBase" />
+  <xs:complexType name="ConfidenceFilter">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:FilterBase">
+        <xs:sequence>
+          <xs:element xmlns:q2="http://dev.virtualearth.net/webservices/v1/common" minOccurs="0" name="MinimumConfidence" type="q2:Confidence" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ConfidenceFilter" nillable="true" type="tns:ConfidenceFilter" />
+  <xs:complexType name="GeocodeResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="http://dev.virtualearth.net/webservices/v1/common" base="q3:ResponseBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Results" nillable="true" type="q3:ArrayOfGeocodeResult" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GeocodeResponse" nillable="true" type="tns:GeocodeResponse" />
+  <xs:complexType name="ReverseGeocodeRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q4="http://dev.virtualearth.net/webservices/v1/common" base="q4:RequestBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Location" nillable="true" type="q4:Location" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ReverseGeocodeRequest" nillable="true" type="tns:ReverseGeocodeRequest" />
+</xs:schema>
