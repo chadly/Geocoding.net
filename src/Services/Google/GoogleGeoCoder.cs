@@ -163,11 +163,6 @@ namespace GeoCoding.Services.Google
             return GeoCode(address);
         }
 
-        public Address[] Validate(Address address)
-        {
-            return GeoCode(address.Street, address.City, address.State, address.PostalCode, address.Country);
-        }
-
         public override string ToString()
         {
             return String.Format("Google GeoCoder: {0}", accessKey);

@@ -166,11 +166,6 @@ namespace GeoCoding.Services.Yahoo
             return GeoCode(request);
         }
 
-        public Address[] Validate(Address address)
-        {
-            return GeoCode(address.Street, address.City, address.State, address.PostalCode, address.Country);
-        }
-
         public override string ToString()
         {
             return String.Format("Yahoo GeoCoder: {0}", appId);

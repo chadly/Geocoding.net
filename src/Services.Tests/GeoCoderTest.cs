@@ -45,17 +45,6 @@ namespace GeoCoding.Services.Tests
             AssertWhiteHouseAddress(addresses[0]);
         }
 
-        [Fact]
-        public void CanValidateAddress()
-        {
-            Address invalidAddress = new Address() { Street = "1600 pennsylvania ave", City = "washington", State = "dc" };
-
-            Address[] addresses = geoCoder.Validate(invalidAddress);
-
-            Assert.Equal(1, addresses.Length);
-            AssertWhiteHouseAddress(addresses[0]);
-        }
-
 		[Theory]
 		[InlineData("en-US")]
 		[InlineData("cs-CZ")]

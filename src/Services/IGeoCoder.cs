@@ -6,6 +6,5 @@ namespace GeoCoding.Services
     {
         Address[] GeoCode(string address);
         Address[] GeoCode(string street, string city, string state, string postalCode, string country);
-        Address[] Validate(Address address);
     }
 }
