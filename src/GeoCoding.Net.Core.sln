@@ -11,20 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2F70EFC9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Tests", "Services.Tests\Services.Tests.csproj", "{BB5F66AC-286B-4BA5-86EC-6DED28426132}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{891021E5-7521-4F93-9946-B7B630DF3192}"
-	ProjectSection(SolutionItems) = preProject
-		..\build-quick.bat = ..\build-quick.bat
-		..\build-release.bat = ..\build-release.bat
-		..\clean.bat = ..\clean.bat
-		geocoding.build = geocoding.build
-		..\how-to-build.txt = ..\how-to-build.txt
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework Core", "Framework Core", "{2104CCA2-94D4-4C56-9A5E-FAF9D9538817}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{4F0BCB32-2575-443D-B59B-BC7069403F2C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Web", "Examples\Example.Web\Example.Web.csproj", "{80733FA4-B825-4983-94B5-EAB9A440692F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,10 +35,6 @@ Global
 		{BB5F66AC-286B-4BA5-86EC-6DED28426132}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB5F66AC-286B-4BA5-86EC-6DED28426132}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB5F66AC-286B-4BA5-86EC-6DED28426132}.Release|Any CPU.Build.0 = Release|Any CPU
-		{80733FA4-B825-4983-94B5-EAB9A440692F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80733FA4-B825-4983-94B5-EAB9A440692F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80733FA4-B825-4983-94B5-EAB9A440692F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80733FA4-B825-4983-94B5-EAB9A440692F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +44,5 @@ Global
 		{29970407-AEFA-4FAD-A337-7EB9E0BB51C1} = {2104CCA2-94D4-4C56-9A5E-FAF9D9538817}
 		{7B1A1712-034C-4685-A7E0-DF14789D4C94} = {2F70EFC9-498C-4D69-85EB-2395D88FFBA5}
 		{BB5F66AC-286B-4BA5-86EC-6DED28426132} = {2F70EFC9-498C-4D69-85EB-2395D88FFBA5}
-		{80733FA4-B825-4983-94B5-EAB9A440692F} = {4F0BCB32-2575-443D-B59B-BC7069403F2C}
 	EndGlobalSection
 EndGlobal
