@@ -58,6 +58,11 @@
     <Compile Include="Google\GoogleStatusCode.cs" />
     <Compile Include="IGeoCoder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\VirtualEarth.Imagery\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\VirtualEarth.Token\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -94,6 +99,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\VirtualEarth.Imagery\" />
     <WCFMetadataStorage Include="Service References\VirtualEarth.Token\" />
     <WCFMetadataStorage Include="Service References\VirtualEarth\" />
   </ItemGroup>
@@ -120,6 +126,14 @@
     <None Include="Service References\VirtualEarth.Token\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\VirtualEarth.Imagery\Arrays.xsd" />
+    <None Include="Service References\VirtualEarth.Imagery\common.xsd" />
+    <None Include="Service References\VirtualEarth.Imagery\contracts.wsdl" />
+    <None Include="Service References\VirtualEarth.Imagery\contracts.xsd" />
+    <None Include="Service References\VirtualEarth.Imagery\imagery.wsdl" />
+    <None Include="Service References\VirtualEarth.Imagery\imagery.xsd" />
+    <None Include="Service References\VirtualEarth.Imagery\search.xsd" />
+    <None Include="Service References\VirtualEarth.Imagery\service.xsd" />
     <None Include="Service References\VirtualEarth.Token\GeoCoding.Services.VirtualEarth.Token.CountryRegionInfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -133,6 +147,24 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\VirtualEarth.Token\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VirtualEarth.Imagery\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VirtualEarth.Imagery\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\VirtualEarth.Imagery\GeoCoding.Services.VirtualEarth.Imagery.ImageryMetadataResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VirtualEarth.Imagery\GeoCoding.Services.VirtualEarth.Imagery.MapUriResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\VirtualEarth.Imagery\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
