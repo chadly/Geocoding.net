@@ -29,24 +29,31 @@ namespace GeoCoding.Services.VirtualEarth
 			this.tokenService = tokenService;
 		}
 
-		private string Token()
+		public void Dispose()
 		{
-			var tokenSpec = new TokenSpecification() { ClientIPAddress = LocalIPAddress(), TokenValidityDurationMinutes = 480 };
-			var response = tokenService.GetClientToken(new GetClientTokenRequest() { specification = tokenSpec });
-			return response.GetClientTokenResult;
+			if (factory != null)
+				factory.Dispose();
 		}
 
-		private string LocalIPAddress()
+		public GeoAddress[] GeoCode(string address)
 		{
-			var host = Dns.GetHostEntry(Dns.GetHostName());
-			foreach (var ip in host.AddressList)
-			{
-				if (ip.AddressFamily.ToString() == "InterNetwork")
-				{
-					return ip.ToString();
-				}
-			}
-			return "127.0.0.1";
+			string token = Token();
+			var request = new GeocodeRequest() { Query = address, Credentials = new Credentials() { Token = token } };
+
+			var response = geocodeService.Geocode(request);
+			return response.Results.Select(r => AddressFromVirtualEarth(r)).ToArray();
+		}
+
+		public GeoAddress[] GeoCode(string street, string city, string state, string postalCode, string country)
+		{
+			return GeoCode(street + " " + city + ", " + state + " " + postalCode + " " + country);
+		}
+
+		private string Token()
+		{
+			var tokenSpec = new TokenSpecification() { ClientIPAddress = LocalIPAddress.Current, TokenValidityDurationMinutes = 480 };
+			var response = tokenService.GetClientToken(new GetClientTokenRequest() { specification = tokenSpec });
+			return response.GetClientTokenResult;
 		}
 
 		private AddressAccuracy AccuracyFromVirtualEarth(Confidence confidence)
@@ -82,26 +89,6 @@ namespace GeoCoding.Services.VirtualEarth
 
 			address.ChangeLocation(LocationFromVirtualEarth(result.Locations), AccuracyFromVirtualEarth(result.Confidence));
 			return address;
-		}
-
-		public GeoAddress[] GeoCode(string address)
-		{
-			string token = Token();
-			var request = new GeocodeRequest() { Query = address, Credentials = new Credentials() { Token = token } };
-
-			var response = geocodeService.Geocode(request);
-			return response.Results.Select(r => AddressFromVirtualEarth(r)).ToArray();
-		}
-
-		public GeoAddress[] GeoCode(string street, string city, string state, string postalCode, string country)
-		{
-			return GeoCode(street + " " + city + ", " + state + " " + postalCode + " " + country);
-		}
-
-		public void Dispose()
-		{
-			if (factory != null)
-				factory.Dispose();
 		}
 	}
 }

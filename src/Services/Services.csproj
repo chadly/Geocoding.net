@@ -73,6 +73,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="VirtualEarth\LocalIPAddress.cs" />
     <Compile Include="VirtualEarth\VirtualEarthGeoCoder.cs" />
     <Compile Include="VirtualEarth\VirtualEarthServiceFactory.cs" />
     <Compile Include="Yahoo\YahooGeoCoder.cs" />
