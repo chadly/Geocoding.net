@@ -7,7 +7,7 @@ using System.Web;
 using System.Xml;
 using System.Xml.XPath;
 
-namespace GeoCoding.Services.Yahoo
+namespace GeoCoding.Yahoo
 {
     public class YahooGeoCoder : IGeoCoder
     {

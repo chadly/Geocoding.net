@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Configuration;
-using GeoCoding.Services.VirtualEarth;
+using GeoCoding.VirtualEarth;
 
-namespace GeoCoding.Services.Tests
+namespace GeoCoding.Tests
 {
 	public class VirtualEarthGeoCoderTest : GeoCoderTest, IDisposable
 	{

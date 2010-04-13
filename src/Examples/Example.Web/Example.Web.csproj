@@ -67,10 +67,6 @@
     <Content Include="Views\Shared\Site.Master" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Core.csproj">
-      <Project>{29970407-AEFA-4FAD-A337-7EB9E0BB51C1}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Services\Services.csproj">
       <Project>{654812CF-D009-4420-B9EC-D07B030926A1}</Project>
       <Name>Services</Name>

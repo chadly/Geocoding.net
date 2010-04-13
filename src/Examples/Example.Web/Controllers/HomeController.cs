@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
-using GeoCoding.Services;
+using GeoCoding;
 
 namespace Example.Web.Controllers
 {

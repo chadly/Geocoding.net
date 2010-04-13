@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace GeoCoding.Services.VirtualEarth
+namespace GeoCoding.VirtualEarth
 {
 	public static class LocalIPAddress
 	{

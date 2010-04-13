@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Configuration;
-using GeoCoding.Services.Google;
+using GeoCoding.Google;
 
-namespace GeoCoding.Services.Tests
+namespace GeoCoding.Tests
 {
     public class GoogleGeoCoderTest : GeoCoderTest
     {

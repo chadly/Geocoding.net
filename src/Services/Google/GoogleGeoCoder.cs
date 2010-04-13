@@ -7,7 +7,7 @@ using System.Web;
 using System.Xml;
 using System.Xml.XPath;
 
-namespace GeoCoding.Services.Google
+namespace GeoCoding.Google
 {
     public class GoogleGeoCoder : IGeoCoder
     {

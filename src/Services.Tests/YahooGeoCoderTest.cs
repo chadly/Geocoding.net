@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Configuration;
-using GeoCoding.Services.Yahoo;
+using GeoCoding.Yahoo;
 
-namespace GeoCoding.Services.Tests
+namespace GeoCoding.Tests
 {
     public class YahooGeoCoderTest : GeoCoderTest
     {

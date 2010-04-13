@@ -5,10 +5,10 @@ using System.Web.Routing;
 using Autofac.Builder;
 using Autofac.Integration.Web;
 using Autofac.Integration.Web.Mvc;
-using GeoCoding.Services;
-using GeoCoding.Services.Google;
-using GeoCoding.Services.VirtualEarth;
-using GeoCoding.Services.Yahoo;
+using GeoCoding;
+using GeoCoding.Google;
+using GeoCoding.VirtualEarth;
+using GeoCoding.Yahoo;
 
 namespace Example.Web
 {

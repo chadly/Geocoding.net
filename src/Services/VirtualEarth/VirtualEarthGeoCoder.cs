@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
-using GeoCoding.Services.VirtualEarth.Token;
+using GeoCoding.VirtualEarth.Token;
 using GeoAddress = GeoCoding.Address;
 using GeoLocation = GeoCoding.Location;
 
-namespace GeoCoding.Services.VirtualEarth
+namespace GeoCoding.VirtualEarth
 {
 	public class VirtualEarthGeoCoder : IGeoCoder, IDisposable
 	{

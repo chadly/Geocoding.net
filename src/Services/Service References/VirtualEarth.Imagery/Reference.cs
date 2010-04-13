@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GeoCoding.Services.VirtualEarth.Imagery {
+namespace GeoCoding.VirtualEarth.Imagery {
     using System.Runtime.Serialization;
     using System;
     
@@ -17,24 +17,24 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="RequestBase", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Services.VirtualEarth.Imagery.MapUriRequest))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Services.VirtualEarth.Imagery.ImageryMetadataRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.Imagery.MapUriRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.Imagery.ImageryMetadataRequest))]
     public partial class RequestBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.Credentials CredentialsField;
+        private GeoCoding.VirtualEarth.Imagery.Credentials CredentialsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CultureField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.ExecutionOptions ExecutionOptionsField;
+        private GeoCoding.VirtualEarth.Imagery.ExecutionOptions ExecutionOptionsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.UserProfile UserProfileField;
+        private GeoCoding.VirtualEarth.Imagery.UserProfile UserProfileField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -47,7 +47,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.Credentials Credentials {
+        public GeoCoding.VirtualEarth.Imagery.Credentials Credentials {
             get {
                 return this.CredentialsField;
             }
@@ -73,7 +73,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.ExecutionOptions ExecutionOptions {
+        public GeoCoding.VirtualEarth.Imagery.ExecutionOptions ExecutionOptions {
             get {
                 return this.ExecutionOptionsField;
             }
@@ -86,7 +86,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.UserProfile UserProfile {
+        public GeoCoding.VirtualEarth.Imagery.UserProfile UserProfile {
             get {
                 return this.UserProfileField;
             }
@@ -224,25 +224,25 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.Heading CurrentHeadingField;
+        private GeoCoding.VirtualEarth.Imagery.Heading CurrentHeadingField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.UserLocation CurrentLocationField;
+        private GeoCoding.VirtualEarth.Imagery.UserLocation CurrentLocationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.DeviceType DeviceTypeField;
+        private GeoCoding.VirtualEarth.Imagery.DeviceType DeviceTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.DistanceUnit DistanceUnitField;
+        private GeoCoding.VirtualEarth.Imagery.DistanceUnit DistanceUnitField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string IPAddressField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.ShapeBase MapViewField;
+        private GeoCoding.VirtualEarth.Imagery.ShapeBase MapViewField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.SizeOfint ScreenSizeField;
+        private GeoCoding.VirtualEarth.Imagery.SizeOfint ScreenSizeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -255,7 +255,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.Heading CurrentHeading {
+        public GeoCoding.VirtualEarth.Imagery.Heading CurrentHeading {
             get {
                 return this.CurrentHeadingField;
             }
@@ -268,7 +268,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.UserLocation CurrentLocation {
+        public GeoCoding.VirtualEarth.Imagery.UserLocation CurrentLocation {
             get {
                 return this.CurrentLocationField;
             }
@@ -281,7 +281,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.DeviceType DeviceType {
+        public GeoCoding.VirtualEarth.Imagery.DeviceType DeviceType {
             get {
                 return this.DeviceTypeField;
             }
@@ -294,7 +294,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.DistanceUnit DistanceUnit {
+        public GeoCoding.VirtualEarth.Imagery.DistanceUnit DistanceUnit {
             get {
                 return this.DistanceUnitField;
             }
@@ -320,7 +320,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.ShapeBase MapView {
+        public GeoCoding.VirtualEarth.Imagery.ShapeBase MapView {
             get {
                 return this.MapViewField;
             }
@@ -333,7 +333,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.SizeOfint ScreenSize {
+        public GeoCoding.VirtualEarth.Imagery.SizeOfint ScreenSize {
             get {
                 return this.ScreenSizeField;
             }
@@ -359,22 +359,22 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="MapUriRequest", Namespace="http://dev.virtualearth.net/webservices/v1/imagery")]
     [System.SerializableAttribute()]
-    public partial class MapUriRequest : GeoCoding.Services.VirtualEarth.Imagery.RequestBase {
+    public partial class MapUriRequest : GeoCoding.VirtualEarth.Imagery.RequestBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.Location CenterField;
+        private GeoCoding.VirtualEarth.Imagery.Location CenterField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.Location MajorRoutesDestinationField;
+        private GeoCoding.VirtualEarth.Imagery.Location MajorRoutesDestinationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.MapUriOptions OptionsField;
+        private GeoCoding.VirtualEarth.Imagery.MapUriOptions OptionsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.Pushpin[] PushpinsField;
+        private GeoCoding.VirtualEarth.Imagery.Pushpin[] PushpinsField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.Location Center {
+        public GeoCoding.VirtualEarth.Imagery.Location Center {
             get {
                 return this.CenterField;
             }
@@ -387,7 +387,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.Location MajorRoutesDestination {
+        public GeoCoding.VirtualEarth.Imagery.Location MajorRoutesDestination {
             get {
                 return this.MajorRoutesDestinationField;
             }
@@ -400,7 +400,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.MapUriOptions Options {
+        public GeoCoding.VirtualEarth.Imagery.MapUriOptions Options {
             get {
                 return this.OptionsField;
             }
@@ -413,7 +413,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.Pushpin[] Pushpins {
+        public GeoCoding.VirtualEarth.Imagery.Pushpin[] Pushpins {
             get {
                 return this.PushpinsField;
             }
@@ -430,16 +430,16 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ImageryMetadataRequest", Namespace="http://dev.virtualearth.net/webservices/v1/imagery")]
     [System.SerializableAttribute()]
-    public partial class ImageryMetadataRequest : GeoCoding.Services.VirtualEarth.Imagery.RequestBase {
+    public partial class ImageryMetadataRequest : GeoCoding.VirtualEarth.Imagery.RequestBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.ImageryMetadataOptions OptionsField;
+        private GeoCoding.VirtualEarth.Imagery.ImageryMetadataOptions OptionsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.MapStyle StyleField;
+        private GeoCoding.VirtualEarth.Imagery.MapStyle StyleField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.ImageryMetadataOptions Options {
+        public GeoCoding.VirtualEarth.Imagery.ImageryMetadataOptions Options {
             get {
                 return this.OptionsField;
             }
@@ -452,7 +452,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.MapStyle Style {
+        public GeoCoding.VirtualEarth.Imagery.MapStyle Style {
             get {
                 return this.StyleField;
             }
@@ -475,16 +475,16 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.Heading HeadingField;
+        private GeoCoding.VirtualEarth.Imagery.Heading HeadingField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.Location LocationField;
+        private GeoCoding.VirtualEarth.Imagery.Location LocationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool ReturnImageryProvidersField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.UriScheme UriSchemeField;
+        private GeoCoding.VirtualEarth.Imagery.UriScheme UriSchemeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> ZoomLevelField;
@@ -500,7 +500,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.Heading Heading {
+        public GeoCoding.VirtualEarth.Imagery.Heading Heading {
             get {
                 return this.HeadingField;
             }
@@ -513,7 +513,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.Location Location {
+        public GeoCoding.VirtualEarth.Imagery.Location Location {
             get {
                 return this.LocationField;
             }
@@ -539,7 +539,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.UriScheme UriScheme {
+        public GeoCoding.VirtualEarth.Imagery.UriScheme UriScheme {
             get {
                 return this.UriSchemeField;
             }
@@ -643,13 +643,13 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="UserLocation", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    public partial class UserLocation : GeoCoding.Services.VirtualEarth.Imagery.Location {
+    public partial class UserLocation : GeoCoding.VirtualEarth.Imagery.Location {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.Confidence ConfidenceField;
+        private GeoCoding.VirtualEarth.Imagery.Confidence ConfidenceField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.Confidence Confidence {
+        public GeoCoding.VirtualEarth.Imagery.Confidence Confidence {
             get {
                 return this.ConfidenceField;
             }
@@ -666,10 +666,10 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ShapeBase", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Services.VirtualEarth.Imagery.SearchPoint))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Services.VirtualEarth.Imagery.Circle))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Services.VirtualEarth.Imagery.Rectangle))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Services.VirtualEarth.Imagery.Polygon))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.Imagery.SearchPoint))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.Imagery.Circle))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.Imagery.Rectangle))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.Imagery.Polygon))]
     public partial class ShapeBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -782,8 +782,8 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Location", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Services.VirtualEarth.Imagery.GeocodeLocation))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Services.VirtualEarth.Imagery.UserLocation))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.Imagery.GeocodeLocation))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.Imagery.UserLocation))]
     public partial class Location : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -861,7 +861,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="GeocodeLocation", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    public partial class GeocodeLocation : GeoCoding.Services.VirtualEarth.Imagery.Location {
+    public partial class GeocodeLocation : GeoCoding.VirtualEarth.Imagery.Location {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CalculationMethodField;
@@ -898,13 +898,13 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="SearchPoint", Namespace="http://dev.virtualearth.net/webservices/v1/search")]
     [System.SerializableAttribute()]
-    public partial class SearchPoint : GeoCoding.Services.VirtualEarth.Imagery.ShapeBase {
+    public partial class SearchPoint : GeoCoding.VirtualEarth.Imagery.ShapeBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.Location PointField;
+        private GeoCoding.VirtualEarth.Imagery.Location PointField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.Location Point {
+        public GeoCoding.VirtualEarth.Imagery.Location Point {
             get {
                 return this.PointField;
             }
@@ -921,19 +921,19 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Circle", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    public partial class Circle : GeoCoding.Services.VirtualEarth.Imagery.ShapeBase {
+    public partial class Circle : GeoCoding.VirtualEarth.Imagery.ShapeBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.Location CenterField;
+        private GeoCoding.VirtualEarth.Imagery.Location CenterField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.DistanceUnit DistanceUnitField;
+        private GeoCoding.VirtualEarth.Imagery.DistanceUnit DistanceUnitField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double RadiusField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.Location Center {
+        public GeoCoding.VirtualEarth.Imagery.Location Center {
             get {
                 return this.CenterField;
             }
@@ -946,7 +946,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.DistanceUnit DistanceUnit {
+        public GeoCoding.VirtualEarth.Imagery.DistanceUnit DistanceUnit {
             get {
                 return this.DistanceUnitField;
             }
@@ -976,16 +976,16 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Rectangle", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    public partial class Rectangle : GeoCoding.Services.VirtualEarth.Imagery.ShapeBase {
+    public partial class Rectangle : GeoCoding.VirtualEarth.Imagery.ShapeBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.Location NortheastField;
+        private GeoCoding.VirtualEarth.Imagery.Location NortheastField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.Location SouthwestField;
+        private GeoCoding.VirtualEarth.Imagery.Location SouthwestField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.Location Northeast {
+        public GeoCoding.VirtualEarth.Imagery.Location Northeast {
             get {
                 return this.NortheastField;
             }
@@ -998,7 +998,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.Location Southwest {
+        public GeoCoding.VirtualEarth.Imagery.Location Southwest {
             get {
                 return this.SouthwestField;
             }
@@ -1015,13 +1015,13 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Polygon", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    public partial class Polygon : GeoCoding.Services.VirtualEarth.Imagery.ShapeBase {
+    public partial class Polygon : GeoCoding.VirtualEarth.Imagery.ShapeBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.Location[] VerticesField;
+        private GeoCoding.VirtualEarth.Imagery.Location[] VerticesField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.Location[] Vertices {
+        public GeoCoding.VirtualEarth.Imagery.Location[] Vertices {
             get {
                 return this.VerticesField;
             }
@@ -1047,19 +1047,19 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         private string[] DisplayLayersField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.SizeOfint ImageSizeField;
+        private GeoCoding.VirtualEarth.Imagery.SizeOfint ImageSizeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.ImageType ImageTypeField;
+        private GeoCoding.VirtualEarth.Imagery.ImageType ImageTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool PreventIconCollisionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.MapStyle StyleField;
+        private GeoCoding.VirtualEarth.Imagery.MapStyle StyleField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.UriScheme UriSchemeField;
+        private GeoCoding.VirtualEarth.Imagery.UriScheme UriSchemeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> ZoomLevelField;
@@ -1088,7 +1088,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.SizeOfint ImageSize {
+        public GeoCoding.VirtualEarth.Imagery.SizeOfint ImageSize {
             get {
                 return this.ImageSizeField;
             }
@@ -1101,7 +1101,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.ImageType ImageType {
+        public GeoCoding.VirtualEarth.Imagery.ImageType ImageType {
             get {
                 return this.ImageTypeField;
             }
@@ -1127,7 +1127,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.MapStyle Style {
+        public GeoCoding.VirtualEarth.Imagery.MapStyle Style {
             get {
                 return this.StyleField;
             }
@@ -1140,7 +1140,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.UriScheme UriScheme {
+        public GeoCoding.VirtualEarth.Imagery.UriScheme UriScheme {
             get {
                 return this.UriSchemeField;
             }
@@ -1191,7 +1191,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         private string LabelField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.Location LocationField;
+        private GeoCoding.VirtualEarth.Imagery.Location LocationField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1230,7 +1230,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.Location Location {
+        public GeoCoding.VirtualEarth.Imagery.Location Location {
             get {
                 return this.LocationField;
             }
@@ -1284,8 +1284,8 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ResponseBase", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Services.VirtualEarth.Imagery.MapUriResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Services.VirtualEarth.Imagery.ImageryMetadataResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.Imagery.MapUriResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.Imagery.ImageryMetadataResponse))]
     public partial class ResponseBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -1295,7 +1295,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         private System.Uri BrandLogoUriField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.ResponseSummary ResponseSummaryField;
+        private GeoCoding.VirtualEarth.Imagery.ResponseSummary ResponseSummaryField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1321,7 +1321,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.ResponseSummary ResponseSummary {
+        public GeoCoding.VirtualEarth.Imagery.ResponseSummary ResponseSummary {
             get {
                 return this.ResponseSummaryField;
             }
@@ -1353,7 +1353,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.AuthenticationResultCode AuthenticationResultCodeField;
+        private GeoCoding.VirtualEarth.Imagery.AuthenticationResultCode AuthenticationResultCodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CopyrightField;
@@ -1362,7 +1362,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         private string FaultReasonField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.ResponseStatusCode StatusCodeField;
+        private GeoCoding.VirtualEarth.Imagery.ResponseStatusCode StatusCodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TraceIdField;
@@ -1378,7 +1378,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.AuthenticationResultCode AuthenticationResultCode {
+        public GeoCoding.VirtualEarth.Imagery.AuthenticationResultCode AuthenticationResultCode {
             get {
                 return this.AuthenticationResultCodeField;
             }
@@ -1417,7 +1417,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.ResponseStatusCode StatusCode {
+        public GeoCoding.VirtualEarth.Imagery.ResponseStatusCode StatusCode {
             get {
                 return this.StatusCodeField;
             }
@@ -1456,7 +1456,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="MapUriResponse", Namespace="http://dev.virtualearth.net/webservices/v1/imagery")]
     [System.SerializableAttribute()]
-    public partial class MapUriResponse : GeoCoding.Services.VirtualEarth.Imagery.ResponseBase {
+    public partial class MapUriResponse : GeoCoding.VirtualEarth.Imagery.ResponseBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UriField;
@@ -1479,13 +1479,13 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ImageryMetadataResponse", Namespace="http://dev.virtualearth.net/webservices/v1/imagery")]
     [System.SerializableAttribute()]
-    public partial class ImageryMetadataResponse : GeoCoding.Services.VirtualEarth.Imagery.ResponseBase {
+    public partial class ImageryMetadataResponse : GeoCoding.VirtualEarth.Imagery.ResponseBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.ImageryMetadataResult[] ResultsField;
+        private GeoCoding.VirtualEarth.Imagery.ImageryMetadataResult[] ResultsField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.ImageryMetadataResult[] Results {
+        public GeoCoding.VirtualEarth.Imagery.ImageryMetadataResult[] Results {
             get {
                 return this.ResultsField;
             }
@@ -1502,14 +1502,14 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ImageryMetadataResult", Namespace="http://dev.virtualearth.net/webservices/v1/imagery")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Services.VirtualEarth.Imagery.ImageryMetadataBirdseyeResult))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.Imagery.ImageryMetadataBirdseyeResult))]
     public partial class ImageryMetadataResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.SizeOfint ImageSizeField;
+        private GeoCoding.VirtualEarth.Imagery.SizeOfint ImageSizeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ImageUriField;
@@ -1518,13 +1518,13 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         private string[] ImageUriSubdomainsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.ImageryProvider[] ImageryProvidersField;
+        private GeoCoding.VirtualEarth.Imagery.ImageryProvider[] ImageryProvidersField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.RangeOfdateTime VintageField;
+        private GeoCoding.VirtualEarth.Imagery.RangeOfdateTime VintageField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.RangeOfint ZoomRangeField;
+        private GeoCoding.VirtualEarth.Imagery.RangeOfint ZoomRangeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1537,7 +1537,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.SizeOfint ImageSize {
+        public GeoCoding.VirtualEarth.Imagery.SizeOfint ImageSize {
             get {
                 return this.ImageSizeField;
             }
@@ -1576,7 +1576,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.ImageryProvider[] ImageryProviders {
+        public GeoCoding.VirtualEarth.Imagery.ImageryProvider[] ImageryProviders {
             get {
                 return this.ImageryProvidersField;
             }
@@ -1589,7 +1589,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.RangeOfdateTime Vintage {
+        public GeoCoding.VirtualEarth.Imagery.RangeOfdateTime Vintage {
             get {
                 return this.VintageField;
             }
@@ -1602,7 +1602,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.RangeOfint ZoomRange {
+        public GeoCoding.VirtualEarth.Imagery.RangeOfint ZoomRange {
             get {
                 return this.ZoomRangeField;
             }
@@ -1787,10 +1787,10 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ImageryMetadataBirdseyeResult", Namespace="http://dev.virtualearth.net/webservices/v1/imagery")]
     [System.SerializableAttribute()]
-    public partial class ImageryMetadataBirdseyeResult : GeoCoding.Services.VirtualEarth.Imagery.ImageryMetadataResult {
+    public partial class ImageryMetadataBirdseyeResult : GeoCoding.VirtualEarth.Imagery.ImageryMetadataResult {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.Heading HeadingField;
+        private GeoCoding.VirtualEarth.Imagery.Heading HeadingField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int TilesXField;
@@ -1799,7 +1799,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         private int TilesYField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.Heading Heading {
+        public GeoCoding.VirtualEarth.Imagery.Heading Heading {
             get {
                 return this.HeadingField;
             }
@@ -1851,7 +1851,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         private string AttributionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.CoverageArea[] CoverageAreasField;
+        private GeoCoding.VirtualEarth.Imagery.CoverageArea[] CoverageAreasField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1877,7 +1877,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.CoverageArea[] CoverageAreas {
+        public GeoCoding.VirtualEarth.Imagery.CoverageArea[] CoverageAreas {
             get {
                 return this.CoverageAreasField;
             }
@@ -1909,10 +1909,10 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.Rectangle BoundingRectangleField;
+        private GeoCoding.VirtualEarth.Imagery.Rectangle BoundingRectangleField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.Services.VirtualEarth.Imagery.RangeOfint ZoomRangeField;
+        private GeoCoding.VirtualEarth.Imagery.RangeOfint ZoomRangeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1925,7 +1925,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.Rectangle BoundingRectangle {
+        public GeoCoding.VirtualEarth.Imagery.Rectangle BoundingRectangle {
             get {
                 return this.BoundingRectangleField;
             }
@@ -1938,7 +1938,7 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.Services.VirtualEarth.Imagery.RangeOfint ZoomRange {
+        public GeoCoding.VirtualEarth.Imagery.RangeOfint ZoomRange {
             get {
                 return this.ZoomRangeField;
             }
@@ -1967,25 +1967,25 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
         [System.ServiceModel.OperationContractAttribute(Action="http://dev.virtualearth.net/webservices/v1/imagery/contracts/IImageryService/GetI" +
             "mageryMetadata", ReplyAction="http://dev.virtualearth.net/webservices/v1/imagery/contracts/IImageryService/GetI" +
             "mageryMetadataResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GeoCoding.Services.VirtualEarth.Imagery.ResponseSummary), Action="http://dev.virtualearth.net/webservices/v1/imagery/contracts/IImageryService/GetI" +
+        [System.ServiceModel.FaultContractAttribute(typeof(GeoCoding.VirtualEarth.Imagery.ResponseSummary), Action="http://dev.virtualearth.net/webservices/v1/imagery/contracts/IImageryService/GetI" +
             "mageryMetadataResponseSummaryFault", Name="ResponseSummary", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
-        GeoCoding.Services.VirtualEarth.Imagery.ImageryMetadataResponse GetImageryMetadata(GeoCoding.Services.VirtualEarth.Imagery.ImageryMetadataRequest request);
+        GeoCoding.VirtualEarth.Imagery.ImageryMetadataResponse GetImageryMetadata(GeoCoding.VirtualEarth.Imagery.ImageryMetadataRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://dev.virtualearth.net/webservices/v1/imagery/contracts/IImageryService/GetM" +
             "apUri", ReplyAction="http://dev.virtualearth.net/webservices/v1/imagery/contracts/IImageryService/GetM" +
             "apUriResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GeoCoding.Services.VirtualEarth.Imagery.ResponseSummary), Action="http://dev.virtualearth.net/webservices/v1/imagery/contracts/IImageryService/GetM" +
+        [System.ServiceModel.FaultContractAttribute(typeof(GeoCoding.VirtualEarth.Imagery.ResponseSummary), Action="http://dev.virtualearth.net/webservices/v1/imagery/contracts/IImageryService/GetM" +
             "apUriResponseSummaryFault", Name="ResponseSummary", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
-        GeoCoding.Services.VirtualEarth.Imagery.MapUriResponse GetMapUri(GeoCoding.Services.VirtualEarth.Imagery.MapUriRequest request);
+        GeoCoding.VirtualEarth.Imagery.MapUriResponse GetMapUri(GeoCoding.VirtualEarth.Imagery.MapUriRequest request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public interface IImageryServiceChannel : GeoCoding.Services.VirtualEarth.Imagery.IImageryService, System.ServiceModel.IClientChannel {
+    public interface IImageryServiceChannel : GeoCoding.VirtualEarth.Imagery.IImageryService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public partial class ImageryServiceClient : System.ServiceModel.ClientBase<GeoCoding.Services.VirtualEarth.Imagery.IImageryService>, GeoCoding.Services.VirtualEarth.Imagery.IImageryService {
+    public partial class ImageryServiceClient : System.ServiceModel.ClientBase<GeoCoding.VirtualEarth.Imagery.IImageryService>, GeoCoding.VirtualEarth.Imagery.IImageryService {
         
         public ImageryServiceClient() {
         }
@@ -2006,11 +2006,11 @@ namespace GeoCoding.Services.VirtualEarth.Imagery {
                 base(binding, remoteAddress) {
         }
         
-        public GeoCoding.Services.VirtualEarth.Imagery.ImageryMetadataResponse GetImageryMetadata(GeoCoding.Services.VirtualEarth.Imagery.ImageryMetadataRequest request) {
+        public GeoCoding.VirtualEarth.Imagery.ImageryMetadataResponse GetImageryMetadata(GeoCoding.VirtualEarth.Imagery.ImageryMetadataRequest request) {
             return base.Channel.GetImageryMetadata(request);
         }
         
-        public GeoCoding.Services.VirtualEarth.Imagery.MapUriResponse GetMapUri(GeoCoding.Services.VirtualEarth.Imagery.MapUriRequest request) {
+        public GeoCoding.VirtualEarth.Imagery.MapUriResponse GetMapUri(GeoCoding.VirtualEarth.Imagery.MapUriRequest request) {
             return base.Channel.GetMapUri(request);
         }
     }

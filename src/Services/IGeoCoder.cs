@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GeoCoding.Services
+namespace GeoCoding
 {
     public interface IGeoCoder
     {

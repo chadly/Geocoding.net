@@ -4,7 +4,7 @@ using System.Globalization;
 using Xunit;
 using Xunit.Extensions;
 
-namespace GeoCoding.Services.Tests
+namespace GeoCoding.Tests
 {
     public abstract class GeoCoderTest
     {
