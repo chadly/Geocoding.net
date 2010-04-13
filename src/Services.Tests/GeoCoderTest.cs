@@ -17,15 +17,15 @@ namespace GeoCoding.Services.Tests
 
         protected abstract IGeoCoder CreateGeoCoder();
 
-        private void AssertWhiteHouseAddress(Address address)
-        {
-            Assert.Equal("1600 Pennsylvania Ave NW", address.Street);
-            Assert.Equal("Washington", address.City);
-            Assert.Equal("DC", address.State);
-            Assert.Equal("20006", address.PostalCode);
+		private void AssertWhiteHouseAddress(Address address)
+		{
+			Assert.True("The White House".Equals(address.Street) || "1600 Pennsylvania Ave NW".Equals(address.Street));
+			Assert.Equal("Washington", address.City);
+			Assert.Equal("DC", address.State);
+			Assert.True("20006".Equals(address.PostalCode) || "20500".Equals(address.PostalCode));
 			Assert.Equal(AddressAccuracy.AddressLevel, address.Accuracy);
 			Assert.True(address.Country == "US" || address.Country == "United States");
-        }
+		}
 
         [Fact]
         public void CanGeoCodeAddress()

@@ -72,28 +72,31 @@ namespace GeoCoding.Services.Google
             return gpsCoordinates;
         }
 
-        private Address RetrieveAddress(XPathNavigator nav)
-        {
-            //create a "sub-navigator" so that we can perform global xpath searches for nodes (e.g. //adr:PostalCodeNumber)
-            //doing this because the xml schema changes depending upon the accuracy of the address returned
-            //it is a pain in the ass to parse
-            nav = CreateSubNavigator(nav);
+		private Address RetrieveAddress(XPathNavigator nav)
+		{
+			//create a "sub-navigator" so that we can perform global xpath searches for nodes (e.g. //adr:PostalCodeNumber)
+			//doing this because the xml schema changes depending upon the accuracy of the address returned
+			//it is a pain in the ass to parse
+			nav = CreateSubNavigator(nav);
 
-            GoogleAddressAccuracy accuracy = (GoogleAddressAccuracy)int.Parse(EvaluateXPath("string(//adr:AddressDetails/@Accuracy)", nav));
+			GoogleAddressAccuracy accuracy = (GoogleAddressAccuracy)int.Parse(EvaluateXPath("string(//adr:AddressDetails/@Accuracy)", nav));
 
-            string formattedAddress = EvaluateXPath("string(//kml:address)", nav);
-            string country = EvaluateXPath("string(//adr:CountryNameCode)", nav);
-            string state = EvaluateXPath("string(//adr:AdministrativeAreaName)", nav);
-            string county = EvaluateXPath("string(//adr:SubAdministrativeAreaName)", nav);
-            string city = EvaluateXPath("string(//adr:LocalityName)", nav);
-            string street = EvaluateXPath("string(//adr:ThoroughfareName)", nav);
-            string zip = EvaluateXPath("string(//adr:PostalCodeNumber)", nav);
-            string[] coordinates = EvaluateXPath("string(//kml:Point/kml:coordinates)", nav).Split(',');
+			string formattedAddress = EvaluateXPath("string(//kml:address)", nav);
+			string country = EvaluateXPath("string(//adr:CountryNameCode)", nav);
+			string state = EvaluateXPath("string(//adr:AdministrativeAreaName)", nav);
+			string county = EvaluateXPath("string(//adr:SubAdministrativeAreaName)", nav);
+			string city = EvaluateXPath("string(//adr:LocalityName)", nav);
+			string street = EvaluateXPath("string(//adr:ThoroughfareName)", nav);
+			string zip = EvaluateXPath("string(//adr:PostalCodeNumber)", nav);
+			string[] coordinates = EvaluateXPath("string(//kml:Point/kml:coordinates)", nav).Split(',');
 
-            var addr = new Address() { Street = street, City = city, State = state, PostalCode = zip, Country = country };
-            addr.ChangeLocation(FromCoordinates(coordinates), MapAccuracy(accuracy));
-            return addr;
-        }
+			if (accuracy == GoogleAddressAccuracy.PremiseLevel)
+				street = EvaluateXPath("string(//adr:AddressLine)", nav);
+
+			var addr = new Address() { Street = street, City = city, State = state, PostalCode = zip, Country = country };
+			addr.ChangeLocation(FromCoordinates(coordinates), MapAccuracy(accuracy));
+			return addr;
+		}
 
         private Address[] ProcessWebResponse(WebResponse response)
         {
@@ -121,22 +124,26 @@ namespace GeoCoding.Services.Google
 
         #endregion
 
-        private AddressAccuracy MapAccuracy(GoogleAddressAccuracy accuracy)
-        {
-            switch (accuracy)
-            {
-                case GoogleAddressAccuracy.UnknownLocation: return AddressAccuracy.Unknown;
-                case GoogleAddressAccuracy.CountryLevel: return AddressAccuracy.CountryLevel;
-                case GoogleAddressAccuracy.RegionLevel: return AddressAccuracy.StateLevel;
-                case GoogleAddressAccuracy.SubRegionLevel: return AddressAccuracy.StateLevel;
-                case GoogleAddressAccuracy.TownLevel: return AddressAccuracy.CityLevel;
-                case GoogleAddressAccuracy.ZipCodeLevel: return AddressAccuracy.PostalCodeLevel;
-                case GoogleAddressAccuracy.StreetLevel: return AddressAccuracy.StreetLevel;
-                case GoogleAddressAccuracy.IntersectionLevel: return AddressAccuracy.StreetLevel;
-                case GoogleAddressAccuracy.AddressLevel: return AddressAccuracy.AddressLevel;
-                default: return AddressAccuracy.Unknown;
-            }
-        }
+		private AddressAccuracy MapAccuracy(GoogleAddressAccuracy accuracy)
+		{
+			switch (accuracy)
+			{
+				case GoogleAddressAccuracy.UnknownLocation: return AddressAccuracy.Unknown;
+				case GoogleAddressAccuracy.CountryLevel: return AddressAccuracy.CountryLevel;
+				case GoogleAddressAccuracy.RegionLevel: return AddressAccuracy.StateLevel;
+				case GoogleAddressAccuracy.SubRegionLevel: return AddressAccuracy.StateLevel;
+				case GoogleAddressAccuracy.TownLevel: return AddressAccuracy.CityLevel;
+				case GoogleAddressAccuracy.ZipCodeLevel: return AddressAccuracy.PostalCodeLevel;
+				case GoogleAddressAccuracy.StreetLevel: return AddressAccuracy.StreetLevel;
+				case GoogleAddressAccuracy.IntersectionLevel: return AddressAccuracy.StreetLevel;
+
+				case GoogleAddressAccuracy.AddressLevel:
+				case GoogleAddressAccuracy.PremiseLevel:
+					return AddressAccuracy.AddressLevel;
+
+				default: return AddressAccuracy.Unknown;
+			}
+		}
 
         private HttpWebRequest BuildWebRequest(string address)
         {
