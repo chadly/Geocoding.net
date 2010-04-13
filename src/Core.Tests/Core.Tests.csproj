@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GeoCoding.Tests</RootNamespace>
-    <AssemblyName>GeoCoding.Tests</AssemblyName>
+    <AssemblyName>GeoCoding.Core.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
@@ -68,9 +68,9 @@
     <Compile Include="YahooGeoCoderTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Services\Services.csproj">
+    <ProjectReference Include="..\Core\Core.csproj">
       <Project>{654812CF-D009-4420-B9EC-D07B030926A1}</Project>
-      <Name>Services</Name>
+      <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

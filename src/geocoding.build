@@ -15,7 +15,7 @@
     <vssolutions Include="GeoCoding.Net.sln" />
 
     <!-- Define user-specific files that need to be copied from template -->
-    <templateFiles Include="Services.Tests\App.config.temp" />
+    <templateFiles Include="Core.Tests\App.config.temp" />
 
     <!-- Define tests that should be run as part of the build -->
     <tests Include="**\*.Tests.csproj" />
@@ -23,7 +23,7 @@
 
   <!-- Define outputs -->
   <ItemGroup>
-    <binaryOutput Include="Services\Services.csproj">
+    <binaryOutput Include="Core\Core.csproj">
       <zipName>geocoding.net</zipName>
     </binaryOutput>
   </ItemGroup>
