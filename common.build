@@ -7,6 +7,8 @@
     <buildDir Condition="'$(buildDir)'==''">$(MSBuildProjectDirectory)\..\build\$(configuration)</buildDir>
     <libDir>$(MSBuildProjectDirectory)\..\lib</libDir>
 
+    <includeDependencyOutput Condition="'$(includeDependencyOutput)'==''">false</includeDependencyOutput>
+
     <MSBuildCommunityTasksPath>$(libDir)\MsBuild</MSBuildCommunityTasksPath>
     <svnToolPath Condition="'$(svnToolPath)'==''">C:\Program Files (x86)\VisualSVN\bin</svnToolPath>
   </PropertyGroup>
@@ -18,7 +20,7 @@
 
   <Target Name="_CopyOutputToTempDir">
     <!-- copy binary output to build temp directory -->
-    <MSBuild Projects="@(binaryOutput)" Properties="Configuration=$(configuration);OutputPath=$(buildDir)\temp\%(binaryOutput.Filename)" />
+    <MSBuild Projects="@(binaryOutput)" Properties="Configuration=$(configuration);OutputPath=$(buildDir)\temp\%(binaryOutput.zipName)" />
 
     <!-- copy web output to build temp directory -->
     <MSBuild Projects="@(webOutput)" Properties="Configuration=$(configuration);OutputPath=$(buildDir)\temp\%(webOutput.Filename)" />
@@ -26,7 +28,7 @@
 
   <Target Name="_RemoveTempDir">
     <!-- delete temporary build directory -->
-    <RemoveDir Directories="$(buildDir)\temp" />
+    <RemoveDir Directories="$(buildDir)\temp" ContinueOnError="true" />
   </Target>
 
   <Target Name="_CleanBuildDir">
@@ -35,12 +37,12 @@
 
   <Target Name="_ZipBinaryOutput" Condition="@(binaryOutput) != ''">
     <!-- create an item group of files for each binary output project specified -->
-    <CreateItem Include="$(buildDir)\temp\%(binaryOutput.Filename)\**\*.*" AdditionalMetadata="OutputType=%(binaryOutput.Filename);ZipName=%(binaryOutput.zipName)">
+    <CreateItem Include="$(buildDir)\temp\%(binaryOutput.zipName)\**\*.*" AdditionalMetadata="ZipName=%(binaryOutput.zipName)">
       <Output TaskParameter="Include" ItemName="binaryZipOutput" />
     </CreateItem>
 
     <!-- zip that shit up -->
-    <Zip Files="@(binaryZipOutput)" ZipFileName="$(buildDir)\%(binaryZipOutput.ZipName)_$(configuration)_v$(versionString).zip" WorkingDirectory="$(buildDir)\temp\%(binaryZipOutput.OutputType)" />
+    <Zip Files="@(binaryZipOutput)" ZipFileName="$(buildDir)\%(binaryZipOutput.ZipName)_$(configuration)_v$(versionString).zip" WorkingDirectory="$(buildDir)\temp\%(binaryZipOutput.ZipName)" />
   </Target>
 
   <Target Name="_ZipWebOutput" Condition="@(webOutput) != ''">
@@ -104,7 +106,8 @@
       AssemblyCopyright="$(copyright)"
       AssemblyConfiguration="$(configuration)"
       ComVisible="false"
-      AssemblyVersion="$(versionString)" />
+      AssemblyVersion="$(versionString)"
+      AssemblyFileVersion="$(versionString)"/>
   </Target>
 
   <Target Name="Test" DependsOnTargets="Compile">
@@ -118,7 +121,7 @@
   </Target>
 
   <Target Name="Zip" DependsOnTargets="Compile;_CopyOutputToTempDir">
-    <MSBuild Projects="@(vsbuilds)" Targets="Zip" Properties="Configuration=$(configuration);svnToolPath=$(svnToolPath);buildDir=$(buildDir)" />
+    <MSBuild Condition="$(includeDependencyOutput) == 'true'" Projects="@(vsbuilds)" Targets="Zip" Properties="Configuration=$(configuration);svnToolPath=$(svnToolPath);buildDir=$(buildDir)" />
     <CallTarget Targets="_ZipBinaryOutput;_ZipWebOutput" />
   </Target>
 </Project>
