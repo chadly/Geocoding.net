@@ -83,6 +83,11 @@ namespace GeoCoding.Services.VirtualEarth
 			return TokenServiceFactory.CreateChannel();
 		}
 
+		public IImageryService CreateImageryService()
+		{
+			return ImageryServiceFactory.CreateChannel();
+		}
+
 		public void Dispose()
 		{
 			if (geocodeServiceFactory != null)
