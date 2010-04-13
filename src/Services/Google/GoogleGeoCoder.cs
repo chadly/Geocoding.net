@@ -93,9 +93,7 @@ namespace GeoCoding.Services.Google
 			if (accuracy == GoogleAddressAccuracy.PremiseLevel)
 				street = EvaluateXPath("string(//adr:AddressLine)", nav);
 
-			var addr = new Address() { Street = street, City = city, State = state, PostalCode = zip, Country = country };
-			addr.ChangeLocation(FromCoordinates(coordinates), MapAccuracy(accuracy));
-			return addr;
+			return new Address(street, city, state, zip, country, FromCoordinates(coordinates), MapAccuracy(accuracy));
 		}
 
         private Address[] ProcessWebResponse(WebResponse response)

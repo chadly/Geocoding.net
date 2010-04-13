@@ -70,7 +70,7 @@ namespace GeoCoding.Services.VirtualEarth
 		private GeoLocation LocationFromVirtualEarth(GeocodeLocation[] locations)
 		{
 			if (!locations.Any())
-				return GeoLocation.Empty;
+				return null;
 
 			var loc = locations.First();
 			return new GeoLocation(loc.Latitude, loc.Longitude);
@@ -78,17 +78,15 @@ namespace GeoCoding.Services.VirtualEarth
 
 		private GeoAddress AddressFromVirtualEarth(GeocodeResult result)
 		{
-			var address = new GeoAddress()
-			{
-				Street = result.Address.AddressLine,
-				City = result.Address.Locality,
-				State = result.Address.AdminDistrict,
-				PostalCode = result.Address.PostalCode,
-				Country = result.Address.CountryRegion
-			};
-
-			address.ChangeLocation(LocationFromVirtualEarth(result.Locations), AccuracyFromVirtualEarth(result.Confidence));
-			return address;
+			return new GeoAddress(
+				result.Address.AddressLine,
+				result.Address.Locality,
+				result.Address.AdminDistrict,
+				result.Address.PostalCode,
+				result.Address.CountryRegion,
+				LocationFromVirtualEarth(result.Locations),
+				AccuracyFromVirtualEarth(result.Confidence)
+			);
 		}
 	}
 }

@@ -30,69 +30,37 @@ namespace GeoCoding.Services.Yahoo
             this.appId = appId;
         }
 
-        #region XML Parsing
+		private Address[] GeoCode(HttpWebRequest request)
+		{
+			try
+			{
+				using (WebResponse response = request.GetResponse())
+				{
+					return ProcessWebResponse(response);
+				}
+			}
+			catch (WebException ex)
+			{
+				if (!HandleWebException(ex))
+					throw;
+				return new Address[0];
+			}
+		}
 
-        private XmlNamespaceManager CreateXmlNamespaceManager(XPathNavigator nav)
-        {
-            XmlNamespaceManager nsManager = new XmlNamespaceManager(nav.NameTable);
-            nsManager.AddNamespace("y", "urn:yahoo:maps");
-            return nsManager;
-        }
+		public Address[] GeoCode(string address)
+		{
+			if (String.IsNullOrEmpty(address)) throw new ArgumentNullException("address");
 
-        private XPathDocument LoadXmlResponse(WebResponse response)
-        {
-            using (Stream stream = response.GetResponseStream())
-            {
-                XPathDocument doc = new XPathDocument(stream);
-                return doc;
-            }
-        }
+			HttpWebRequest request = BuildWebRequest(address);
+			return GeoCode(request);
+		}
 
-        private string EvaluateXPath(string xpath, XPathNavigator nav)
-        {
-            XPathExpression exp = nav.Compile(xpath);
-            exp.SetContext(namespaceManager);
-            return (string)nav.Evaluate(exp);
-        }
-
-        private Address RetrieveAddress(XPathNavigator nav)
-        {
-            AddressAccuracy accuracy = MapAccuracy(EvaluateXPath("string(@precision)", nav));
-
-            double latitude = double.Parse(EvaluateXPath("string(y:Latitude)", nav), CultureInfo.InvariantCulture);
-			double longitude = double.Parse(EvaluateXPath("string(y:Longitude)", nav), CultureInfo.InvariantCulture);
-
-            string street = EvaluateXPath("string(y:Address)", nav);
-            string city = EvaluateXPath("string(y:City)", nav);
-            string state = EvaluateXPath("string(y:State)", nav);
-            string postalCode = EvaluateXPath("string(y:Zip)", nav);
-            string country = EvaluateXPath("string(y:Country)", nav);
-
-            var addr = new Address() { Street = street, City = city, State = state, PostalCode = postalCode, Country = country };
-            addr.ChangeLocation(new Location(latitude, longitude), accuracy);
-            return addr;
-        }
-
-        private Address[] ProcessWebResponse(WebResponse response)
-        {
-            XPathDocument xmlDoc = LoadXmlResponse(response);
-            XPathNavigator nav = xmlDoc.CreateNavigator();
-            namespaceManager = CreateXmlNamespaceManager(nav);
-
-            XPathExpression exp = nav.Compile("y:ResultSet/y:Result");
-            exp.SetContext(namespaceManager);
-            XPathNodeIterator nodes = nav.Select(exp);
-
-            List<Address> addresses = new List<Address>();
-            while (nodes.MoveNext())
-            {
-                addresses.Add(RetrieveAddress(nodes.Current));
-            }
-
-            return addresses.ToArray();
-        }
-
-        #endregion
+		public Address[] GeoCode(string street, string city, string state, string postalCode, string country)
+		{
+			//ignoring the country parameter since yahoo doesn't accept it
+			HttpWebRequest request = BuildWebRequest(street, city, state, postalCode);
+			return GeoCode(request);
+		}
 
         private AddressAccuracy MapAccuracy(string precision)
         {
@@ -134,37 +102,75 @@ namespace GeoCoding.Services.Yahoo
             return false;
         }
 
-        private Address[] GeoCode(HttpWebRequest request)
-        {
-            try
-            {
-                using (WebResponse response = request.GetResponse())
-                {
-                    return ProcessWebResponse(response);
-                }
-            }
-            catch (WebException ex)
-            {
-                if (!HandleWebException(ex))
-                    throw;
-                return new Address[0];
-            }
-        }
+		#region XML Parsing
 
-        public Address[] GeoCode(string address)
-        {
-            if (String.IsNullOrEmpty(address)) throw new ArgumentNullException("address");
+		private XmlNamespaceManager CreateXmlNamespaceManager(XPathNavigator nav)
+		{
+			XmlNamespaceManager nsManager = new XmlNamespaceManager(nav.NameTable);
+			nsManager.AddNamespace("y", "urn:yahoo:maps");
+			return nsManager;
+		}
 
-            HttpWebRequest request = BuildWebRequest(address);
-            return GeoCode(request);
-        }
+		private XPathDocument LoadXmlResponse(WebResponse response)
+		{
+			using (Stream stream = response.GetResponseStream())
+			{
+				XPathDocument doc = new XPathDocument(stream);
+				return doc;
+			}
+		}
 
-        public Address[] GeoCode(string street, string city, string state, string postalCode, string country)
-        {
-            //ignoring the country parameter since yahoo doesn't accept it
-            HttpWebRequest request = BuildWebRequest(street, city, state, postalCode);
-            return GeoCode(request);
-        }
+		private string EvaluateXPath(string xpath, XPathNavigator nav)
+		{
+			XPathExpression exp = nav.Compile(xpath);
+			exp.SetContext(namespaceManager);
+			return (string)nav.Evaluate(exp);
+		}
+
+		private Address RetrieveAddress(XPathNavigator nav)
+		{
+			AddressAccuracy accuracy = MapAccuracy(EvaluateXPath("string(@precision)", nav));
+
+			double latitude = double.Parse(EvaluateXPath("string(y:Latitude)", nav), CultureInfo.InvariantCulture);
+			double longitude = double.Parse(EvaluateXPath("string(y:Longitude)", nav), CultureInfo.InvariantCulture);
+
+			string street = EvaluateXPath("string(y:Address)", nav);
+			string city = EvaluateXPath("string(y:City)", nav);
+			string state = EvaluateXPath("string(y:State)", nav);
+			string postalCode = EvaluateXPath("string(y:Zip)", nav);
+			string country = EvaluateXPath("string(y:Country)", nav);
+
+			return new Address(
+				street,
+				city,
+				state,
+				postalCode,
+				country,
+				new Location(latitude, longitude),
+				accuracy
+			);
+		}
+
+		private Address[] ProcessWebResponse(WebResponse response)
+		{
+			XPathDocument xmlDoc = LoadXmlResponse(response);
+			XPathNavigator nav = xmlDoc.CreateNavigator();
+			namespaceManager = CreateXmlNamespaceManager(nav);
+
+			XPathExpression exp = nav.Compile("y:ResultSet/y:Result");
+			exp.SetContext(namespaceManager);
+			XPathNodeIterator nodes = nav.Select(exp);
+
+			List<Address> addresses = new List<Address>();
+			while (nodes.MoveNext())
+			{
+				addresses.Add(RetrieveAddress(nodes.Current));
+			}
+
+			return addresses.ToArray();
+		}
+
+		#endregion
 
         public override string ToString()
         {

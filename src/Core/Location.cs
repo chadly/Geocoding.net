@@ -2,60 +2,88 @@
 
 namespace GeoCoding
 {
-    public struct Location
-    {
-        public static readonly Location Empty = new Location();
+	public class Location
+	{
+		private readonly double latitude;
+		private readonly double longitude;
 
-        private readonly double latitude;
-        private readonly double longitude;
+		public double Latitude
+		{
+			get { return latitude; }
+		}
 
-        public double Latitude
-        {
-            get { return latitude; }
-        }
+		public double Longitude
+		{
+			get { return longitude; }
+		}
 
-        public double Longitude
-        {
-            get { return longitude; }
-        }
+		public Location(double latitude, double longitude)
+		{
+			if (longitude <= -180 || longitude > 180)
+				throw new ArgumentOutOfRangeException("longitude", longitude, "Value must be between -180 and 180 (inclusive).");
 
-        public Location(double latitude, double longitude)
-        {
-            this.latitude = latitude;
-            this.longitude = longitude;
-        }
+			if (latitude < -90 || latitude > 90)
+				throw new ArgumentOutOfRangeException("latitude", latitude, "Value must be between -90(inclusive) and 90(inclusive).");
 
-        private double ToRadian(double val)
-        {
-            return (Math.PI / 180.0) * val;
-        }
+			if (double.IsNaN(longitude))
+				throw new ArgumentException("Longitude must be a valid number.", "longitude");
 
-        public Distance DistanceBetween(Location location)
-        {
-            return DistanceBetween(location, DistanceUnits.Miles);
-        }
+			if (double.IsNaN(latitude))
+				throw new ArgumentException("Latitude must be a valid number.", "latitude");
 
-        public Distance DistanceBetween(Location location, DistanceUnits units)
-        {
-            double earthRadius = (units == DistanceUnits.Miles) ? Distance.EarthRadiusInMiles : Distance.EarthRadiusInKilometers;
+			this.latitude = latitude;
+			this.longitude = longitude;
+		}
 
-            double latRadian = ToRadian(location.Latitude - this.Latitude);
-            double longRadian = ToRadian(location.Longitude - this.Longitude);
+		private double ToRadian(double val)
+		{
+			return (Math.PI / 180.0) * val;
+		}
 
-            double a = Math.Pow(Math.Sin(latRadian / 2.0), 2) +
-                Math.Cos(ToRadian(this.Latitude)) *
-                Math.Cos(ToRadian(location.Latitude)) *
-                Math.Pow(Math.Sin(longRadian / 2.0), 2);
+		public Distance DistanceBetween(Location location)
+		{
+			return DistanceBetween(location, DistanceUnits.Miles);
+		}
 
-            double c = 2.0 * Math.Asin(Math.Min(1, Math.Sqrt(a)));
+		public Distance DistanceBetween(Location location, DistanceUnits units)
+		{
+			double earthRadius = (units == DistanceUnits.Miles) ? Distance.EarthRadiusInMiles : Distance.EarthRadiusInKilometers;
 
-            double distance = earthRadius * c;
-            return new Distance(distance, units);
-        }
+			double latRadian = ToRadian(location.Latitude - this.Latitude);
+			double longRadian = ToRadian(location.Longitude - this.Longitude);
 
-        public override string ToString()
-        {
-            return String.Format("{0}, {1}", latitude, longitude);
-        }
-    }
+			double a = Math.Pow(Math.Sin(latRadian / 2.0), 2) +
+				Math.Cos(ToRadian(this.Latitude)) *
+				Math.Cos(ToRadian(location.Latitude)) *
+				Math.Pow(Math.Sin(longRadian / 2.0), 2);
+
+			double c = 2.0 * Math.Asin(Math.Min(1, Math.Sqrt(a)));
+
+			double distance = earthRadius * c;
+			return new Distance(distance, units);
+		}
+
+		public override bool Equals(object obj)
+		{
+			return Equals(obj as Location);
+		}
+
+		public bool Equals(Location coor)
+		{
+			if (coor == null)
+				return false;
+
+			return (this.Latitude == coor.Latitude && this.Longitude == coor.Longitude);
+		}
+
+		public override int GetHashCode()
+		{
+			return Latitude.GetHashCode() ^ Latitude.GetHashCode();
+		}
+
+		public override string ToString()
+		{
+			return String.Format("{0}, {1}", latitude, longitude);
+		}
+	}
 }
