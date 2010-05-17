@@ -5,7 +5,7 @@
     <company>GeoCoding.Net</company>
     <copyright>Copyright © 2008 GeoCoding.Net</copyright>
     <major>1</major>
-    <minor>2</minor>
+    <minor>3</minor>
     <build Condition="'$(BUILD_NUMBER)'==''">0</build>
     <build Condition="'$(BUILD_NUMBER)'!=''">$(BUILD_NUMBER)</build>
   </PropertyGroup>
