@@ -140,6 +140,10 @@ namespace GeoCoding.Yahoo
 			string postalCode = EvaluateXPath("string(y:Zip)", nav);
 			string country = EvaluateXPath("string(y:Country)", nav);
 
+			//Yahoo likes to lie and tell us it has postal code precision when it doesn't really have a postal code...
+			if (accuracy == AddressAccuracy.PostalCodeLevel && String.IsNullOrEmpty(postalCode))
+				accuracy = AddressAccuracy.CityLevel;
+
 			return new Address(
 				street,
 				city,

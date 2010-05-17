@@ -56,15 +56,26 @@ namespace GeoCoding.VirtualEarth
 			return response.GetClientTokenResult;
 		}
 
-		private AddressAccuracy AccuracyFromVirtualEarth(Confidence confidence)
+		private AddressAccuracy AccuracyFromVirtualEarth(Address address)
 		{
-			switch (confidence)
-			{
-				case Confidence.High: return AddressAccuracy.AddressLevel;
-				case Confidence.Medium: return AddressAccuracy.CityLevel;
-				case Confidence.Low: return AddressAccuracy.Unknown;
-				default: return AddressAccuracy.Unknown;
-			}
+			//Virtual Earth returns an address "confidence" which is not very helpful when trying to determine the accuracy of the address, hence, this:
+
+			if (!String.IsNullOrEmpty(address.AddressLine))
+				return AddressAccuracy.AddressLevel;
+
+			if (!String.IsNullOrEmpty(address.PostalCode))
+				return AddressAccuracy.PostalCodeLevel;
+
+			if (!String.IsNullOrEmpty(address.Locality))
+				return AddressAccuracy.CityLevel;
+
+			if (!String.IsNullOrEmpty(address.AdminDistrict))
+				return AddressAccuracy.StateLevel;
+
+			if (!String.IsNullOrEmpty(address.CountryRegion))
+				return AddressAccuracy.CountryLevel;
+
+			return AddressAccuracy.Unknown;
 		}
 
 		private GeoLocation LocationFromVirtualEarth(GeocodeLocation[] locations)
@@ -85,7 +96,7 @@ namespace GeoCoding.VirtualEarth
 				result.Address.PostalCode,
 				result.Address.CountryRegion,
 				LocationFromVirtualEarth(result.Locations),
-				AccuracyFromVirtualEarth(result.Confidence)
+				AccuracyFromVirtualEarth(result.Address)
 			);
 		}
 	}

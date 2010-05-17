@@ -1,21 +1,21 @@
 ﻿using System;
-using System.Threading;
 using System.Globalization;
+using System.Threading;
 using Xunit;
 using Xunit.Extensions;
 
 namespace GeoCoding.Tests
 {
-    public abstract class GeoCoderTest
-    {
-        private readonly IGeoCoder geoCoder;
+	public abstract class GeoCoderTest
+	{
+		private readonly IGeoCoder geoCoder;
 
-        public GeoCoderTest()
-        {
-            geoCoder = CreateGeoCoder();
-        }
+		public GeoCoderTest()
+		{
+			geoCoder = CreateGeoCoder();
+		}
 
-        protected abstract IGeoCoder CreateGeoCoder();
+		protected abstract IGeoCoder CreateGeoCoder();
 
 		private void AssertWhiteHouseAddress(Address address)
 		{
@@ -27,19 +27,19 @@ namespace GeoCoding.Tests
 			Assert.True(address.Country == "US" || address.Country == "United States");
 		}
 
-        [Fact]
-        public void CanGeoCodeAddress()
-        {
-            Address[] addresses = geoCoder.GeoCode("1600 pennsylvania ave washington dc");
-            AssertWhiteHouseAddress(addresses[0]);
-        }
+		[Fact]
+		public void CanGeoCodeAddress()
+		{
+			Address[] addresses = geoCoder.GeoCode("1600 pennsylvania ave washington dc");
+			AssertWhiteHouseAddress(addresses[0]);
+		}
 
-        [Fact]
-        public void CanGeoCodeNormalizedAddress()
-        {
-            Address[] addresses = geoCoder.GeoCode("1600 pennsylvania ave", "washington", "dc", null, null);
-            AssertWhiteHouseAddress(addresses[0]);
-        }
+		[Fact]
+		public void CanGeoCodeNormalizedAddress()
+		{
+			Address[] addresses = geoCoder.GeoCode("1600 pennsylvania ave", "washington", "dc", null, null);
+			AssertWhiteHouseAddress(addresses[0]);
+		}
 
 		[Theory]
 		[InlineData("en-US")]
@@ -57,5 +57,17 @@ namespace GeoCoding.Tests
 			Assert.True(addresses[0].Country == "CA" || addresses[0].Country == "Canada");
 			Assert.Equal(AddressAccuracy.AddressLevel, addresses[0].Accuracy);
 		}
-    }
+
+		[Theory]
+		[InlineData("United States", AddressAccuracy.CountryLevel)]
+		[InlineData("Illinois, US", AddressAccuracy.StateLevel)]
+		[InlineData("New York, New York", AddressAccuracy.CityLevel)]
+		[InlineData("90210, US", AddressAccuracy.PostalCodeLevel)]
+		[InlineData("1600 pennsylvania ave washington dc", AddressAccuracy.AddressLevel)]
+		public void CanMatchAccuracyLevelsOfAddress(string address, AddressAccuracy accuracy)
+		{
+			Address[] addresses = geoCoder.GeoCode(address);
+			Assert.Equal(accuracy, addresses[0].Accuracy);
+		}
+	}
 }
