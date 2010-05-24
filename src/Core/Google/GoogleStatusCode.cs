@@ -9,6 +9,8 @@ namespace GeoCoding.Google
         MissingAddress = 601,
         UnknownAddress = 602,
         UnavailableAddress = 603,
-        BadKey = 610
+        UnknownDirections = 604,
+        BadKey = 610,
+        TooManyQueries = 620
     }
 }
