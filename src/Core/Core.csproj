@@ -46,6 +46,9 @@
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.ServiceModel.Web">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.XML" />
   </ItemGroup>
@@ -55,6 +58,8 @@
     </Compile>
     <Compile Include="Address.cs" />
     <Compile Include="AddressAccuracy.cs" />
+    <Compile Include="BingMaps\BingMapsGeocoder.cs" />
+    <Compile Include="BingMaps\BingMapsJSON.cs" />
     <Compile Include="Distance.cs" />
     <Compile Include="DistanceUnits.cs" />
     <Compile Include="Google\GoogleAddressAccuracy.cs" />
