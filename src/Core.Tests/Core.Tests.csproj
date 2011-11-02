@@ -18,6 +18,21 @@
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -73,6 +88,18 @@
     <Compile Include="YahooGeoCoderTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Google\Core.Google.csproj">
+      <Project>{2E608F4E-29F7-4AC3-922F-23D971312CAE}</Project>
+      <Name>Core.Google</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.VirtualEarth\Core.VirtualEarth.csproj">
+      <Project>{74BCB608-4674-452F-A50C-7EE61AC47EAF}</Project>
+      <Name>Core.VirtualEarth</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Yahoo\Core.Yahoo.csproj">
+      <Project>{B2863E87-3983-46EF-8B3E-37A4475ECA13}</Project>
+      <Name>Core.Yahoo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{654812CF-D009-4420-B9EC-D07B030926A1}</Project>
       <Name>Core</Name>
@@ -83,6 +110,23 @@
       <Link>Properties\geocoding.snk</Link>
     </None>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

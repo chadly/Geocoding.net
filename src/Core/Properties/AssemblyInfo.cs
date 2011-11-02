@@ -1,3 +1,3 @@
 ﻿using System.Reflection;
 
-[assembly: AssemblyTitle("GeoCoding Services")]
+[assembly: AssemblyTitle("GeoCoding Core")]

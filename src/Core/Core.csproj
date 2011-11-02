@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GeoCoding</RootNamespace>
-    <AssemblyName>GeoCoding</AssemblyName>
+    <AssemblyName>GeoCoding.Core</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
@@ -18,6 +18,21 @@
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -66,116 +81,13 @@
     <Compile Include="BingMaps\BingMapsJSON.cs" />
     <Compile Include="Distance.cs" />
     <Compile Include="DistanceUnits.cs" />
-    <Compile Include="Google\GoogleAddressAccuracy.cs" />
-    <Compile Include="Google\GoogleGeoCoder.cs" />
-    <Compile Include="Google\GoogleStatusCode.cs" />
     <Compile Include="IGeoCoder.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\VirtualEarth.Imagery\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\VirtualEarth.Token\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\VirtualEarth\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="VirtualEarth\LocalIPAddress.cs" />
-    <Compile Include="VirtualEarth\VirtualEarthGeoCoder.cs" />
-    <Compile Include="VirtualEarth\VirtualEarthServiceFactory.cs" />
-    <Compile Include="Yahoo\YahooGeoCoder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\geocoding.snk">
       <Link>Properties\geocoding.snk</Link>
-    </None>
-    <None Include="Service References\VirtualEarth\GeocodeService.wsdl" />
-    <None Include="Service References\VirtualEarth\GeocodeService.xsd" />
-    <None Include="Service References\VirtualEarth\GeocodeService1.wsdl" />
-    <None Include="Service References\VirtualEarth\GeocodeService1.xsd" />
-    <None Include="Service References\VirtualEarth\GeocodeService2.xsd" />
-    <None Include="Service References\VirtualEarth\GeocodeService3.xsd" />
-    <None Include="Service References\VirtualEarth\GeocodeService4.xsd" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\VirtualEarth.Imagery\" />
-    <WCFMetadataStorage Include="Service References\VirtualEarth.Token\" />
-    <WCFMetadataStorage Include="Service References\VirtualEarth\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\VirtualEarth\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\VirtualEarth\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\VirtualEarth.Token\common.wsdl" />
-    <None Include="Service References\VirtualEarth\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\VirtualEarth.Token\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\VirtualEarth.Token\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\VirtualEarth.Imagery\Arrays.xsd" />
-    <None Include="Service References\VirtualEarth.Imagery\common.xsd" />
-    <None Include="Service References\VirtualEarth.Imagery\contracts.wsdl" />
-    <None Include="Service References\VirtualEarth.Imagery\contracts.xsd" />
-    <None Include="Service References\VirtualEarth.Imagery\imagery.wsdl" />
-    <None Include="Service References\VirtualEarth.Imagery\imagery.xsd" />
-    <None Include="Service References\VirtualEarth.Imagery\search.xsd" />
-    <None Include="Service References\VirtualEarth.Imagery\service.xsd" />
-    <None Include="Service References\VirtualEarth.Token\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\VirtualEarth.Imagery\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\VirtualEarth.Imagery\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\VirtualEarth.Imagery\GeoCoding.VirtualEarth.Imagery.ImageryMetadataResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VirtualEarth.Imagery\GeoCoding.VirtualEarth.Imagery.MapUriResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VirtualEarth.Imagery\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\VirtualEarth.Token\GeoCoding.VirtualEarth.Token.CountryRegionInfo.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VirtualEarth.Token\GeoCoding.VirtualEarth.Token.DataSource.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VirtualEarth.Token\GeoCoding.VirtualEarth.Token.EntityType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VirtualEarth.Token\GeoCoding.VirtualEarth.Token.VersionInfo.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\VirtualEarth\GeoCoding.VirtualEarth.GeocodeResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +96,24 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
