@@ -1,29 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
+    <projectName>GeoCoding.Net</projectName>
+    <company>GeoCoding.Net</company>
+    <copyright>Copyright © 2008 - 2011 Chad Lee</copyright>
+    <major>1</major>
+    <minor>4</minor>
+    <build Condition="'$(BUILD_NUMBER)'==''">0</build>
+    <build Condition="'$(BUILD_NUMBER)'!=''">$(BUILD_NUMBER)</build>
+  </PropertyGroup>
+
+  <!-- Define order of solutions to build -->
+  <ItemGroup>
+    <vssolutions Include="src\GeoCoding.Net.sln" />
+  </ItemGroup>
+
+  <!-- Define outputs -->
+  <ItemGroup>
+    <binaryOutput Include="src\Core\Core.csproj">
+      <zipName>geocoding.net</zipName>
+    </binaryOutput>
+  </ItemGroup>
+
+  <PropertyGroup>
     <!-- default configuration is "Debug"; the other is "Release" -->
     <configuration Condition="'$(configuration)'==''">Debug</configuration>
 
-    <buildDir Condition="'$(buildDir)'==''">$(MSBuildProjectDirectory)\..\build\$(configuration)</buildDir>
-    <libDir>$(MSBuildProjectDirectory)\..\lib</libDir>
+    <buildDir Condition="'$(buildDir)'==''">$(MSBuildProjectDirectory)\build\$(configuration)</buildDir>
+    <libDir>$(MSBuildThisFileDirectory)lib\</libDir>
 
     <includeDependencyOutput Condition="'$(includeDependencyOutput)'==''">false</includeDependencyOutput>
 
-    <MSBuildCommunityTasksPath>$(libDir)\MsBuild</MSBuildCommunityTasksPath>
+    <MSBuildCommunityTasksPath>$(libDir)MsBuild</MSBuildCommunityTasksPath>
     <svnToolPath Condition="'$(svnToolPath)'==''">C:\Program Files (x86)\VisualSVN\bin</svnToolPath>
   </PropertyGroup>
 
-  <Import Project="lib\MsBuild\MSBuild.Community.Tasks.Targets" />
-  <UsingTask AssemblyFile="$(libDir)\Xunit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
+  <UsingTask AssemblyFile="$(libDir)Xunit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
 
   <!-- ========= Private Targets ===================================================== -->
 
   <Target Name="_CopyOutputToTempDir">
     <!-- copy binary output to build temp directory -->
-    <MSBuild Projects="@(binaryOutput)" Properties="Configuration=$(configuration);OutputPath=$(buildDir)\temp\%(binaryOutput.zipName)" />
+    <CreateItem Include="@(binaryOutput -> '%(RootDir)%(Directory)bin\$(Configuration)\**\*.*')" AdditionalMetadata="ZipName=%(binaryOutput.zipName)">
+      <Output TaskParameter="Include" ItemName="binaryOutputToCopy" />
+    </CreateItem>
+    <Copy SourceFiles="@(binaryOutputToCopy)" DestinationFiles="@(binaryOutputToCopy -> '$(buildDir)\temp\%(ZipName)\%(RecursiveDir)%(Filename)%(Extension)')" />
 
     <!-- copy web output to build temp directory -->
-    <MSBuild Projects="@(webOutput)" Properties="Configuration=$(configuration);OutputPath=$(buildDir)\temp\%(webOutput.Filename)" />
+    <MSBuild Projects="@(webOutput)" Targets="PipelinePreDeployCopyAllFilesToOneFolder" Properties="Configuration=$(configuration);_PackageTempDir=$(buildDir)\temp\%(webOutput.Filename)" />
   </Target>
 
   <Target Name="_RemoveTempDir">
@@ -48,12 +73,12 @@
   <Target Name="_ZipWebOutput" Condition="@(webOutput) != ''">
     <!-- create an item group of files for each web output -->
     <!-- (it is located in a weird directory structure) -->
-    <CreateItem Include="$(buildDir)\temp\%(webOutput.Filename)\_PublishedWebsites\%(webOutput.Filename)\**\*.*" AdditionalMetadata="OutputType=%(webOutput.Filename);ZipName=%(webOutput.zipName)">
+    <CreateItem Include="$(buildDir)\temp\%(webOutput.Filename)\**\*.*" AdditionalMetadata="OutputType=%(webOutput.Filename);ZipName=%(webOutput.zipName)">
       <Output TaskParameter="Include" ItemName="webZipOutput" />
     </CreateItem>
 
     <!-- zip that shit up -->
-    <Zip Files="@(webZipOutput)" ZipFileName="$(buildDir)\%(webZipOutput.ZipName)_$(configuration)_v$(versionString).zip" WorkingDirectory="$(buildDir)\temp\%(webZipOutput.OutputType)\_PublishedWebsites\%(webZipOutput.OutputType)" />
+    <Zip Files="@(webZipOutput)" ZipFileName="$(buildDir)\%(webZipOutput.ZipName)_$(configuration)_v$(versionString).zip" WorkingDirectory="$(buildDir)\temp\%(webZipOutput.OutputType)" />
   </Target>
 
 
@@ -68,12 +93,23 @@
     <!-- Clean the entire build directory -->
     <CallTarget Targets="_CleanBuildDir" />
 
-    <!-- Call all VS projects to clean up -->
+    <!-- Call all builds to clean up -->
     <MSBuild Projects="@(vsbuilds)" Targets="Clean" Properties="Configuration=$(configuration);svnToolPath=$(svnToolPath);buildDir=$(buildDir)" />
-    <MSBuild Projects="@(vssolutions)" Targets="Clean" Properties="Configuration=$(configuration)" />
+
+    <Exec Command="FOR /F &quot;tokens=*&quot; %%G IN ('DIR /B /AD /S bin') DO RMDIR /S /Q &quot;%%G&quot;" />
+    <Exec Command="FOR /F &quot;tokens=*&quot; %%G IN ('DIR /B /AD /S obj') DO RMDIR /S /Q &quot;%%G&quot;" />
+
+    <Delete Files="src\AssemblyInfoCommon.cs" />
+    <Delete Files="@(templateFiles -> '%(RootDir)%(Directory)%(Filename)')" />
   </Target>
 
   <Target Name="CopyTemplateFiles">
+    <MSBuild Projects="@(vsbuilds)" Targets="CopyTemplateFiles" Properties="Configuration=$(configuration);svnToolPath=$(svnToolPath);buildDir=$(buildDir)" />
+
+    <CreateItem Include="$(MSBuildProjectDirectory)\**\*.config.temp">
+      <Output TaskParameter="Include" ItemName="templateFiles" />
+    </CreateItem>
+
     <Copy SourceFiles="@(templateFiles -> '%(FullPath)')"
           DestinationFiles="@(templateFiles -> '%(RootDir)%(Directory)%(Filename)')"
           Condition="!Exists('%(templateFiles.RootDir)%(templateFiles.Directory)%(templateFiles.Filename)')" />
@@ -100,7 +136,7 @@
 
     <AssemblyInfo
       CodeLanguage="CS"
-      OutputFile="AssemblyInfoCommon.cs"
+      OutputFile="src\AssemblyInfoCommon.cs"
       AssemblyProduct="$(projectName)"
       AssemblyCompany="$(company)"
       AssemblyCopyright="$(copyright)"
@@ -111,13 +147,17 @@
   </Target>
 
   <Target Name="Test" DependsOnTargets="Compile">
-    <MakeDir Directories="$(buildDir)\test-results" />
+    <MakeDir Directories="$(buildDir)" />
     <MSBuild Projects="@(vsbuilds)" Targets="Test" Properties="Configuration=$(configuration);svnToolPath=$(svnToolPath);buildDir=$(buildDir)" />
 
+    <CreateItem Include="$(MSBuildProjectDirectory)\**\*Tests.csproj">
+      <Output TaskParameter="Include" ItemName="tests" />
+    </CreateItem>
+
     <!-- run unit tests -->
-    <xunit
+    <xunit Condition="@(tests) != ''"
       Assembly="@(tests -> '%(RootDir)%(Directory)bin\$(configuration)\GeoCoding.%(Filename).dll')"
-      Html="$(buildDir)\test-results\GeoCoding.%(tests.Filename).html" />
+      Html="$(buildDir)\GeoCoding.%(tests.Filename).html" />
   </Target>
 
   <Target Name="Zip" DependsOnTargets="Compile;_CopyOutputToTempDir">

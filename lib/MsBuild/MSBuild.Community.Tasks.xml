@@ -157,6 +157,24 @@
                 AssemblyVersion="1.0.0.0" 
                 AssemblyFileVersion="1.0.0.0" />
             ]]></code>
+            <para>Generates a complete version file for C++/CLI.</para>
+            <code><![CDATA[
+            <AssemblyInfo CodeLanguage="CPP"  
+                OutputFile="$(MSBuildProjectDirectory)\Properties\AssemblyInfo.cpp"
+                AssemblyTitle="MyAssembly" 
+                AssemblyDescription="MyAssembly Description"
+                AssemblyConfiguration="$(Configuration)"
+                AssemblyCompany="Company Name, LLC"
+                AssemblyProduct="MyAssembly"
+                AssemblyCopyright="Copyright (c) Company Name, LLC 2008"
+                AssemblyTrademark=""
+                ComVisible="false"
+                CLSCompliant="true"
+                Guid="d038566a-1937-478a-b5c5-b79c4afb253d"
+                AssemblyVersion="1.0.0.0" 
+                AssemblyFileVersion="1.0.0.0"
+                UnmanagedCode="true" />
+            ]]></code>
             </example>
         </member>
         <member name="F:MSBuild.Community.Tasks.AssemblyInfo.DEFAULT_OUTPUT_FILE">
@@ -167,7 +185,7 @@
         </member>
         <member name="M:MSBuild.Community.Tasks.AssemblyInfo.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:AssemblyInfo"/> class.
+            Initializes a new instance of the <see cref="T:MSBuild.Community.Tasks.AssemblyInfo"/> class.
             </summary>
         </member>
         <member name="M:MSBuild.Community.Tasks.AssemblyInfo.Execute">
@@ -283,9 +301,33 @@
             Gets or sets the assembly delay sign value.
             </summary>
         </member>
+        <member name="P:MSBuild.Community.Tasks.AssemblyInfo.SkipVerification">
+            <summary>
+            Gets or sets the assembly delay sign value.
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.AssemblyInfo.UnmanagedCode">
+            <summary>
+            Gets or sets the assembly delay sign value.
+            </summary>
+        </member>
         <member name="P:MSBuild.Community.Tasks.AssemblyInfo.GenerateClass">
             <summary>
             Gets or sets a value indicating whether to generate the ThisAssmebly class.
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.AssemblyInfo.NeutralResourcesLanguage">
+            <summary>
+            Gets or sets the neutral language which is used as a fallback language configuration 
+            if the locale on the computer isn't supported. Example is setting this to "en-US".
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.AssemblyInfo.InternalsVisibleTo">
+            <summary>
+            Makes it possible to make certain assemblies able to use constructs marked as internal.
+            Example might be setting this value to "UnitTests" assembly. The typical use case might 
+            be constructors in classes which shouldn't be available to other assemblies, but the unit
+            tests should be able to use them.
             </summary>
         </member>
         <member name="P:MSBuild.Community.Tasks.AssemblyInfo.OutputFile">
@@ -377,6 +419,11 @@
             </summary>
             <value><c>true</c> if system; otherwise, <c>false</c>.</value>
         </member>
+        <member name="T:MSBuild.Community.Tasks.ByteDescriptions">
+            <summary>
+            Describes certain byte measurements as nice strings.
+            </summary>
+        </member>
         <member name="T:MSBuild.Community.Tasks.Computer">
             <summary>
             Provides information about the build computer.
@@ -423,6 +470,240 @@
         <member name="P:MSBuild.Community.Tasks.Computer.OSVersion">
             <summary>
             Gets the version number of the build computer's operating system.
+            </summary>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.Beep">
+            <summary>
+            A task to play the sound of a beep through the console speaker.
+            </summary>
+            <remarks>
+      By default, the beep plays at a frequency of 800 hertz for a duration of 200 milliseconds.
+    </remarks><example>
+      To play the sound of a beep at a frequency of 800 hertz and for a duration of 200 milliseconds, use
+      <code>
+        <![CDATA[<Beep />]]>
+      </code>
+    </example><example>
+      To play the sound of a beep at a frequency of 440 hertz and for a duration of 300 milliseconds, use
+      <code>
+        <![CDATA[<Beep Frequency="440" Duration="300" />]]>
+      </code>
+    </example>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Beep.Execute">
+            <summary>
+            Plays the sound of a beep 
+            at the given <see cref="P:MSBuild.Community.Tasks.Beep.Frequency"/> and for the given <see cref="P:MSBuild.Community.Tasks.Beep.Duration"/> 
+            through the console speaker.
+            </summary>
+            <returns>
+            Always returns <see langword="true"/>, even when the sound could not be played.
+            </returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Beep.Frequency">
+            <summary>
+            Gets or sets the frequency of the beep, ranging from 37 to 32767 hertz.
+            Defaults to 800 hertz.
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Beep.Duration">
+            <summary>
+            Gets or sets the of the beep measured in milliseconds.
+            Defaults to 200 milliseconds.
+            </summary>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.DeleteTree">
+            <summary>
+            Delete a directory tree.  This task supports wild card directory selection.
+            </summary>
+            <example>
+            <para>Delete all bin and obj directories.</para>
+            <code><![CDATA[
+            <DeleteTree Directories="**\bin;**\obj" />
+            ]]></code>
+            <para>Delete all bin and obj directories that start with MSBuild.Community.</para>
+            <code><![CDATA[
+            <DeleteTree Directories="MSBuild.Community.*\**\bin;MSBuild.Community.*\**\obj" />
+            ]]></code>
+            </example>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.DeleteTree.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MSBuild.Community.Tasks.DeleteTree"/> class.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.DeleteTree.Execute">
+            <summary>
+            When overridden in a derived class, executes the task.
+            </summary>
+            <returns>
+            true if the task successfully executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.DeleteTree.Directories">
+            <summary>
+            Gets or sets the directories to be deleted.
+            </summary>
+            <value>The directories to be deleted.</value>
+            <remarks>
+            Directories can contain wild cards.
+            </remarks>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.DeleteTree.Recursive">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:MSBuild.Community.Tasks.DeleteTree"/> is recursive.
+            </summary>
+            <value><c>true</c> if recursive; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.DeleteTree.DeletedDirectories">
+            <summary>
+            Gets the deleted directories.
+            </summary>
+            <value>The deleted directories.</value>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.FtpUpload">
+            <summary>
+            Uploads a group of files using File Transfer Protocol (FTP).
+            </summary>
+            <remarks>
+            Set either LocalFiles or LocalFile but not both.
+            </remarks>
+            <example>Upload a file.
+            <code><![CDATA[
+            <FtpUpload 
+                LocalFile="MSBuild.Community.Tasks.zip" 
+                RemoteUri="ftp://localhost/" />
+            ]]></code>
+            
+            Upload all the files in an ItemGroup:
+            <code><![CDATA[
+            <FtpUpload
+                Username="username"
+                Password="password"
+                UsePassive="true"
+                RemoteUri="ftp://webserver.com/httpdocs/"
+                LocalFiles="@(FilesToUpload)"
+                RemoteFiles="@(FilesToUpload->'%(RecursiveDir)%(Filename)%(Extension)')" />
+            ]]></code>
+            </example>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.IFtpWebRequestCreator">
+            <summary>
+            Describes a factory for IFtpWebRequest.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.IFtpWebRequestCreator.Create(System.Uri,System.String)">
+            <summary>
+            Instantiates an FtpWebRequest.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.FtpUpload.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FtpUpload"/> class.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.FtpUpload.#ctor(MSBuild.Community.Tasks.IFtpWebRequestCreator)">
+            <summary>
+            Initializes a new instance that will inject the specified dependency.
+            </summary>
+            <param name="requestCreator"></param>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.FtpUpload.Execute">
+            <summary>
+            When overridden in a derived class, executes the task.
+            </summary>
+            <returns>
+            true if the task successfully executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.FtpUpload.LocalFile">
+            <summary>
+            Gets or sets the single file to upload.  Use
+            this or LocalFiles, but not both.
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.FtpUpload.LocalFiles">
+            <summary>
+            Gets or sets the local files to upload.  Use this
+            or LocalFile, but not both.
+            </summary>
+            <value>The local file.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.FtpUpload.RemoteFiles">
+            <summary>
+            Gets or sets the remote files to upload.
+            Each item in this list should have a corresponding item in LocalFiles.
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.FtpUpload.RemoteUri">
+            <summary>
+            Gets or sets the remote URI to upload.
+            </summary>
+            <value>The remote URI.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.FtpUpload.Username">
+            <summary>
+            Gets or sets the username.
+            </summary>
+            <value>The username.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.FtpUpload.Password">
+            <summary>
+            Gets or sets the password.
+            </summary>
+            <value>The password.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.FtpUpload.UsePassive">
+            <summary>
+            Gets or sets the behavior of a client application's data transfer process.
+            </summary>
+            <value><c>true</c> if [use passive]; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.IFtpWebRequest">
+            <summary>
+            This class references an interface that looks like FtpWebRequest
+            in order to support unit testing without an actual FTP Server.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.IFtpWebRequest.SetContentLength(System.Int64)">
+            <summary>
+            Sets the ContentLength property of the FtpWebRequest.
+            </summary>
+            <param name="length"></param>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.IFtpWebRequest.GetRequestStream">
+            <summary>
+            Calls GetRequestStream on the FtpWebRequest.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.IFtpWebRequest.GetStatusDescriptionAndCloseResponse">
+            <summary>
+            Gets the StatusDescription property of the response, then closes the response
+            on the FtpWebRequest.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.IFtpWebRequest.GetAndCloseResponse">
+            <summary>
+            Gets the response from the FTP server and closes it.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.IFtpWebRequest.GetResponseStream">
+            <summary>
+            Gets the response stream from the FtpWebRequest.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.RealFtpWebRequest">
+            <summary>
+            An adapter to make the real FtpWebRequest look like
+            an IFtpWebRequest.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.RealFtpWebRequest.#ctor(System.Net.FtpWebRequest)">
+            <summary>
+            Initializes a new instance of the RealFtpWebRequest class.
             </summary>
         </member>
         <member name="T:MSBuild.Community.Tasks.Ftp.FtpClientTaskBase">
@@ -822,6 +1103,13 @@
             <param name="isDirectory">if set to <c>true</c> this instance represents a directory; otherwise, <c>false</c>.</param>
             <param name="name">The name.</param>
         </member>
+        <member name="M:MSBuild.Community.Tasks.Ftp.FtpEntry.ParseDirList(System.String[])">
+            <summary>
+            Parses the dir list.
+            </summary>
+            <param name="entryLines">The entry lines.</param>
+            <returns></returns>
+        </member>
         <member name="P:MSBuild.Community.Tasks.Ftp.FtpEntry.IsDirectory">
             <summary>
             Gets or sets a value indicating whether this instance represents a directory.
@@ -951,6 +1239,1090 @@
             </summary>
             <value><c>true</c> if recursive; otherwise, <c>false</c>.</value>
         </member>
+        <member name="T:MSBuild.Community.Tasks.Fusion.UninstallStatus">
+            <summary>
+            The status of an uninstall.
+            </summary>
+        </member>
+        <member name="F:MSBuild.Community.Tasks.Fusion.UninstallStatus.None">
+            <summary>
+            No status.
+            </summary>
+        </member>
+        <member name="F:MSBuild.Community.Tasks.Fusion.UninstallStatus.Uninstalled">
+            <summary>
+            Uninstalled successfully.
+            </summary>
+        </member>
+        <member name="F:MSBuild.Community.Tasks.Fusion.UninstallStatus.StillInUse">
+            <summary>
+            Assembly is still in use.
+            </summary>
+        </member>
+        <member name="F:MSBuild.Community.Tasks.Fusion.UninstallStatus.AlreadyUninstalled">
+            <summary>
+            Assembly already uninstalled or not found.
+            </summary>
+        </member>
+        <member name="F:MSBuild.Community.Tasks.Fusion.UninstallStatus.DeletePending">
+            <summary>
+            Assembly delete is pending.
+            </summary>
+        </member>
+        <member name="F:MSBuild.Community.Tasks.Fusion.UninstallStatus.HasInstallReferences">
+            <summary>
+            Assembly has a reference to an installed application.
+            </summary>
+        </member>
+        <member name="F:MSBuild.Community.Tasks.Fusion.UninstallStatus.ReferenceNotFound">
+            <summary>
+            Assembly not found.
+            </summary>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.Fusion.FusionWrapper">
+            <summary>
+            A class wrapping fusion api calls
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Fusion.FusionWrapper.InstallAssembly(System.String,System.Boolean)">
+            <summary>
+            Installs the assembly.
+            </summary>
+            <param name="assemblyPath">The assembly path.</param>
+            <param name="force">if set to <c>true</c> force.</param>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Fusion.FusionWrapper.UninstallAssembly(System.String,System.Boolean)">
+            <summary>
+            Uninstalls the assembly.
+            </summary>
+            <param name="assemblyName">Name of the assembly.</param>
+            <param name="force">if set to <c>true</c> force.</param>
+            <returns>Returns <c>true</c> if uninstall successful.</returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Fusion.FusionWrapper.UninstallAssembly(System.String,System.Boolean,MSBuild.Community.Tasks.Fusion.UninstallStatus@)">
+            <summary>
+            Uninstalls the assembly.
+            </summary>
+            <param name="assemblyName">Name of the assembly.</param>
+            <param name="force">if set to <c>true</c> force.</param>
+            <param name="result">The UninstallStatus result.</param>
+            <returns>Returns <c>true</c> if uninstall successful.</returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Fusion.FusionWrapper.GetAssemblyPath(System.String)">
+            <summary>
+            Gets the assembly path.
+            </summary>
+            <param name="assemblyName">Name of the assembly.</param>
+            <returns>The path to the assembly in the GAC.</returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Fusion.FusionWrapper.GetAssemblyName(System.String)">
+            <summary>
+            Gets the name of the assembly.
+            </summary>
+            <param name="assemblyName">Name of the assembly.</param>
+            <returns>An <see cref="T:System.Reflection.AssemblyName"/> instance.</returns>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.HtmlHelp.ChmCompiler">
+            <summary>
+            Html Help 1x compiler task.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.HtmlHelp.ChmCompiler.GenerateFullPathToTool">
+            <summary>
+            Returns the fully qualified path to the executable file.
+            </summary>
+            <returns>
+            The fully qualified path to the executable file.
+            </returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.HtmlHelp.ChmCompiler.LogToolCommand(System.String)">
+            <summary>
+            Logs the starting point of the run to all registered loggers.
+            </summary>
+            <param name="message">A descriptive message to provide loggers, usually the command line and switches.</param>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.HtmlHelp.ChmCompiler.GenerateCommandLineCommands">
+            <summary>
+            Returns a string value containing the command line arguments to pass directly to the executable file.
+            </summary>
+            <returns>
+            A string value containing the command line arguments to pass directly to the executable file.
+            </returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.HtmlHelp.ChmCompiler.HandleTaskExecutionErrors">
+            <summary>
+            Handles execution errors raised by the executable file.
+            </summary>
+            <returns>
+            true if the method runs successfully; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.HtmlHelp.ChmCompiler.ProjectFile">
+            <summary>
+            Gets or sets the project file path.
+            </summary>
+            <value>The project file path.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.HtmlHelp.ChmCompiler.ToolName">
+            <summary>
+            Gets the name of the executable file to run.
+            </summary>
+            <value></value>
+            <returns>The name of the executable file to run.</returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.HtmlHelp.ChmCompiler.StandardOutputLoggingImportance">
+            <summary>
+            Gets the <see cref="T:Microsoft.Build.Framework.MessageImportance"></see> with which to log errors.
+            </summary>
+            <value></value>
+            <returns>The <see cref="T:Microsoft.Build.Framework.MessageImportance"></see> with which to log errors.</returns>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.HtmlHelp.HxCompiler">
+            <summary>
+            A Html Help 2.0 compiler task.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.HtmlHelp.HxCompiler.GenerateFullPathToTool">
+            <summary>
+            Returns the fully qualified path to the executable file.
+            </summary>
+            <returns>
+            The fully qualified path to the executable file.
+            </returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.HtmlHelp.HxCompiler.LogToolCommand(System.String)">
+            <summary>
+            Logs the starting point of the run to all registered loggers.
+            </summary>
+            <param name="message">A descriptive message to provide loggers, usually the command line and switches.</param>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.HtmlHelp.HxCompiler.GenerateCommandLineCommands">
+            <summary>
+            Returns a string value containing the command line arguments to pass directly to the executable file.
+            </summary>
+            <returns>
+            A string value containing the command line arguments to pass directly to the executable file.
+            </returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.HtmlHelp.HxCompiler.HandleTaskExecutionErrors">
+            <summary>
+            Handles execution errors raised by the executable file.
+            </summary>
+            <returns>
+            true if the method runs successfully; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.HtmlHelp.HxCompiler.ProjectFile">
+            <summary>
+            Gets or sets the project file path.
+            </summary>
+            <value>The project file path.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.HtmlHelp.HxCompiler.LogFile">
+            <summary>
+            Gets or sets the log file.
+            </summary>
+            <value>The log file.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.HtmlHelp.HxCompiler.ProjectRoot">
+            <summary>
+            Gets or sets the project root.
+            </summary>
+            <value>The project root.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.HtmlHelp.HxCompiler.OutputFile">
+            <summary>
+            Gets or sets the output file.
+            </summary>
+            <value>The output file.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.HtmlHelp.HxCompiler.NoInfoMessages">
+            <summary>
+            Gets or sets a value indicating whether no info messages will be output.
+            </summary>
+            <value><c>true</c> if no info messages; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.HtmlHelp.HxCompiler.NoWarningMessages">
+            <summary>
+            Gets or sets a value indicating whether no warning messages will be output.
+            </summary>
+            <value><c>true</c> if no warning messages; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.HtmlHelp.HxCompiler.NoErrorMessages">
+            <summary>
+            Gets or sets a value indicating whether no error messages will be output.
+            </summary>
+            <value><c>true</c> if no error messages; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.HtmlHelp.HxCompiler.QuiteMode">
+            <summary>
+            Gets or sets a value indicating quite mode.
+            </summary>
+            <value><c>true</c> if quite mode; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.HtmlHelp.HxCompiler.UncompileFile">
+            <summary>
+            Gets or sets the uncompile file.
+            </summary>
+            <value>The uncompile file.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.HtmlHelp.HxCompiler.UncompileDirectory">
+            <summary>
+            Gets or sets the uncompile directory.
+            </summary>
+            <value>The uncompile directory.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.HtmlHelp.HxCompiler.ToolName">
+            <summary>
+            Gets the name of the executable file to run.
+            </summary>
+            <value></value>
+            <returns>The name of the executable file to run.</returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.HtmlHelp.HxCompiler.StandardOutputLoggingImportance">
+            <summary>
+            Gets the <see cref="T:Microsoft.Build.Framework.MessageImportance"></see> with which to log errors.
+            </summary>
+            <value></value>
+            <returns>The <see cref="T:Microsoft.Build.Framework.MessageImportance"></see> with which to log errors.</returns>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.InnoSetup">
+            <summary>
+            MSBuild task to create installer with InnoSetup
+            </summary>
+            <example>Create installer
+            <code><![CDATA[
+                <InnoSetup 
+                    ScriptFile="setup.iss"
+                    OutputFileName="MySetup.exe"
+                    OutputPath="C:\SetupDir"
+                    Quiet="True" />
+            ]]></code>
+            </example>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.InnoSetup.GenerateFullPathToTool">
+            <summary>
+            Returns the fully qualified path to the executable file.
+            </summary>
+            <returns>
+            The fully qualified path to the executable file.
+            </returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.InnoSetup.LogToolCommand(System.String)">
+            <summary>
+            Logs the starting point of the run to all registered loggers.
+            </summary>
+            <param name="message">A descriptive message to provide loggers, usually the command line and switches.</param>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.InnoSetup.GenerateCommandLineCommands">
+            <summary>
+            Returns a string value containing the command line arguments to pass directly to the executable file.
+            </summary>
+            <returns>
+            A string value containing the command line arguments to pass directly to the executable file.
+            </returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.InnoSetup.Execute">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.InnoSetup.ScriptFile">
+            <summary>
+            Filename of Inno Setup script (.iss)
+            </summary>
+            <value>InnoSetup file, example: C:\Setup.iss</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.InnoSetup.OutputFileName">
+            <summary>
+            Specify output filename
+            </summary>
+            <value>Name for setup, examples: MySetup.exe</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.InnoSetup.OutputPath">
+            <summary>
+            Specify output path
+            </summary>
+            <value>Path for output setup, example: C:\Setups</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.InnoSetup.Quiet">
+            <summary>
+            Quiet compile
+            </summary>
+            <value>True o False</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.InnoSetup.ToolName">
+            <summary>
+            Gets the name of the executable file to run.
+            </summary>
+            <value></value>
+            <returns>The name of the executable file to run.</returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.InnoSetup.StandardOutputLoggingImportance">
+            <summary>
+            Gets the <see cref="T:Microsoft.Build.Framework.MessageImportance"></see> with which to log errors.
+            </summary>
+            <value></value>
+            <returns>The <see cref="T:Microsoft.Build.Framework.MessageImportance"></see> with which to log errors.</returns>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.MergeModes">
+            <summary>
+            Defines the modes for merging files.
+            </summary>
+        </member>
+        <member name="F:MSBuild.Community.Tasks.MergeModes.Binary">
+            <summary>
+            Merges files as binary data.
+            </summary>
+        </member>
+        <member name="F:MSBuild.Community.Tasks.MergeModes.Text">
+            <summary>
+            Merges files as text.
+            </summary>
+        </member>
+        <member name="F:MSBuild.Community.Tasks.MergeModes.TextLine">
+            <summary>
+            Merges files as text line by line.
+            </summary>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.Merge">
+            <summary>
+            Merge files into the destination file.
+            </summary>
+            <example>Merge CSS files together for better browser performance.
+            <code><![CDATA[
+            <Merge Mode="TextLine" 
+                SourceFiles="Main.css;Login.css" 
+                DestinationFile="All.css" />
+            ]]></code>
+            </example>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Merge.Execute">
+            <summary>
+            When overridden in a derived class, executes the task.
+            </summary>
+            <returns>
+            true if the task successfully executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Merge.Mode">
+            <summary>
+            Gets or sets the mode to use when merging.
+            </summary>
+            <value>The merge mode.</value>
+            <enum cref="T:MSBuild.Community.Tasks.MergeModes"/>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Merge.SourceFiles">
+            <summary>
+            Gets or sets the source files to merge.
+            </summary>
+            <value>The source files to merge.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Merge.DestinationFile">
+            <summary>
+            Gets or sets the destination file where the
+            <see cref="P:MSBuild.Community.Tasks.Merge.SourceFiles"/> are merged to.
+            </summary>
+            <value>The destination file.</value>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.Net.HttpRequest">
+            <summary>
+            Makes an HTTP request, optionally validating the result and writing it to a file.
+            </summary>
+            <remarks>
+            Execute a http request to hit the database update.  
+            Target attributes to set:
+                Url (required),
+                FailOnNon2xxResponse (200 responses generally means successful http request. default=true), 
+                EnsureResponseContains (string to check for),
+                WriteResponseTo (file name to write to),
+            </remarks>
+            <example>
+            Example of a update request ensuring "Database upgrade check completed successfully." was returned.
+            <code><![CDATA[
+                <HttpRequest Url="http://mydomain.com/index.php?checkdb=1" 
+                    EnsureResponseContains="Database upgrade check completed successfully." 
+                    FailOnNon2xxResponse="true" />
+            ]]></code>
+            </example>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Net.HttpRequest.#ctor">
+            <summary>
+            Constructor to set the default parameters for http request
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Net.HttpRequest.Execute">
+            <summary>
+            Entry Point inherited from Task
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Net.HttpRequest.Url">
+            <summary>
+            The URL to make an HTTP request against.
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Net.HttpRequest.EnsureResponseContains">
+            <summary>
+            Optional: if set then the task fails if the response text doesn't contain the text specified.
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Net.HttpRequest.FailOnNon2xxResponse">
+            <summary>
+            Default is true.  When true, if the web server returns a status code less than 200 or greater than 299 then the task fails.
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Net.HttpRequest.WriteResponseTo">
+            <summary>
+            Optional; the name of the file to write the response to.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.PathUtil.RelativePathTo(System.String,System.String)">
+            <summary>  
+            Creates a relative path from one file  
+            or folder to another.  
+            </summary>  
+            <param name="fromDirectory">  
+            Contains the directory that defines the   
+            start of the relative path.  
+            </param>  
+            <param name="toPath">  
+            Contains the path that defines the  
+            endpoint of the relative path.  
+            </param>  
+            <returns>  
+            The relative path from the start  
+            directory to the end path.  
+            </returns>  
+            <exception cref="T:System.ArgumentNullException">
+            Thrown if <paramref name="fromDirectory"/> or <paramref name="toPath"/> are null.
+            </exception>  
+        </member>
+        <member name="T:MSBuild.Community.Tasks.RegexCompiler">
+            <summary>
+            Compiles regular expressions and saves them to disk in an assembly.
+            </summary>
+            <remarks>
+      <para>
+        When defining the regular expressions in an MSBuild project file, the ItemGroup
+        item must have a metadata tag called 'Pattern' that is the actually regular expression.
+        Other optional metadata tags are the following.
+        <list type="table">
+          <listheader>
+            <term>Metadata Tags</term>
+            <description>Description</description>
+          </listheader>
+          <item>
+            <term>Pattern</term>
+            <description>The actually regular expression pattern to be compiled. (Required)</description>
+          </item>
+          <item>
+            <term>Options</term>
+            <description>The RegexOptions for the expression.</description>
+          </item>
+          <item>
+            <term>Namespace</term>
+            <description>The class namespace for the compile class.</description>
+          </item>
+          <item>
+            <term>IsPublic</term>
+            <description>A flag if the generated expression should be public.</description>
+          </item>
+        </list>
+      </para>
+    </remarks><example>
+      Creates an assembly with the compiled regular expressions.
+      <code>
+        <![CDATA[
+  <ItemGroup>
+    <RegexPatterns Include="TextRegex">
+      <Pattern>\G[^&lt;]+</Pattern>
+      <Options>RegexOptions.Singleline | RegexOptions.Multiline</Options>
+    </RegexPatterns>
+    <RegexPatterns Include="CommentRegex">
+      <Pattern>\G&lt;%--(([^-]*)-)*?-%&gt;</Pattern>
+      <Options>RegexOptions.Singleline | RegexOptions.Multiline</Options>
+    </RegexPatterns>
+    <RegexPatterns Include="CodeRegex">
+      <Pattern>\G&lt;%(?![@%])(?&lt;code&gt;.*?)%&gt;</Pattern>
+      <Options>RegexOptions.Singleline | RegexOptions.Multiline</Options>
+      <Namespace>MSBuild.Community.RegularExpressions</Namespace>
+    </RegexPatterns>
+  </ItemGroup>
+
+  <Target Name="RegexCompiler">
+    <RegexCompiler
+      OutputDirectory="Test"
+      RegularExpressions="@(RegexPatterns)"
+      Namespace="MSBuild.RegularExpressions"
+      AssemblyName="MSBuild.RegularExpressions.dll"
+      AssemblyTitle="MSBuild.RegularExpressions"
+      AssemblyDescription="MSBuild Community Tasks Regular Expressions"
+      AssemblyCompany="Company Name, LLC"
+      AssemblyProduct="MSBuildTasks"
+      AssemblyCopyright="Copyright (c) MSBuildTasks 2008"
+      AssemblyVersion="1.0.0.0"
+      AssemblyFileVersion="1.0.0.0" />
+  </Target>
+]]>
+      </code>
+    </example>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.RegexCompiler.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MSBuild.Community.Tasks.RegexCompiler"/> class.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.RegexCompiler.Execute">
+            <summary>
+            When overridden in a derived class, executes the task.
+            </summary>
+            <returns>
+            true if the task successfully executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.RegexCompiler.AssemblyName">
+            <summary>
+            Gets or sets the name of the assembly to be created by the regex compiler.
+            </summary>
+            <value>The name of the assembly.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.RegexCompiler.AssemblyTitle">
+            <summary>
+            Gets or sets the assembly title.
+            </summary>
+            <value>The assembly title.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.RegexCompiler.AssemblyDescription">
+            <summary>
+            Gets or sets the assembly description.
+            </summary>
+            <value>The assembly description.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.RegexCompiler.AssemblyCompany">
+            <summary>
+            Gets or sets the assembly company.
+            </summary>
+            <value>The assembly company.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.RegexCompiler.AssemblyProduct">
+            <summary>
+            Gets or sets the assembly product.
+            </summary>
+            <value>The assembly product.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.RegexCompiler.AssemblyCopyright">
+            <summary>
+            Gets or sets the assembly copyright.
+            </summary>
+            <value>The assembly copyright.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.RegexCompiler.AssemblyCulture">
+            <summary>
+            Gets or sets the assembly culture.
+            </summary>
+            <value>The assembly culture.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.RegexCompiler.AssemblyVersion">
+            <summary>
+            Gets or sets the assembly version.
+            </summary>
+            <value>The assembly version.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.RegexCompiler.AssemblyFileVersion">
+            <summary>
+            Gets or sets the assembly file version.
+            </summary>
+            <value>The assembly file version.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.RegexCompiler.AssemblyInformationalVersion">
+            <summary>
+            Gets or sets the assembly informational version.
+            </summary>
+            <value>The assembly informational version.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.RegexCompiler.AssemblyKeyFile">
+            <summary>
+            Gets or sets the assembly key file.
+            </summary>
+            <value>The assembly key file.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.RegexCompiler.OutputDirectory">
+            <summary>
+            Gets or sets the directory where the assembly will be saved.
+            </summary>
+            <value>The output directory.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.RegexCompiler.OutputFile">
+            <summary>
+            Gets or sets the output file.
+            </summary>
+            <value>The output file.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.RegexCompiler.RegularExpressions">
+            <summary>
+            Gets or sets the regular expressions.
+            </summary>
+            <value>The regular expressions.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.RegexCompiler.IsPublic">
+            <summary>
+            Gets or sets a value indicating whether the default value is public for regular expression instances.
+            </summary>
+            <value><c>true</c> if regular expression instance is public; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.RegexCompiler.Namespace">
+            <summary>
+            Gets or sets the default namespace for regular expression instances.
+            </summary>
+            <value>The namespace for regular expression instances.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.RegexCompiler.Options">
+            <summary>
+            Gets or sets the default regular expression options.
+            </summary>
+            <value>The default regular expression options.</value>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.Sandcastle.BuildAssembler">
+            <summary>
+            BuildAssembler task for Sandcastle.
+            </summary>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.Sandcastle.SandcastleToolBase">
+            <summary>
+            A base class for Sandcastle Tools,
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Sandcastle.SandcastleToolBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MSBuild.Community.Tasks.Sandcastle.SandcastleToolBase"/> class.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Sandcastle.SandcastleToolBase.GenerateFullPathToTool">
+            <summary>
+            Returns the fully qualified path to the executable file.
+            </summary>
+            <returns>
+            The fully qualified path to the executable file.
+            </returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Sandcastle.SandcastleToolBase.LogToolCommand(System.String)">
+            <summary>
+            Logs the starting point of the run to all registered loggers.
+            </summary>
+            <param name="message">A descriptive message to provide loggers, usually the command line and switches.</param>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Sandcastle.SandcastleToolBase.LogEventsFromTextOutput(System.String,Microsoft.Build.Framework.MessageImportance)">
+            <summary>
+            Logs the events from text output.
+            </summary>
+            <param name="singleLine">The single line.</param>
+            <param name="messageImportance">The message importance.</param>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.SandcastleToolBase.SandcastleEnviroment">
+            <summary>
+            Gets or sets the sandcastle enviroment.
+            </summary>
+            <value>The sandcastle enviroment.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.SandcastleToolBase.EnviromentVariables">
+            <summary>
+            Gets or sets the enviroment variables.
+            </summary>
+            <value>The enviroment variables.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.SandcastleToolBase.SandcastleRoot">
+            <summary>
+            Gets or sets the sandcastle install root directory.
+            </summary>
+            <value>The sandcastle root directory.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.SandcastleToolBase.NoInfoMessages">
+            <summary>
+            Gets or sets a value indicating whether no info messages will be output.
+            </summary>
+            <value><c>true</c> if no info messages; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.SandcastleToolBase.NoWarnMessages">
+            <summary>
+            Gets or sets a value indicating whether no warning messages will be output.
+            </summary>
+            <value><c>true</c> if no warning messages; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.SandcastleToolBase.StandardOutputLoggingImportance">
+            <summary>
+            Gets the <see cref="T:Microsoft.Build.Framework.MessageImportance"></see> with which to log errors.
+            </summary>
+            <value></value>
+            <returns>The <see cref="T:Microsoft.Build.Framework.MessageImportance"></see> with which to log errors.</returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.SandcastleToolBase.EnvironmentOverride">
+            <summary>
+            Gets the override value of the PATH environment variable.
+            </summary>
+            <value></value>
+            <returns>The override value of the PATH environment variable.</returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Sandcastle.BuildAssembler.GenerateCommandLineCommands">
+            <summary>
+            Returns a string value containing the command line arguments to pass directly to the executable file.
+            </summary>
+            <returns>
+            A string value containing the command line arguments to pass directly to the executable file.
+            </returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.BuildAssembler.ConfigFile">
+            <summary>
+            Gets or sets the configuration file.
+            </summary>
+            <value>The configuration file.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.BuildAssembler.ManifestFile">
+            <summary>
+            Gets or sets the manifest file.
+            </summary>
+            <value>The manifest file.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.BuildAssembler.ToolName">
+            <summary>
+            Gets the name of the executable file to run.
+            </summary>
+            <value></value>
+            <returns>The name of the executable file to run.</returns>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.Sandcastle.ChmBuilder">
+            <summary>
+            ChmBuilder task for Sandcastle.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Sandcastle.ChmBuilder.GenerateCommandLineCommands">
+            <summary>
+            Returns a string value containing the command line arguments to pass directly to the executable file.
+            </summary>
+            <returns>
+            A string value containing the command line arguments to pass directly to the executable file.
+            </returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.ChmBuilder.HtmlDirectory">
+            <summary>
+            Gets or sets the HTML directory.
+            </summary>
+            <value>The HTML directory.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.ChmBuilder.ProjectName">
+            <summary>
+            Gets or sets the name of the project.
+            </summary>
+            <value>The name of the project.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.ChmBuilder.TocFile">
+            <summary>
+            Gets or sets the toc file.
+            </summary>
+            <value>The toc file.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.ChmBuilder.OutputDirectory">
+            <summary>
+            Gets or sets the output file.
+            </summary>
+            <value>The output file.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.ChmBuilder.Metadata">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:MSBuild.Community.Tasks.Sandcastle.ChmBuilder"/> is metadata.
+            </summary>
+            <value><c>true</c> if metadata; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.ChmBuilder.LanguageId">
+            <summary>
+            Gets or sets the language id.
+            </summary>
+            <value>The language id.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.ChmBuilder.ToolName">
+            <summary>
+            Gets the name of the executable file to run.
+            </summary>
+            <value></value>
+            <returns>The name of the executable file to run.</returns>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.Sandcastle.DBCSFix">
+            <summary>
+            DBCSFix task for Sandcastle.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Sandcastle.DBCSFix.GenerateCommandLineCommands">
+            <summary>
+            Returns a string value containing the command line arguments to pass directly to the executable file.
+            </summary>
+            <returns>
+            A string value containing the command line arguments to pass directly to the executable file.
+            </returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.DBCSFix.ChmDirectory">
+            <summary>
+            Gets or sets the CHM directory.
+            </summary>
+            <value>The CHM directory.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.DBCSFix.LanguageId">
+            <summary>
+            Gets or sets the language id.
+            </summary>
+            <value>The language id.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.DBCSFix.ToolName">
+            <summary>
+            Gets the name of the executable file to run.
+            </summary>
+            <value></value>
+            <returns>The name of the executable file to run.</returns>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.Sandcastle.MRefBuilder">
+            <summary>
+            MRefBuilder task for Sandcastle.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Sandcastle.MRefBuilder.GenerateCommandLineCommands">
+            <summary>
+            Returns a string value containing the command line arguments to pass directly to the executable file.
+            </summary>
+            <returns>
+            A string value containing the command line arguments to pass directly to the executable file.
+            </returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.MRefBuilder.OutputFile">
+            <summary>
+            Gets or sets the output file.
+            </summary>
+            <value>The output file.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.MRefBuilder.ConfigFile">
+            <summary>
+            Gets or sets the config file.
+            </summary>
+            <value>The config file.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.MRefBuilder.References">
+            <summary>
+            Gets or sets the references.
+            </summary>
+            <value>The references.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.MRefBuilder.Assemblies">
+            <summary>
+            Gets or sets the assemblies.
+            </summary>
+            <value>The assemblies.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.MRefBuilder.IncludeInternal">
+            <summary>
+            Gets or sets a value indicating whether to include internal members.
+            </summary>
+            <value><c>true</c> to include internal; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.MRefBuilder.ToolName">
+            <summary>
+            Gets the name of the executable file to run.
+            </summary>
+            <value></value>
+            <returns>The name of the executable file to run.</returns>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.Sandcastle.Sandcastle">
+            <summary>
+            The Sandcastle task.
+            </summary>
+            <example>Create the Html Help for MSBuild Community Task project.
+            <code><![CDATA[
+            <Sandcastle TopicStyle="vs2005"
+                WorkingDirectory="$(MSBuildProjectDirectory)\Help"
+                Assemblies="@(Assemblies)"
+                Comments="@(Comments)"
+                References="@(References)"
+                ChmName="MSBuildTasks"
+                HxName="MSBuildTasks" />
+            ]]></code>
+            </example>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Sandcastle.Sandcastle.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MSBuild.Community.Tasks.Sandcastle.Sandcastle"/> class.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Sandcastle.Sandcastle.Execute">
+            <summary>
+            When overridden in a derived class, executes the task.
+            </summary>
+            <returns>
+            true if the task successfully executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.Sandcastle.SandcastleRoot">
+            <summary>
+            Gets or sets the sandcastle install root directory.
+            </summary>
+            <value>The sandcastle root directory.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.Sandcastle.WorkingDirectory">
+            <summary>
+            Gets or sets the working directory.
+            </summary>
+            <value>The working directory.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.Sandcastle.TopicStyle">
+            <summary>
+            Gets or sets the html help topic style.
+            </summary>
+            <value>The html help topic style.</value>
+            <remarks>
+            The styles supported are hana, prototype and vs2005. 
+            The default style is vs2005.
+            </remarks>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.Sandcastle.Clean">
+            <summary>
+            Gets or sets a value indicating whether working directory is cleaned.
+            </summary>
+            <value><c>true</c> if clean; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.Sandcastle.References">
+            <summary>
+            Gets or sets the references.
+            </summary>
+            <value>The references.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.Sandcastle.Assemblies">
+            <summary>
+            Gets or sets the assemblies.
+            </summary>
+            <value>The assemblies.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.Sandcastle.Comments">
+            <summary>
+            Gets or sets the comments.
+            </summary>
+            <value>The comments.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.Sandcastle.SandcastleConfig">
+            <summary>
+            Gets or sets the build assembler config file.
+            </summary>
+            <value>The build assembler config.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.Sandcastle.ChmName">
+            <summary>
+            Gets or sets the name of the CHM.
+            </summary>
+            <value>The name of the CHM.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.Sandcastle.LanguageId">
+            <summary>
+            Gets or sets the language id.
+            </summary>
+            <value>The language id.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.Sandcastle.HxName">
+            <summary>
+            Gets or sets a value indicating a Html Help 2x project will be created.
+            </summary>
+            <value>The name of the Html Help 2x project.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.Sandcastle.NoInfoMessages">
+            <summary>
+            Gets or sets a value indicating whether no info messages will be output.
+            </summary>
+            <value><c>true</c> if no info messages; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.Sandcastle.NoWarnMessages">
+            <summary>
+            Gets or sets a value indicating whether no warning messages will be output.
+            </summary>
+            <value><c>true</c> if no warning messages; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.Sandcastle.SandcastleEnviroment">
+            <summary>
+            A class representing the sandcastle enviroment.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Sandcastle.SandcastleEnviroment.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MSBuild.Community.Tasks.Sandcastle.SandcastleEnviroment"/> class.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Sandcastle.SandcastleEnviroment.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MSBuild.Community.Tasks.Sandcastle.SandcastleEnviroment"/> class.
+            </summary>
+            <param name="sandcastleRoot">The sandcastle root.</param>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.SandcastleEnviroment.SandcastleRoot">
+            <summary>
+            Gets or sets the sandcastle root.
+            </summary>
+            <value>The sandcastle root.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.SandcastleEnviroment.ToolsDirectory">
+            <summary>
+            Gets or sets the tools directory.
+            </summary>
+            <value>The tools directory.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.SandcastleEnviroment.TransformsDirectory">
+            <summary>
+            Gets or sets the transforms directory.
+            </summary>
+            <value>The transforms directory.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.SandcastleEnviroment.PresentationDirectory">
+            <summary>
+            Gets or sets the presentation directory.
+            </summary>
+            <value>The presentation directory.</value>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.Sandcastle.XslTransform">
+            <summary>
+            XslTransform task for Sandcastle.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Sandcastle.XslTransform.GenerateCommandLineCommands">
+            <summary>
+            Returns a string value containing the command line arguments to pass directly to the executable file.
+            </summary>
+            <returns>
+            A string value containing the command line arguments to pass directly to the executable file.
+            </returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.XslTransform.OutputFile">
+            <summary>
+            Gets or sets the output file.
+            </summary>
+            <value>The output file.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.XslTransform.XsltFiles">
+            <summary>
+            Gets or sets the XSLT files.
+            </summary>
+            <value>The XSLT files.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.XslTransform.XmlFile">
+            <summary>
+            Gets or sets the XML files.
+            </summary>
+            <value>The XML files.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.XslTransform.Arguments">
+            <summary>
+            Gets or sets the arguments.
+            </summary>
+            <value>The arguments.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sandcastle.XslTransform.ToolName">
+            <summary>
+            Gets the name of the executable file to run.
+            </summary>
+            <value></value>
+            <returns>The name of the executable file to run.</returns>
+        </member>
         <member name="T:MSBuild.Community.Tasks.Services.IFilesSystem">
             <summary>
             The contract for a service that will provide access to the file system.
@@ -1018,7 +2390,7 @@
         </member>
         <member name="T:MSBuild.Community.Tasks.GacUtil">
             <summary>
-            MSBuild task to install and uninstall asseblies into the GAC
+            MSBuild task to install and uninstall assemblies into the GAC
             </summary>
             <example>Install a dll into the GAC.
             <code><![CDATA[
@@ -1037,31 +2409,9 @@
             ]]></code>
             </example>
         </member>
-        <member name="M:MSBuild.Community.Tasks.GacUtil.GenerateFullPathToTool">
-            <summary>
-            Returns the fully qualified path to the executable file.
-            </summary>
-            <returns>
-            The fully qualified path to the executable file.
-            </returns>
-        </member>
-        <member name="M:MSBuild.Community.Tasks.GacUtil.LogToolCommand(System.String)">
-            <summary>
-            Logs the starting point of the run to all registered loggers.
-            </summary>
-            <param name="message">A descriptive message to provide loggers, usually the command line and switches.</param>
-        </member>
-        <member name="M:MSBuild.Community.Tasks.GacUtil.GenerateCommandLineCommands">
-            <summary>
-            Returns a string value containing the command line arguments to pass directly to the executable file.
-            </summary>
-            <returns>
-            A string value containing the command line arguments to pass directly to the executable file.
-            </returns>
-        </member>
         <member name="M:MSBuild.Community.Tasks.GacUtil.Execute">
             <summary>
-            Runs the exectuable file with the specified task parameters.
+            Runs the executable file with the specified task parameters.
             </summary>
             <returns>
             true if the task runs successfully; otherwise, false.
@@ -1074,6 +2424,32 @@
             <value>The command.</value>
             <enum cref="T:MSBuild.Community.Tasks.GacUtilCommands"/>
         </member>
+        <member name="P:MSBuild.Community.Tasks.GacUtil.RelatedFileExtensions">
+            <summary>
+            Gets or sets the related file extensions to copy when <see cref="P:MSBuild.Community.Tasks.GacUtil.IncludeRelatedFiles"/> is true.
+            </summary>
+            <value>The related file extensions.</value>
+            <remarks>
+            The default extensions are .pdb and .xml.
+            </remarks>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.GacUtil.IncludeRelatedFiles">
+            <summary>
+            Gets or sets a value indicating whether related files are included when installing in GAC.
+            </summary>
+            <value><c>true</c> if related files are included when installing in GAC; otherwise, <c>false</c>.</value>
+            <remarks>
+            Setting IncludeRelatedFiles to true will copy the pdb and xml files from the same folder as the
+            assembly to the location in the GAC that the assembly was installed to.  This is useful in some  
+            debugging scenarios were you need to debug assemblies that are GAC'd.
+            </remarks>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.GacUtil.Quiet">
+            <summary>
+            Gets or sets a value indicating whether warning messages are output.
+            </summary>
+            <value><c>true</c> to not log warning messages; otherwise, <c>false</c>.</value>
+        </member>
         <member name="P:MSBuild.Community.Tasks.GacUtil.Force">
             <summary>
             Gets or sets a value indicating whether to force reinstall of an assembly.
@@ -1082,23 +2458,44 @@
         </member>
         <member name="P:MSBuild.Community.Tasks.GacUtil.Assemblies">
             <summary>
-            Gets or sets the assembly.
+            Gets or sets the assembly name or file.
             </summary>
-            <value>The assembly.</value>
+            <value>The assembly name or file.</value>
+            <remarks>
+            When the command is install, Assemblies should be a file path to the assembly
+            to install in the GAC.  When command is uninstall, Assemblies should be a 
+            the full name of the assembly to uninstall.
+            </remarks>
         </member>
-        <member name="P:MSBuild.Community.Tasks.GacUtil.ToolName">
+        <member name="P:MSBuild.Community.Tasks.GacUtil.InstalledPaths">
             <summary>
-            Gets the name of the executable file to run.
+            Gets the installed assembly paths.
             </summary>
-            <value></value>
-            <returns>The name of the executable file to run.</returns>
+            <value>The installed paths.</value>
         </member>
-        <member name="P:MSBuild.Community.Tasks.GacUtil.StandardOutputLoggingImportance">
+        <member name="P:MSBuild.Community.Tasks.GacUtil.InstalledNames">
             <summary>
-            Gets the <see cref="T:Microsoft.Build.Framework.MessageImportance"></see> with which to log errors.
+            Gets the installed assembly names.
             </summary>
-            <value></value>
-            <returns>The <see cref="T:Microsoft.Build.Framework.MessageImportance"></see> with which to log errors.</returns>
+            <value>The installed names.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.GacUtil.Successful">
+            <summary>
+            Gets the number of assemblies successfully installed/uninstalled.
+            </summary>
+            <value>The number successful assemblies.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.GacUtil.Failed">
+            <summary>
+            Gets the number of assemblies that failed to installed/uninstalled.
+            </summary>
+            <value>The number failed assemblies.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.GacUtil.Skipped">
+            <summary>
+            Gets the number of assemblies that were skipped during installed/uninstalled.
+            </summary>
+            <value>The number of skipped assemblies.</value>
         </member>
         <member name="T:MSBuild.Community.Tasks.JavaScript.JSCompress">
             <summary>
@@ -1514,6 +2911,338 @@
             <value></value>
             <returns>The <see cref="T:Microsoft.Build.Framework.MessageImportance"></see> with which to log errors.</returns>
         </member>
+        <member name="T:MSBuild.Community.Tasks.Sound">
+            <summary>
+            A task to play a sound from a .wav file path or URL.
+            </summary>
+            <remarks>
+      You must specify either
+      a file or URL (<see cref="P:MSBuild.Community.Tasks.Sound.SoundLocation"/>),
+      a file relative to the <see cref="P:System.Environment.SystemDirectory"/> (<see cref="P:MSBuild.Community.Tasks.Sound.SystemSoundFile"/>),
+      or a file within the <see cref="F:System.Environment.SpecialFolder.MyMusic"/> folder (<see cref="P:MSBuild.Community.Tasks.Sound.MyMusicFile"/>).
+    </remarks><example>
+      To play the windows XP startup sound, use
+      <code>
+        <![CDATA[<Sound SystemSoundFile="..\Media\Windows XP Startup.wav" />]]>
+      </code>
+    </example><example>
+      To play a wav file from the "MyMusic" folder, use
+      <code>
+        <![CDATA[<Sound MyMusicFile="25881_acclivity_3beeps1000.wav" />]]>
+      </code>
+    </example>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Sound.Execute">
+            <summary>
+            Loads the .wav file given by <see cref="P:MSBuild.Community.Tasks.Sound.SoundLocation"/>
+            and plays the sound using a new thread.
+            </summary>
+            <returns>
+            Returns <see langword="true"/> if the .wav file can successfully be played;
+            otherwise, returns <see langword="false"/>.
+            </returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sound.SoundLocation">
+            <summary>
+            Gets or sets the file path or URL of the .wav file to load.
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sound.SystemSoundFile">
+            <summary>
+            Sets the file path of the .wav file to load
+            as a relative path to <see cref="P:System.Environment.SystemDirectory"/>.
+            </summary>
+            <example>
+            For example, on a Windows XP platform, you can call
+            <code><![CDATA[<Sound SystemSoundFile="..\Media\Windows XP Startup.wav" />]]></code>
+            </example>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sound.MyMusicFile">
+            <summary>
+            Sets the file path of the .wav file to load
+            as a relative path to <see cref="F:System.Environment.SpecialFolder.MyMusic"/>.
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sound.LoadTimeout">
+            <summary>
+            Gets or sets the time, in milliseconds, in which the .wav file must load.
+            </summary>
+            <value>The number of milliseconds to wait. The default is 10000 (10 seconds).</value>
+            <remarks>
+            After this time has expired, the loading is canceled and the task execution fails.
+            </remarks>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Sound.Synchron">
+            <summary>
+            Gets or sets a value indicating whether to play the sound synchronously.
+            </summary>
+            <value>
+            	<see langword="true"/> if playing the sound using the caller's thread (default);
+            otherwise, <see langword="false"/> if playing the sound using a new thread.
+            </value>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.SqlServer.SqlPubCommands">
+            <summary>
+            The SqlPubWiz commands
+            </summary>
+        </member>
+        <member name="F:MSBuild.Community.Tasks.SqlServer.SqlPubCommands.Script">
+            <summary>
+            Scripts a local database to one or more files
+            </summary>
+        </member>
+        <member name="F:MSBuild.Community.Tasks.SqlServer.SqlPubCommands.Publish">
+            <summary>
+            Publishes a local database to a web service provided by a hoster.
+            </summary>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.SqlServer.SqlPubWiz">
+            <summary>
+            The Database Publishing Wizard enables the deployment of
+            SQL Server databases (both schema and data) into a shared
+            hosting environment.
+            </summary>
+            <example>Generate the database script for Northwind on localhost.
+            <code><![CDATA[
+            <SqlPubWiz 
+                Database="Northwind" 
+                Output="Northwind.sql" 
+                SchemaOnly="true" />
+            ]]></code>
+            </example>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.GenerateFullPathToTool">
+            <summary>
+            Returns the fully qualified path to the executable file.
+            </summary>
+            <returns>
+            The fully qualified path to the executable file.
+            </returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.GenerateCommandLineCommands">
+            <summary>
+            Returns a string value containing the command line arguments to pass directly to the executable file.
+            </summary>
+            <returns>
+            A string value containing the command line arguments to pass directly to the executable file.
+            </returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.LogToolCommand(System.String)">
+            <summary>
+            Logs the starting point of the run to all registered loggers.
+            </summary>
+            <param name="message">A descriptive message to provide loggers, usually the command line and switches.</param>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.Command">
+            <summary>
+            Gets or sets the database publishing command.
+            </summary>
+            <value>The database publishing command.</value>
+            <remarks>
+            Use either script or publish. Use script to script a local
+            database to a file on the local computer. Use publish to 
+            transfer database objects directly to a hosted database via
+            a web service. script and publish enable some of the same 
+            options and switches. Some options and switches are only 
+            enabled only by one of these verbs.
+            </remarks>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.ConnectionString">
+            <summary>
+            Gets or sets the full connection string to the local database.
+            </summary>
+            <value>The connection string.</value>
+            <remarks>
+            Provides a full connection string to connect to the local 
+            database. This connection string encapsulates all connection 
+            options to the server. Incompatible with <see cref="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.Username"/>, 
+            <see cref="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.Password"/> or, <see cref="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.Server"/>.
+            </remarks>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.Database">
+            <summary>
+            Gets or sets the name of the local database to be scripted.
+            </summary>
+            <value>The name of the database to be scripted.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.Username">
+            <summary>
+            Gets or sets the SQL Server user name to use for connection
+            to the source database. 
+            </summary>
+            <value>The SQL Server user name.</value>
+            <remarks>
+            Specifies the SQL Server User name to use for connection
+            to the source database. Requires <see cref="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.Password"/>.
+            Incompatible with <see cref="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.ConnectionString"/>.
+            </remarks>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.Password">
+            <summary>
+            Gets or sets the password to use for connection
+            to the source database.
+            </summary>
+            <value>The password.</value>
+            <remarks>
+            Specifies the password to use for connection to the source
+            database. Requires <see cref="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.Username"/>. 
+            Incompatible with <see cref="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.ConnectionString"/>.
+            </remarks>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.Server">
+            <summary>
+            Gets or sets the name or IP address for the local database connection.
+            </summary>
+            <value>The name or IP address of server.</value>
+            <remarks>
+            Specifies the name or IP address for the local database connection.
+            The default is localhost. Incompatible with <see cref="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.ConnectionString"/>.
+            </remarks>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.Output">
+            <summary>
+            Gets or sets the full file path for the script file generated.
+            </summary>
+            <value>The full file path.</value>
+            <remarks>
+            Use only with script. Specifies the full file path for the script
+            file generated by the sqlpubwiz. 
+            </remarks>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.SchemaOnly">
+            <summary>
+            Gets or sets a value indicating whether the schema, 
+            but not the data, should be scripted.
+            </summary>
+            <value>
+            <c>true</c> if only the schema should be scripted; 
+            otherwise, <c>false</c>.
+            </value>
+            <remarks>
+            Specifies that the schema, but not the data, should be
+            scripted. Incompatible with <see cref="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.DataOnly"/>.
+            If neither <see cref="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.SchemaOnly"/> nor <see cref="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.DataOnly"/>
+            are specified, both the schema and data are scripted.
+            </remarks>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.DataOnly">
+            <summary>
+            Gets or sets a value indicating whether the data but 
+            not the schema should be scripted.
+            </summary>
+            <value>
+            <c>true</c> if only the data is scripted; 
+            otherwise, <c>false</c>.
+            </value>
+            <remarks>
+            Specifies that the data but not the schema should be 
+            scripted. Incompatible with <see cref="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.NoDropExisting"/> 
+            or <see cref="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.SchemaOnly"/>. If neither <see cref="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.SchemaOnly"/>
+            nor <see cref="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.DataOnly"/> are specified, both the schema
+            and data are scripted.
+            </remarks>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.TargetServer">
+            <summary>
+            Gets or sets the target server the script should target.
+            </summary>
+            <value>The target server the script should target.</value>
+            <remarks>
+            Specifies that the script to be generated should target
+            a SQL Server 2000 or SQL Server 2005 instance. 
+            The default is SQL Server 2005.
+            </remarks>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.NoSchemaQualify">
+            <summary>
+            Gets or sets a value indicating whether objects will
+            not be qualified with a schema.
+            </summary>
+            <value>
+            <c>true</c> if objects will not be schema qualified;
+            otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.NoDropExisting">
+            <summary>
+            Gets or sets a value indicating whether the produced 
+            script should not drop pre-existing objects.
+            </summary>
+            <value>
+            <c>true</c> if pre-existing objects should not be dropped;
+            otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.Quiet">
+            <summary>
+            Gets or sets a value indicating output message suppression.
+            </summary>
+            <value><c>true</c> to suppress messages; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.HosterName">
+            <summary>
+            Gets or sets the friendly name of previously
+            configured hosting Web service.
+            </summary>
+            <value>The name of the hoster.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.WebServiceAddress">
+            <summary>
+            Gets or sets the configuration of the hosting Web service endpoint.
+            </summary>
+            <value>The web service address.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.ServiceUsername">
+            <summary>
+            Gets or sets the username on the hosting Web service endpoint.
+            </summary>
+            <value>The service username.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.ServicePassword">
+            <summary>
+            Gets or sets the password for the remote Web service endpoint.
+            </summary>
+            <value>The service password.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.ServiceDatabaseServer">
+            <summary>
+            Gets or sets the database name to publish to on the remote server.
+            </summary>
+            <value>The service database server.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.ServiceDatabase">
+            <summary>
+            Gets or sets the remote database server name.
+            </summary>
+            <value>The service database.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.NoTransaction">
+            <summary>
+            Gets or sets a value indicating whether the publish operation
+            should not be executed within a single transaction.
+            </summary>
+            <value><c>true</c> to not publish in a single transaction; otherwise, <c>false</c>.</value>
+            <remarks>
+            Specifies that the publish operation should not be executed
+            within a single transaction.  This reduces logging overhead
+            on the target server, but if the publish is interrupted, the
+            target database may be left in a partially populated state.
+            </remarks>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.ToolName">
+            <summary>
+            Gets the name of the executable file to run.
+            </summary>
+            <value></value>
+            <returns>The name of the executable file to run.</returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlServer.SqlPubWiz.StandardOutputLoggingImportance">
+            <summary>
+            Gets the <see cref="T:Microsoft.Build.Framework.MessageImportance"></see> with which to log errors.
+            </summary>
+            <value></value>
+            <returns>The <see cref="T:Microsoft.Build.Framework.MessageImportance"></see> with which to log errors.</returns>
+        </member>
         <member name="T:MSBuild.Community.Tasks.Subversion.SvnCopy">
             <summary>
             Copy a file or folder in Subversion
@@ -1535,6 +3264,11 @@
         <member name="T:MSBuild.Community.Tasks.Subversion.SvnClient">
             <summary>
             Subversion client base class
+            </summary>
+        </member>
+        <member name="F:MSBuild.Community.Tasks.Subversion.SvnClient._outputBuffer">
+            <summary>
+            Contains output of SVN command-line client.
             </summary>
         </member>
         <member name="M:MSBuild.Community.Tasks.Subversion.SvnClient.GenerateSvnCommand">
@@ -1579,6 +3313,13 @@
             <returns>
             The fully qualified path to the executable file.
             </returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.Subversion.SvnClient.FindToolPath(System.String)">
+            <summary>
+            Finds the tool path.
+            </summary>
+            <param name="toolName">Name of the tool.</param>
+            <returns></returns>
         </member>
         <member name="M:MSBuild.Community.Tasks.Subversion.SvnClient.LogToolCommand(System.String)">
             <summary>
@@ -1628,6 +3369,16 @@
             </summary>
             <value>The message.</value>
         </member>
+        <member name="P:MSBuild.Community.Tasks.Subversion.SvnClient.MessageFile">
+            <summary>
+            Gets or sets the message file.
+            </summary>
+            <value>The message file.</value>
+            <remarks>
+            Uses the contents of the named file for the specified 
+            subcommand, though different subcommands do different 
+            things with this content.</remarks>
+        </member>
         <member name="P:MSBuild.Community.Tasks.Subversion.SvnClient.RepositoryPath">
             <summary>
             Gets or sets the repository path.
@@ -1651,6 +3402,11 @@
             Gets or sets the revision.
             </summary>
             <value>The revision.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Subversion.SvnClient.Output">
+            <summary>
+            Gets the output of SVN command-line client.
+            </summary>
         </member>
         <member name="P:MSBuild.Community.Tasks.Subversion.SvnClient.CommandSwitches">
             <summary>
@@ -1700,6 +3456,195 @@
             <summary>
             The path to which the SourcePath should be copied
             </summary>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.SymbolServer.SymStoreCommands">
+            <summary>
+            Commands for the SymStore tasks.
+            </summary>
+        </member>
+        <member name="F:MSBuild.Community.Tasks.SymbolServer.SymStoreCommands.add">
+            <summary>
+            Add to the symbol server store.
+            </summary>
+        </member>
+        <member name="F:MSBuild.Community.Tasks.SymbolServer.SymStoreCommands.query">
+            <summary>
+            Query the symbol server store.
+            </summary>
+        </member>
+        <member name="F:MSBuild.Community.Tasks.SymbolServer.SymStoreCommands.delete">
+            <summary>
+            Delete from the symbol serer store.
+            </summary>
+        </member>
+        <member name="T:MSBuild.Community.Tasks.SymbolServer.SymStore">
+            <summary>
+            Task that wraps the Symbol Server SymStore.exe application.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.SymbolServer.SymStore.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MSBuild.Community.Tasks.SymbolServer.SymStore"/> class.
+            </summary>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.SymbolServer.SymStore.GenerateCommandLineCommands">
+            <summary>
+            Returns a string value containing the command line arguments to pass directly to the executable file.
+            </summary>
+            <returns>
+            A string value containing the command line arguments to pass directly to the executable file.
+            </returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.SymbolServer.SymStore.GenerateFullPathToTool">
+            <summary>
+            Returns the fully qualified path to the executable file.
+            </summary>
+            <returns>
+            The fully qualified path to the executable file.
+            </returns>
+        </member>
+        <member name="M:MSBuild.Community.Tasks.SymbolServer.SymStore.LogToolCommand(System.String)">
+            <summary>
+            Logs the starting point of the run to all registered loggers.
+            </summary>
+            <param name="message">A descriptive message to provide loggers, usually the command line and switches.</param>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.Command">
+            <summary>
+            Gets or sets the command.
+            </summary>
+            <value>The command.</value>
+            <enum cref="T:MSBuild.Community.Tasks.SymbolServer.SymStoreCommands"/>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.Append">
+            <summary>
+            Gets or sets a value indicating SymStore will append new indexing information to an existing index file.
+            </summary>
+            <value><c>true</c> if append; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.Comment">
+            <summary>
+            Gets or sets the comment for the transaction.
+            </summary>
+            <value>The comment for the transaction.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.Compress">
+            <summary>
+            Gets or sets a value indicating SymStore will create a compressed version of each file copied to the symbol store instead of using an uncompressed copy of the file.
+            </summary>
+            <value><c>true</c> if compress; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.LogFile">
+            <summary>
+            Gets or sets a log file to be used for command output. If this is not included, transaction information and other output is sent to stdout.
+            </summary>
+            <value>The log file to be used for command output.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.Files">
+            <summary>
+            Gets or sets the network path of files or directories to add.
+            </summary>
+            <value>The network path of files or directories to add.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.Share">
+            <summary>
+            Gets or sets the server and share where the symbol files were originally stored.
+            </summary>
+            <value>The server and share where the symbol files were originally stored.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.ID">
+            <summary>
+            Gets or sets the transaction ID string.
+            </summary>
+            <value>The transaction ID string.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.Local">
+            <summary>
+            Gets or sets a value indicating whether the file will be in a local directory rather than a network path.
+            </summary>
+            <value><c>true</c> if local; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.Verbose">
+            <summary>
+            Gets or sets a value indicating whether SymStore will display verbose output.
+            </summary>
+            <value><c>true</c> if verbose; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.Pointer">
+            <summary>
+            Gets or sets a value indicating whether SymStore will store a pointer to the file, rather than the file itself.
+            </summary>
+            <value><c>true</c> if pointer; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.Recursive">
+            <summary>
+            Gets or sets a value indicating whether SymStore will add files or directories recursively.
+            </summary>
+            <value><c>true</c> if recursive; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.Store">
+            <summary>
+            Gets or sets the root directory for the symbol store.
+            </summary>
+            <value>The root directory for the symbol store.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.Product">
+            <summary>
+            Gets or sets the name of the product.
+            </summary>
+            <value>The name of the product.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.Version">
+            <summary>
+            Gets or sets the version of the product.
+            </summary>
+            <value>The version of the product.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.Message">
+            <summary>
+            Gets or sets the message to be added to each file.
+            </summary>
+            <value>The message to be added to each file.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.Relative">
+            <summary>
+            Gets or sets a value indicating whether the paths in the file pointers will be relative.
+            </summary>
+            <value><c>true</c> if relative; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.NoReference">
+            <summary>
+            Gets or sets a value indicating whether to omit the creation of reference pointer files for the files and pointers being stored.
+            </summary>
+            <value><c>true</c> to omit the creation of reference pointer; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.WriteIndex">
+            <summary>
+            Gets or sets the index file. Causes SymStore not to store the actual symbol files. Instead, SymStore records information in the IndexFile that will enable SymStore to access the symbol files at a later time.
+            </summary>
+            <value>The write index file.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.ReadIndex">
+            <summary>
+            Gets or sets the index file. Causes SymStore to read the data from a file created with WriteIndexFile.
+            </summary>
+            <value>The read index file.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.ToolName">
+            <summary>
+            Gets the name of the executable file to run.
+            </summary>
+            <value></value>
+            <returns>
+            The name of the executable file to run.
+            </returns>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SymbolServer.SymStore.StandardOutputLoggingImportance">
+            <summary>
+            Gets the <see cref="T:Microsoft.Build.Framework.MessageImportance"></see> with which to log errors.
+            </summary>
+            <value></value>
+            <returns>The <see cref="T:Microsoft.Build.Framework.MessageImportance"></see> with which to log errors.</returns>
         </member>
         <member name="T:MSBuild.Community.Tasks.Tfs.IServer">
             <summary>
@@ -1930,14 +3875,17 @@
             </summary>
             <remarks>
       XmlMassUpdate allows to to specify multiple changes to make to an XML file (the <see cref="P:MSBuild.Community.Tasks.Xml.XmlMassUpdate.ContentFile"/>. By default, the changes are applied to the <see cref="P:MSBuild.Community.Tasks.Xml.XmlMassUpdate.ContentFile"/>, but you can create a new file by providing the <see cref="P:MSBuild.Community.Tasks.Xml.XmlMassUpdate.MergedFile"/> attribute.  The change instructions are specified using XML in the <see cref="P:MSBuild.Community.Tasks.Xml.XmlMassUpdate.SubstitutionsFile"/>. If the <see cref="P:MSBuild.Community.Tasks.Xml.XmlMassUpdate.SubstitutionsFile"/> does not mirror the structure of the <see cref="P:MSBuild.Community.Tasks.Xml.XmlMassUpdate.ContentFile"/> exactly, you can specify the <see cref="P:MSBuild.Community.Tasks.Xml.XmlMassUpdate.ContentRoot"/> and <see cref="P:MSBuild.Community.Tasks.Xml.XmlMassUpdate.SubstitutionsRoot"/> XPath expressions which determine how the files should be mapped to each other.
-      <para>Any element within the <see cref="P:MSBuild.Community.Tasks.Xml.XmlMassUpdate.SubstitutionsRoot"/> will find the corresponding element in the <see cref="P:MSBuild.Community.Tasks.Xml.XmlMassUpdate.ContentRoot"/>. If it does not exist, it will be created with all of its attributes. If it does exist, the attributes will be added or updated as specified.</para>
+      <para>
+        Any element within the <see cref="P:MSBuild.Community.Tasks.Xml.XmlMassUpdate.SubstitutionsRoot"/> will find the corresponding element in the <see cref="P:MSBuild.Community.Tasks.Xml.XmlMassUpdate.ContentRoot"/>. If it does not exist, it will be created with all of its attributes. If it does exist, the attributes will be added or updated as specified.
+      </para>
       <para>
         Any attribute declared within the <see cref="P:MSBuild.Community.Tasks.Xml.XmlMassUpdate.UpdateControlNamespace"/> will not be copied to the modified file. Valid attributes are <c>key</c> and <c>action</c>. The <c>key</c> attribute allows you to define an attribute to use as the identifying attribute when you only want to update a single element, and multiple elements with the same name exist. You can also use the <c>action="remove"</c> attribute to specify that an element should be deleted instead of updated.
       </para>
-  </remarks><example>
-      <para>These examples will demonstrate how to make multiple updates to a XML file named web.config. It looks like:
-      <code>
-        <![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+    </remarks><example>
+      <para>
+        These examples will demonstrate how to make multiple updates to a XML file named web.config. It looks like:
+        <code>
+          <![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
 	<appSettings>
 		<add key="ItemsPerPage" value="10" />
@@ -1951,7 +3899,7 @@
         <globalization requestEncoding="utf-8" responseEncoding="utf-8" />
     </system.web>
 </configuration> ]]>
-      </code>
+        </code>
       </para>
     </example><example>
       You can update the file using instructions from an external file (specified as the <see cref="P:MSBuild.Community.Tasks.Xml.XmlMassUpdate.SubstitutionsFile"/>):
@@ -1960,7 +3908,7 @@
       </code>
       The <see cref="P:MSBuild.Community.Tasks.Xml.XmlMassUpdate.SubstitutionsFile"/> is named changes.xml and contains:
       <code>
-      <![CDATA[<system.web>
+        <![CDATA[<system.web>
         <compilation debug="false" />
         <customErrors mode="RemoteOnly" defaultRedirect="Error.htm">
           <error statusCode="401" redirect="AccessDenied.aspx" />
@@ -1998,8 +3946,8 @@
         <add xmu:key="key" key="DefaultSort" value="LastName" />
   </appSettings>
 </configuration> ]]>
-    </code>
-  </example><example>
+      </code>
+    </example><example>
       Use a changes.xml file with the following contents to demonstrate how to remove an element from the updated file:
       <code>
         <![CDATA[<configuration xmlns:xmu="urn:msbuildcommunitytasks-xmlmassupdate">
@@ -2199,6 +4147,13 @@
             </summary>
             <exclude/>
         </member>
+        <member name="M:MSBuild.Community.Tasks.IIS.WebBase.VerifySiteHostHeaderExists(System.DirectoryServices.DirectoryEntry)">
+            <summary>
+            Verify that the IIS Website exists if it has been specified.
+            </summary>
+            <param name="site">DirectoryEntry that meets the IISWebServer schema</param>
+            <returns>True if a site is found when specified. True if no site has been specified.</returns>
+        </member>
         <member name="M:MSBuild.Community.Tasks.IIS.WebBase.VerifyServerPortExists(System.DirectoryServices.DirectoryEntry)">
             <summary>
             Helper method for <see cref="M:MSBuild.Community.Tasks.IIS.WebBase.VerifyIISRoot"/> that verifies the server port exists.
@@ -2207,11 +4162,23 @@
             <returns>Boolean value indicating the status of the port check.</returns>
             <exclude/>
         </member>
+        <member name="M:MSBuild.Community.Tasks.IIS.WebBase.SetIISPrimitives(System.String)">
+            <summary>
+            Sets some of the protected properties for the Virtual Directory Creation Wizard.
+            </summary>
+            <param name="serverInstance">DirectoryEntry.Name where the Entry is an IISWebServer schema</param>
+        </member>
         <member name="P:MSBuild.Community.Tasks.IIS.WebBase.ServerName">
             <summary>
             Gets or sets the name of the server.  The default value is 'localhost'.
             </summary>
             <value>The name of the server.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.IIS.WebBase.HostHeaderName">
+            <summary>
+            Gets or sets host header. Used when you have more than one website in IIS that have the same port but different host headers.
+            </summary>
+            <value>The name of the host header.</value>
         </member>
         <member name="P:MSBuild.Community.Tasks.IIS.WebBase.ServerPort">
             <summary>
@@ -3372,13 +5339,6 @@
             </summary>
             <returns>true if execution is successful, false if not.</returns>
         </member>
-        <member name="M:MSBuild.Community.Tasks.Subversion.SvnInfo.LogEventsFromTextOutput(System.String,Microsoft.Build.Framework.MessageImportance)">
-            <summary>
-            Logs the events from text output.
-            </summary>
-            <param name="singleLine">The single line.</param>
-            <param name="messageImportance">The message importance.</param>
-        </member>
         <member name="P:MSBuild.Community.Tasks.Subversion.SvnInfo.RepositoryRoot">
             <summary>
             Return the repository root or null if not set by Subversion.
@@ -4073,6 +6033,12 @@
             <remarks>Any value returned by <see cref="P:System.Text.Encoding.WebName"/> is valid input.
             <para>The default is <c>utf-8</c></para></remarks>
         </member>
+        <member name="P:MSBuild.Community.Tasks.FileUpdate.WarnOnNoUpdate">
+            <summary>
+            When TRUE, a warning will be generated to show which file was not updated.
+            </summary>
+            <remarks>N/A</remarks>
+        </member>
         <member name="T:MSBuild.Community.Tasks.FxCop">
             <summary>
             Uses FxCop to analyse managed code assemblies and reports on
@@ -4440,61 +6406,6 @@
             </summary>
             <returns><see langword="true"/> if the task ran successfully; 
             otherwise <see langword="false"/>.</returns>
-        </member>
-        <member name="T:MSBuild.Community.Tasks.FtpUpload">
-            <summary>
-            Uploads a file using File Transfer Protocol (FTP).
-            </summary>
-            <example>Upload a file.
-            <code><![CDATA[
-            <FtpUpload 
-                LocalFile="MSBuild.Community.Tasks.zip" 
-                RemoteUri="ftp://localhost/MSBuild.Community.Tasks.zip" />
-            ]]></code>
-            </example>
-        </member>
-        <member name="M:MSBuild.Community.Tasks.FtpUpload.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:FtpUpload"/> class.
-            </summary>
-        </member>
-        <member name="M:MSBuild.Community.Tasks.FtpUpload.Execute">
-            <summary>
-            When overridden in a derived class, executes the task.
-            </summary>
-            <returns>
-            true if the task successfully executed; otherwise, false.
-            </returns>
-        </member>
-        <member name="P:MSBuild.Community.Tasks.FtpUpload.LocalFile">
-            <summary>
-            Gets or sets the local file to upload.
-            </summary>
-            <value>The local file.</value>
-        </member>
-        <member name="P:MSBuild.Community.Tasks.FtpUpload.RemoteUri">
-            <summary>
-            Gets or sets the remote URI to upload.
-            </summary>
-            <value>The remote URI.</value>
-        </member>
-        <member name="P:MSBuild.Community.Tasks.FtpUpload.Username">
-            <summary>
-            Gets or sets the username.
-            </summary>
-            <value>The username.</value>
-        </member>
-        <member name="P:MSBuild.Community.Tasks.FtpUpload.Password">
-            <summary>
-            Gets or sets the password.
-            </summary>
-            <value>The password.</value>
-        </member>
-        <member name="P:MSBuild.Community.Tasks.FtpUpload.UsePassive">
-            <summary>
-            Gets or sets the behavior of a client application's data transfer process.
-            </summary>
-            <value><c>true</c> if [use passive]; otherwise, <c>false</c>.</value>
         </member>
         <member name="T:MSBuild.Community.Tasks.IIS.AppPoolCreate">
             <summary>
@@ -5518,6 +7429,12 @@
             </summary>
             <value>The password.</value>
         </member>
+        <member name="P:MSBuild.Community.Tasks.Mail.EnableSsl">
+            <summary>
+            Specify whether the Mail task uses SSL to encrypt the connection.
+            </summary>
+            <value><c>true</c> if the Mail task uses SSL; otherwise <c>false</c>. The default value is <c>false</c>.</value>
+        </member>
         <member name="T:MSBuild.Community.Tasks.Math.Add">
             <summary>
             Add numbers
@@ -5952,6 +7869,16 @@
               Looks up a localized string similar to Couldn&apos;t resolve server host name {0}..
             </summary>
         </member>
+        <member name="P:MSBuild.Community.Tasks.Properties.Resources.CreatingDirectory">
+            <summary>
+              Looks up a localized string similar to Creating directory &quot;{0}&quot;..
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Properties.Resources.ExactlyOneTypeOfDestination">
+            <summary>
+              Looks up a localized string similar to Both &quot;{0}&quot; and &quot;{1}&quot; were specified as input parameters in the project file. Please choose one or the other..
+            </summary>
+        </member>
         <member name="P:MSBuild.Community.Tasks.Properties.Resources.FileNotFound">
             <summary>
               Looks up a localized string similar to File Not Found: {0}.
@@ -6014,14 +7941,19 @@
               Looks up a localized string similar to &quot;{0}&quot; is not a number..
             </summary>
         </member>
-        <member name="P:MSBuild.Community.Tasks.Properties.Resources.MoveCreatesDirectory">
+        <member name="P:MSBuild.Community.Tasks.Properties.Resources.MergeComplete">
             <summary>
-              Looks up a localized string similar to Creating directory &quot;{0}&quot;..
+              Looks up a localized string similar to Merge Complete: {0} files merged into &apos;{1}&apos;..
             </summary>
         </member>
-        <member name="P:MSBuild.Community.Tasks.Properties.Resources.MoveDestinationIsDirectory">
+        <member name="P:MSBuild.Community.Tasks.Properties.Resources.MergeCompleteNoSourceFiles">
             <summary>
-              Looks up a localized string similar to Could not move the file &quot;{0}&quot; to the destination file &quot;{1}&quot;, because the destination is a folder instead of a file. To move the source file into a folder, consider using the DestinationFolder parameter instead of DestinationFiles..
+              Looks up a localized string similar to Merge Complete: No source files to merge..
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Properties.Resources.MergingFile">
+            <summary>
+              Looks up a localized string similar to Merging file &apos;{0}&apos; into &apos;{1}&apos;.
             </summary>
         </member>
         <member name="P:MSBuild.Community.Tasks.Properties.Resources.MoveError">
@@ -6029,24 +7961,9 @@
               Looks up a localized string similar to Unable to move file &quot;{0}&quot; to &quot;{1}&quot;. {2}.
             </summary>
         </member>
-        <member name="P:MSBuild.Community.Tasks.Properties.Resources.MoveExactlyOneTypeOfDestination">
-            <summary>
-              Looks up a localized string similar to Both &quot;{0}&quot; and &quot;{1}&quot; were specified as input parameters in the project file. Please choose one or the other..
-            </summary>
-        </member>
         <member name="P:MSBuild.Community.Tasks.Properties.Resources.MoveFileComment">
             <summary>
               Looks up a localized string similar to Moving file from &quot;{0}&quot; to &quot;{1}&quot;..
-            </summary>
-        </member>
-        <member name="P:MSBuild.Community.Tasks.Properties.Resources.MoveNeedsDestination">
-            <summary>
-              Looks up a localized string similar to No destination specified for Move. Please supply either &quot;{0}&quot; or &quot;{1}&quot;..
-            </summary>
-        </member>
-        <member name="P:MSBuild.Community.Tasks.Properties.Resources.MoveSourceIsDirectory">
-            <summary>
-              Looks up a localized string similar to The source file &quot;{0}&quot; is actually a directory.  The &quot;Move&quot; task does not support moving directories..
             </summary>
         </member>
         <member name="P:MSBuild.Community.Tasks.Properties.Resources.NUnitNotFound">
@@ -6162,6 +8079,21 @@
         <member name="P:MSBuild.Community.Tasks.Properties.Resources.SvnLocalPathNotWorkCopy">
             <summary>
               Looks up a localized string similar to LocalPath is not a working subversion copy..
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Properties.Resources.TaskDestinationIsDirectory">
+            <summary>
+              Looks up a localized string similar to Could not {0} the file &quot;{1}&quot; to the destination file &quot;{2}&quot;, because the destination is a folder instead of a file. To {0} the source file into a folder, consider using the DestinationFolder parameter instead of DestinationFiles..
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Properties.Resources.TaskNeedsDestination">
+            <summary>
+              Looks up a localized string similar to No destination specified for {0}. Please supply either &quot;{1}&quot; or &quot;{2}&quot;..
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Properties.Resources.TaskSourceIsDirectory">
+            <summary>
+              Looks up a localized string similar to The source file &quot;{0}&quot; is actually a directory.  The &quot;{1}&quot; task does not support moving directories..
             </summary>
         </member>
         <member name="P:MSBuild.Community.Tasks.Properties.Resources.TimeFormatException">
@@ -7092,6 +9024,30 @@
             <summary>
             Executes a SQL command.
             </summary>
+            <remarks>
+            Execute a SQL command against a database.  Target attributes to set:
+            ConnectionString (required), Command (required, the SQL to execute),
+            SelectMode (NonQuery, Scalar, or ScalarXml, default is NonQuery),
+            OutputFile (required when SelectMode is Scalar or ScalarXml).
+            
+            Note: ScalarXml was created because of the 2033 byte limit on the sql return. 
+            See http://aspnetresources.com/blog/executescalar_truncates_xml.aspx for details.
+            </remarks>
+            <example>
+            Example of returning a count of items in a table.  Uses the default SelectMode of NonQuery.
+            <code><![CDATA[
+                <SqlExecute ConnectionString="server=MyServer;Database=MyDatabase;Trusted_Connection=yes;"
+                    Command="create database MyDatabase" />
+            ]]></code>
+            
+            Example of returning the items of a table in an xml format.
+            <code><![CDATA[
+                <SqlExecute ConnectionString="server=MyServer;Database=MyDatabase;Trusted_Connection=yes;"
+            		Command="select * from SomeTable for xml auto"
+            		SelectMode="ScalarXml"
+            		OutputFile="SomeTable.xml" />
+            ]]></code>
+            </example>
         </member>
         <member name="M:MSBuild.Community.Tasks.SqlExecute.Execute">
             <summary>
@@ -7101,6 +9057,11 @@
             true if the task successfully executed; otherwise, false.
             </returns>
         </member>
+        <member name="M:MSBuild.Community.Tasks.SqlExecute.IsOutputFileSpecified(System.String)">
+            <summary>
+            Determines if an output file was specified.
+            </summary>
+        </member>
         <member name="P:MSBuild.Community.Tasks.SqlExecute.ConnectionString">
             <summary>
             The connection string
@@ -7109,6 +9070,16 @@
         <member name="P:MSBuild.Community.Tasks.SqlExecute.Command">
             <summary>
             The command to execute
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlExecute.SelectMode">
+            <summary>
+            The SQL Selection Mode.  Set to NonQuery, Scalar, or ScalarXml.  Default is NonQuery.
+            </summary>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.SqlExecute.OutputFile">
+            <summary>
+            The file name to write to
             </summary>
         </member>
         <member name="P:MSBuild.Community.Tasks.SqlExecute.Result">
@@ -7327,7 +9298,7 @@
         </member>
         <member name="M:MSBuild.Community.Tasks.Unzip.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Unzip"/> class.
+            Initializes a new instance of the <see cref="T:MSBuild.Community.Tasks.Unzip"/> class.
             </summary>
         </member>
         <member name="M:MSBuild.Community.Tasks.Unzip.Execute">
@@ -7349,6 +9320,18 @@
             Gets or sets the target directory.
             </summary>
             <value>The target directory.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Unzip.Overwrite">
+            <summary>
+            Gets or sets a value indicating whether to overwrite any existing files on extraction. Defaults to <c>true</c>.
+            </summary>
+            <value><c>true</c> to overwrite any existing files on extraction; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MSBuild.Community.Tasks.Unzip.ExtractedFiles">
+            <summary>
+            Gets the files extracted from the zip.
+            </summary>
+            <value>The files extracted from the zip.</value>
         </member>
         <member name="T:MSBuild.Community.Tasks.Version">
             <summary>
@@ -7684,6 +9667,12 @@
             </summary>
             <value>The value.</value>
         </member>
+        <member name="P:MSBuild.Community.Tasks.XmlUpdate.Delete">
+            <summary>
+            Gets or sets a value indicating whether the matched node is deleted.
+            </summary>
+            <value><c>true</c> to delete matched node; otherwise, <c>false</c>.</value>
+        </member>
         <member name="P:MSBuild.Community.Tasks.XmlUpdate.Namespace">
             <summary>
             Gets or sets the default namespace.
@@ -7725,7 +9714,7 @@
         </member>
         <member name="M:MSBuild.Community.Tasks.Zip.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Zip"/> class.
+            Initializes a new instance of the <see cref="T:MSBuild.Community.Tasks.Zip"/> class.
             </summary>
         </member>
         <member name="M:MSBuild.Community.Tasks.Zip.Execute">
@@ -7744,7 +9733,7 @@
         </member>
         <member name="P:MSBuild.Community.Tasks.Zip.ZipLevel">
             <summary>
-            Gets or sets the zip level.
+            Gets or sets the zip level. Default is 6.
             </summary>
             <value>The zip level.</value>
             <remarks>0 - store only to 9 - means best compression</remarks>
@@ -7757,7 +9746,7 @@
         </member>
         <member name="P:MSBuild.Community.Tasks.Zip.Flatten">
             <summary>
-            Gets or sets a value indicating whether this <see cref="T:Zip"/> is flatten.
+            Gets or sets a value indicating whether this <see cref="T:MSBuild.Community.Tasks.Zip"/> is flatten.
             </summary>
             <value><c>true</c> if flatten; otherwise, <c>false</c>.</value>
             <remarks>

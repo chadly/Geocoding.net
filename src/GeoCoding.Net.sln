@@ -6,7 +6,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{891021E5
 		..\build-quick.bat = ..\build-quick.bat
 		..\build-release.bat = ..\build-release.bat
 		..\clean.bat = ..\clean.bat
-		geocoding.build = geocoding.build
 		..\how-to-build.txt = ..\how-to-build.txt
 	EndProjectSection
 EndProject
@@ -43,9 +42,7 @@ Global
 		{BB5F66AC-286B-4BA5-86EC-6DED28426132}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB5F66AC-286B-4BA5-86EC-6DED28426132}.Release|Any CPU.Build.0 = Release|Any CPU
 		{80733FA4-B825-4983-94B5-EAB9A440692F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80733FA4-B825-4983-94B5-EAB9A440692F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80733FA4-B825-4983-94B5-EAB9A440692F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80733FA4-B825-4983-94B5-EAB9A440692F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2E608F4E-29F7-4AC3-922F-23D971312CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2E608F4E-29F7-4AC3-922F-23D971312CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E608F4E-29F7-4AC3-922F-23D971312CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
