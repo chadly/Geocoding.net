@@ -26,7 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Implementations", "Implemen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Yahoo", "Core.Yahoo\Core.Yahoo.csproj", "{B2863E87-3983-46EF-8B3E-37A4475ECA13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.VirtualEarth", "Core.VirtualEarth\Core.VirtualEarth.csproj", "{74BCB608-4674-452F-A50C-7EE61AC47EAF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Microsoft", "Core.Microsoft\Core.Microsoft.csproj", "{74BCB608-4674-452F-A50C-7EE61AC47EAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

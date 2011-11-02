@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GeoCoding.VirtualEarth.Token {
+namespace GeoCoding.Microsoft.VirtualEarth.Token {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -18,32 +18,32 @@ namespace GeoCoding.VirtualEarth.Token {
         // CODEGEN: Generating message contract since message GetVersionInfoRequest has headers
         [System.ServiceModel.OperationContractAttribute(Action="http://s.mappoint.net/mappoint-30/GetVersionInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute()]
-        GeoCoding.VirtualEarth.Token.GetVersionInfoResponse GetVersionInfo(GeoCoding.VirtualEarth.Token.GetVersionInfoRequest request);
+        GeoCoding.Microsoft.VirtualEarth.Token.GetVersionInfoResponse GetVersionInfo(GeoCoding.Microsoft.VirtualEarth.Token.GetVersionInfoRequest request);
         
         // CODEGEN: Generating message contract since message GetCountryRegionInfoRequest has headers
         [System.ServiceModel.OperationContractAttribute(Action="http://s.mappoint.net/mappoint-30/GetCountryRegionInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute()]
-        GeoCoding.VirtualEarth.Token.GetCountryRegionInfoResponse GetCountryRegionInfo(GeoCoding.VirtualEarth.Token.GetCountryRegionInfoRequest request);
+        GeoCoding.Microsoft.VirtualEarth.Token.GetCountryRegionInfoResponse GetCountryRegionInfo(GeoCoding.Microsoft.VirtualEarth.Token.GetCountryRegionInfoRequest request);
         
         // CODEGEN: Generating message contract since message GetEntityTypesRequest has headers
         [System.ServiceModel.OperationContractAttribute(Action="http://s.mappoint.net/mappoint-30/GetEntityTypes", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute()]
-        GeoCoding.VirtualEarth.Token.GetEntityTypesResponse GetEntityTypes(GeoCoding.VirtualEarth.Token.GetEntityTypesRequest request);
+        GeoCoding.Microsoft.VirtualEarth.Token.GetEntityTypesResponse GetEntityTypes(GeoCoding.Microsoft.VirtualEarth.Token.GetEntityTypesRequest request);
         
         // CODEGEN: Generating message contract since message GetDataSourceInfoRequest has headers
         [System.ServiceModel.OperationContractAttribute(Action="http://s.mappoint.net/mappoint-30/GetDataSourceInfo", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute()]
-        GeoCoding.VirtualEarth.Token.GetDataSourceInfoResponse GetDataSourceInfo(GeoCoding.VirtualEarth.Token.GetDataSourceInfoRequest request);
+        GeoCoding.Microsoft.VirtualEarth.Token.GetDataSourceInfoResponse GetDataSourceInfo(GeoCoding.Microsoft.VirtualEarth.Token.GetDataSourceInfoRequest request);
         
         // CODEGEN: Generating message contract since message GetGreatCircleDistancesRequest has headers
         [System.ServiceModel.OperationContractAttribute(Action="http://s.mappoint.net/mappoint-30/GetGreatCircleDistances", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute()]
-        GeoCoding.VirtualEarth.Token.GetGreatCircleDistancesResponse GetGreatCircleDistances(GeoCoding.VirtualEarth.Token.GetGreatCircleDistancesRequest request);
+        GeoCoding.Microsoft.VirtualEarth.Token.GetGreatCircleDistancesResponse GetGreatCircleDistances(GeoCoding.Microsoft.VirtualEarth.Token.GetGreatCircleDistancesRequest request);
         
         // CODEGEN: Generating message contract since message GetClientTokenRequest has headers
         [System.ServiceModel.OperationContractAttribute(Action="http://s.mappoint.net/mappoint-30/GetClientToken", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute()]
-        GeoCoding.VirtualEarth.Token.GetClientTokenResponse GetClientToken(GeoCoding.VirtualEarth.Token.GetClientTokenRequest request);
+        GeoCoding.Microsoft.VirtualEarth.Token.GetClientTokenResponse GetClientToken(GeoCoding.Microsoft.VirtualEarth.Token.GetClientTokenRequest request);
     }
     
     /// <remarks/>
@@ -768,15 +768,15 @@ namespace GeoCoding.VirtualEarth.Token {
     public partial class GetVersionInfoRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://s.mappoint.net/mappoint-30/")]
-        public GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader;
+        public GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader;
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://s.mappoint.net/mappoint-30/")]
-        public GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader;
+        public GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader;
         
         public GetVersionInfoRequest() {
         }
         
-        public GetVersionInfoRequest(GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader) {
+        public GetVersionInfoRequest(GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader) {
             this.CustomerInfoHeader = CustomerInfoHeader;
             this.UserInfoHeader = UserInfoHeader;
         }
@@ -806,10 +806,10 @@ namespace GeoCoding.VirtualEarth.Token {
     public partial class GetCountryRegionInfoRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://s.mappoint.net/mappoint-30/")]
-        public GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader;
+        public GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader;
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://s.mappoint.net/mappoint-30/")]
-        public GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader;
+        public GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://s.mappoint.net/mappoint-30/", Order=0)]
         public int[] entityIDs;
@@ -817,7 +817,7 @@ namespace GeoCoding.VirtualEarth.Token {
         public GetCountryRegionInfoRequest() {
         }
         
-        public GetCountryRegionInfoRequest(GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader, int[] entityIDs) {
+        public GetCountryRegionInfoRequest(GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader, int[] entityIDs) {
             this.CustomerInfoHeader = CustomerInfoHeader;
             this.UserInfoHeader = UserInfoHeader;
             this.entityIDs = entityIDs;
@@ -848,10 +848,10 @@ namespace GeoCoding.VirtualEarth.Token {
     public partial class GetEntityTypesRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://s.mappoint.net/mappoint-30/")]
-        public GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader;
+        public GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader;
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://s.mappoint.net/mappoint-30/")]
-        public GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader;
+        public GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://s.mappoint.net/mappoint-30/", Order=0)]
         public string dataSourceName;
@@ -859,7 +859,7 @@ namespace GeoCoding.VirtualEarth.Token {
         public GetEntityTypesRequest() {
         }
         
-        public GetEntityTypesRequest(GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader, string dataSourceName) {
+        public GetEntityTypesRequest(GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader, string dataSourceName) {
             this.CustomerInfoHeader = CustomerInfoHeader;
             this.UserInfoHeader = UserInfoHeader;
             this.dataSourceName = dataSourceName;
@@ -890,10 +890,10 @@ namespace GeoCoding.VirtualEarth.Token {
     public partial class GetDataSourceInfoRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://s.mappoint.net/mappoint-30/")]
-        public GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader;
+        public GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader;
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://s.mappoint.net/mappoint-30/")]
-        public GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader;
+        public GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://s.mappoint.net/mappoint-30/", Order=0)]
         public string[] dataSourceNames;
@@ -901,7 +901,7 @@ namespace GeoCoding.VirtualEarth.Token {
         public GetDataSourceInfoRequest() {
         }
         
-        public GetDataSourceInfoRequest(GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader, string[] dataSourceNames) {
+        public GetDataSourceInfoRequest(GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader, string[] dataSourceNames) {
             this.CustomerInfoHeader = CustomerInfoHeader;
             this.UserInfoHeader = UserInfoHeader;
             this.dataSourceNames = dataSourceNames;
@@ -932,10 +932,10 @@ namespace GeoCoding.VirtualEarth.Token {
     public partial class GetGreatCircleDistancesRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://s.mappoint.net/mappoint-30/")]
-        public GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader;
+        public GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader;
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://s.mappoint.net/mappoint-30/")]
-        public GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader;
+        public GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://s.mappoint.net/mappoint-30/", Order=0)]
         public LatLong[] latLongs;
@@ -943,7 +943,7 @@ namespace GeoCoding.VirtualEarth.Token {
         public GetGreatCircleDistancesRequest() {
         }
         
-        public GetGreatCircleDistancesRequest(GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader, LatLong[] latLongs) {
+        public GetGreatCircleDistancesRequest(GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader, LatLong[] latLongs) {
             this.CustomerInfoHeader = CustomerInfoHeader;
             this.UserInfoHeader = UserInfoHeader;
             this.latLongs = latLongs;
@@ -974,18 +974,18 @@ namespace GeoCoding.VirtualEarth.Token {
     public partial class GetClientTokenRequest {
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://s.mappoint.net/mappoint-30/")]
-        public GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader;
+        public GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader;
         
         [System.ServiceModel.MessageHeaderAttribute(Namespace="http://s.mappoint.net/mappoint-30/")]
-        public GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader;
+        public GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://s.mappoint.net/mappoint-30/", Order=0)]
-        public GeoCoding.VirtualEarth.Token.TokenSpecification specification;
+        public GeoCoding.Microsoft.VirtualEarth.Token.TokenSpecification specification;
         
         public GetClientTokenRequest() {
         }
         
-        public GetClientTokenRequest(GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader, GeoCoding.VirtualEarth.Token.TokenSpecification specification) {
+        public GetClientTokenRequest(GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader, GeoCoding.Microsoft.VirtualEarth.Token.TokenSpecification specification) {
             this.CustomerInfoHeader = CustomerInfoHeader;
             this.UserInfoHeader = UserInfoHeader;
             this.specification = specification;
@@ -1010,12 +1010,12 @@ namespace GeoCoding.VirtualEarth.Token {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface CommonServiceSoapChannel : GeoCoding.VirtualEarth.Token.CommonServiceSoap, System.ServiceModel.IClientChannel {
+    public interface CommonServiceSoapChannel : GeoCoding.Microsoft.VirtualEarth.Token.CommonServiceSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class CommonServiceSoapClient : System.ServiceModel.ClientBase<GeoCoding.VirtualEarth.Token.CommonServiceSoap>, GeoCoding.VirtualEarth.Token.CommonServiceSoap {
+    public partial class CommonServiceSoapClient : System.ServiceModel.ClientBase<GeoCoding.Microsoft.VirtualEarth.Token.CommonServiceSoap>, GeoCoding.Microsoft.VirtualEarth.Token.CommonServiceSoap {
         
         public CommonServiceSoapClient() {
         }
@@ -1037,85 +1037,85 @@ namespace GeoCoding.VirtualEarth.Token {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        GeoCoding.VirtualEarth.Token.GetVersionInfoResponse GeoCoding.VirtualEarth.Token.CommonServiceSoap.GetVersionInfo(GeoCoding.VirtualEarth.Token.GetVersionInfoRequest request) {
+        GeoCoding.Microsoft.VirtualEarth.Token.GetVersionInfoResponse GeoCoding.Microsoft.VirtualEarth.Token.CommonServiceSoap.GetVersionInfo(GeoCoding.Microsoft.VirtualEarth.Token.GetVersionInfoRequest request) {
             return base.Channel.GetVersionInfo(request);
         }
         
-        public VersionInfo[] GetVersionInfo(GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader) {
-            GeoCoding.VirtualEarth.Token.GetVersionInfoRequest inValue = new GeoCoding.VirtualEarth.Token.GetVersionInfoRequest();
+        public VersionInfo[] GetVersionInfo(GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader) {
+            GeoCoding.Microsoft.VirtualEarth.Token.GetVersionInfoRequest inValue = new GeoCoding.Microsoft.VirtualEarth.Token.GetVersionInfoRequest();
             inValue.CustomerInfoHeader = CustomerInfoHeader;
             inValue.UserInfoHeader = UserInfoHeader;
-            GeoCoding.VirtualEarth.Token.GetVersionInfoResponse retVal = ((GeoCoding.VirtualEarth.Token.CommonServiceSoap)(this)).GetVersionInfo(inValue);
+            GeoCoding.Microsoft.VirtualEarth.Token.GetVersionInfoResponse retVal = ((GeoCoding.Microsoft.VirtualEarth.Token.CommonServiceSoap)(this)).GetVersionInfo(inValue);
             return retVal.GetVersionInfoResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        GeoCoding.VirtualEarth.Token.GetCountryRegionInfoResponse GeoCoding.VirtualEarth.Token.CommonServiceSoap.GetCountryRegionInfo(GeoCoding.VirtualEarth.Token.GetCountryRegionInfoRequest request) {
+        GeoCoding.Microsoft.VirtualEarth.Token.GetCountryRegionInfoResponse GeoCoding.Microsoft.VirtualEarth.Token.CommonServiceSoap.GetCountryRegionInfo(GeoCoding.Microsoft.VirtualEarth.Token.GetCountryRegionInfoRequest request) {
             return base.Channel.GetCountryRegionInfo(request);
         }
         
-        public CountryRegionInfo[] GetCountryRegionInfo(GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader, int[] entityIDs) {
-            GeoCoding.VirtualEarth.Token.GetCountryRegionInfoRequest inValue = new GeoCoding.VirtualEarth.Token.GetCountryRegionInfoRequest();
+        public CountryRegionInfo[] GetCountryRegionInfo(GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader, int[] entityIDs) {
+            GeoCoding.Microsoft.VirtualEarth.Token.GetCountryRegionInfoRequest inValue = new GeoCoding.Microsoft.VirtualEarth.Token.GetCountryRegionInfoRequest();
             inValue.CustomerInfoHeader = CustomerInfoHeader;
             inValue.UserInfoHeader = UserInfoHeader;
             inValue.entityIDs = entityIDs;
-            GeoCoding.VirtualEarth.Token.GetCountryRegionInfoResponse retVal = ((GeoCoding.VirtualEarth.Token.CommonServiceSoap)(this)).GetCountryRegionInfo(inValue);
+            GeoCoding.Microsoft.VirtualEarth.Token.GetCountryRegionInfoResponse retVal = ((GeoCoding.Microsoft.VirtualEarth.Token.CommonServiceSoap)(this)).GetCountryRegionInfo(inValue);
             return retVal.GetCountryRegionInfoResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        GeoCoding.VirtualEarth.Token.GetEntityTypesResponse GeoCoding.VirtualEarth.Token.CommonServiceSoap.GetEntityTypes(GeoCoding.VirtualEarth.Token.GetEntityTypesRequest request) {
+        GeoCoding.Microsoft.VirtualEarth.Token.GetEntityTypesResponse GeoCoding.Microsoft.VirtualEarth.Token.CommonServiceSoap.GetEntityTypes(GeoCoding.Microsoft.VirtualEarth.Token.GetEntityTypesRequest request) {
             return base.Channel.GetEntityTypes(request);
         }
         
-        public EntityType[] GetEntityTypes(GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader, string dataSourceName) {
-            GeoCoding.VirtualEarth.Token.GetEntityTypesRequest inValue = new GeoCoding.VirtualEarth.Token.GetEntityTypesRequest();
+        public EntityType[] GetEntityTypes(GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader, string dataSourceName) {
+            GeoCoding.Microsoft.VirtualEarth.Token.GetEntityTypesRequest inValue = new GeoCoding.Microsoft.VirtualEarth.Token.GetEntityTypesRequest();
             inValue.CustomerInfoHeader = CustomerInfoHeader;
             inValue.UserInfoHeader = UserInfoHeader;
             inValue.dataSourceName = dataSourceName;
-            GeoCoding.VirtualEarth.Token.GetEntityTypesResponse retVal = ((GeoCoding.VirtualEarth.Token.CommonServiceSoap)(this)).GetEntityTypes(inValue);
+            GeoCoding.Microsoft.VirtualEarth.Token.GetEntityTypesResponse retVal = ((GeoCoding.Microsoft.VirtualEarth.Token.CommonServiceSoap)(this)).GetEntityTypes(inValue);
             return retVal.GetEntityTypesResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        GeoCoding.VirtualEarth.Token.GetDataSourceInfoResponse GeoCoding.VirtualEarth.Token.CommonServiceSoap.GetDataSourceInfo(GeoCoding.VirtualEarth.Token.GetDataSourceInfoRequest request) {
+        GeoCoding.Microsoft.VirtualEarth.Token.GetDataSourceInfoResponse GeoCoding.Microsoft.VirtualEarth.Token.CommonServiceSoap.GetDataSourceInfo(GeoCoding.Microsoft.VirtualEarth.Token.GetDataSourceInfoRequest request) {
             return base.Channel.GetDataSourceInfo(request);
         }
         
-        public DataSource[] GetDataSourceInfo(GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader, string[] dataSourceNames) {
-            GeoCoding.VirtualEarth.Token.GetDataSourceInfoRequest inValue = new GeoCoding.VirtualEarth.Token.GetDataSourceInfoRequest();
+        public DataSource[] GetDataSourceInfo(GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader, string[] dataSourceNames) {
+            GeoCoding.Microsoft.VirtualEarth.Token.GetDataSourceInfoRequest inValue = new GeoCoding.Microsoft.VirtualEarth.Token.GetDataSourceInfoRequest();
             inValue.CustomerInfoHeader = CustomerInfoHeader;
             inValue.UserInfoHeader = UserInfoHeader;
             inValue.dataSourceNames = dataSourceNames;
-            GeoCoding.VirtualEarth.Token.GetDataSourceInfoResponse retVal = ((GeoCoding.VirtualEarth.Token.CommonServiceSoap)(this)).GetDataSourceInfo(inValue);
+            GeoCoding.Microsoft.VirtualEarth.Token.GetDataSourceInfoResponse retVal = ((GeoCoding.Microsoft.VirtualEarth.Token.CommonServiceSoap)(this)).GetDataSourceInfo(inValue);
             return retVal.GetDataSourceInfoResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        GeoCoding.VirtualEarth.Token.GetGreatCircleDistancesResponse GeoCoding.VirtualEarth.Token.CommonServiceSoap.GetGreatCircleDistances(GeoCoding.VirtualEarth.Token.GetGreatCircleDistancesRequest request) {
+        GeoCoding.Microsoft.VirtualEarth.Token.GetGreatCircleDistancesResponse GeoCoding.Microsoft.VirtualEarth.Token.CommonServiceSoap.GetGreatCircleDistances(GeoCoding.Microsoft.VirtualEarth.Token.GetGreatCircleDistancesRequest request) {
             return base.Channel.GetGreatCircleDistances(request);
         }
         
-        public double[] GetGreatCircleDistances(GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader, LatLong[] latLongs) {
-            GeoCoding.VirtualEarth.Token.GetGreatCircleDistancesRequest inValue = new GeoCoding.VirtualEarth.Token.GetGreatCircleDistancesRequest();
+        public double[] GetGreatCircleDistances(GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader, LatLong[] latLongs) {
+            GeoCoding.Microsoft.VirtualEarth.Token.GetGreatCircleDistancesRequest inValue = new GeoCoding.Microsoft.VirtualEarth.Token.GetGreatCircleDistancesRequest();
             inValue.CustomerInfoHeader = CustomerInfoHeader;
             inValue.UserInfoHeader = UserInfoHeader;
             inValue.latLongs = latLongs;
-            GeoCoding.VirtualEarth.Token.GetGreatCircleDistancesResponse retVal = ((GeoCoding.VirtualEarth.Token.CommonServiceSoap)(this)).GetGreatCircleDistances(inValue);
+            GeoCoding.Microsoft.VirtualEarth.Token.GetGreatCircleDistancesResponse retVal = ((GeoCoding.Microsoft.VirtualEarth.Token.CommonServiceSoap)(this)).GetGreatCircleDistances(inValue);
             return retVal.GetGreatCircleDistancesResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        GeoCoding.VirtualEarth.Token.GetClientTokenResponse GeoCoding.VirtualEarth.Token.CommonServiceSoap.GetClientToken(GeoCoding.VirtualEarth.Token.GetClientTokenRequest request) {
+        GeoCoding.Microsoft.VirtualEarth.Token.GetClientTokenResponse GeoCoding.Microsoft.VirtualEarth.Token.CommonServiceSoap.GetClientToken(GeoCoding.Microsoft.VirtualEarth.Token.GetClientTokenRequest request) {
             return base.Channel.GetClientToken(request);
         }
         
-        public string GetClientToken(GeoCoding.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.VirtualEarth.Token.UserInfoHeader UserInfoHeader, GeoCoding.VirtualEarth.Token.TokenSpecification specification) {
-            GeoCoding.VirtualEarth.Token.GetClientTokenRequest inValue = new GeoCoding.VirtualEarth.Token.GetClientTokenRequest();
+        public string GetClientToken(GeoCoding.Microsoft.VirtualEarth.Token.CustomerInfoHeader CustomerInfoHeader, GeoCoding.Microsoft.VirtualEarth.Token.UserInfoHeader UserInfoHeader, GeoCoding.Microsoft.VirtualEarth.Token.TokenSpecification specification) {
+            GeoCoding.Microsoft.VirtualEarth.Token.GetClientTokenRequest inValue = new GeoCoding.Microsoft.VirtualEarth.Token.GetClientTokenRequest();
             inValue.CustomerInfoHeader = CustomerInfoHeader;
             inValue.UserInfoHeader = UserInfoHeader;
             inValue.specification = specification;
-            GeoCoding.VirtualEarth.Token.GetClientTokenResponse retVal = ((GeoCoding.VirtualEarth.Token.CommonServiceSoap)(this)).GetClientToken(inValue);
+            GeoCoding.Microsoft.VirtualEarth.Token.GetClientTokenResponse retVal = ((GeoCoding.Microsoft.VirtualEarth.Token.CommonServiceSoap)(this)).GetClientToken(inValue);
             return retVal.GetClientTokenResult;
         }
     }

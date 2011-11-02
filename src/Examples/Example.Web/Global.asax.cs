@@ -8,7 +8,7 @@ using Autofac.Integration.Web.Mvc;
 using GeoCoding;
 using GeoCoding.BingMaps;
 using GeoCoding.Google;
-using GeoCoding.VirtualEarth;
+using GeoCoding.Microsoft;
 using GeoCoding.Yahoo;
 
 namespace Example.Web

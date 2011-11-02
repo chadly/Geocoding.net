@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
-using GeoCoding.VirtualEarth.Token;
+using GeoCoding.Microsoft.VirtualEarth;
+using GeoCoding.Microsoft.VirtualEarth.Token;
 using GeoAddress = GeoCoding.Address;
 using GeoLocation = GeoCoding.Location;
 
-namespace GeoCoding.VirtualEarth
+namespace GeoCoding.Microsoft
 {
 	public class VirtualEarthGeoCoder : IGeoCoder, IDisposable
 	{
@@ -56,7 +57,7 @@ namespace GeoCoding.VirtualEarth
 			return response.GetClientTokenResult;
 		}
 
-		private AddressAccuracy AccuracyFromVirtualEarth(Address address)
+		private AddressAccuracy AccuracyFromVirtualEarth(VirtualEarth.Address address)
 		{
 			//Virtual Earth returns an address "confidence" which is not very helpful when trying to determine the accuracy of the address, hence, this:
 

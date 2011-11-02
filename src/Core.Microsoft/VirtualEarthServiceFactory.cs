@@ -2,10 +2,11 @@
 using System.Net;
 using System.Security.Principal;
 using System.ServiceModel;
-using GeoCoding.VirtualEarth.Imagery;
-using GeoCoding.VirtualEarth.Token;
+using GeoCoding.Microsoft.VirtualEarth;
+using GeoCoding.Microsoft.VirtualEarth.Imagery;
+using GeoCoding.Microsoft.VirtualEarth.Token;
 
-namespace GeoCoding.VirtualEarth
+namespace GeoCoding.Microsoft
 {
 	public class VirtualEarthServiceFactory : IDisposable
 	{

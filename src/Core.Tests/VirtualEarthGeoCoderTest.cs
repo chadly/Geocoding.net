@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
-using GeoCoding.VirtualEarth;
+using GeoCoding.Microsoft;
+using GeoCoding.Microsoft.VirtualEarth;
 
 namespace GeoCoding.Tests
 {

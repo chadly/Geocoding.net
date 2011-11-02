@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GeoCoding.VirtualEarth {
+namespace GeoCoding.Microsoft.VirtualEarth {
     using System.Runtime.Serialization;
     using System;
     
@@ -17,24 +17,24 @@ namespace GeoCoding.VirtualEarth {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="RequestBase", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.ReverseGeocodeRequest))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.GeocodeRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Microsoft.VirtualEarth.ReverseGeocodeRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Microsoft.VirtualEarth.GeocodeRequest))]
     public partial class RequestBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.Credentials CredentialsField;
+        private GeoCoding.Microsoft.VirtualEarth.Credentials CredentialsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CultureField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.ExecutionOptions ExecutionOptionsField;
+        private GeoCoding.Microsoft.VirtualEarth.ExecutionOptions ExecutionOptionsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.UserProfile UserProfileField;
+        private GeoCoding.Microsoft.VirtualEarth.UserProfile UserProfileField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -47,7 +47,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.Credentials Credentials {
+        public GeoCoding.Microsoft.VirtualEarth.Credentials Credentials {
             get {
                 return this.CredentialsField;
             }
@@ -73,7 +73,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.ExecutionOptions ExecutionOptions {
+        public GeoCoding.Microsoft.VirtualEarth.ExecutionOptions ExecutionOptions {
             get {
                 return this.ExecutionOptionsField;
             }
@@ -86,7 +86,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.UserProfile UserProfile {
+        public GeoCoding.Microsoft.VirtualEarth.UserProfile UserProfile {
             get {
                 return this.UserProfileField;
             }
@@ -224,25 +224,25 @@ namespace GeoCoding.VirtualEarth {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.Heading CurrentHeadingField;
+        private GeoCoding.Microsoft.VirtualEarth.Heading CurrentHeadingField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.UserLocation CurrentLocationField;
+        private GeoCoding.Microsoft.VirtualEarth.UserLocation CurrentLocationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.DeviceType DeviceTypeField;
+        private GeoCoding.Microsoft.VirtualEarth.DeviceType DeviceTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.DistanceUnit DistanceUnitField;
+        private GeoCoding.Microsoft.VirtualEarth.DistanceUnit DistanceUnitField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string IPAddressField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.ShapeBase MapViewField;
+        private GeoCoding.Microsoft.VirtualEarth.ShapeBase MapViewField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.SizeOfint ScreenSizeField;
+        private GeoCoding.Microsoft.VirtualEarth.SizeOfint ScreenSizeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -255,7 +255,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.Heading CurrentHeading {
+        public GeoCoding.Microsoft.VirtualEarth.Heading CurrentHeading {
             get {
                 return this.CurrentHeadingField;
             }
@@ -268,7 +268,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.UserLocation CurrentLocation {
+        public GeoCoding.Microsoft.VirtualEarth.UserLocation CurrentLocation {
             get {
                 return this.CurrentLocationField;
             }
@@ -281,7 +281,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.DeviceType DeviceType {
+        public GeoCoding.Microsoft.VirtualEarth.DeviceType DeviceType {
             get {
                 return this.DeviceTypeField;
             }
@@ -294,7 +294,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.DistanceUnit DistanceUnit {
+        public GeoCoding.Microsoft.VirtualEarth.DistanceUnit DistanceUnit {
             get {
                 return this.DistanceUnitField;
             }
@@ -320,7 +320,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.ShapeBase MapView {
+        public GeoCoding.Microsoft.VirtualEarth.ShapeBase MapView {
             get {
                 return this.MapViewField;
             }
@@ -333,7 +333,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.SizeOfint ScreenSize {
+        public GeoCoding.Microsoft.VirtualEarth.SizeOfint ScreenSize {
             get {
                 return this.ScreenSizeField;
             }
@@ -359,13 +359,13 @@ namespace GeoCoding.VirtualEarth {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ReverseGeocodeRequest", Namespace="http://dev.virtualearth.net/webservices/v1/geocode")]
     [System.SerializableAttribute()]
-    public partial class ReverseGeocodeRequest : GeoCoding.VirtualEarth.RequestBase {
+    public partial class ReverseGeocodeRequest : GeoCoding.Microsoft.VirtualEarth.RequestBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.Location LocationField;
+        private GeoCoding.Microsoft.VirtualEarth.Location LocationField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.Location Location {
+        public GeoCoding.Microsoft.VirtualEarth.Location Location {
             get {
                 return this.LocationField;
             }
@@ -382,19 +382,19 @@ namespace GeoCoding.VirtualEarth {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="GeocodeRequest", Namespace="http://dev.virtualearth.net/webservices/v1/geocode")]
     [System.SerializableAttribute()]
-    public partial class GeocodeRequest : GeoCoding.VirtualEarth.RequestBase {
+    public partial class GeocodeRequest : GeoCoding.Microsoft.VirtualEarth.RequestBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.Address AddressField;
+        private GeoCoding.Microsoft.VirtualEarth.Address AddressField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.GeocodeOptions OptionsField;
+        private GeoCoding.Microsoft.VirtualEarth.GeocodeOptions OptionsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string QueryField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.Address Address {
+        public GeoCoding.Microsoft.VirtualEarth.Address Address {
             get {
                 return this.AddressField;
             }
@@ -407,7 +407,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.GeocodeOptions Options {
+        public GeoCoding.Microsoft.VirtualEarth.GeocodeOptions Options {
             get {
                 return this.OptionsField;
             }
@@ -603,7 +603,7 @@ namespace GeoCoding.VirtualEarth {
         private System.Nullable<int> CountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.FilterBase[] FiltersField;
+        private GeoCoding.Microsoft.VirtualEarth.FilterBase[] FiltersField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -629,7 +629,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.FilterBase[] Filters {
+        public GeoCoding.Microsoft.VirtualEarth.FilterBase[] Filters {
             get {
                 return this.FiltersField;
             }
@@ -700,13 +700,13 @@ namespace GeoCoding.VirtualEarth {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="UserLocation", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    public partial class UserLocation : GeoCoding.VirtualEarth.Location {
+    public partial class UserLocation : GeoCoding.Microsoft.VirtualEarth.Location {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.Confidence ConfidenceField;
+        private GeoCoding.Microsoft.VirtualEarth.Confidence ConfidenceField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.Confidence Confidence {
+        public GeoCoding.Microsoft.VirtualEarth.Confidence Confidence {
             get {
                 return this.ConfidenceField;
             }
@@ -723,9 +723,9 @@ namespace GeoCoding.VirtualEarth {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ShapeBase", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.Rectangle))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.Circle))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.Polygon))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Microsoft.VirtualEarth.Rectangle))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Microsoft.VirtualEarth.Circle))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Microsoft.VirtualEarth.Polygon))]
     public partial class ShapeBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -838,8 +838,8 @@ namespace GeoCoding.VirtualEarth {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Location", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.GeocodeLocation))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.UserLocation))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Microsoft.VirtualEarth.GeocodeLocation))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Microsoft.VirtualEarth.UserLocation))]
     public partial class Location : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -917,7 +917,7 @@ namespace GeoCoding.VirtualEarth {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="GeocodeLocation", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    public partial class GeocodeLocation : GeoCoding.VirtualEarth.Location {
+    public partial class GeocodeLocation : GeoCoding.Microsoft.VirtualEarth.Location {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CalculationMethodField;
@@ -954,16 +954,16 @@ namespace GeoCoding.VirtualEarth {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Rectangle", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    public partial class Rectangle : GeoCoding.VirtualEarth.ShapeBase {
+    public partial class Rectangle : GeoCoding.Microsoft.VirtualEarth.ShapeBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.Location NortheastField;
+        private GeoCoding.Microsoft.VirtualEarth.Location NortheastField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.Location SouthwestField;
+        private GeoCoding.Microsoft.VirtualEarth.Location SouthwestField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.Location Northeast {
+        public GeoCoding.Microsoft.VirtualEarth.Location Northeast {
             get {
                 return this.NortheastField;
             }
@@ -976,7 +976,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.Location Southwest {
+        public GeoCoding.Microsoft.VirtualEarth.Location Southwest {
             get {
                 return this.SouthwestField;
             }
@@ -993,19 +993,19 @@ namespace GeoCoding.VirtualEarth {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Circle", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    public partial class Circle : GeoCoding.VirtualEarth.ShapeBase {
+    public partial class Circle : GeoCoding.Microsoft.VirtualEarth.ShapeBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.Location CenterField;
+        private GeoCoding.Microsoft.VirtualEarth.Location CenterField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.DistanceUnit DistanceUnitField;
+        private GeoCoding.Microsoft.VirtualEarth.DistanceUnit DistanceUnitField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double RadiusField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.Location Center {
+        public GeoCoding.Microsoft.VirtualEarth.Location Center {
             get {
                 return this.CenterField;
             }
@@ -1018,7 +1018,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.DistanceUnit DistanceUnit {
+        public GeoCoding.Microsoft.VirtualEarth.DistanceUnit DistanceUnit {
             get {
                 return this.DistanceUnitField;
             }
@@ -1048,13 +1048,13 @@ namespace GeoCoding.VirtualEarth {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Polygon", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    public partial class Polygon : GeoCoding.VirtualEarth.ShapeBase {
+    public partial class Polygon : GeoCoding.Microsoft.VirtualEarth.ShapeBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.Location[] VerticesField;
+        private GeoCoding.Microsoft.VirtualEarth.Location[] VerticesField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.Location[] Vertices {
+        public GeoCoding.Microsoft.VirtualEarth.Location[] Vertices {
             get {
                 return this.VerticesField;
             }
@@ -1071,7 +1071,7 @@ namespace GeoCoding.VirtualEarth {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="FilterBase", Namespace="http://dev.virtualearth.net/webservices/v1/geocode")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.ConfidenceFilter))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Microsoft.VirtualEarth.ConfidenceFilter))]
     public partial class FilterBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -1101,13 +1101,13 @@ namespace GeoCoding.VirtualEarth {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ConfidenceFilter", Namespace="http://dev.virtualearth.net/webservices/v1/geocode")]
     [System.SerializableAttribute()]
-    public partial class ConfidenceFilter : GeoCoding.VirtualEarth.FilterBase {
+    public partial class ConfidenceFilter : GeoCoding.Microsoft.VirtualEarth.FilterBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.Confidence MinimumConfidenceField;
+        private GeoCoding.Microsoft.VirtualEarth.Confidence MinimumConfidenceField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.Confidence MinimumConfidence {
+        public GeoCoding.Microsoft.VirtualEarth.Confidence MinimumConfidence {
             get {
                 return this.MinimumConfidenceField;
             }
@@ -1124,14 +1124,14 @@ namespace GeoCoding.VirtualEarth {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ResponseBase", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.VirtualEarth.GeocodeResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GeoCoding.Microsoft.VirtualEarth.GeocodeResponse))]
     public partial class ResponseBase : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.ResponseSummary ResponseSummaryField;
+        private GeoCoding.Microsoft.VirtualEarth.ResponseSummary ResponseSummaryField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1144,7 +1144,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.ResponseSummary ResponseSummary {
+        public GeoCoding.Microsoft.VirtualEarth.ResponseSummary ResponseSummary {
             get {
                 return this.ResponseSummaryField;
             }
@@ -1176,7 +1176,7 @@ namespace GeoCoding.VirtualEarth {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.AuthenticationResultCode AuthenticationResultCodeField;
+        private GeoCoding.Microsoft.VirtualEarth.AuthenticationResultCode AuthenticationResultCodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CopyrightField;
@@ -1185,7 +1185,7 @@ namespace GeoCoding.VirtualEarth {
         private string FaultReasonField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.ResponseStatusCode StatusCodeField;
+        private GeoCoding.Microsoft.VirtualEarth.ResponseStatusCode StatusCodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TraceIdField;
@@ -1201,7 +1201,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.AuthenticationResultCode AuthenticationResultCode {
+        public GeoCoding.Microsoft.VirtualEarth.AuthenticationResultCode AuthenticationResultCode {
             get {
                 return this.AuthenticationResultCodeField;
             }
@@ -1240,7 +1240,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.ResponseStatusCode StatusCode {
+        public GeoCoding.Microsoft.VirtualEarth.ResponseStatusCode StatusCode {
             get {
                 return this.StatusCodeField;
             }
@@ -1279,13 +1279,13 @@ namespace GeoCoding.VirtualEarth {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="GeocodeResponse", Namespace="http://dev.virtualearth.net/webservices/v1/geocode")]
     [System.SerializableAttribute()]
-    public partial class GeocodeResponse : GeoCoding.VirtualEarth.ResponseBase {
+    public partial class GeocodeResponse : GeoCoding.Microsoft.VirtualEarth.ResponseBase {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.GeocodeResult[] ResultsField;
+        private GeoCoding.Microsoft.VirtualEarth.GeocodeResult[] ResultsField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.GeocodeResult[] Results {
+        public GeoCoding.Microsoft.VirtualEarth.GeocodeResult[] Results {
             get {
                 return this.ResultsField;
             }
@@ -1308,13 +1308,13 @@ namespace GeoCoding.VirtualEarth {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.Address AddressField;
+        private GeoCoding.Microsoft.VirtualEarth.Address AddressField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.Rectangle BestViewField;
+        private GeoCoding.Microsoft.VirtualEarth.Rectangle BestViewField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.Confidence ConfidenceField;
+        private GeoCoding.Microsoft.VirtualEarth.Confidence ConfidenceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DisplayNameField;
@@ -1323,7 +1323,7 @@ namespace GeoCoding.VirtualEarth {
         private string EntityTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GeoCoding.VirtualEarth.GeocodeLocation[] LocationsField;
+        private GeoCoding.Microsoft.VirtualEarth.GeocodeLocation[] LocationsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string[] MatchCodesField;
@@ -1339,7 +1339,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.Address Address {
+        public GeoCoding.Microsoft.VirtualEarth.Address Address {
             get {
                 return this.AddressField;
             }
@@ -1352,7 +1352,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.Rectangle BestView {
+        public GeoCoding.Microsoft.VirtualEarth.Rectangle BestView {
             get {
                 return this.BestViewField;
             }
@@ -1365,7 +1365,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.Confidence Confidence {
+        public GeoCoding.Microsoft.VirtualEarth.Confidence Confidence {
             get {
                 return this.ConfidenceField;
             }
@@ -1404,7 +1404,7 @@ namespace GeoCoding.VirtualEarth {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GeoCoding.VirtualEarth.GeocodeLocation[] Locations {
+        public GeoCoding.Microsoft.VirtualEarth.GeocodeLocation[] Locations {
             get {
                 return this.LocationsField;
             }
@@ -1483,25 +1483,25 @@ namespace GeoCoding.VirtualEarth {
         [System.ServiceModel.OperationContractAttribute(Action="http://dev.virtualearth.net/webservices/v1/geocode/contracts/IGeocodeService/Geoc" +
             "ode", ReplyAction="http://dev.virtualearth.net/webservices/v1/geocode/contracts/IGeocodeService/Geoc" +
             "odeResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GeoCoding.VirtualEarth.ResponseSummary), Action="http://dev.virtualearth.net/webservices/v1/geocode/contracts/IGeocodeService/Geoc" +
+        [System.ServiceModel.FaultContractAttribute(typeof(GeoCoding.Microsoft.VirtualEarth.ResponseSummary), Action="http://dev.virtualearth.net/webservices/v1/geocode/contracts/IGeocodeService/Geoc" +
             "odeResponseSummaryFault", Name="ResponseSummary", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
-        GeoCoding.VirtualEarth.GeocodeResponse Geocode(GeoCoding.VirtualEarth.GeocodeRequest request);
+        GeoCoding.Microsoft.VirtualEarth.GeocodeResponse Geocode(GeoCoding.Microsoft.VirtualEarth.GeocodeRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://dev.virtualearth.net/webservices/v1/geocode/contracts/IGeocodeService/Reve" +
             "rseGeocode", ReplyAction="http://dev.virtualearth.net/webservices/v1/geocode/contracts/IGeocodeService/Reve" +
             "rseGeocodeResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GeoCoding.VirtualEarth.ResponseSummary), Action="http://dev.virtualearth.net/webservices/v1/geocode/contracts/IGeocodeService/Reve" +
+        [System.ServiceModel.FaultContractAttribute(typeof(GeoCoding.Microsoft.VirtualEarth.ResponseSummary), Action="http://dev.virtualearth.net/webservices/v1/geocode/contracts/IGeocodeService/Reve" +
             "rseGeocodeResponseSummaryFault", Name="ResponseSummary", Namespace="http://dev.virtualearth.net/webservices/v1/common")]
-        GeoCoding.VirtualEarth.GeocodeResponse ReverseGeocode(GeoCoding.VirtualEarth.ReverseGeocodeRequest request);
+        GeoCoding.Microsoft.VirtualEarth.GeocodeResponse ReverseGeocode(GeoCoding.Microsoft.VirtualEarth.ReverseGeocodeRequest request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IGeocodeServiceChannel : GeoCoding.VirtualEarth.IGeocodeService, System.ServiceModel.IClientChannel {
+    public interface IGeocodeServiceChannel : GeoCoding.Microsoft.VirtualEarth.IGeocodeService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GeocodeServiceClient : System.ServiceModel.ClientBase<GeoCoding.VirtualEarth.IGeocodeService>, GeoCoding.VirtualEarth.IGeocodeService {
+    public partial class GeocodeServiceClient : System.ServiceModel.ClientBase<GeoCoding.Microsoft.VirtualEarth.IGeocodeService>, GeoCoding.Microsoft.VirtualEarth.IGeocodeService {
         
         public GeocodeServiceClient() {
         }
@@ -1522,11 +1522,11 @@ namespace GeoCoding.VirtualEarth {
                 base(binding, remoteAddress) {
         }
         
-        public GeoCoding.VirtualEarth.GeocodeResponse Geocode(GeoCoding.VirtualEarth.GeocodeRequest request) {
+        public GeoCoding.Microsoft.VirtualEarth.GeocodeResponse Geocode(GeoCoding.Microsoft.VirtualEarth.GeocodeRequest request) {
             return base.Channel.Geocode(request);
         }
         
-        public GeoCoding.VirtualEarth.GeocodeResponse ReverseGeocode(GeoCoding.VirtualEarth.ReverseGeocodeRequest request) {
+        public GeoCoding.Microsoft.VirtualEarth.GeocodeResponse ReverseGeocode(GeoCoding.Microsoft.VirtualEarth.ReverseGeocodeRequest request) {
             return base.Channel.ReverseGeocode(request);
         }
     }
