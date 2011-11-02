@@ -3,9 +3,9 @@
   <PropertyGroup>
     <projectName>GeoCoding.Net</projectName>
     <company>GeoCoding.Net</company>
-    <copyright>Copyright © 2008 GeoCoding.Net</copyright>
+    <copyright>Copyright © 2008 - 2011 Chad Lee</copyright>
     <major>1</major>
-    <minor>3</minor>
+    <minor>4</minor>
     <build Condition="'$(BUILD_NUMBER)'==''">0</build>
     <build Condition="'$(BUILD_NUMBER)'!=''">$(BUILD_NUMBER)</build>
   </PropertyGroup>
