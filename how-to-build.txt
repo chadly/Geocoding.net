@@ -11,28 +11,30 @@ you will need to change the path to svnversion.exe in order to successfully run 
 See sample build commands below for example.
 
 
-How to Build from Visual Studio 2008 Command Prompt
+How to Build from Visual Studio 2010 Command Prompt
 ==============================================================
-Here are some sample build commands (these should be run from the src directory):
+Here are some sample build commands (these should be run from the working copy root directory):
 
 Debug Build with tests
   > msbuild geocoding.build
 
-Debug Build without tests (only version + compile)
-  > msbuild geocoding.build /t:Version;Compile
+Debug Build without tests (this is what build-quick is doing)
+  > msbuild geocoding.build /t:Compile
 
 Debug Build without tests and custom path to svnversion.exe
-  > msbuild geocoding.build /t:Version;Compile /p:svnToolPath=C:\Program Files\Subversion
+  > msbuild geocoding.build /t:Compile /p:svnToolPath=C:\Program Files\Subversion
 
 Release Build
   > msbuild geocoding.build /p:Configuration=Release
 
-Zip Debug Build to Output Dir (no tests)
-  > msbuild geocoding.build /t:Zip
+Copy & Merge Release Build to Output Dir (no tests)
+  > msbuild geocoding.build /t:ILMerge /p:Configuration=Release
 
 Generate AssemblyInfoCommon file
   > msbuild geocoding.build /t:Version
 
+Generate App.config from template file
+  > msbuild geocoding.build /t:CopyTemplateFiles
 
 Service tests
 ==============
