@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace GeoCoding.BingMaps
+namespace GeoCoding.Microsoft
 {
     [DataContract]
 	public class Address

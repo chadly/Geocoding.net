@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Configuration;
-using GeoCoding.BingMaps;
+using GeoCoding.Microsoft;
 
 namespace GeoCoding.Tests
 {

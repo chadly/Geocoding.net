@@ -8,7 +8,7 @@ using GeoCoding;
 using GeoAddress = GeoCoding.Address;
 using GeoLocation = GeoCoding.Location;
 
-namespace GeoCoding.BingMaps
+namespace GeoCoding.Microsoft
 {
 	public class BingMapsGeoCoder : IGeoCoder
 	{
