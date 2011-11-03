@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://dev.virtualearth.net/webservices/v1/search" elementFormDefault="qualified" targetNamespace="http://dev.virtualearth.net/webservices/v1/search" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://dev.virtualearth.net/webservices/v1/metadata/imageryservice/ImageryService3.xsd" namespace="http://dev.virtualearth.net/webservices/v1/common" />
+  <xs:complexType name="SearchPoint">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://dev.virtualearth.net/webservices/v1/common" base="q1:ShapeBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Point" nillable="true" type="q1:Location" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SearchPoint" nillable="true" type="tns:SearchPoint" />
+</xs:schema>

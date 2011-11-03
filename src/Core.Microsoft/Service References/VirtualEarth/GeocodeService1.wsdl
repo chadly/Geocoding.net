@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:tns="http://dev.virtualearth.net/webservices/v1/geocode/contracts" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" targetNamespace="http://dev.virtualearth.net/webservices/v1/geocode/contracts" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://dev.virtualearth.net/webservices/v1/geocode/contracts/Imports">
+      <xsd:import schemaLocation="http://dev.virtualearth.net/webservices/v1/metadata/geocodeservice/GeocodeService.xsd" namespace="http://dev.virtualearth.net/webservices/v1/geocode/contracts" />
+      <xsd:import schemaLocation="http://dev.virtualearth.net/webservices/v1/metadata/geocodeservice/GeocodeService1.xsd" namespace="http://dev.virtualearth.net/webservices/v1/common" />
+      <xsd:import schemaLocation="http://dev.virtualearth.net/webservices/v1/metadata/geocodeservice/GeocodeService4.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://dev.virtualearth.net/webservices/v1/metadata/geocodeservice/GeocodeService2.xsd" namespace="http://dev.virtualearth.net/webservices/v1/geocode" />
+      <xsd:import schemaLocation="http://dev.virtualearth.net/webservices/v1/metadata/geocodeservice/GeocodeService3.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IGeocodeService_Geocode_InputMessage">
+    <wsdl:part name="parameters" element="tns:Geocode" />
+  </wsdl:message>
+  <wsdl:message name="IGeocodeService_Geocode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GeocodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGeocodeService_Geocode_ResponseSummaryFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://dev.virtualearth.net/webservices/v1/common" name="detail" element="q1:ResponseSummary" />
+  </wsdl:message>
+  <wsdl:message name="IGeocodeService_ReverseGeocode_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReverseGeocode" />
+  </wsdl:message>
+  <wsdl:message name="IGeocodeService_ReverseGeocode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReverseGeocodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGeocodeService_ReverseGeocode_ResponseSummaryFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://dev.virtualearth.net/webservices/v1/common" name="detail" element="q2:ResponseSummary" />
+  </wsdl:message>
+  <wsdl:portType name="IGeocodeService">
+    <wsdl:operation name="Geocode">
+      <wsdl:input wsaw:Action="http://dev.virtualearth.net/webservices/v1/geocode/contracts/IGeocodeService/Geocode" message="tns:IGeocodeService_Geocode_InputMessage" />
+      <wsdl:output wsaw:Action="http://dev.virtualearth.net/webservices/v1/geocode/contracts/IGeocodeService/GeocodeResponse" message="tns:IGeocodeService_Geocode_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://dev.virtualearth.net/webservices/v1/geocode/contracts/IGeocodeService/GeocodeResponseSummaryFault" name="ResponseSummaryFault" message="tns:IGeocodeService_Geocode_ResponseSummaryFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReverseGeocode">
+      <wsdl:input wsaw:Action="http://dev.virtualearth.net/webservices/v1/geocode/contracts/IGeocodeService/ReverseGeocode" message="tns:IGeocodeService_ReverseGeocode_InputMessage" />
+      <wsdl:output wsaw:Action="http://dev.virtualearth.net/webservices/v1/geocode/contracts/IGeocodeService/ReverseGeocodeResponse" message="tns:IGeocodeService_ReverseGeocode_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://dev.virtualearth.net/webservices/v1/geocode/contracts/IGeocodeService/ReverseGeocodeResponseSummaryFault" name="ResponseSummaryFault" message="tns:IGeocodeService_ReverseGeocode_ResponseSummaryFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

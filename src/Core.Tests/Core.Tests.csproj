@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BB5F66AC-286B-4BA5-86EC-6DED28426132}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GeoCoding.Tests</RootNamespace>
+    <AssemblyName>GeoCoding.Core.Tests</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\geocoding.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="xunit, Version=1.0.0.1267, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\xunit\xunit.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.extensions, Version=1.1.0.1323, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\xunit\xunit.extensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\AssemblyInfoCommon.cs">
+      <Link>Properties\AssemblyInfoCommon.cs</Link>
+    </Compile>
+    <Compile Include="AddressTest.cs" />
+    <Compile Include="BingMapsTest.cs" />
+    <Compile Include="DistanceTest.cs" />
+    <Compile Include="GeoCoderTest.cs" />
+    <Compile Include="GoogleGeoCoderTest.cs" />
+    <Compile Include="LocationTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VirtualEarthGeoCoderTest.cs" />
+    <Compile Include="YahooGeoCoderTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Google\Core.Google.csproj">
+      <Project>{2E608F4E-29F7-4AC3-922F-23D971312CAE}</Project>
+      <Name>Core.Google</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Microsoft\Core.Microsoft.csproj">
+      <Project>{74BCB608-4674-452F-A50C-7EE61AC47EAF}</Project>
+      <Name>Core.Microsoft</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Yahoo\Core.Yahoo.csproj">
+      <Project>{B2863E87-3983-46EF-8B3E-37A4475ECA13}</Project>
+      <Name>Core.Yahoo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{654812CF-D009-4420-B9EC-D07B030926A1}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\geocoding.snk">
+      <Link>Properties\geocoding.snk</Link>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

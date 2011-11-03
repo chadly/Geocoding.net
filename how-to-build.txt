@@ -1,0 +1,42 @@
+In order to compile the solution in Visual Studio, you must first
+run the build in MSBuild. The build process generates some files that
+are needed to compile in Visual Studio.
+
+The easiest way to run the build is just to run build-quick.bat. This will
+run a basic Debug build without running any tests.
+
+
+NOTE: If you don't have VisualSVN installed (or if you have it installed on a 32-bit system),
+you will need to change the path to svnversion.exe in order to successfully run the build.
+See sample build commands below for example.
+
+
+How to Build from Visual Studio 2010 Command Prompt
+==============================================================
+Here are some sample build commands (these should be run from the working copy root directory):
+
+Debug Build with tests
+  > msbuild geocoding.build
+
+Debug Build without tests (this is what build-quick is doing)
+  > msbuild geocoding.build /t:Compile
+
+Debug Build without tests and custom path to svnversion.exe
+  > msbuild geocoding.build /t:Compile /p:svnToolPath=C:\Program Files\Subversion
+
+Release Build
+  > msbuild geocoding.build /p:Configuration=Release
+
+Copy & Merge Release Build to Output Dir (no tests)
+  > msbuild geocoding.build /t:ILMerge /p:Configuration=Release
+
+Generate AssemblyInfoCommon file
+  > msbuild geocoding.build /t:Version
+
+Generate App.config from template file
+  > msbuild geocoding.build /t:CopyTemplateFiles
+
+Service tests
+==============
+You will need to generate API keys for each respective service to run the service tests.
+Edit App.config in Core.Tests and put in your API keys.

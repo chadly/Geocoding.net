@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://s.mappoint.net/mappoint-30/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://s.mappoint.net/mappoint-30/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://s.mappoint.net/mappoint-30/">
+      <s:element name="GetVersionInfo">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetVersionInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetVersionInfoResult" type="tns:ArrayOfVersionInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfVersionInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="VersionInfo" nillable="true" type="tns:VersionInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="VersionInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Component" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Version" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CustomerInfoHeader" type="tns:CustomerInfoHeader" />
+      <s:complexType name="CustomerInfoHeader">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CustomLogEntry" type="s:short" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UserInfoHeader" type="tns:UserInfoHeader" />
+      <s:complexType name="UserInfoHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Culture" type="tns:CultureInfo" />
+          <s:element minOccurs="1" maxOccurs="1" name="DefaultDistanceUnit" type="tns:DistanceUnit" />
+          <s:element minOccurs="0" maxOccurs="1" name="Context" type="tns:CountryRegionContext" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CultureInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Lcid" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DistanceUnit">
+        <s:restriction base="s:string">
+          <s:enumeration value="Kilometer" />
+          <s:enumeration value="Mile" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="CountryRegionContext">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" default="0" name="EntityID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Iso2" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCountryRegionInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="entityIDs" type="tns:ArrayOfInt" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCountryRegionInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCountryRegionInfoResult" type="tns:ArrayOfCountryRegionInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCountryRegionInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CountryRegionInfo" nillable="true" type="tns:CountryRegionInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CountryRegionInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="EntityID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LatLong" type="tns:LatLong" />
+          <s:element minOccurs="0" maxOccurs="1" name="Iso2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Iso3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FriendlyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OfficialName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LatLong">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" default="0" name="Latitude" type="s:double" />
+          <s:element minOccurs="0" maxOccurs="1" default="0" name="Longitude" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetEntityTypes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dataSourceName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEntityTypesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEntityTypesResult" type="tns:ArrayOfEntityType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEntityType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EntityType" nillable="true" type="tns:EntityType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EntityType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ParentName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Definition" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Properties" type="tns:ArrayOfEntityProperty" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEntityProperty">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Property" nillable="true" type="tns:EntityProperty" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EntityProperty">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DataType" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetDataSourceInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dataSourceNames" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetDataSourceInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDataSourceInfoResult" type="tns:ArrayOfDataSource" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDataSource">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DataSource" nillable="true" type="tns:DataSource" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DataSource">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Version" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Capability" type="tns:DataSourceCapability" />
+          <s:element minOccurs="0" maxOccurs="1" name="EntityExtent" type="tns:ArrayOfInt" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DataSourceCapability">
+        <s:list>
+          <s:simpleType>
+            <s:restriction base="s:string">
+              <s:enumeration value="CanDrawMaps" />
+              <s:enumeration value="CanFindPlaces" />
+              <s:enumeration value="CanFindNearby" />
+              <s:enumeration value="CanRoute" />
+              <s:enumeration value="CanFindAddress" />
+              <s:enumeration value="HasIcons" />
+              <s:enumeration value="DataServiceQuery" />
+            </s:restriction>
+          </s:simpleType>
+        </s:list>
+      </s:simpleType>
+      <s:element name="GetGreatCircleDistances">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="latLongs" type="tns:ArrayOfLatLong" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLatLong">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LatLong" nillable="true" type="tns:LatLong" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetGreatCircleDistancesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGreatCircleDistancesResult" type="tns:ArrayOfDouble" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDouble">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="double" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetClientToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="specification" type="tns:TokenSpecification" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TokenSpecification">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ClientIPAddress" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TokenValidityDurationMinutes" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetClientTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetClientTokenResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetVersionInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetVersionInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetVersionInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionInfoCustomerInfoHeader">
+    <wsdl:part name="CustomerInfoHeader" element="tns:CustomerInfoHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetVersionInfoUserInfoHeader">
+    <wsdl:part name="UserInfoHeader" element="tns:UserInfoHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetCountryRegionInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCountryRegionInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetCountryRegionInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCountryRegionInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCountryRegionInfoCustomerInfoHeader">
+    <wsdl:part name="CustomerInfoHeader" element="tns:CustomerInfoHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetCountryRegionInfoUserInfoHeader">
+    <wsdl:part name="UserInfoHeader" element="tns:UserInfoHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetEntityTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEntityTypes" />
+  </wsdl:message>
+  <wsdl:message name="GetEntityTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEntityTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEntityTypesCustomerInfoHeader">
+    <wsdl:part name="CustomerInfoHeader" element="tns:CustomerInfoHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetEntityTypesUserInfoHeader">
+    <wsdl:part name="UserInfoHeader" element="tns:UserInfoHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSourceInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDataSourceInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSourceInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDataSourceInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSourceInfoCustomerInfoHeader">
+    <wsdl:part name="CustomerInfoHeader" element="tns:CustomerInfoHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetDataSourceInfoUserInfoHeader">
+    <wsdl:part name="UserInfoHeader" element="tns:UserInfoHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetGreatCircleDistancesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGreatCircleDistances" />
+  </wsdl:message>
+  <wsdl:message name="GetGreatCircleDistancesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGreatCircleDistancesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGreatCircleDistancesCustomerInfoHeader">
+    <wsdl:part name="CustomerInfoHeader" element="tns:CustomerInfoHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetGreatCircleDistancesUserInfoHeader">
+    <wsdl:part name="UserInfoHeader" element="tns:UserInfoHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetClientTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:GetClientToken" />
+  </wsdl:message>
+  <wsdl:message name="GetClientTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:GetClientTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetClientTokenCustomerInfoHeader">
+    <wsdl:part name="CustomerInfoHeader" element="tns:CustomerInfoHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetClientTokenUserInfoHeader">
+    <wsdl:part name="UserInfoHeader" element="tns:UserInfoHeader" />
+  </wsdl:message>
+  <wsdl:portType name="CommonServiceSoap">
+    <wsdl:operation name="GetVersionInfo">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get the MapPoint Web Service version.</documentation>
+      <wsdl:input message="tns:GetVersionInfoSoapIn" />
+      <wsdl:output message="tns:GetVersionInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountryRegionInfo">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Retrieve information about countries or national regions.</documentation>
+      <wsdl:input message="tns:GetCountryRegionInfoSoapIn" />
+      <wsdl:output message="tns:GetCountryRegionInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEntityTypes">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Retrieve the list types and their properties in a DataSource.</documentation>
+      <wsdl:input message="tns:GetEntityTypesSoapIn" />
+      <wsdl:output message="tns:GetEntityTypesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSourceInfo">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Get a general description of data sources.</documentation>
+      <wsdl:input message="tns:GetDataSourceInfoSoapIn" />
+      <wsdl:output message="tns:GetDataSourceInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGreatCircleDistances">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Calculate pair-wise distances </documentation>
+      <wsdl:input message="tns:GetGreatCircleDistancesSoapIn" />
+      <wsdl:output message="tns:GetGreatCircleDistancesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClientToken">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Gets a token for use with VE authentication.</documentation>
+      <wsdl:input message="tns:GetClientTokenSoapIn" />
+      <wsdl:output message="tns:GetClientTokenSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CommonServiceSoap" type="tns:CommonServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetVersionInfo">
+      <soap:operation soapAction="http://s.mappoint.net/mappoint-30/GetVersionInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetVersionInfoCustomerInfoHeader" part="CustomerInfoHeader" use="literal" />
+        <soap:header message="tns:GetVersionInfoUserInfoHeader" part="UserInfoHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountryRegionInfo">
+      <soap:operation soapAction="http://s.mappoint.net/mappoint-30/GetCountryRegionInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetCountryRegionInfoCustomerInfoHeader" part="CustomerInfoHeader" use="literal" />
+        <soap:header message="tns:GetCountryRegionInfoUserInfoHeader" part="UserInfoHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEntityTypes">
+      <soap:operation soapAction="http://s.mappoint.net/mappoint-30/GetEntityTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetEntityTypesCustomerInfoHeader" part="CustomerInfoHeader" use="literal" />
+        <soap:header message="tns:GetEntityTypesUserInfoHeader" part="UserInfoHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataSourceInfo">
+      <soap:operation soapAction="http://s.mappoint.net/mappoint-30/GetDataSourceInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetDataSourceInfoCustomerInfoHeader" part="CustomerInfoHeader" use="literal" />
+        <soap:header message="tns:GetDataSourceInfoUserInfoHeader" part="UserInfoHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGreatCircleDistances">
+      <soap:operation soapAction="http://s.mappoint.net/mappoint-30/GetGreatCircleDistances" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetGreatCircleDistancesCustomerInfoHeader" part="CustomerInfoHeader" use="literal" />
+        <soap:header message="tns:GetGreatCircleDistancesUserInfoHeader" part="UserInfoHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientToken">
+      <soap:operation soapAction="http://s.mappoint.net/mappoint-30/GetClientToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetClientTokenCustomerInfoHeader" part="CustomerInfoHeader" use="literal" />
+        <soap:header message="tns:GetClientTokenUserInfoHeader" part="UserInfoHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CommonService">
+    <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">The common service contains classes, methods, and properties that are common to the find, route, and render services.  The common service also provides basic utility functions that can be used in the Microsoft MapPoint Web Service applications.&lt;/p&gt;&lt;p class="intro"&gt;Read the &lt;a href="default.htm"&gt;formal description&lt;/a&gt; of the MapPoint Web Service for more information.</documentation>
+    <wsdl:port name="CommonServiceSoap" binding="tns:CommonServiceSoap">
+      <soap:address location="http://common.virtualearth.net/find-30/common.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

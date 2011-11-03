@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://dev.virtualearth.net/webservices/v1/imagery/contracts" elementFormDefault="qualified" targetNamespace="http://dev.virtualearth.net/webservices/v1/imagery/contracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://dev.virtualearth.net/webservices/v1/metadata/imageryservice/ImageryService.xsd" namespace="http://dev.virtualearth.net/webservices/v1/imagery" />
+  <xs:element name="GetImageryMetadata">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://dev.virtualearth.net/webservices/v1/imagery" minOccurs="0" name="request" nillable="true" type="q1:ImageryMetadataRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetImageryMetadataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://dev.virtualearth.net/webservices/v1/imagery" minOccurs="0" name="GetImageryMetadataResult" nillable="true" type="q2:ImageryMetadataResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMapUri">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://dev.virtualearth.net/webservices/v1/imagery" minOccurs="0" name="request" nillable="true" type="q3:MapUriRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMapUriResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://dev.virtualearth.net/webservices/v1/imagery" minOccurs="0" name="GetMapUriResult" nillable="true" type="q4:MapUriResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

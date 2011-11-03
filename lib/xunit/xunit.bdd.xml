@@ -1,0 +1,356 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>xunit.bdd</name>
+    </assembly>
+    <members>
+        <member name="T:Xunit.Extensions.ObservationAttribute">
+            <summary>
+            Identifies a method as an observation which asserts the specification
+            </summary>
+        </member>
+        <member name="T:Xunit.Extensions.BooleanAssertionExtensions">
+            <summary>
+            Extensions which provide assertions to classes derived from <see cref="T:System.Boolean"/>.
+            </summary>
+        </member>
+        <member name="M:Xunit.Extensions.BooleanAssertionExtensions.ShouldBeFalse(System.Boolean)">
+            <summary>
+            Verifies that the condition is false.
+            </summary>
+            <param name="condition">The condition to be tested</param>
+            <exception cref="!:FalseException">Thrown if the condition is not false</exception>
+        </member>
+        <member name="M:Xunit.Extensions.BooleanAssertionExtensions.ShouldBeFalse(System.Boolean,System.String)">
+            <summary>
+            Verifies that the condition is false.
+            </summary>
+            <param name="condition">The condition to be tested</param>
+            <param name="userMessage">The message to show when the condition is not false</param>
+            <exception cref="!:FalseException">Thrown if the condition is not false</exception>
+        </member>
+        <member name="M:Xunit.Extensions.BooleanAssertionExtensions.ShouldBeTrue(System.Boolean)">
+            <summary>
+            Verifies that an expression is true.
+            </summary>
+            <param name="condition">The condition to be inspected</param>
+            <exception cref="!:TrueException">Thrown when the condition is false</exception>
+        </member>
+        <member name="M:Xunit.Extensions.BooleanAssertionExtensions.ShouldBeTrue(System.Boolean,System.String)">
+            <summary>
+            Verifies that an expression is true.
+            </summary>
+            <param name="condition">The condition to be inspected</param>
+            <param name="userMessage">The message to be shown when the condition is false</param>
+            <exception cref="!:TrueException">Thrown when the condition is false</exception>
+        </member>
+        <member name="T:Xunit.Extensions.DateTimeAssertionExtensions">
+            <summary>
+            Extensions which provide assertions to classes derived from <see cref="T:System.DateTime"/>.
+            </summary>
+        </member>
+        <member name="M:Xunit.Extensions.DateTimeAssertionExtensions.ShouldBeWithinOneSecondFromNow(System.DateTime)">
+            <summary>
+            Verifies that the specified DateTime is within one second from now.
+            </summary>
+        </member>
+        <member name="M:Xunit.Extensions.DateTimeAssertionExtensions.ShouldBeWithinOneSecondFromNow(System.Nullable{System.DateTime})">
+            <summary>
+            Verifies that the specified DateTime is within one second from now.
+            </summary>
+        </member>
+        <member name="M:Xunit.Extensions.DateTimeAssertionExtensions.ShouldBeWithinOneSecondFrom(System.DateTime,System.DateTime)">
+            <summary>
+            Verifies that the actual DateTime is within one second from the expected DateTime.
+            </summary>
+        </member>
+        <member name="M:Xunit.Extensions.DateTimeAssertionExtensions.ShouldBeWithinOneSecondFrom(System.Nullable{System.DateTime},System.DateTime)">
+            <summary>
+            Verifies that the actual DateTime is within one second from the expected DateTime.
+            </summary>
+        </member>
+        <member name="T:Xunit.Extensions.StringAssertionExtensions">
+            <summary>
+            Extensions which provide assertions to classes derived from <see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="M:Xunit.Extensions.StringAssertionExtensions.ShouldContain(System.String,System.String)">
+            <summary>
+            Verifies that a string contains a given sub-string, using the current culture.
+            </summary>
+            <param name="actualString">The string to be inspected</param>
+            <param name="expectedSubString">The sub-string expected to be in the string</param>
+            <exception cref="!:ContainsException">Thrown when the sub-string is not present inside the string</exception>
+        </member>
+        <member name="M:Xunit.Extensions.StringAssertionExtensions.ShouldContain(System.String,System.String,System.StringComparison)">
+            <summary>
+            Verifies that a string contains a given sub-string, using the given comparison type.
+            </summary>
+            <param name="actualString">The string to be inspected</param>
+            <param name="expectedSubString">The sub-string expected to be in the string</param>
+            <param name="comparisonType">The type of string comparison to perform</param>
+            <exception cref="!:ContainsException">Thrown when the sub-string is not present inside the string</exception>
+        </member>
+        <member name="M:Xunit.Extensions.StringAssertionExtensions.ShouldNotContain(System.String,System.String)">
+            <summary>
+            Verifies that a string does not contain a given sub-string, using the current culture.
+            </summary>
+            <param name="actualString">The string to be inspected</param>
+            <param name="expectedSubString">The sub-string which is expected not to be in the string</param>
+            <exception cref="!:DoesNotContainException">Thrown when the sub-string is present inside the string</exception>
+        </member>
+        <member name="M:Xunit.Extensions.StringAssertionExtensions.ShouldNotContain(System.String,System.String,System.StringComparison)">
+            <summary>
+            Verifies that a string does not contain a given sub-string, using the current culture.
+            </summary>
+            <param name="actualString">The string to be inspected</param>
+            <param name="expectedSubString">The sub-string which is expected not to be in the string</param>
+            <param name="comparisonType">The type of string comparison to perform</param>
+            <exception cref="!:DoesNotContainException">Thrown when the sub-string is present inside the given string</exception>
+        </member>
+        <member name="T:Xunit.Extensions.ISpecification">
+            <summary>
+            The specification interface
+            </summary>
+        </member>
+        <member name="M:Xunit.Extensions.ISpecification.Observe">
+            <summary>
+            Performs the action to observe the outcome of to validate the specification.
+            </summary>
+        </member>
+        <member name="T:Xunit.Extensions.CollectionAssertExtensions">
+            <summary>
+            Extensions which provide assertions to classes derived from <see cref="T:System.Collections.IEnumerable"/> and <see cref="T:System.Collections.Generic.IEnumerable`1"/>.
+            </summary>
+        </member>
+        <member name="M:Xunit.Extensions.CollectionAssertExtensions.ShouldBeEmpty(System.Collections.IEnumerable)">
+            <summary>
+            Verifies that a collection is empty.
+            </summary>
+            <param name="collection">The collection to be inspected</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when the collection is null</exception>
+            <exception cref="!:EmptyException">Thrown when the collection is not empty</exception>
+        </member>
+        <member name="M:Xunit.Extensions.CollectionAssertExtensions.ShouldContain``1(System.Collections.Generic.IEnumerable{``0},``0)">
+            <summary>
+            Verifies that a collection contains a given object.
+            </summary>
+            <typeparam name="T">The type of the object to be verified</typeparam>
+            <param name="collection">The collection to be inspected</param>
+            <param name="expected">The object expected to be in the collection</param>
+            <exception cref="!:ContainsException">Thrown when the object is not present in the collection</exception>
+        </member>
+        <member name="M:Xunit.Extensions.CollectionAssertExtensions.ShouldContain``1(System.Collections.Generic.IEnumerable{``0},``0,System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+            Verifies that a collection contains a given object, using a comparer.
+            </summary>
+            <typeparam name="T">The type of the object to be verified</typeparam>
+            <param name="collection">The collection to be inspected</param>
+            <param name="expected">The object expected to be in the collection</param>
+            <param name="comparer">The comparer used to equate objects in the collection with the expected object</param>
+            <exception cref="!:ContainsException">Thrown when the object is not present in the collection</exception>
+        </member>
+        <member name="M:Xunit.Extensions.CollectionAssertExtensions.ShouldNotBeEmpty(System.Collections.IEnumerable)">
+            <summary>
+            Verifies that a collection is not empty.
+            </summary>
+            <param name="collection">The collection to be inspected</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when a null collection is passed</exception>
+            <exception cref="!:NotEmptyException">Thrown when the collection is empty</exception>
+        </member>
+        <member name="M:Xunit.Extensions.CollectionAssertExtensions.ShouldNotContain``1(System.Collections.Generic.IEnumerable{``0},``0)">
+            <summary>
+            Verifies that a collection does not contain a given object.
+            </summary>
+            <typeparam name="T">The type of the object to be compared</typeparam>
+            <param name="expected">The object that is expected not to be in the collection</param>
+            <param name="collection">The collection to be inspected</param>
+            <exception cref="!:DoesNotContainException">Thrown when the object is present inside the container</exception>
+        </member>
+        <member name="M:Xunit.Extensions.CollectionAssertExtensions.ShouldNotContain``1(System.Collections.Generic.IEnumerable{``0},``0,System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+            Verifies that a collection does not contain a given object, using a comparer.
+            </summary>
+            <typeparam name="T">The type of the object to be compared</typeparam>
+            <param name="expected">The object that is expected not to be in the collection</param>
+            <param name="collection">The collection to be inspected</param>
+            <param name="comparer">The comparer used to equate objects in the collection with the expected object</param>
+            <exception cref="!:DoesNotContainException">Thrown when the object is present inside the container</exception>
+        </member>
+        <member name="T:Xunit.Extensions.ObjectAssertExtensions">
+            <summary>
+            Extensions which provide assertions to classes derived from <see cref="T:System.Object"/>.
+            </summary>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldBeInRange``1(``0,``0,``0)">
+            <summary>
+            Verifies that a value is within a given range.
+            </summary>
+            <typeparam name="T">The type of the value to be compared</typeparam>
+            <param name="actual">The actual value to be evaluated</param>
+            <param name="low">The (inclusive) low value of the range</param>
+            <param name="high">The (inclusive) high value of the range</param>
+            <exception cref="!:InRangeException">Thrown when the value is not in the given range</exception>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldBeInRange``1(``0,``0,``0,System.Collections.Generic.IComparer{``0})">
+            <summary>
+            Verifies that a value is within a given range, using a comparer.
+            </summary>
+            <typeparam name="T">The type of the value to be compared</typeparam>
+            <param name="actual">The actual value to be evaluated</param>
+            <param name="low">The (inclusive) low value of the range</param>
+            <param name="high">The (inclusive) high value of the range</param>
+            <param name="comparer">The comparer used to evaluate the value's range</param>
+            <exception cref="!:InRangeException">Thrown when the value is not in the given range</exception>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldBeNull(System.Object)">
+            <summary>
+            Verifies that an object reference is null.
+            </summary>
+            <param name="object">The object to be inspected</param>
+            <exception cref="!:NullException">Thrown when the object reference is not null</exception>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldBeSameAs(System.Object,System.Object)">
+            <summary>
+            Verifies that two objects are the same instance.
+            </summary>
+            <param name="actual">The actual object instance</param>
+            <param name="expected">The expected object instance</param>
+            <exception cref="!:SameException">Thrown when the objects are not the same instance</exception>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldBeType``1(System.Object)">
+            <summary>
+            Verifies that an object is exactly the given type (and not a derived type).
+            </summary>
+            <typeparam name="T">The type the object should be</typeparam>
+            <param name="object">The object to be evaluated</param>
+            <returns>The object, casted to type T when successful</returns>
+            <exception cref="!:IsTypeException">Thrown when the object is not the given type</exception>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldBeType(System.Object,System.Type)">
+            <summary>
+            Verifies that an object is exactly the given type (and not a derived type).
+            </summary>
+            <param name="object">The object to be evaluated</param>
+            <param name="expectedType">The type the object should be</param>
+            <exception cref="!:IsTypeException">Thrown when the object is not the given type</exception>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldBeAssignableFrom``1(System.Object)">
+            <summary>
+            Verifies that an object is the given type or a derived type.
+            </summary>
+            <typeparam name="T">The type the object should be</typeparam>
+            <param name="object">The object to be evaluated</param>
+            <returns>The object, casted to type T when successful</returns>
+            <exception cref="T:Xunit.Sdk.IsAssignableFromException">Thrown when the object is not assignable from the given type</exception>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldBeAssignableFrom(System.Object,System.Type)">
+            <summary>
+            Verifies that an object is the given type or a derived type.
+            </summary>
+            <param name="object">The object to be evaluated</param>
+            <param name="expectedType">The type the object should be</param>
+            <exception cref="T:Xunit.Sdk.IsAssignableFromException">Thrown when the object is not assignable from the given type</exception>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldEqual``1(``0,``0)">
+            <summary>
+            Verifies that two objects are equal, using a default comparer.
+            </summary>
+            <typeparam name="T">The type of the objects to be compared</typeparam>
+            <param name="actual">The value to be compared against</param>
+            <param name="expected">The expected value</param>
+            <exception cref="!:EqualException">Thrown when the objects are not equal</exception>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldEqual``1(``0,``0,System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+            Verifies that two objects are equal, using a custom comparer.
+            </summary>
+            <typeparam name="T">The type of the objects to be compared</typeparam>
+            <param name="actual">The value to be compared against</param>
+            <param name="expected">The expected value</param>
+            <param name="comparer">The comparer used to compare the two objects</param>
+            <exception cref="!:EqualException">Thrown when the objects are not equal</exception>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldNotBeInRange``1(``0,``0,``0)">
+            <summary>
+            Verifies that a value is not within a given range, using the default comparer.
+            </summary>
+            <typeparam name="T">The type of the value to be compared</typeparam>
+            <param name="actual">The actual value to be evaluated</param>
+            <param name="low">The (inclusive) low value of the range</param>
+            <param name="high">The (inclusive) high value of the range</param>
+            <exception cref="!:NotInRangeException">Thrown when the value is in the given range</exception>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldNotBeInRange``1(``0,``0,``0,System.Collections.Generic.IComparer{``0})">
+            <summary>
+            Verifies that a value is not within a given range, using a comparer.
+            </summary>
+            <typeparam name="T">The type of the value to be compared</typeparam>
+            <param name="actual">The actual value to be evaluated</param>
+            <param name="low">The (inclusive) low value of the range</param>
+            <param name="high">The (inclusive) high value of the range</param>
+            <param name="comparer">The comparer used to evaluate the value's range</param>
+            <exception cref="!:NotInRangeException">Thrown when the value is in the given range</exception>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldNotBeNull(System.Object)">
+            <summary>
+            Verifies that an object reference is not null.
+            </summary>
+            <param name="object">The object to be validated</param>
+            <exception cref="!:NotNullException">Thrown when the object is not null</exception>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldNotBeSameAs(System.Object,System.Object)">
+            <summary>
+            Verifies that two objects are not the same instance.
+            </summary>
+            <param name="actual">The actual object instance</param>
+            <param name="expected">The expected object instance</param>
+            <exception cref="!:NotSameException">Thrown when the objects are the same instance</exception>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldNotBeType``1(System.Object)">
+            <summary>
+            Verifies that an object is not exactly the given type.
+            </summary>
+            <typeparam name="T">The type the object should not be</typeparam>
+            <param name="object">The object to be evaluated</param>
+            <exception cref="!:IsTypeException">Thrown when the object is the given type</exception>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldNotBeType(System.Object,System.Type)">
+            <summary>
+            Verifies that an object is not exactly the given type.
+            </summary>
+            <param name="object">The object to be evaluated</param>
+            <param name="expectedType">The type the object should not be</param>
+            <exception cref="!:IsTypeException">Thrown when the object is the given type</exception>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldNotEqual``1(``0,``0)">
+            <summary>
+            Verifies that two objects are not equal, using a default comparer.
+            </summary>
+            <typeparam name="T">The type of the objects to be compared</typeparam>
+            <param name="actual">The actual object</param>
+            <param name="expected">The expected object</param>
+            <exception cref="!:NotEqualException">Thrown when the objects are equal</exception>
+        </member>
+        <member name="M:Xunit.Extensions.ObjectAssertExtensions.ShouldNotEqual``1(``0,``0,System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+            Verifies that two objects are not equal, using a custom comparer.
+            </summary>
+            <typeparam name="T">The type of the objects to be compared</typeparam>
+            <param name="actual">The actual object</param>
+            <param name="expected">The expected object</param>
+            <param name="comparer">The comparer used to examine the objects</param>
+            <exception cref="!:NotEqualException">Thrown when the objects are equal</exception>
+        </member>
+        <member name="T:Xunit.Extensions.Specification">
+            <summary>
+            The base specification class
+            </summary>
+        </member>
+        <member name="M:Xunit.Extensions.Specification.Observe">
+            <summary>
+            Performs the action to observe the outcome of to validate the specification.
+            </summary>
+        </member>
+    </members>
+</doc>

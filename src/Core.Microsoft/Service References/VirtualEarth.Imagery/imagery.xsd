@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://dev.virtualearth.net/webservices/v1/imagery" elementFormDefault="qualified" targetNamespace="http://dev.virtualearth.net/webservices/v1/imagery" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://dev.virtualearth.net/webservices/v1/metadata/imageryservice/ImageryService3.xsd" namespace="http://dev.virtualearth.net/webservices/v1/common" />
+  <xs:import schemaLocation="http://dev.virtualearth.net/webservices/v1/metadata/imageryservice/ImageryService1.xsd" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="ImageryMetadataRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://dev.virtualearth.net/webservices/v1/common" base="q1:RequestBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Options" nillable="true" type="tns:ImageryMetadataOptions" />
+          <xs:element minOccurs="0" name="Style" type="q1:MapStyle" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ImageryMetadataRequest" nillable="true" type="tns:ImageryMetadataRequest" />
+  <xs:complexType name="ImageryMetadataOptions">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://dev.virtualearth.net/webservices/v1/common" minOccurs="0" name="Heading" nillable="true" type="q2:Heading" />
+      <xs:element xmlns:q3="http://dev.virtualearth.net/webservices/v1/common" minOccurs="0" name="Location" nillable="true" type="q3:Location" />
+      <xs:element minOccurs="0" name="ReturnImageryProviders" type="xs:boolean" />
+      <xs:element xmlns:q4="http://dev.virtualearth.net/webservices/v1/common" minOccurs="0" name="UriScheme" type="q4:UriScheme" />
+      <xs:element minOccurs="0" name="ZoomLevel" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ImageryMetadataOptions" nillable="true" type="tns:ImageryMetadataOptions" />
+  <xs:complexType name="ImageryMetadataResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q5="http://dev.virtualearth.net/webservices/v1/common" base="q5:ResponseBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Results" nillable="true" type="tns:ArrayOfImageryMetadataResult" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ImageryMetadataResponse" nillable="true" type="tns:ImageryMetadataResponse" />
+  <xs:complexType name="ArrayOfImageryMetadataResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ImageryMetadataResult" nillable="true" type="tns:ImageryMetadataResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfImageryMetadataResult" nillable="true" type="tns:ArrayOfImageryMetadataResult" />
+  <xs:complexType name="ImageryMetadataResult">
+    <xs:sequence>
+      <xs:element xmlns:q6="http://dev.virtualearth.net/webservices/v1/common" minOccurs="0" name="ImageSize" nillable="true" type="q6:SizeOfint" />
+      <xs:element minOccurs="0" name="ImageUri" nillable="true" type="xs:string" />
+      <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ImageUriSubdomains" nillable="true" type="q7:ArrayOfstring" />
+      <xs:element minOccurs="0" name="ImageryProviders" nillable="true" type="tns:ArrayOfImageryProvider" />
+      <xs:element xmlns:q8="http://dev.virtualearth.net/webservices/v1/common" minOccurs="0" name="Vintage" nillable="true" type="q8:RangeOfdateTime" />
+      <xs:element xmlns:q9="http://dev.virtualearth.net/webservices/v1/common" minOccurs="0" name="ZoomRange" nillable="true" type="q9:RangeOfint" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ImageryMetadataResult" nillable="true" type="tns:ImageryMetadataResult" />
+  <xs:complexType name="ArrayOfImageryProvider">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ImageryProvider" nillable="true" type="tns:ImageryProvider" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfImageryProvider" nillable="true" type="tns:ArrayOfImageryProvider" />
+  <xs:complexType name="ImageryProvider">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Attribution" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CoverageAreas" nillable="true" type="tns:ArrayOfCoverageArea" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ImageryProvider" nillable="true" type="tns:ImageryProvider" />
+  <xs:complexType name="ArrayOfCoverageArea">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CoverageArea" nillable="true" type="tns:CoverageArea" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCoverageArea" nillable="true" type="tns:ArrayOfCoverageArea" />
+  <xs:complexType name="CoverageArea">
+    <xs:sequence>
+      <xs:element xmlns:q10="http://dev.virtualearth.net/webservices/v1/common" minOccurs="0" name="BoundingRectangle" nillable="true" type="q10:Rectangle" />
+      <xs:element xmlns:q11="http://dev.virtualearth.net/webservices/v1/common" minOccurs="0" name="ZoomRange" nillable="true" type="q11:RangeOfint" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CoverageArea" nillable="true" type="tns:CoverageArea" />
+  <xs:complexType name="ImageryMetadataBirdseyeResult">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ImageryMetadataResult">
+        <xs:sequence>
+          <xs:element xmlns:q12="http://dev.virtualearth.net/webservices/v1/common" minOccurs="0" name="Heading" nillable="true" type="q12:Heading" />
+          <xs:element minOccurs="0" name="TilesX" type="xs:int" />
+          <xs:element minOccurs="0" name="TilesY" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ImageryMetadataBirdseyeResult" nillable="true" type="tns:ImageryMetadataBirdseyeResult" />
+  <xs:complexType name="MapUriRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q13="http://dev.virtualearth.net/webservices/v1/common" base="q13:RequestBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Center" nillable="true" type="q13:Location" />
+          <xs:element minOccurs="0" name="MajorRoutesDestination" nillable="true" type="q13:Location" />
+          <xs:element minOccurs="0" name="Options" nillable="true" type="tns:MapUriOptions" />
+          <xs:element minOccurs="0" name="Pushpins" nillable="true" type="q13:ArrayOfPushpin" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MapUriRequest" nillable="true" type="tns:MapUriRequest" />
+  <xs:complexType name="MapUriOptions">
+    <xs:sequence>
+      <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DisplayLayers" nillable="true" type="q14:ArrayOfstring" />
+      <xs:element xmlns:q15="http://dev.virtualearth.net/webservices/v1/common" minOccurs="0" name="ImageSize" nillable="true" type="q15:SizeOfint" />
+      <xs:element xmlns:q16="http://dev.virtualearth.net/webservices/v1/common" minOccurs="0" name="ImageType" type="q16:ImageType" />
+      <xs:element minOccurs="0" name="PreventIconCollision" type="xs:boolean" />
+      <xs:element xmlns:q17="http://dev.virtualearth.net/webservices/v1/common" minOccurs="0" name="Style" type="q17:MapStyle" />
+      <xs:element xmlns:q18="http://dev.virtualearth.net/webservices/v1/common" minOccurs="0" name="UriScheme" type="q18:UriScheme" />
+      <xs:element minOccurs="0" name="ZoomLevel" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MapUriOptions" nillable="true" type="tns:MapUriOptions" />
+  <xs:complexType name="MapUriResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q19="http://dev.virtualearth.net/webservices/v1/common" base="q19:ResponseBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Uri" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="MapUriResponse" nillable="true" type="tns:MapUriResponse" />
+</xs:schema>

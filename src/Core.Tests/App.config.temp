@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+    <add key="googleAccessKey" value="your-access-key-here" />
+    <add key="yahooAppId" value="your-app-id-here" />
+
+    <add key="virtualEarthUsername" value="your-username-here" />
+    <add key="virtualEarthPassword" value="your-password-here" />
+
+    <add key="bingMapsKey" value="your-key-here" />
+  </appSettings>
+</configuration>

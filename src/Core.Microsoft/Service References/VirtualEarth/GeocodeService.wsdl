@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:i0="http://dev.virtualearth.net/webservices/v1/geocode/contracts" xmlns:tns="http://dev.virtualearth.net/webservices/v1/geocode" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" name="GeocodeService" targetNamespace="http://dev.virtualearth.net/webservices/v1/geocode" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://dev.virtualearth.net/webservices/v1/geocode/contracts" location="http://dev.virtualearth.net/webservices/v1/metadata/geocodeservice/GeocodeService1.wsdl" />
+  <wsdl:types />
+  <wsdl:binding name="BasicHttpBinding_IGeocodeService" type="i0:IGeocodeService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Geocode">
+      <soap:operation soapAction="http://dev.virtualearth.net/webservices/v1/geocode/contracts/IGeocodeService/Geocode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ResponseSummaryFault">
+        <soap:fault use="literal" name="ResponseSummaryFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ReverseGeocode">
+      <soap:operation soapAction="http://dev.virtualearth.net/webservices/v1/geocode/contracts/IGeocodeService/ReverseGeocode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ResponseSummaryFault">
+        <soap:fault use="literal" name="ResponseSummaryFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GeocodeService">
+    <wsdl:port name="BasicHttpBinding_IGeocodeService" binding="tns:BasicHttpBinding_IGeocodeService">
+      <soap:address location="http://dev.virtualearth.net/webservices/v1/geocodeservice/GeocodeService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
