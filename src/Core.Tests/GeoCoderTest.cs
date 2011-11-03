@@ -9,7 +9,7 @@ namespace GeoCoding.Tests
 {
 	public abstract class GeoCoderTest
 	{
-		private readonly IGeoCoder geoCoder;
+		readonly IGeoCoder geoCoder;
 
 		public GeoCoderTest()
 		{
@@ -48,18 +48,6 @@ namespace GeoCoding.Tests
 			Assert.True(addr.FormattedAddress.Contains("K1M"));
 			Assert.True(addr.FormattedAddress.Contains("CA") || addr.FormattedAddress.Contains("Canada"));
 		}
-
-		//[Theory]
-		//[InlineData("United States", AddressAccuracy.CountryLevel)]
-		//[InlineData("Illinois, US", AddressAccuracy.StateLevel)]
-		//[InlineData("New York, New York", AddressAccuracy.CityLevel)]
-		//[InlineData("90210, US", AddressAccuracy.PostalCodeLevel)]
-		//[InlineData("1600 pennsylvania ave washington dc", AddressAccuracy.AddressLevel)]
-		//public void CanMatchAccuracyLevelsOfAddress(string address, AddressAccuracy accuracy)
-		//{
-		//    Address[] addresses = geoCoder.GeoCode(address);
-		//    Assert.Equal(accuracy, addresses[0].Accuracy);
-		//}
 
 		private void AssertWhiteHouseAddress(Address address)
 		{

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -21,7 +20,7 @@ namespace GeoCoding.Google
 			get { return (UseSsl ? "https:" : "http:") + "//maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false"; }
 		}
 
-		public IEnumerable<Address> GeoCode(string address)
+		public IEnumerable<GoogleAddress> GeoCode(string address)
 		{
 			if (String.IsNullOrEmpty(address))
 				throw new ArgumentNullException("address");
@@ -46,10 +45,15 @@ namespace GeoCoding.Google
 			}
 		}
 
-		public IEnumerable<Address> GeoCode(string street, string city, string state, string postalCode, string country)
+		IEnumerable<Address> IGeoCoder.GeoCode(string address)
+		{
+			return GeoCode(address).Cast<Address>();
+		}
+
+		IEnumerable<Address> IGeoCoder.GeoCode(string street, string city, string state, string postalCode, string country)
 		{
 			string address = String.Format("{0} {1}, {2} {3}, {4}", street, city, state, postalCode, country);
-			return GeoCode(address);
+			return GeoCode(address).Cast<Address>();
 		}
 
 		private HttpWebRequest BuildWebRequest(string address)
@@ -60,7 +64,7 @@ namespace GeoCoding.Google
 			return req;
 		}
 
-		private IEnumerable<Address> ProcessWebResponse(WebResponse response)
+		private IEnumerable<GoogleAddress> ProcessWebResponse(WebResponse response)
 		{
 			XPathDocument xmlDoc = LoadXmlResponse(response);
 			XPathNavigator nav = xmlDoc.CreateNavigator();
@@ -73,7 +77,7 @@ namespace GeoCoding.Google
 			if (status == GoogleStatus.Ok)
 				return ParseAddresses(nav.Select("/GeocodeResponse/result"));
 
-			return new Address[0];
+			return new GoogleAddress[0];
 		}
 
 		private XPathDocument LoadXmlResponse(WebResponse response)
@@ -85,7 +89,7 @@ namespace GeoCoding.Google
 			}
 		}
 
-		private IEnumerable<Address> ParseAddresses(XPathNodeIterator nodes)
+		private IEnumerable<GoogleAddress> ParseAddresses(XPathNodeIterator nodes)
 		{
 			while (nodes.MoveNext())
 			{
