@@ -4,7 +4,7 @@ namespace GeoCoding.Google
 {
 	public class GoogleGeoCodingException : Exception
 	{
-		const string defaultMessage = "There was an error processing the geocoding request. See Status for more information.";
+		const string defaultMessage = "There was an error processing the geocoding request. See Status or InnerException for more information.";
 
 		public GoogleStatus Status { get; private set; }
 
