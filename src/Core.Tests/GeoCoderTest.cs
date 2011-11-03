@@ -55,8 +55,12 @@ namespace GeoCoding.Tests
 			Assert.True(address.FormattedAddress.Contains("Washington, DC"));
 			Assert.True(address.FormattedAddress.Contains("US") || address.FormattedAddress.Contains("United States"));
 
-			Assert.Equal(38.8976777, address.Coordinates.Latitude);
-			Assert.Equal(-77.0365170, address.Coordinates.Longitude);
+			//just hoping that each geocoder implementation gets it somwhere near the vicinity
+			double lat = Math.Round(address.Coordinates.Latitude, 2);
+			Assert.Equal(38.90, lat);
+
+			double lng = Math.Round(address.Coordinates.Longitude, 2);
+			Assert.Equal(-77.04, lng);
 		}
 	}
 }

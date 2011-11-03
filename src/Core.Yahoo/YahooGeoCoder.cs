@@ -1,118 +1,122 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Web;
-using System.Xml;
 using System.Xml.XPath;
 
 namespace GeoCoding.Yahoo
 {
 	/// <remarks>
-	/// Current API this is using: http://developer.yahoo.com/maps/rest/V1/geocode.html
-	/// Need to migrate to http://developer.yahoo.com/geo/placefinder/
+	/// http://developer.yahoo.com/geo/placefinder/
 	/// </remarks>
-    public class YahooGeoCoder : IGeoCoder
-    {
-        public const string ServiceUrl = "http://local.yahooapis.com/MapsService/V1/geocode?location={0}&appid={1}";
-        public const string ServiceUrlNormal = "http://local.yahooapis.com/MapsService/V1/geocode?street={0}&city={1}&state={2}&zip={3}&appid={4}";
+	public class YahooGeoCoder : IGeoCoder
+	{
+		public const string ServiceUrl = "http://where.yahooapis.com/geocode?q={0}&appid={1}";
+		public const string ServiceUrlNormal = "http://where.yahooapis.com/geocode?street={0}&city={1}&state={2}&postal={3}&country={4}&appid={5}";
 
-        private readonly string appId;
-        private XmlNamespaceManager namespaceManager;
+		readonly string appId;
 
-        public string AppId
-        {
-            get { return appId; }
-        }
+		public string AppId
+		{
+			get { return appId; }
+		}
 
-        public YahooGeoCoder(string appId)
-        {
-            if (String.IsNullOrEmpty(appId))
-                throw new ArgumentNullException("appId");
+		public YahooGeoCoder(string appId)
+		{
+			if (String.IsNullOrEmpty(appId))
+				throw new ArgumentNullException("appId");
 
-            this.appId = appId;
-        }
+			this.appId = appId;
+		}
 
-		private IEnumerable<Address> GeoCode(HttpWebRequest request)
+		public IEnumerable<YahooAddress> GeoCode(string address)
+		{
+			if (String.IsNullOrEmpty(address))
+				throw new ArgumentNullException("address");
+
+			try
+			{
+				HttpWebRequest request = BuildWebRequest(address);
+				return GeoCode(request);
+			}
+			catch (YahooGeoCodingException)
+			{
+				//let these pass through
+				throw;
+			}
+			catch (Exception ex)
+			{
+				//wrap in yahoo exception
+				throw new YahooGeoCodingException(ex);
+			}
+		}
+
+		public IEnumerable<YahooAddress> GeoCode(string street, string city, string state, string postalCode, string country)
 		{
 			try
 			{
-				using (WebResponse response = request.GetResponse())
-				{
-					return ProcessWebResponse(response);
-				}
+				HttpWebRequest request = BuildWebRequest(street, city, state, postalCode, country);
+				return GeoCode(request);
 			}
-			catch (WebException ex)
+			catch (YahooGeoCodingException)
 			{
-				if (!HandleWebException(ex))
-					throw;
-				return new Address[0];
+				//let these pass through
+				throw;
+			}
+			catch (Exception ex)
+			{
+				//wrap in yahoo exception
+				throw new YahooGeoCodingException(ex);
 			}
 		}
 
-		public IEnumerable<Address> GeoCode(string address)
+		IEnumerable<Address> IGeoCoder.GeoCode(string address)
 		{
-			if (String.IsNullOrEmpty(address)) throw new ArgumentNullException("address");
-
-			HttpWebRequest request = BuildWebRequest(address);
-			return GeoCode(request);
+			return GeoCode(address).Cast<Address>();
 		}
 
-		public IEnumerable<Address> GeoCode(string street, string city, string state, string postalCode, string country)
+		IEnumerable<Address> IGeoCoder.GeoCode(string street, string city, string state, string postalCode, string country)
 		{
-			//ignoring the country parameter since yahoo doesn't accept it
-			HttpWebRequest request = BuildWebRequest(street, city, state, postalCode);
-			return GeoCode(request);
+			return GeoCode(street, city, state, postalCode, country).Cast<Address>();
 		}
 
-        private AddressAccuracy MapAccuracy(string precision)
-        {
-            switch (precision)
-            {
-                case "address": return AddressAccuracy.AddressLevel;
-                case "street": return AddressAccuracy.StreetLevel;
-                case "zip+4":
-                case "zip+2":
-                case "zip": return AddressAccuracy.PostalCodeLevel;
-                case "city": return AddressAccuracy.CityLevel;
-                case "state": return AddressAccuracy.StateLevel;
-                case "country": return AddressAccuracy.CountryLevel;
-                default: return AddressAccuracy.Unknown;
-            }
-        }
-
-        private HttpWebRequest BuildWebRequest(string address)
-        {
-            string url = String.Format(ServiceUrl, HttpUtility.UrlEncode(address), appId);
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-            req.Method = "GET";
-            return req;
-        }
-
-        private HttpWebRequest BuildWebRequest(string street, string city, string state, string postalCode)
-        {
-            string url = String.Format(ServiceUrlNormal, HttpUtility.UrlEncode(street), HttpUtility.UrlEncode(city), HttpUtility.UrlEncode(state), HttpUtility.UrlEncode(postalCode), appId);
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-            req.Method = "GET";
-            return req;
-        }
-
-        private bool HandleWebException(WebException ex)
-        {
-            //yahoo returns a HTTP 400 Bad Request response when it gets an address it can't find
-            if (((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.BadRequest)
-                return true;
-            return false;
-        }
-
-		#region XML Parsing
-
-		private XmlNamespaceManager CreateXmlNamespaceManager(XPathNavigator nav)
+		private HttpWebRequest BuildWebRequest(string address)
 		{
-			XmlNamespaceManager nsManager = new XmlNamespaceManager(nav.NameTable);
-			nsManager.AddNamespace("y", "urn:yahoo:maps");
-			return nsManager;
+			string url = String.Format(ServiceUrl, HttpUtility.UrlEncode(address), appId);
+			HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+			req.Method = "GET";
+			return req;
+		}
+
+		private HttpWebRequest BuildWebRequest(string street, string city, string state, string postalCode, string country)
+		{
+			string url = String.Format(ServiceUrlNormal, HttpUtility.UrlEncode(street), HttpUtility.UrlEncode(city), HttpUtility.UrlEncode(state), HttpUtility.UrlEncode(postalCode), HttpUtility.UrlEncode(country), appId);
+			HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+			req.Method = "GET";
+			return req;
+		}
+
+		private IEnumerable<YahooAddress> GeoCode(HttpWebRequest request)
+		{
+			using (WebResponse response = request.GetResponse())
+			{
+				return ProcessWebResponse(response);
+			}
+		}
+
+		private IEnumerable<YahooAddress> ProcessWebResponse(WebResponse response)
+		{
+			XPathDocument xmlDoc = LoadXmlResponse(response);
+			XPathNavigator nav = xmlDoc.CreateNavigator();
+
+			YahooError error = EvaluateError(Convert.ToInt32(nav.Evaluate("number(/ResultSet/Error)")));
+
+			if (error != YahooError.NoError)
+				throw new YahooGeoCodingException(error);
+
+			return ParseAddresses(nav.Select("/ResultSet/Result"));
 		}
 
 		private XPathDocument LoadXmlResponse(WebResponse response)
@@ -124,66 +128,79 @@ namespace GeoCoding.Yahoo
 			}
 		}
 
-		private string EvaluateXPath(string xpath, XPathNavigator nav)
+		private IEnumerable<YahooAddress> ParseAddresses(XPathNodeIterator nodes)
 		{
-			XPathExpression exp = nav.Compile(xpath);
-			exp.SetContext(namespaceManager);
-			return (string)nav.Evaluate(exp);
-		}
-
-		private Address RetrieveAddress(XPathNavigator nav)
-		{
-			AddressAccuracy accuracy = MapAccuracy(EvaluateXPath("string(@precision)", nav));
-
-			double latitude = double.Parse(EvaluateXPath("string(y:Latitude)", nav), CultureInfo.InvariantCulture);
-			double longitude = double.Parse(EvaluateXPath("string(y:Longitude)", nav), CultureInfo.InvariantCulture);
-
-			string street = EvaluateXPath("string(y:Address)", nav);
-			string city = EvaluateXPath("string(y:City)", nav);
-			string state = EvaluateXPath("string(y:State)", nav);
-			string postalCode = EvaluateXPath("string(y:Zip)", nav);
-			string country = EvaluateXPath("string(y:Country)", nav);
-
-			//Yahoo likes to lie and tell us it has postal code precision when it doesn't really have a postal code...
-			if (accuracy == AddressAccuracy.PostalCodeLevel && String.IsNullOrEmpty(postalCode))
-				accuracy = AddressAccuracy.CityLevel;
-
-			return new YahooAddress(
-				street,
-				city,
-				state,
-				postalCode,
-				country,
-				new Location(latitude, longitude),
-				accuracy,
-				String.Format("{0}, {1}, {2} {3}, {4}", street, city, state, postalCode, country)
-			);
-		}
-
-		private Address[] ProcessWebResponse(WebResponse response)
-		{
-			XPathDocument xmlDoc = LoadXmlResponse(response);
-			XPathNavigator nav = xmlDoc.CreateNavigator();
-			namespaceManager = CreateXmlNamespaceManager(nav);
-
-			XPathExpression exp = nav.Compile("y:ResultSet/y:Result");
-			exp.SetContext(namespaceManager);
-			XPathNodeIterator nodes = nav.Select(exp);
-
-			List<Address> addresses = new List<Address>();
 			while (nodes.MoveNext())
 			{
-				addresses.Add(RetrieveAddress(nodes.Current));
-			}
+				XPathNavigator nav = nodes.Current;
 
-			return addresses.ToArray();
+				int quality = Convert.ToInt32(nav.Evaluate("number(quality)"));
+				string formattedAddress = ParseFormattedAddress(nav);
+
+				double latitude = (double)nav.Evaluate("number(latitude)");
+				double longitude = (double)nav.Evaluate("number(longitude)");
+				Location coordinates = new Location(latitude, longitude);
+
+				string name = (string)nav.Evaluate("string(name)");
+				string house = (string)nav.Evaluate("string(house)");
+				string street = (string)nav.Evaluate("string(street)");
+				string unit = (string)nav.Evaluate("string(unit)");
+				string unitType = (string)nav.Evaluate("string(unittype)");
+				string neighborhood = (string)nav.Evaluate("string(neighborhood)");
+				string city = (string)nav.Evaluate("string(city)");
+				string county = (string)nav.Evaluate("string(county)");
+				string countyCode = (string)nav.Evaluate("string(countycode)");
+				string state = (string)nav.Evaluate("string(state)");
+				string stateCode = (string)nav.Evaluate("string(statecode)");
+				string postalCode = (string)nav.Evaluate("string(postal)");
+				string country = (string)nav.Evaluate("string(country)");
+				string countryCode = (string)nav.Evaluate("string(countrycode)");
+
+				yield return new YahooAddress(
+					formattedAddress,
+					coordinates,
+					name,
+					house,
+					street,
+					unit,
+					unitType,
+					neighborhood,
+					city,
+					county,
+					countyCode,
+					state,
+					stateCode,
+					postalCode,
+					country,
+					countryCode,
+					quality
+				);
+			}
 		}
 
-		#endregion
+		private string ParseFormattedAddress(XPathNavigator nav)
+		{
+			string[] lines = new string[4];
+			lines[0] = (string)nav.Evaluate("string(line1)");
+			lines[1] = (string)nav.Evaluate("string(line2)");
+			lines[2] = (string)nav.Evaluate("string(line3)");
+			lines[3] = (string)nav.Evaluate("string(line4)");
 
-        public override string ToString()
-        {
-            return String.Format("Yahoo GeoCoder: {0}", appId);
-        }
-    }
+			lines = lines.Select(s => (s ?? "").Trim()).Where(s => !String.IsNullOrEmpty(s)).ToArray();
+			return String.Join(", ", lines);
+		}
+
+		private YahooError EvaluateError(int errorCode)
+		{
+			if (errorCode >= 1000)
+				return YahooError.UnknownError;
+
+			return (YahooError)errorCode;
+		}
+
+		public override string ToString()
+		{
+			return String.Format("Yahoo GeoCoder: {0}", appId);
+		}
+	}
 }
