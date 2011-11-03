@@ -11,15 +11,15 @@
 
   <!-- Define order of solutions to build -->
   <ItemGroup>
-    <vssolutions Include="src\GeoCoding.Net.sln" />
+    <vssolutions Include="src\GeoCoding.sln" />
   </ItemGroup>
 
   <!-- Define outputs -->
   <ItemGroup>
     <merge Include="src\Core\Core.csproj" />
-    <merge Include="src\Core.Google\Core.Google.csproj" />
-    <merge Include="src\Core.Yahoo\Core.Yahoo.csproj" />
-    <merge Include="src\Core.Microsoft\Core.Microsoft.csproj" />
+    <merge Include="src\Google\Google.csproj" />
+    <merge Include="src\Yahoo\Yahoo.csproj" />
+    <merge Include="src\Microsoft\Microsoft.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
