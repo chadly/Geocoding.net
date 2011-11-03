@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Web;
 
 using GeoCoding;
 using GeoAddress = GeoCoding.Address;
@@ -25,13 +26,21 @@ namespace GeoCoding.Microsoft
 
 		public IEnumerable<GeoAddress> GeoCode(string address)
 		{
-			var response = GetResponse(string.Format(UNFORMATTED_QUERY, address, BingKey));
+			var response = GetResponse(string.Format(UNFORMATTED_QUERY, BingURLEncode(address), BingKey));
 			return ParseResponse(response);
 		}
 
 		public IEnumerable<GeoAddress> GeoCode(string street, string city, string state, string postalCode, string country)
 		{
-			var response = GetResponse(string.Format(FORMATTED_QUERY, country, state, postalCode, city, street, BingKey));
+			var response = GetResponse(
+				string.Format(
+					FORMATTED_QUERY,
+					BingURLEncode(country),
+					BingURLEncode(state),
+					BingURLEncode(postalCode),
+					BingURLEncode(city),
+					BingURLEncode(street), 
+					BingKey));
 			return ParseResponse(response);
 		}
 
@@ -113,6 +122,11 @@ namespace GeoCoding.Microsoft
 				default:
 					return ConfidenceLevel.Unknown;
 			}
+		}
+
+		private string BingURLEncode(string toEncode)
+		{
+			return HttpUtility.UrlPathEncode(toEncode).Replace("#", "%23");
 		}
 	}
 }
