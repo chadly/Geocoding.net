@@ -15,8 +15,12 @@ namespace GeoCoding.Microsoft
 	{
 		private string BingKey;
 		private static string UNFORMATTED_QUERY = "http://dev.virtualearth.net/REST/v1/Locations/{0}?key={1}";
-		private static string FORMATTED_QUERY = "http://dev.virtualearth.net/REST/v1/Locations?CountryRegion={0}&adminDistrict={1}&postalCode={2}&locality={3}&addressLine1={4}&key={5}";
-
+		private static string FORMATTED_QUERY = "http://dev.virtualearth.net/REST/v1/Locations?{0}&key={1}";
+		private static string COUNTRY = "countryRegion={0}";
+		private static string ADMIN = "adminDistrict={0}";
+		private static string ZIP = "postalCode={0}";
+		private static string CITY = "locality={0}";
+		private static string ADDRESS = "addressLine={0}";
 		public BingMapsGeoCoder(string bingKey)
 		{
 			this.BingKey = bingKey;
@@ -30,16 +34,34 @@ namespace GeoCoding.Microsoft
 			return ParseResponse(response);
 		}
 
+		private bool AppendParameter(StringBuilder sb, string parameter, string format, bool first)
+		{
+			if (!string.IsNullOrEmpty(parameter))
+			{
+				if (!first)
+				{
+					sb.Append('&');
+				}
+				sb.Append(string.Format(format, BingURLEncode(parameter)));
+				return false;
+			}
+			return first;
+		}
+
 		public IEnumerable<GeoAddress> GeoCode(string street, string city, string state, string postalCode, string country)
 		{
+			StringBuilder parameters = new StringBuilder();
+			bool first = true;
+			first = AppendParameter(parameters, city, CITY, first);
+			first = AppendParameter(parameters, state, ADMIN, first);
+			first = AppendParameter(parameters, postalCode, ZIP, first);
+			first = AppendParameter(parameters, country, COUNTRY, first);
+			first = AppendParameter(parameters, street, ADDRESS, first);
+
 			var response = GetResponse(
 				string.Format(
 					FORMATTED_QUERY,
-					BingURLEncode(country),
-					BingURLEncode(state),
-					BingURLEncode(postalCode),
-					BingURLEncode(city),
-					BingURLEncode(street), 
+					parameters.ToString(), 
 					BingKey));
 			return ParseResponse(response);
 		}
@@ -126,6 +148,9 @@ namespace GeoCoding.Microsoft
 
 		private string BingURLEncode(string toEncode)
 		{
+			if (string.IsNullOrEmpty(toEncode)){
+				return string.Empty;
+			}
 			return HttpUtility.UrlPathEncode(toEncode).Replace("#", "%23");
 		}
 	}
