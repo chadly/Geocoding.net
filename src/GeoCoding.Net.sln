@@ -6,6 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{891021E5
 		..\build-quick.bat = ..\build-quick.bat
 		..\build-release.bat = ..\build-release.bat
 		..\clean.bat = ..\clean.bat
+		..\geocoding.build = ..\geocoding.build
 		..\how-to-build.txt = ..\how-to-build.txt
 	EndProjectSection
 EndProject

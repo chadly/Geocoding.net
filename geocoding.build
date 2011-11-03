@@ -6,8 +6,7 @@
     <copyright>Copyright © 2008 - 2011 Chad Lee</copyright>
     <major>1</major>
     <minor>4</minor>
-    <build Condition="'$(BUILD_NUMBER)'==''">0</build>
-    <build Condition="'$(BUILD_NUMBER)'!=''">$(BUILD_NUMBER)</build>
+    <build>1</build>
   </PropertyGroup>
 
   <!-- Define order of solutions to build -->
