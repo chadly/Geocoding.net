@@ -2,10 +2,6 @@
 <configuration>
   <appSettings>
     <add key="yahooAppId" value="your-app-id-here" />
-
-    <add key="virtualEarthUsername" value="your-username-here" />
-    <add key="virtualEarthPassword" value="your-password-here" />
-
     <add key="bingMapsKey" value="your-key-here" />
   </appSettings>
 </configuration>

@@ -11,6 +11,9 @@ using GeoLocation = GeoCoding.Location;
 
 namespace GeoCoding.Microsoft
 {
+	/// <remarks>
+	/// http://msdn.microsoft.com/en-us/library/ff701715.aspx
+	/// </remarks>
 	public class BingMapsGeoCoder : IGeoCoder
 	{
 		private string BingKey;
@@ -21,6 +24,7 @@ namespace GeoCoding.Microsoft
 		private static string ZIP = "postalCode={0}";
 		private static string CITY = "locality={0}";
 		private static string ADDRESS = "addressLine={0}";
+
 		public BingMapsGeoCoder(string bingKey)
 		{
 			this.BingKey = bingKey;
