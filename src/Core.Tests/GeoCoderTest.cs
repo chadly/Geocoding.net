@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Globalization;
 using System.Threading;
 using Xunit;
@@ -17,27 +18,17 @@ namespace GeoCoding.Tests
 
 		protected abstract IGeoCoder CreateGeoCoder();
 
-		private void AssertWhiteHouseAddress(Address address)
-		{
-			Assert.True("The White House".Equals(address.Street) || "1600 Pennsylvania Ave NW".Equals(address.Street));
-			Assert.Equal("Washington", address.City);
-			Assert.Equal("DC", address.State);
-			Assert.True("20006".Equals(address.PostalCode) || "20500".Equals(address.PostalCode));
-			Assert.Equal(AddressAccuracy.AddressLevel, address.Accuracy);
-			Assert.True(address.Country == "US" || address.Country == "United States");
-		}
-
 		[Fact]
 		public void CanGeoCodeAddress()
 		{
-			Address[] addresses = geoCoder.GeoCode("1600 pennsylvania ave washington dc");
+			Address[] addresses = geoCoder.GeoCode("1600 pennsylvania ave washington dc").ToArray();
 			AssertWhiteHouseAddress(addresses[0]);
 		}
 
 		[Fact]
 		public void CanGeoCodeNormalizedAddress()
 		{
-			Address[] addresses = geoCoder.GeoCode("1600 pennsylvania ave", "washington", "dc", null, null);
+			Address[] addresses = geoCoder.GeoCode("1600 pennsylvania ave", "washington", "dc", null, null).ToArray();
 			AssertWhiteHouseAddress(addresses[0]);
 		}
 
@@ -48,26 +39,36 @@ namespace GeoCoding.Tests
 		{
 			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(cultureName);
 
-			Address[] addresses = geoCoder.GeoCode("24 sussex drive ottawa, ontario");
+			Address[] addresses = geoCoder.GeoCode("24 sussex drive ottawa, ontario").ToArray();
 
-			Assert.Equal("24 Sussex Dr", addresses[0].Street);
-			Assert.Equal("Ottawa", addresses[0].City);
-			Assert.Equal("ON", addresses[0].State);
-			Assert.Equal("K1M", addresses[0].PostalCode);
-			Assert.True(addresses[0].Country == "CA" || addresses[0].Country == "Canada");
-			Assert.Equal(AddressAccuracy.AddressLevel, addresses[0].Accuracy);
+			Address addr = addresses[0];
+
+			Assert.True(addr.FormattedAddress.Contains("24 Sussex"));
+			Assert.True(addr.FormattedAddress.Contains("Ottawa, ON"));
+			Assert.True(addr.FormattedAddress.Contains("K1M"));
+			Assert.True(addr.FormattedAddress.Contains("CA") || addr.FormattedAddress.Contains("Canada"));
 		}
 
-		[Theory]
-		[InlineData("United States", AddressAccuracy.CountryLevel)]
-		[InlineData("Illinois, US", AddressAccuracy.StateLevel)]
-		[InlineData("New York, New York", AddressAccuracy.CityLevel)]
-		[InlineData("90210, US", AddressAccuracy.PostalCodeLevel)]
-		[InlineData("1600 pennsylvania ave washington dc", AddressAccuracy.AddressLevel)]
-		public void CanMatchAccuracyLevelsOfAddress(string address, AddressAccuracy accuracy)
+		//[Theory]
+		//[InlineData("United States", AddressAccuracy.CountryLevel)]
+		//[InlineData("Illinois, US", AddressAccuracy.StateLevel)]
+		//[InlineData("New York, New York", AddressAccuracy.CityLevel)]
+		//[InlineData("90210, US", AddressAccuracy.PostalCodeLevel)]
+		//[InlineData("1600 pennsylvania ave washington dc", AddressAccuracy.AddressLevel)]
+		//public void CanMatchAccuracyLevelsOfAddress(string address, AddressAccuracy accuracy)
+		//{
+		//    Address[] addresses = geoCoder.GeoCode(address);
+		//    Assert.Equal(accuracy, addresses[0].Accuracy);
+		//}
+
+		private void AssertWhiteHouseAddress(Address address)
 		{
-			Address[] addresses = geoCoder.GeoCode(address);
-			Assert.Equal(accuracy, addresses[0].Accuracy);
+			Assert.True(address.FormattedAddress.Contains("The White House") || address.FormattedAddress.Contains("1600 Pennsylvania Ave NW"));
+			Assert.True(address.FormattedAddress.Contains("Washington, DC"));
+			Assert.True(address.FormattedAddress.Contains("US") || address.FormattedAddress.Contains("United States"));
+
+			Assert.Equal(38.8976777, address.Coordinates.Latitude);
+			Assert.Equal(-77.0365170, address.Coordinates.Longitude);
 		}
 	}
 }

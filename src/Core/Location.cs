@@ -4,8 +4,8 @@ namespace GeoCoding
 {
 	public class Location
 	{
-		private readonly double latitude;
-		private readonly double longitude;
+		readonly double latitude;
+		readonly double longitude;
 
 		public double Latitude
 		{

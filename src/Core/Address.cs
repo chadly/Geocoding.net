@@ -3,40 +3,14 @@ using System.Text;
 
 namespace GeoCoding
 {
-	public class Address
+	public abstract class Address
 	{
-		private readonly string street;
-		private readonly string city;
-		private readonly string state;
-		private readonly string postalCode;
-		private readonly string country;
-		private readonly Location coordinates;
-		private readonly AddressAccuracy accuracy;
-		private readonly ConfidenceLevel confidence; 
+		readonly string formattedAddress;
+		readonly Location coordinates;
 
-		public string Street
+		public string FormattedAddress
 		{
-			get { return street ?? ""; }
-		}
-
-		public string City
-		{
-			get { return city ?? ""; }
-		}
-
-		public string State
-		{
-			get { return state ?? ""; }
-		}
-
-		public string PostalCode
-		{
-			get { return postalCode ?? ""; }
-		}
-
-		public string Country
-		{
-			get { return country ?? ""; }
+			get { return formattedAddress ?? ""; }
 		}
 
 		public Location Coordinates
@@ -44,30 +18,19 @@ namespace GeoCoding
 			get { return coordinates; }
 		}
 
-		public AddressAccuracy Accuracy
+		public Address(string formattedAddress, Location coordinates)
 		{
-			get { return accuracy; }
-		}
+			formattedAddress = (formattedAddress ?? "").Trim();
 
-		public ConfidenceLevel Confidence
-		{
-			get { return confidence; }
-		}
+			if (String.IsNullOrEmpty(formattedAddress))
+				throw new ArgumentNullException("formattedAddress");
 
-		public Address(string street, string city, string state, string postalCode, string country, Location coordinates, AddressAccuracy accuracy, ConfidenceLevel confidence)
-		{
-			this.street = street;
-			this.city = city;
-			this.state = state;
-			this.postalCode = postalCode;
-			this.country = country;
+			if (coordinates == null)
+				throw new ArgumentNullException("coordinates");
+
+			this.formattedAddress = formattedAddress;
 			this.coordinates = coordinates;
-			this.accuracy = accuracy;
-			this.confidence = confidence;
 		}
-
-		public Address(string street, string city, string state, string postalCode, string country, Location coordinates, AddressAccuracy accuracy)
-			: this(street, city, state, postalCode, country, coordinates, accuracy, ConfidenceLevel.High) { }
 
 		public virtual Distance DistanceBetween(Address address)
 		{
@@ -81,48 +44,7 @@ namespace GeoCoding
 
 		public override string ToString()
 		{
-			StringBuilder address = new StringBuilder();
-
-			bool hasStuff = false;
-
-			if (!String.IsNullOrEmpty(street))
-			{
-				address.Append(street);
-				hasStuff = true;
-			}
-
-			if (!String.IsNullOrEmpty(city))
-			{
-				if (hasStuff)
-					address.Append(", ");
-				address.Append(city);
-				hasStuff = true;
-			}
-
-			if (!String.IsNullOrEmpty(state))
-			{
-				if (hasStuff)
-					address.Append(", ");
-				address.Append(state);
-				hasStuff = true;
-			}
-
-			if (!String.IsNullOrEmpty(postalCode))
-			{
-				if (hasStuff)
-					address.Append(" ");
-				address.Append(postalCode);
-				hasStuff = true;
-			}
-
-			if (!String.IsNullOrEmpty(country))
-			{
-				if (hasStuff)
-					address.Append(", ");
-				address.Append(country);
-			}
-
-			return address.ToString();
+			return FormattedAddress;
 		}
 	}
 }

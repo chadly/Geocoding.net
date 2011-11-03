@@ -9,6 +9,10 @@ using System.Xml.XPath;
 
 namespace GeoCoding.Yahoo
 {
+	/// <remarks>
+	/// Current API this is using: http://developer.yahoo.com/maps/rest/V1/geocode.html
+	/// Need to migrate to http://developer.yahoo.com/geo/placefinder/
+	/// </remarks>
     public class YahooGeoCoder : IGeoCoder
     {
         public const string ServiceUrl = "http://local.yahooapis.com/MapsService/V1/geocode?location={0}&appid={1}";
@@ -30,7 +34,7 @@ namespace GeoCoding.Yahoo
             this.appId = appId;
         }
 
-		private Address[] GeoCode(HttpWebRequest request)
+		private IEnumerable<Address> GeoCode(HttpWebRequest request)
 		{
 			try
 			{
@@ -47,7 +51,7 @@ namespace GeoCoding.Yahoo
 			}
 		}
 
-		public Address[] GeoCode(string address)
+		public IEnumerable<Address> GeoCode(string address)
 		{
 			if (String.IsNullOrEmpty(address)) throw new ArgumentNullException("address");
 
@@ -55,7 +59,7 @@ namespace GeoCoding.Yahoo
 			return GeoCode(request);
 		}
 
-		public Address[] GeoCode(string street, string city, string state, string postalCode, string country)
+		public IEnumerable<Address> GeoCode(string street, string city, string state, string postalCode, string country)
 		{
 			//ignoring the country parameter since yahoo doesn't accept it
 			HttpWebRequest request = BuildWebRequest(street, city, state, postalCode);
@@ -144,14 +148,15 @@ namespace GeoCoding.Yahoo
 			if (accuracy == AddressAccuracy.PostalCodeLevel && String.IsNullOrEmpty(postalCode))
 				accuracy = AddressAccuracy.CityLevel;
 
-			return new Address(
+			return new YahooAddress(
 				street,
 				city,
 				state,
 				postalCode,
 				country,
 				new Location(latitude, longitude),
-				accuracy
+				accuracy,
+				String.Format("{0}, {1}, {2} {3}, {4}", street, city, state, postalCode, country)
 			);
 		}
 

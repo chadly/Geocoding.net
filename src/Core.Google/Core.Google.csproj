@@ -49,9 +49,12 @@
     <Compile Include="..\AssemblyInfoCommon.cs">
       <Link>Properties\AssemblyInfoCommon.cs</Link>
     </Compile>
-    <Compile Include="GoogleAddressAccuracy.cs" />
+    <Compile Include="GoogleAddress.cs" />
+    <Compile Include="GoogleAddressComponent.cs" />
+    <Compile Include="GoogleAddressType.cs" />
     <Compile Include="GoogleGeoCoder.cs" />
-    <Compile Include="GoogleStatusCode.cs" />
+    <Compile Include="GoogleGeoCodingException.cs" />
+    <Compile Include="GoogleStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -77,7 +77,6 @@
     <Compile Include="..\AssemblyInfoCommon.cs">
       <Link>Properties\AssemblyInfoCommon.cs</Link>
     </Compile>
-    <Compile Include="AddressTest.cs" />
     <Compile Include="BingMapsTest.cs" />
     <Compile Include="DistanceTest.cs" />
     <Compile Include="GeoCoderTest.cs" />

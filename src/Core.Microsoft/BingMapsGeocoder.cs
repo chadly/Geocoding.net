@@ -23,13 +23,13 @@ namespace GeoCoding.Microsoft
 
 		#region IGeoCoder Members
 
-		public GeoAddress[] GeoCode(string address)
+		public IEnumerable<GeoAddress> GeoCode(string address)
 		{
 			var response = GetResponse(string.Format(UNFORMATTED_QUERY, address, BingKey));
 			return ParseResponse(response);
 		}
 
-		public GeoAddress[] GeoCode(string street, string city, string state, string postalCode, string country)
+		public IEnumerable<GeoAddress> GeoCode(string street, string city, string state, string postalCode, string country)
 		{
 			var response = GetResponse(string.Format(FORMATTED_QUERY, country, state, postalCode, city, street, BingKey));
 			return ParseResponse(response);
@@ -37,7 +37,7 @@ namespace GeoCoding.Microsoft
 
 		#endregion
 
-		private GeoAddress[] ParseResponse(Response response)
+		private IEnumerable<GeoAddress> ParseResponse(Response response)
 		{
 			List<GeoAddress> addresses = new List<GeoAddress>();
 			foreach (var resource in response.ResourceSets[0].Resources)
@@ -59,16 +59,18 @@ namespace GeoCoding.Microsoft
 
 		private GeoAddress AddressFromBingMaps(Location location)
 		{
-			return new GeoAddress(
-				location.Address.AddressLine,
-				location.Address.Locality,
-				location.Address.AdminDistrict,
-				location.Address.PostalCode,
-				location.Address.CountryRegion,
-				LocationFromBingMaps(location.Point),
-				AccuracyFromBingMaps(location.Address),
-				ConfidenceFromBingMaps(location.Confidence)
-			);
+#warning need to fix this
+			return null;
+			//return new GeoAddress(
+			//    location.Address.AddressLine,
+			//    location.Address.Locality,
+			//    location.Address.AdminDistrict,
+			//    location.Address.PostalCode,
+			//    location.Address.CountryRegion,
+			//    LocationFromBingMaps(location.Point),
+			//    AccuracyFromBingMaps(location.Address),
+			//    ConfidenceFromBingMaps(location.Confidence)
+			//);
 		}
 
 		private GeoLocation LocationFromBingMaps(Point point)

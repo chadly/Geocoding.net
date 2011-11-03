@@ -5,6 +5,7 @@ using GeoCoding.Microsoft.VirtualEarth;
 using GeoCoding.Microsoft.VirtualEarth.Token;
 using GeoAddress = GeoCoding.Address;
 using GeoLocation = GeoCoding.Location;
+using System.Collections.Generic;
 
 namespace GeoCoding.Microsoft
 {
@@ -36,7 +37,7 @@ namespace GeoCoding.Microsoft
 				factory.Dispose();
 		}
 
-		public GeoAddress[] GeoCode(string address)
+		public IEnumerable<GeoAddress> GeoCode(string address)
 		{
 			string token = Token();
 			var request = new GeocodeRequest() { Query = address, Credentials = new Credentials() { Token = token } };
@@ -45,7 +46,7 @@ namespace GeoCoding.Microsoft
 			return response.Results.Select(r => AddressFromVirtualEarth(r)).ToArray();
 		}
 
-		public GeoAddress[] GeoCode(string street, string city, string state, string postalCode, string country)
+		public IEnumerable<GeoAddress> GeoCode(string street, string city, string state, string postalCode, string country)
 		{
 			return GeoCode(street + " " + city + ", " + state + " " + postalCode + " " + country);
 		}
@@ -90,16 +91,18 @@ namespace GeoCoding.Microsoft
 
 		private GeoAddress AddressFromVirtualEarth(GeocodeResult result)
 		{
-			return new GeoAddress(
-				result.Address.AddressLine,
-				result.Address.Locality,
-				result.Address.AdminDistrict,
-				result.Address.PostalCode,
-				result.Address.CountryRegion,
-				LocationFromVirtualEarth(result.Locations),
-				AccuracyFromVirtualEarth(result.Address),
-				ConfidenceFromVirtualEarth(result.Confidence)
-			);
+#warning need to fix this
+			return null;
+			//return new GeoAddress(
+			//    result.Address.AddressLine,
+			//    result.Address.Locality,
+			//    result.Address.AdminDistrict,
+			//    result.Address.PostalCode,
+			//    result.Address.CountryRegion,
+			//    LocationFromVirtualEarth(result.Locations),
+			//    AccuracyFromVirtualEarth(result.Address),
+			//    ConfidenceFromVirtualEarth(result.Confidence)
+			//);
 		}
 
 		private ConfidenceLevel ConfidenceFromVirtualEarth(VirtualEarth.Confidence confidence)

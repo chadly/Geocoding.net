@@ -4,8 +4,8 @@
     <projectName>GeoCoding.Net</projectName>
     <company>GeoCoding.Net</company>
     <copyright>Copyright © 2008 - 2011 Chad Lee</copyright>
-    <major>1</major>
-    <minor>4</minor>
+    <major>2</major>
+    <minor>0</minor>
     <build Condition="'$(BUILD_NUMBER)'==''">0</build>
     <build Condition="'$(BUILD_NUMBER)'!=''">$(BUILD_NUMBER)</build>
   </PropertyGroup>

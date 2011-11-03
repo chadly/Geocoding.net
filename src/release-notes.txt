@@ -3,3 +3,6 @@ Version 1.3
 
 Version 1.4
 	-- Added Bing Maps API implementation. Microsoft is phasing out the Virtual Earth API in favor of the new Bing Maps REST API.
+
+Version 2.0
+	-- Updating GoogleGeoCoder to Google Maps API v3
