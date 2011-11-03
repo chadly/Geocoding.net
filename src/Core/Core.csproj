@@ -65,6 +65,7 @@
     </Compile>
     <Compile Include="Address.cs" />
     <Compile Include="AddressAccuracy.cs" />
+    <Compile Include="ConfidenceLevel.cs" />
     <Compile Include="Distance.cs" />
     <Compile Include="DistanceUnits.cs" />
     <Compile Include="IGeoCoder.cs" />

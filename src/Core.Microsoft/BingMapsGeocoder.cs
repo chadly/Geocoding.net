@@ -66,7 +66,8 @@ namespace GeoCoding.Microsoft
 				location.Address.PostalCode,
 				location.Address.CountryRegion,
 				LocationFromBingMaps(location.Point),
-				AccuracyFromBingMaps(location.Address)
+				AccuracyFromBingMaps(location.Address),
+				ConfidenceFromBingMaps(location.Confidence)
 			);
 		}
 
@@ -95,6 +96,21 @@ namespace GeoCoding.Microsoft
 				return AddressAccuracy.CountryLevel;
 
 			return AddressAccuracy.Unknown;
+		}
+
+		private ConfidenceLevel ConfidenceFromBingMaps(string confidence)
+		{
+			switch (confidence.ToLower())
+			{
+				case "low":
+					return ConfidenceLevel.Low;
+				case "medium":
+					return ConfidenceLevel.Medium;
+				case "high":
+					return ConfidenceLevel.High;
+				default:
+					return ConfidenceLevel.Unknown;
+			}
 		}
 	}
 }

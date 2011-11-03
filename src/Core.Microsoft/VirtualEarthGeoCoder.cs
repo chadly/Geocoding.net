@@ -97,8 +97,24 @@ namespace GeoCoding.Microsoft
 				result.Address.PostalCode,
 				result.Address.CountryRegion,
 				LocationFromVirtualEarth(result.Locations),
-				AccuracyFromVirtualEarth(result.Address)
+				AccuracyFromVirtualEarth(result.Address),
+				ConfidenceFromVirtualEarth(result.Confidence)
 			);
+		}
+
+		private ConfidenceLevel ConfidenceFromVirtualEarth(VirtualEarth.Confidence confidence)
+		{
+			switch (confidence)
+			{
+				case VirtualEarth.Confidence.High:
+					return ConfidenceLevel.High;
+				case VirtualEarth.Confidence.Low:
+					return ConfidenceLevel.Low;
+				case VirtualEarth.Confidence.Medium:
+					return ConfidenceLevel.Medium;
+				default:
+					return ConfidenceLevel.Unknown;
+			}
 		}
 	}
 }

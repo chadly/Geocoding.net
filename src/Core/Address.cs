@@ -12,6 +12,7 @@ namespace GeoCoding
 		private readonly string country;
 		private readonly Location coordinates;
 		private readonly AddressAccuracy accuracy;
+		private readonly ConfidenceLevel confidence; 
 
 		public string Street
 		{
@@ -48,7 +49,12 @@ namespace GeoCoding
 			get { return accuracy; }
 		}
 
-		public Address(string street, string city, string state, string postalCode, string country, Location coordinates, AddressAccuracy accuracy)
+		public ConfidenceLevel Confidence
+		{
+			get { return confidence; }
+		}
+
+		public Address(string street, string city, string state, string postalCode, string country, Location coordinates, AddressAccuracy accuracy, ConfidenceLevel confidence)
 		{
 			this.street = street;
 			this.city = city;
@@ -57,7 +63,11 @@ namespace GeoCoding
 			this.country = country;
 			this.coordinates = coordinates;
 			this.accuracy = accuracy;
+			this.confidence = confidence;
 		}
+
+		public Address(string street, string city, string state, string postalCode, string country, Location coordinates, AddressAccuracy accuracy)
+			: this(street, city, state, postalCode, country, coordinates, accuracy, ConfidenceLevel.High) { }
 
 		public virtual Distance DistanceBetween(Address address)
 		{
