@@ -22,7 +22,7 @@ namespace GeoCoding.Tests
 			Assert.True("The White House".Equals(address.Street) || "1600 Pennsylvania Ave NW".Equals(address.Street));
 			Assert.Equal("Washington", address.City);
 			Assert.Equal("DC", address.State);
-			Assert.True("20006".Equals(address.PostalCode) || "20500".Equals(address.PostalCode));
+			Assert.True(string.IsNullOrEmpty(address.PostalCode) || "20006".Equals(address.PostalCode) || "20500".Equals(address.PostalCode));
 			Assert.Equal(AddressAccuracy.AddressLevel, address.Accuracy);
 			Assert.True(address.Country == "US" || address.Country == "United States");
 		}
@@ -53,7 +53,7 @@ namespace GeoCoding.Tests
 			Assert.Equal("24 Sussex Dr", addresses[0].Street);
 			Assert.Equal("Ottawa", addresses[0].City);
 			Assert.Equal("ON", addresses[0].State);
-			Assert.Equal("K1M", addresses[0].PostalCode);
+			Assert.True(addresses[0].PostalCode.StartsWith("K1M"));
 			Assert.True(addresses[0].Country == "CA" || addresses[0].Country == "Canada");
 			Assert.Equal(AddressAccuracy.AddressLevel, addresses[0].Accuracy);
 		}
