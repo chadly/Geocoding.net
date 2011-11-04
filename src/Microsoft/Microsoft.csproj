@@ -61,6 +61,7 @@
       <Link>Properties\AssemblyInfoCommon.cs</Link>
     </Compile>
     <Compile Include="BingAddress.cs" />
+    <Compile Include="BingGeoCodingException.cs" />
     <Compile Include="BingMapsGeocoder.cs" />
     <Compile Include="EntityType.cs" />
     <Compile Include="Json.cs" />

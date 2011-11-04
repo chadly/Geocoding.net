@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Text;
@@ -30,26 +30,40 @@ namespace GeoCoding.Microsoft
 
 		public IEnumerable<BingAddress> GeoCode(string address)
 		{
-			var response = GetResponse(string.Format(UNFORMATTED_QUERY, BingUrlEncode(address), bingKey));
-			return ParseResponse(response);
+			try
+			{
+				var response = GetResponse(string.Format(UNFORMATTED_QUERY, BingUrlEncode(address), bingKey));
+				return ParseResponse(response);
+			}
+			catch (Exception ex)
+			{
+				throw new BingGeoCodingException(ex);
+			}
 		}
 
 		public IEnumerable<BingAddress> GeoCode(string street, string city, string state, string postalCode, string country)
 		{
-			StringBuilder parameters = new StringBuilder();
-			bool first = true;
-			first = AppendParameter(parameters, city, CITY, first);
-			first = AppendParameter(parameters, state, ADMIN, first);
-			first = AppendParameter(parameters, postalCode, ZIP, first);
-			first = AppendParameter(parameters, country, COUNTRY, first);
-			first = AppendParameter(parameters, street, ADDRESS, first);
+			try
+			{
+				StringBuilder parameters = new StringBuilder();
+				bool first = true;
+				first = AppendParameter(parameters, city, CITY, first);
+				first = AppendParameter(parameters, state, ADMIN, first);
+				first = AppendParameter(parameters, postalCode, ZIP, first);
+				first = AppendParameter(parameters, country, COUNTRY, first);
+				first = AppendParameter(parameters, street, ADDRESS, first);
 
-			var response = GetResponse(
-				string.Format(
-					FORMATTED_QUERY,
-					parameters.ToString(),
-					bingKey));
-			return ParseResponse(response);
+				var response = GetResponse(
+					string.Format(
+						FORMATTED_QUERY,
+						parameters.ToString(),
+						bingKey));
+				return ParseResponse(response);
+			}
+			catch (Exception ex)
+			{
+				throw new BingGeoCodingException(ex);
+			}
 		}
 
 		IEnumerable<Address> IGeoCoder.GeoCode(string address)
