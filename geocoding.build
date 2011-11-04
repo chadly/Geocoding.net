@@ -30,8 +30,6 @@
     <libDir>$(MSBuildProjectDirectory)\lib</libDir>
 
     <snkFile>$(MSBuildProjectDirectory)\geocoding.snk</snkFile>
-
-    <MSBuildCommunityTasksPath>$(libDir)\MsBuild</MSBuildCommunityTasksPath>
     <svnToolPath Condition="'$(svnToolPath)'==''">C:\Program Files (x86)\VisualSVN\bin</svnToolPath>
   </PropertyGroup>
 
