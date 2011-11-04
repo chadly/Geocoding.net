@@ -27,15 +27,16 @@
     <configuration Condition="'$(configuration)'==''">Debug</configuration>
 
     <buildDir Condition="'$(buildDir)'==''">$(MSBuildProjectDirectory)\build\$(configuration)</buildDir>
-    <libDir>$(MSBuildThisFileDirectory)lib</libDir>
+    <libDir>$(MSBuildProjectDirectory)\lib</libDir>
 
-    <includeDependencyOutput Condition="'$(includeDependencyOutput)'==''">false</includeDependencyOutput>
+    <snkFile>$(MSBuildProjectDirectory)\geocoding.snk</snkFile>
 
     <MSBuildCommunityTasksPath>$(libDir)\MsBuild</MSBuildCommunityTasksPath>
     <svnToolPath Condition="'$(svnToolPath)'==''">C:\Program Files (x86)\VisualSVN\bin</svnToolPath>
   </PropertyGroup>
 
-  <Import Project="$(libDir)\MsBuild\MSBuild.Community.Tasks.Targets" />
+  <UsingTask AssemblyFile="$(libDir)\MsBuild\MSBuild.Community.Tasks.dll" TaskName="MSBuild.Community.Tasks.AssemblyInfo" />
+  <UsingTask AssemblyFile="$(libDir)\MsBuild\MSBuild.Community.Tasks.dll" TaskName="MSBuild.Community.Tasks.Subversion.SvnVersion" />
   <UsingTask AssemblyFile="$(libDir)\Xunit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
   <UsingTask AssemblyFile="$(libDir)\ILMerge\ILMerge.MSBuild.Tasks.dll" TaskName="ILMerge.MSBuild.Tasks.ILMerge" />
 
@@ -43,7 +44,7 @@
   <!-- ========= Public Targets ===================================================== -->
 
   <Target Name="Build">
-    <CallTarget Targets="CleanBuildDir;Compile;Test;ILMerge" />
+    <CallTarget Targets="CleanBuildDir;Compile;Test;Merge" />
   </Target>
 
   <Target Name="CleanBuildDir">
@@ -117,13 +118,13 @@
     <Copy SourceFiles="@(mergeOutputToCopy)" DestinationFiles="@(mergeOutputToCopy -> '$(buildDir)\%(Filename)%(Extension)')" />
   </Target>
 
-  <Target Name="ILMerge" DependsOnTargets="Compile;CopyOutputToBuildDir">
+  <Target Name="Merge" DependsOnTargets="Compile;CopyOutputToBuildDir">
     <CreateItem Include="$(buildDir)\GeoCoding.*.dll">
       <Output TaskParameter="Include" ItemName="mergeAsm" />
     </CreateItem>
 
-    <ILMerge Condition="'$(Configuration)'=='Debug'" InputAssemblies="@(mergeAsm)" OutputFile="$(buildDir)\GeoCoding.dll" DebugInfo="true" />
-    <ILMerge Condition="'$(Configuration)'=='Release'" InputAssemblies="@(mergeAsm)" OutputFile="$(buildDir)\GeoCoding.dll" DebugInfo="false" />
+    <ILMerge Condition="'$(Configuration)'=='Debug'" InputAssemblies="@(mergeAsm)" OutputFile="$(buildDir)\GeoCoding.dll" SnkFile="$(snkFile)" DebugInfo="true" />
+    <ILMerge Condition="'$(Configuration)'=='Release'" InputAssemblies="@(mergeAsm)" OutputFile="$(buildDir)\GeoCoding.dll" SnkFile="$(snkFile)" DebugInfo="false" />
 
     <Delete Files="@(mergeAsm)" />
     <Delete Files="@(mergeAsm -> '%(RootDir)%(Directory)%(Filename).pdb')" />
