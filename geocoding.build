@@ -56,6 +56,10 @@
     <Exec Command="FOR /F &quot;tokens=*&quot; %%G IN ('DIR /B /AD /S obj') DO RMDIR /S /Q &quot;%%G&quot;" />
 
     <Delete Files="src\AssemblyInfoCommon.cs" />
+
+    <CreateItem Include="$(MSBuildProjectDirectory)\**\*.config.temp">
+      <Output TaskParameter="Include" ItemName="templateFiles" />
+    </CreateItem>
     <Delete Files="@(templateFiles -> '%(RootDir)%(Directory)%(Filename)')" />
   </Target>
 
