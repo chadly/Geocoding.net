@@ -1,8 +1,8 @@
 ﻿using System.Runtime.Serialization;
 
-namespace GeoCoding.Microsoft
+namespace GeoCoding.Microsoft.Json
 {
-    [DataContract]
+	[DataContract]
 	public class Address
 	{
 		[DataMember(Name = "addressLine")]
@@ -20,15 +20,6 @@ namespace GeoCoding.Microsoft
 		[DataMember(Name = "postalCode")]
 		public string PostalCode { get; set; }
 	}
-	public enum AuthenticationResultCode
-	{
-		None,
-		NoCredentials,
-		ValidCredentials,
-		InvalidCredentials,
-		CredentialsExpired,
-		NotAuthorized,
-	}
 	[DataContract]
 	public class BoundingBox
 	{
@@ -40,13 +31,6 @@ namespace GeoCoding.Microsoft
 		public double NorthLatitude { get; set; }
 		[DataMember(Name = "eastLongitude")]
 		public double EastLongitude { get; set; }
-	}
-	public enum Confidence
-	{
-		High,
-		Medium,
-		Low,
-		Unknown,
 	}
 	[DataContract]
 	public class Hint

@@ -46,16 +46,14 @@ namespace GeoCoding.Tests
 			Assert.True(addr.FormattedAddress.Contains("24 Sussex"));
 			Assert.True(addr.FormattedAddress.Contains("Ottawa, ON"));
 			Assert.True(addr.FormattedAddress.Contains("K1M"));
-			Assert.True(addr.FormattedAddress.Contains("CA") || addr.FormattedAddress.Contains("Canada"));
 		}
 
 		private void AssertWhiteHouseAddress(Address address)
 		{
 			Assert.True(address.FormattedAddress.Contains("The White House") || address.FormattedAddress.Contains("1600 Pennsylvania Ave NW"));
 			Assert.True(address.FormattedAddress.Contains("Washington, DC"));
-			Assert.True(address.FormattedAddress.Contains("US") || address.FormattedAddress.Contains("United States"));
 
-			//just hoping that each geocoder implementation gets it somwhere near the vicinity
+			//just hoping that each geocoder implementation gets it somewhere near the vicinity
 			double lat = Math.Round(address.Coordinates.Latitude, 2);
 			Assert.Equal(38.90, lat);
 

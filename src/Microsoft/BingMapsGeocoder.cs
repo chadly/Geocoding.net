@@ -1,13 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Web;
-
-using GeoCoding;
-using GeoAddress = GeoCoding.Address;
-using GeoLocation = GeoCoding.Location;
 
 namespace GeoCoding.Microsoft
 {
@@ -16,43 +13,28 @@ namespace GeoCoding.Microsoft
 	/// </remarks>
 	public class BingMapsGeoCoder : IGeoCoder
 	{
-		private string BingKey;
-		private static string UNFORMATTED_QUERY = "http://dev.virtualearth.net/REST/v1/Locations/{0}?key={1}";
-		private static string FORMATTED_QUERY = "http://dev.virtualearth.net/REST/v1/Locations?{0}&key={1}";
-		private static string COUNTRY = "countryRegion={0}";
-		private static string ADMIN = "adminDistrict={0}";
-		private static string ZIP = "postalCode={0}";
-		private static string CITY = "locality={0}";
-		private static string ADDRESS = "addressLine={0}";
+		const string UNFORMATTED_QUERY = "http://dev.virtualearth.net/REST/v1/Locations/{0}?key={1}";
+		const string FORMATTED_QUERY = "http://dev.virtualearth.net/REST/v1/Locations?{0}&key={1}";
+		const string COUNTRY = "countryRegion={0}";
+		const string ADMIN = "adminDistrict={0}";
+		const string ZIP = "postalCode={0}";
+		const string CITY = "locality={0}";
+		const string ADDRESS = "addressLine={0}";
+
+		readonly string bingKey;
 
 		public BingMapsGeoCoder(string bingKey)
 		{
-			this.BingKey = bingKey;
+			this.bingKey = bingKey;
 		}
 
-		#region IGeoCoder Members
-
-		public IEnumerable<GeoAddress> GeoCode(string address)
+		public IEnumerable<BingAddress> GeoCode(string address)
 		{
-			var response = GetResponse(string.Format(UNFORMATTED_QUERY, BingURLEncode(address), BingKey));
+			var response = GetResponse(string.Format(UNFORMATTED_QUERY, BingUrlEncode(address), bingKey));
 			return ParseResponse(response);
 		}
 
-		private bool AppendParameter(StringBuilder sb, string parameter, string format, bool first)
-		{
-			if (!string.IsNullOrEmpty(parameter))
-			{
-				if (!first)
-				{
-					sb.Append('&');
-				}
-				sb.Append(string.Format(format, BingURLEncode(parameter)));
-				return false;
-			}
-			return first;
-		}
-
-		public IEnumerable<GeoAddress> GeoCode(string street, string city, string state, string postalCode, string country)
+		public IEnumerable<BingAddress> GeoCode(string street, string city, string state, string postalCode, string country)
 		{
 			StringBuilder parameters = new StringBuilder();
 			bool first = true;
@@ -65,77 +47,65 @@ namespace GeoCoding.Microsoft
 			var response = GetResponse(
 				string.Format(
 					FORMATTED_QUERY,
-					parameters.ToString(), 
-					BingKey));
+					parameters.ToString(),
+					bingKey));
 			return ParseResponse(response);
 		}
 
-		#endregion
-
-		private IEnumerable<GeoAddress> ParseResponse(Response response)
+		IEnumerable<Address> IGeoCoder.GeoCode(string address)
 		{
-			List<GeoAddress> addresses = new List<GeoAddress>();
-			foreach (var resource in response.ResourceSets[0].Resources)
-			{
-				addresses.Add(AddressFromBingMaps(resource as Location));
-			}
-			return addresses.ToArray();
+			return GeoCode(address).Cast<Address>();
 		}
 
-		private Response GetResponse(string queryURL)
+		IEnumerable<Address> IGeoCoder.GeoCode(string street, string city, string state, string postalCode, string country)
+		{
+			return GeoCode(street, city, state, postalCode, country).Cast<Address>();
+		}
+
+		private bool AppendParameter(StringBuilder sb, string parameter, string format, bool first)
+		{
+			if (!string.IsNullOrEmpty(parameter))
+			{
+				if (!first)
+				{
+					sb.Append('&');
+				}
+				sb.Append(string.Format(format, BingUrlEncode(parameter)));
+				return false;
+			}
+			return first;
+		}
+
+		private IEnumerable<BingAddress> ParseResponse(Json.Response response)
+		{
+			foreach (Json.Location location in response.ResourceSets[0].Resources)
+			{
+				yield return new BingAddress(
+					location.Address.FormattedAddress,
+					new Location(location.Point.Coordinates[0], location.Point.Coordinates[1]),
+					location.Address.AddressLine,
+					location.Address.AdminDistrict,
+					location.Address.AdminDistrict2,
+					location.Address.CountryRegion,
+					location.Address.Locality,
+					location.Address.PostalCode,
+					(EntityType)Enum.Parse(typeof(EntityType), location.EntityType),
+					EvaluateConfidence(location.Confidence)
+				);
+			}
+		}
+
+		private Json.Response GetResponse(string queryURL)
 		{
 			HttpWebRequest request = WebRequest.Create(queryURL) as HttpWebRequest;
 			using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
 			{
-				DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(Response));
-				return jsonSerializer.ReadObject(response.GetResponseStream()) as Response;
+				DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(Json.Response));
+				return jsonSerializer.ReadObject(response.GetResponseStream()) as Json.Response;
 			}
 		}
 
-		private GeoAddress AddressFromBingMaps(Location location)
-		{
-#warning need to fix this
-			return null;
-			//return new GeoAddress(
-			//    location.Address.AddressLine,
-			//    location.Address.Locality,
-			//    location.Address.AdminDistrict,
-			//    location.Address.PostalCode,
-			//    location.Address.CountryRegion,
-			//    LocationFromBingMaps(location.Point),
-			//    AccuracyFromBingMaps(location.Address),
-			//    ConfidenceFromBingMaps(location.Confidence)
-			//);
-		}
-
-		private GeoLocation LocationFromBingMaps(Point point)
-		{
-			return new GeoLocation(point.Coordinates[0],point.Coordinates[1]);
-		}
-
-		private AddressAccuracy AccuracyFromBingMaps(Address address)
-		{
-			//Virtual Earth returns an address "confidence" which is not very helpful when trying to determine the accuracy of the address, hence, this:
-
-			if (!String.IsNullOrEmpty(address.AddressLine))
-				return AddressAccuracy.AddressLevel;
-
-			if (!String.IsNullOrEmpty(address.PostalCode))
-				return AddressAccuracy.PostalCodeLevel;
-
-			if (!String.IsNullOrEmpty(address.Locality))
-				return AddressAccuracy.CityLevel;
-
-			if (!String.IsNullOrEmpty(address.AdminDistrict))
-				return AddressAccuracy.StateLevel;
-
-			if (!String.IsNullOrEmpty(address.CountryRegion))
-				return AddressAccuracy.CountryLevel;
-
-			return AddressAccuracy.Unknown;
-		}
-
-		private ConfidenceLevel ConfidenceFromBingMaps(string confidence)
+		private ConfidenceLevel EvaluateConfidence(string confidence)
 		{
 			switch (confidence.ToLower())
 			{
@@ -150,11 +120,11 @@ namespace GeoCoding.Microsoft
 			}
 		}
 
-		private string BingURLEncode(string toEncode)
+		private string BingUrlEncode(string toEncode)
 		{
-			if (string.IsNullOrEmpty(toEncode)){
+			if (string.IsNullOrEmpty(toEncode))
 				return string.Empty;
-			}
+
 			return HttpUtility.UrlPathEncode(toEncode).Replace("#", "%23");
 		}
 	}
