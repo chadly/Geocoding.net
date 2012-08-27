@@ -1,1 +1,0 @@
-See here: http://code.google.com/p/geocoding-net/wiki/How_to_Build_from_Source
