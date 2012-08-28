@@ -49,5 +49,12 @@ namespace GeoCoding.Tests
 			var addresses = geoCoder.GeoCode("sdlkf;jasl;kjfldksjfasldf");
 			Assert.Empty(addresses);
 		}
+
+		[Fact]
+		public void CanReverseGeoCode()
+		{
+			Address[] addresses = geoCoder.ReverseGeocode(38.8976777, -77.036517).ToArray();
+			addresses[0].AssertWhiteHouse();
+		}
 	}
 }
