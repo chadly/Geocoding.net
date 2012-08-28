@@ -13,8 +13,9 @@ namespace GeoCoding.Yahoo
 	/// </remarks>
 	public class YahooGeoCoder : IGeoCoder
 	{
-		public const string ServiceUrl = "http://where.yahooapis.com/geocode?q={0}&appid={1}";
+		public const string ServiceUrl = "http://where.yahooapis.com/geocode?q={0}&appid={1}";		
 		public const string ServiceUrlNormal = "http://where.yahooapis.com/geocode?street={0}&city={1}&state={2}&postal={3}&country={4}&appid={5}";
+		public const string ServiceUrlReverse = "http://where.yahooapis.com/geocode?q={0}&appid={1}&gflags=R";
 
 		readonly string appId;
 
@@ -36,40 +37,18 @@ namespace GeoCoding.Yahoo
 			if (String.IsNullOrEmpty(address))
 				throw new ArgumentNullException("address");
 
-			try
-			{
-				HttpWebRequest request = BuildWebRequest(address);
-				return GeoCode(request);
-			}
-			catch (YahooGeoCodingException)
-			{
-				//let these pass through
-				throw;
-			}
-			catch (Exception ex)
-			{
-				//wrap in yahoo exception
-				throw new YahooGeoCodingException(ex);
-			}
+			string url = String.Format(ServiceUrl, HttpUtility.UrlEncode(address), appId);
+
+			HttpWebRequest request = BuildWebRequest(url);
+			return ProcessRequest(request);
 		}
 
 		public IEnumerable<YahooAddress> GeoCode(string street, string city, string state, string postalCode, string country)
 		{
-			try
-			{
-				HttpWebRequest request = BuildWebRequest(street, city, state, postalCode, country);
-				return GeoCode(request);
-			}
-			catch (YahooGeoCodingException)
-			{
-				//let these pass through
-				throw;
-			}
-			catch (Exception ex)
-			{
-				//wrap in yahoo exception
-				throw new YahooGeoCodingException(ex);
-			}
+			string url = String.Format(ServiceUrlNormal, HttpUtility.UrlEncode(street), HttpUtility.UrlEncode(city), HttpUtility.UrlEncode(state), HttpUtility.UrlEncode(postalCode), HttpUtility.UrlEncode(country), appId);
+
+			HttpWebRequest request = BuildWebRequest(url);
+			return ProcessRequest(request);
 		}
 
 		public IEnumerable<YahooAddress> ReverseGeoCode(Location location)
@@ -82,7 +61,31 @@ namespace GeoCoding.Yahoo
 
 		public IEnumerable<YahooAddress> ReverseGeoCode(double latitude, double longitude)
 		{
-			throw new NotImplementedException();
+			string url = String.Format(ServiceUrlReverse, String.Format("{0} {1}", latitude, longitude), appId);
+
+			HttpWebRequest request = BuildWebRequest(url);
+			return ProcessRequest(request);
+		}
+
+		private IEnumerable<YahooAddress> ProcessRequest(HttpWebRequest request)
+		{
+			try
+			{
+				using (WebResponse response = request.GetResponse())
+				{
+					return ProcessWebResponse(response);
+				}
+			}
+			catch (YahooGeoCodingException)
+			{
+				//let these pass through
+				throw;
+			}
+			catch (Exception ex)
+			{
+				//wrap in yahoo exception
+				throw new YahooGeoCodingException(ex);
+			}
 		}
 
 		IEnumerable<Address> IGeoCoder.GeoCode(string address)
@@ -105,28 +108,11 @@ namespace GeoCoding.Yahoo
 			return ReverseGeoCode(latitude, longitude).Cast<Address>();
 		}
 
-		private HttpWebRequest BuildWebRequest(string address)
+		private HttpWebRequest BuildWebRequest(string url)
 		{
-			string url = String.Format(ServiceUrl, HttpUtility.UrlEncode(address), appId);
 			HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
 			req.Method = "GET";
 			return req;
-		}
-
-		private HttpWebRequest BuildWebRequest(string street, string city, string state, string postalCode, string country)
-		{
-			string url = String.Format(ServiceUrlNormal, HttpUtility.UrlEncode(street), HttpUtility.UrlEncode(city), HttpUtility.UrlEncode(state), HttpUtility.UrlEncode(postalCode), HttpUtility.UrlEncode(country), appId);
-			HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-			req.Method = "GET";
-			return req;
-		}
-
-		private IEnumerable<YahooAddress> GeoCode(HttpWebRequest request)
-		{
-			using (WebResponse response = request.GetResponse())
-			{
-				return ProcessWebResponse(response);
-			}
 		}
 
 		private IEnumerable<YahooAddress> ProcessWebResponse(WebResponse response)
