@@ -20,9 +20,7 @@ How to Build from Source
 
 In order to compile the solution in Visual Studio, you must first run the build in MSBuild. The build process generates some files that are needed to compile in Visual Studio.
 
-The easiest way to run the build is just to run build-quick.bat. This will run a basic Debug build without running any tests.
-
-NOTE: If you don't have VisualSVN installed (or if you have it installed on a 32-bit system), you will need to change the path to svnversion.exe in order to successfully run the build. See sample build commands below for example.
+The easiest way to run the build is just to run build.bat. This will run a basic Debug build without running any tests.
 
 
 ### How to Build from Visual Studio 2010 Command Prompt
@@ -33,13 +31,9 @@ _Debug Build with tests_
 
     msbuild geocoding.build
 
-_Debug Build without tests (this is what build-quick is doing)_
+_Debug Build without tests_
 
     msbuild geocoding.build /t:Compile
-
-_Debug Build without tests and custom path to svnversion.exe_
-
-    msbuild geocoding.build /t:Compile /p:svnToolPath=C:\Program Files\Subversion
 
 _Release Build_
 

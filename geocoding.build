@@ -3,10 +3,13 @@
   <PropertyGroup>
     <projectName>GeoCoding.Net</projectName>
     <company>GeoCoding.Net</company>
-    <copyright>Copyright © 2008 - 2011 Chad Lee</copyright>
+    <copyright>Copyright © 2008 - 2012 Chad Lee</copyright>
     <major>2</major>
     <minor>0</minor>
-    <build>0</build>
+    <patch>0</patch>
+    <!-- build number comes from teamcity -->
+    <build Condition="'$(BUILD_NUMBER)'==''">0</build>
+    <build Condition="'$(BUILD_NUMBER)'!=''">$(BUILD_NUMBER)</build>
   </PropertyGroup>
 
   <!-- Define order of solutions to build -->
@@ -30,11 +33,9 @@
     <libDir>$(MSBuildProjectDirectory)\lib</libDir>
 
     <snkFile>$(MSBuildProjectDirectory)\geocoding.snk</snkFile>
-    <svnToolPath Condition="'$(svnToolPath)'==''">C:\Program Files (x86)\VisualSVN\bin</svnToolPath>
   </PropertyGroup>
 
   <UsingTask AssemblyFile="$(libDir)\MsBuild\MSBuild.Community.Tasks.dll" TaskName="MSBuild.Community.Tasks.AssemblyInfo" />
-  <UsingTask AssemblyFile="$(libDir)\MsBuild\MSBuild.Community.Tasks.dll" TaskName="MSBuild.Community.Tasks.Subversion.SvnVersion" />
   <UsingTask AssemblyFile="$(libDir)\Xunit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
   <UsingTask AssemblyFile="$(libDir)\ILMerge\ILMerge.MSBuild.Tasks.dll" TaskName="ILMerge.MSBuild.Tasks.ILMerge" />
 
@@ -62,14 +63,7 @@
   </Target>
 
   <Target Name="Version">
-    <SvnVersion
-      LocalPath="$(MSBuildProjectDirectory)"
-      UseLastCommittedRevision="true"
-      ToolPath="$(svnToolPath)">
-      <Output TaskParameter="Revision" PropertyName="revision" />
-    </SvnVersion>
-
-    <CreateProperty Value="$(major).$(minor).$(build).$(revision)">
+    <CreateProperty Value="$(major).$(minor).$(patch).$(build)">
       <Output TaskParameter="Value" PropertyName="versionString" />
     </CreateProperty>
 
