@@ -17,7 +17,7 @@ namespace GeoCoding.Google
 
 		public string ServiceUrl
 		{
-			get { return (UseSsl ? "https:" : "http:") + "//maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false"; }
+			get { return (UseSsl ? "https:" : "http:") + "//maps.googleapis.com/maps/api/geocode/xml?{0}={1}&sensor=false"; }
 		}
 
 		public IEnumerable<GoogleAddress> GeoCode(string address)
@@ -25,9 +25,28 @@ namespace GeoCoding.Google
 			if (String.IsNullOrEmpty(address))
 				throw new ArgumentNullException("address");
 
+			HttpWebRequest request = BuildWebRequest("address", HttpUtility.UrlEncode(address));
+			return ProcessRequest(request);
+		}
+
+		public IEnumerable<GoogleAddress> ReverseGeoCode(Location location)
+		{
+			if (location == null)
+				throw new ArgumentNullException("location");
+
+			return ReverseGeoCode(location.Latitude, location.Longitude);
+		}
+
+		public IEnumerable<GoogleAddress> ReverseGeoCode(double latitude, double longitude)
+		{
+			HttpWebRequest request = BuildWebRequest("latlng", String.Format("{0},{1}", latitude, longitude));
+			return ProcessRequest(request);
+		}
+
+		private IEnumerable<GoogleAddress> ProcessRequest(HttpWebRequest request)
+		{
 			try
 			{
-				HttpWebRequest request = BuildWebRequest(address);
 				using (WebResponse response = request.GetResponse())
 				{
 					return ProcessWebResponse(response);
@@ -43,19 +62,6 @@ namespace GeoCoding.Google
 				//wrap in google exception
 				throw new GoogleGeoCodingException(ex);
 			}
-		}
-
-		public IEnumerable<GoogleAddress> ReverseGeoCode(Location location)
-		{
-			if (location == null)
-				throw new ArgumentNullException("location");
-
-			return ReverseGeoCode(location.Latitude, location.Longitude);
-		}
-
-		public IEnumerable<GoogleAddress> ReverseGeoCode(double latitude, double longitude)
-		{
-			throw new NotImplementedException();
 		}
 
 		IEnumerable<Address> IGeoCoder.GeoCode(string address)
@@ -79,9 +85,9 @@ namespace GeoCoding.Google
 			return ReverseGeoCode(latitude, longitude).Cast<Address>();
 		}
 
-		private HttpWebRequest BuildWebRequest(string address)
+		private HttpWebRequest BuildWebRequest(string type, string value)
 		{
-			string url = String.Format(ServiceUrl, HttpUtility.UrlEncode(address));
+			string url = String.Format(ServiceUrl, type, value);
 			HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
 			req.Method = "GET";
 			return req;
