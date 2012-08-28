@@ -13,6 +13,8 @@ namespace GeoCoding.Tests
 
 		public GeoCoderTest()
 		{
+			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-us");
+
 			geoCoder = CreateGeoCoder();
 		}
 
