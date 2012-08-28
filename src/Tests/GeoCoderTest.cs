@@ -56,7 +56,7 @@ namespace GeoCoding.Tests
 		public void CanReverseGeoCode()
 		{
 			Address[] addresses = geoCoder.ReverseGeocode(38.8976777, -77.036517).ToArray();
-			addresses[0].AssertWhiteHouse();
+			addresses[0].AssertWhiteHouseArea();
 		}
 	}
 }

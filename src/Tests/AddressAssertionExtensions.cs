@@ -8,6 +8,11 @@ namespace GeoCoding.Tests
 		public static void AssertWhiteHouse(this Address address)
 		{
 			Assert.True(address.FormattedAddress.Contains("The White House") || address.FormattedAddress.Contains("1600 Pennsylvania Ave NW"));
+			AssertWhiteHouseArea(address);
+		}
+
+		public static void AssertWhiteHouseArea(this Address address)
+		{
 			Assert.True(address.FormattedAddress.Contains("Washington, DC"));
 
 			//just hoping that each geocoder implementation gets it somewhere near the vicinity
