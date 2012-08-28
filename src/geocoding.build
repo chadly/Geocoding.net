@@ -15,6 +15,7 @@
   <!-- Define order of solutions to build -->
   <ItemGroup>
     <vssolutions Include="GeoCoding.sln" />
+    <vssolutions Include="Examples\Examples.sln" />
   </ItemGroup>
 
   <!-- Define outputs -->

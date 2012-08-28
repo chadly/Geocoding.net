@@ -45,6 +45,22 @@
     <Reference Include="Autofac.Integration.Mvc">
       <HintPath>..\..\..\lib\Autofac\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="GeoCoding.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7c714700b88674c7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Core\bin\$(Configuration)\GeoCoding.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GeoCoding.Google, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7c714700b88674c7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Google\bin\$(Configuration)\GeoCoding.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="GeoCoding.Microsoft, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7c714700b88674c7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Microsoft\bin\$(Configuration)\GeoCoding.Microsoft.dll</HintPath>
+    </Reference>
+    <Reference Include="GeoCoding.Yahoo, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7c714700b88674c7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Yahoo\bin\$(Configuration)\GeoCoding.Yahoo.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -76,24 +92,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Site.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Google\Google.csproj">
-      <Project>{2E608F4E-29F7-4AC3-922F-23D971312CAE}</Project>
-      <Name>Google</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Microsoft\Microsoft.csproj">
-      <Project>{74BCB608-4674-452F-A50C-7EE61AC47EAF}</Project>
-      <Name>Microsoft</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Yahoo\Yahoo.csproj">
-      <Project>{B2863E87-3983-46EF-8B3E-37A4475ECA13}</Project>
-      <Name>Yahoo</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Core\Core.csproj">
-      <Project>{654812CF-D009-4420-B9EC-D07B030926A1}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
