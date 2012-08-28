@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using GeoCoding;
 
@@ -20,7 +21,10 @@ namespace Example.Web.Controllers
 
 		public ActionResult Geocode(string address)
 		{
-			var addresses = geoCoder.GeoCode(address);
+			if (String.IsNullOrEmpty(address))
+				return View("Index");
+
+			var addresses = geoCoder.GeoCode(address).ToArray();
 			return View("Index", addresses);
 		}
 	}

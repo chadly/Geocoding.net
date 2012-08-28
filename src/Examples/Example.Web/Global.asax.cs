@@ -1,40 +1,37 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Autofac.Builder;
-using Autofac.Integration.Web;
-using Autofac.Integration.Web.Mvc;
+using Autofac;
+using Autofac.Integration.Mvc;
 using GeoCoding;
-using GeoCoding.BingMaps;
 using GeoCoding.Google;
 using GeoCoding.Microsoft;
 using GeoCoding.Yahoo;
 
 namespace Example.Web
 {
-	public class MvcApplication : System.Web.HttpApplication, IContainerProviderAccessor
+	public class MvcApplication : System.Web.HttpApplication
 	{
-		private static IContainerProvider containerProvider;
-
-		public IContainerProvider ContainerProvider
+		protected void Application_Start()
 		{
-			get { return containerProvider; }
+			var container = InitializeContainer();
+
+			DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
+			RegisterRoutes(RouteTable.Routes);
 		}
 
-		private void InitializeContainer()
+		private IContainer InitializeContainer()
 		{
 			var builder = new ContainerBuilder();
-			builder.RegisterModule(new AutofacControllerModule(Assembly.GetExecutingAssembly()));
+			builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
 			//register your geocoder implementation here -- note: it will use the last one registered
-			builder.Register(c => new VirtualEarthGeoCoder("my-virtual-earth-username", "my-virtual-earth-password")).As<IGeoCoder>();
+			builder.Register(c => new BingMapsGeoCoder("my-bing-maps-key")).As<IGeoCoder>();
 			builder.Register(c => new YahooGeoCoder("my-yahoo-app-id")).As<IGeoCoder>();
-			builder.Register(c => new GoogleGeoCoder("my-google-api-key")).As<IGeoCoder>();
-			builder.Register(c => new BingMapsGeoCoder("my-bing-maps-jey")).As<IGeoCoder>();
+			builder.Register(c => new GoogleGeoCoder()).As<IGeoCoder>();
 
-			containerProvider = new ContainerProvider(builder.Build());
-			ControllerBuilder.Current.SetControllerFactory(new AutofacControllerFactory(ContainerProvider));
+			return builder.Build();
 		}
 
 		public static void RegisterRoutes(RouteCollection routes)
@@ -46,12 +43,6 @@ namespace Example.Web
 				"{controller}/{action}/{id}",                           // URL with parameters
 				new { controller = "Home", action = "Index", id = "" }  // Parameter defaults
 			);
-		}
-
-		protected void Application_Start()
-		{
-			InitializeContainer();
-			RegisterRoutes(RouteTable.Routes);
 		}
 	}
 }
