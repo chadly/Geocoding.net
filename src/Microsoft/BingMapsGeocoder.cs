@@ -76,7 +76,15 @@ namespace GeoCoding.Microsoft
 
 		public IEnumerable<BingAddress> ReverseGeoCode(double latitude, double longitude)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				var response = GetResponse(string.Format(UNFORMATTED_QUERY, String.Format("{0},{1}", latitude, longitude), bingKey));
+				return ParseResponse(response);
+			}
+			catch (Exception ex)
+			{
+				throw new BingGeoCodingException(ex);
+			}
 		}
 
 		IEnumerable<Address> IGeoCoder.GeoCode(string address)
