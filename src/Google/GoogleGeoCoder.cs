@@ -45,6 +45,19 @@ namespace GeoCoding.Google
 			}
 		}
 
+		public IEnumerable<GoogleAddress> ReverseGeoCode(Location location)
+		{
+			if (location == null)
+				throw new ArgumentNullException("location");
+
+			return ReverseGeoCode(location.Latitude, location.Longitude);
+		}
+
+		public IEnumerable<GoogleAddress> ReverseGeoCode(double latitude, double longitude)
+		{
+			throw new NotImplementedException();
+		}
+
 		IEnumerable<Address> IGeoCoder.GeoCode(string address)
 		{
 			return GeoCode(address).Cast<Address>();
@@ -54,6 +67,16 @@ namespace GeoCoding.Google
 		{
 			string address = String.Format("{0} {1}, {2} {3}, {4}", street, city, state, postalCode, country);
 			return GeoCode(address).Cast<Address>();
+		}
+
+		IEnumerable<Address> IGeoCoder.ReverseGeocode(Location location)
+		{
+			return ReverseGeoCode(location).Cast<Address>();
+		}
+
+		IEnumerable<Address> IGeoCoder.ReverseGeocode(double latitude, double longitude)
+		{
+			return ReverseGeoCode(latitude, longitude).Cast<Address>();
 		}
 
 		private HttpWebRequest BuildWebRequest(string address)

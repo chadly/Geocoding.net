@@ -66,6 +66,19 @@ namespace GeoCoding.Microsoft
 			}
 		}
 
+		public IEnumerable<BingAddress> ReverseGeoCode(Location location)
+		{
+			if (location == null)
+				throw new ArgumentNullException("location");
+
+			return ReverseGeoCode(location.Latitude, location.Longitude);
+		}
+
+		public IEnumerable<BingAddress> ReverseGeoCode(double latitude, double longitude)
+		{
+			throw new NotImplementedException();
+		}
+
 		IEnumerable<Address> IGeoCoder.GeoCode(string address)
 		{
 			return GeoCode(address).Cast<Address>();
@@ -74,6 +87,16 @@ namespace GeoCoding.Microsoft
 		IEnumerable<Address> IGeoCoder.GeoCode(string street, string city, string state, string postalCode, string country)
 		{
 			return GeoCode(street, city, state, postalCode, country).Cast<Address>();
+		}
+
+		IEnumerable<Address> IGeoCoder.ReverseGeocode(Location location)
+		{
+			return ReverseGeoCode(location).Cast<Address>();
+		}
+
+		IEnumerable<Address> IGeoCoder.ReverseGeocode(double latitude, double longitude)
+		{
+			return ReverseGeoCode(latitude, longitude).Cast<Address>();
 		}
 
 		private bool AppendParameter(StringBuilder sb, string parameter, string format, bool first)
