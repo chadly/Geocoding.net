@@ -2,6 +2,9 @@ Version 2.0
 	-- Updating GoogleGeoCoder to Google Maps API v3
 	-- Updating YahooGeoCoder to Yahoo PlaceFinder API.
 
+	-- Each service implementation now overrides Address with extra information returned from each service
+	-- Added reverse geocoding
+
 Version 1.4
 	-- Added Bing Maps API implementation. Microsoft is phasing out the Virtual Earth API in favor of the new Bing Maps REST API.
 
