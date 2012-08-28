@@ -14,6 +14,10 @@ The API returns latitude/longitude coordinates and normalized address informatio
     IGeoCoder geoCoder = new GoogleGeoCoder("my-api-key");
     Address[] addresses = geoCoder.GeoCode("123 Main St");
 
+It can also be used to return address information from latitude/longitude coordinates (aka reverse geocoding):
+
+    IGeoCoder geoCoder = new YahooGeoCoder("my-app-ID");
+    Address[] addresses = geoCoder.ReverseGeoCode(38.8976777, -77.036517);
 
 How to Build from Source
 ------------------------
