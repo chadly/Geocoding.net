@@ -14,23 +14,23 @@
 
   <!-- Define order of solutions to build -->
   <ItemGroup>
-    <vssolutions Include="src\GeoCoding.sln" />
+    <vssolutions Include="GeoCoding.sln" />
   </ItemGroup>
 
   <!-- Define outputs -->
   <ItemGroup>
-    <merge Include="src\Core\Core.csproj" />
-    <merge Include="src\Google\Google.csproj" />
-    <merge Include="src\Yahoo\Yahoo.csproj" />
-    <merge Include="src\Microsoft\Microsoft.csproj" />
+    <merge Include="Core\Core.csproj" />
+    <merge Include="Google\Google.csproj" />
+    <merge Include="Yahoo\Yahoo.csproj" />
+    <merge Include="Microsoft\Microsoft.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
     <!-- default configuration is "Debug"; the other is "Release" -->
     <configuration Condition="'$(configuration)'==''">Debug</configuration>
 
-    <buildDir Condition="'$(buildDir)'==''">$(MSBuildProjectDirectory)\build\$(configuration)</buildDir>
-    <libDir>$(MSBuildProjectDirectory)\lib</libDir>
+    <buildDir Condition="'$(buildDir)'==''">$(MSBuildProjectDirectory)\..\build\$(configuration)</buildDir>
+    <libDir>$(MSBuildProjectDirectory)\..\lib</libDir>
 
     <snkFile>$(MSBuildProjectDirectory)\geocoding.snk</snkFile>
   </PropertyGroup>
@@ -54,7 +54,7 @@
     <Exec Command="FOR /F &quot;tokens=*&quot; %%G IN ('DIR /B /AD /S bin') DO RMDIR /S /Q &quot;%%G&quot;" />
     <Exec Command="FOR /F &quot;tokens=*&quot; %%G IN ('DIR /B /AD /S obj') DO RMDIR /S /Q &quot;%%G&quot;" />
 
-    <Delete Files="src\AssemblyInfoCommon.cs" />
+    <Delete Files="AssemblyInfoCommon.cs" />
 
     <CreateItem Include="$(MSBuildProjectDirectory)\**\*.config.temp">
       <Output TaskParameter="Include" ItemName="templateFiles" />
@@ -69,7 +69,7 @@
 
     <AssemblyInfo
       CodeLanguage="CS"
-      OutputFile="src\AssemblyInfoCommon.cs"
+      OutputFile="AssemblyInfoCommon.cs"
       AssemblyProduct="$(projectName)"
       AssemblyCompany="$(company)"
       AssemblyCopyright="$(copyright)"

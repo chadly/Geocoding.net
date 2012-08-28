@@ -13,7 +13,7 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\geocoding.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\geocoding.snk</AssemblyOriginatorKeyFile>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -71,12 +71,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\geocoding.snk">
+    <None Include="..\geocoding.snk">
       <Link>Properties\geocoding.snk</Link>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\release-notes.txt">
+    <Content Include="..\..\release-notes.txt">
       <Link>release-notes.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

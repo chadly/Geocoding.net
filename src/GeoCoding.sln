@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{891021E5-7521-4F93-9946-B7B630DF3192}"
 	ProjectSection(SolutionItems) = preProject
-		..\build-quick.bat = ..\build-quick.bat
-		..\build-release.bat = ..\build-release.bat
+		..\build-with-tests.bat = ..\build-with-tests.bat
+		..\build.bat = ..\build.bat
 		..\clean.bat = ..\clean.bat
-		..\geocoding.build = ..\geocoding.build
-		..\how-to-build.txt = ..\how-to-build.txt
+		geocoding.build = geocoding.build
+		..\readme.md = ..\readme.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core Framework", "Core Framework", "{2104CCA2-94D4-4C56-9A5E-FAF9D9538817}"
@@ -66,7 +66,7 @@ Global
 		{F742864D-9400-4CE2-957A-DBD0A0237277} = {2104CCA2-94D4-4C56-9A5E-FAF9D9538817}
 		{80733FA4-B825-4983-94B5-EAB9A440692F} = {4F0BCB32-2575-443D-B59B-BC7069403F2C}
 		{2E608F4E-29F7-4AC3-922F-23D971312CAE} = {F742864D-9400-4CE2-957A-DBD0A0237277}
-		{74BCB608-4674-452F-A50C-7EE61AC47EAF} = {F742864D-9400-4CE2-957A-DBD0A0237277}
 		{B2863E87-3983-46EF-8B3E-37A4475ECA13} = {F742864D-9400-4CE2-957A-DBD0A0237277}
+		{74BCB608-4674-452F-A50C-7EE61AC47EAF} = {F742864D-9400-4CE2-957A-DBD0A0237277}
 	EndGlobalSection
 EndGlobal
