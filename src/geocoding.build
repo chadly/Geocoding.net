@@ -38,7 +38,7 @@
 
   <UsingTask AssemblyFile="$(libDir)\MSBuildTasks.1.4.0.45\tools\MSBuild.Community.Tasks.dll" TaskName="MSBuild.Community.Tasks.AssemblyInfo" />
   <UsingTask AssemblyFile="$(libDir)\xunit.1.9.1\lib\net20\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
-
+  <UsingTask AssemblyFile="$(libDir)\ILMerge.MSBuild.Tasks.1.0.0.1\lib\net20\ILMerge.MSBuild.Tasks.dll" TaskName="ILMerge.MSBuild.Tasks.ILMerge" />
 
   <!-- ========= Public Targets ===================================================== -->
 
