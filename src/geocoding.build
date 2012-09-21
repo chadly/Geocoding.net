@@ -36,9 +36,8 @@
     <snkFile>$(MSBuildProjectDirectory)\geocoding.snk</snkFile>
   </PropertyGroup>
 
-  <UsingTask AssemblyFile="$(libDir)\MsBuild\MSBuild.Community.Tasks.dll" TaskName="MSBuild.Community.Tasks.AssemblyInfo" />
-  <UsingTask AssemblyFile="$(libDir)\Xunit\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
-  <UsingTask AssemblyFile="$(libDir)\ILMerge\ILMerge.MSBuild.Tasks.dll" TaskName="ILMerge.MSBuild.Tasks.ILMerge" />
+  <UsingTask AssemblyFile="$(libDir)\MSBuildTasks.1.4.0.45\tools\MSBuild.Community.Tasks.dll" TaskName="MSBuild.Community.Tasks.AssemblyInfo" />
+  <UsingTask AssemblyFile="$(libDir)\xunit.1.9.1\lib\net20\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
 
 
   <!-- ========= Public Targets ===================================================== -->
