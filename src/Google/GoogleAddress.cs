@@ -24,7 +24,7 @@ namespace GeoCoding.Google
 		}
 
 		public GoogleAddress(GoogleAddressType type, string formattedAddress, GoogleAddressComponent[] components, Location coordinates, bool isPartialMatch)
-			: base(formattedAddress, coordinates)
+			: base(formattedAddress, coordinates, "Google")
 		{
 			if (components == null)
 				throw new ArgumentNullException("components");

@@ -7,6 +7,7 @@ namespace GeoCoding
 	{
 		readonly string formattedAddress;
 		readonly Location coordinates;
+        readonly string provider;
 
 		public string FormattedAddress
 		{
@@ -18,7 +19,12 @@ namespace GeoCoding
 			get { return coordinates; }
 		}
 
-		public Address(string formattedAddress, Location coordinates)
+        public string Provider
+        {
+            get { return provider ?? ""; }
+        }
+
+		public Address(string formattedAddress, Location coordinates, string provider)
 		{
 			formattedAddress = (formattedAddress ?? "").Trim();
 
@@ -28,9 +34,13 @@ namespace GeoCoding
 			if (coordinates == null)
 				throw new ArgumentNullException("coordinates");
 
+            if (provider == null)
+                throw new ArgumentNullException("provider");
+
 			this.formattedAddress = formattedAddress;
 			this.coordinates = coordinates;
-		}
+            this.provider = provider;
+        }
 
 		public virtual Distance DistanceBetween(Address address)
 		{

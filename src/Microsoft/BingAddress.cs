@@ -40,7 +40,7 @@ namespace GeoCoding.Microsoft
 
 		public BingAddress(string formattedAddress, Location coordinates, string addressLine, string adminDistrict, string adminDistrict2,
 			string countryRegion, string locality, string postalCode, EntityType type, ConfidenceLevel confidence)
-			: base(formattedAddress, coordinates)
+			: base(formattedAddress, coordinates, "Bing")
 		{
 			this.addressLine = addressLine;
 			this.adminDistrict = adminDistrict;
