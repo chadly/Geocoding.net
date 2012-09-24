@@ -131,7 +131,7 @@ namespace GeoCoding
 		public YahooAddress(string formattedAddress, Location coordinates, string name, string house, string street,
 			string unit, string unitType, string neighborhood, string city, string county, string countyCode, string state,
 			string stateCode, string postalCode, string country, string countryCode, int quality)
-			: base(formattedAddress, coordinates)
+			: base(formattedAddress, coordinates, "Yahoo")
 		{
 			this.name = name;
 			this.house = house;
