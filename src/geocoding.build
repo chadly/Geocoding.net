@@ -30,7 +30,7 @@
     <!-- default configuration is "Debug"; the other is "Release" -->
     <configuration Condition="'$(configuration)'==''">Debug</configuration>
 
-    <buildDir Condition="'$(buildDir)'==''">$(MSBuildProjectDirectory)\..\build\$(configuration)</buildDir>
+    <buildDir Condition="'$(buildDir)'==''">$(MSBuildProjectDirectory)\..\bin\$(configuration)</buildDir>
     <libDir>$(MSBuildProjectDirectory)\..\lib</libDir>
 
     <snkFile>$(MSBuildProjectDirectory)\geocoding.snk</snkFile>
@@ -38,7 +38,7 @@
 
   <UsingTask AssemblyFile="$(libDir)\MSBuildTasks.1.4.0.45\tools\MSBuild.Community.Tasks.dll" TaskName="MSBuild.Community.Tasks.AssemblyInfo" />
   <UsingTask AssemblyFile="$(libDir)\xunit.1.9.1\lib\net20\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
-  <UsingTask AssemblyFile="$(libDir)\ILMerge.MSBuild.Tasks.1.0.0.1\lib\net20\ILMerge.MSBuild.Tasks.dll" TaskName="ILMerge.MSBuild.Tasks.ILMerge" />
+  <UsingTask AssemblyFile="$(libDir)\ILMerge.MSBuild.Tasks.1.0.0.3\tools\ILMerge.MSBuild.Tasks.dll" TaskName="ILMerge.MSBuild.Tasks.ILMerge" />
 
   <!-- ========= Public Targets ===================================================== -->
 
