@@ -5,7 +5,7 @@
     <company>GeoCoding.Net</company>
     <copyright>Copyright © 2008 - 2012 Chad Lee</copyright>
     <major>2</major>
-    <minor>0</minor>
+    <minor>1</minor>
     <patch>0</patch>
     <!-- build number comes from teamcity -->
     <build Condition="'$(BUILD_NUMBER)'==''">0</build>

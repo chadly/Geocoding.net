@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Geocoding.net</id>
+    <version>2.1.0</version>
+    <title>Geocoding.net</title>
+    <authors>chadly</authors>
+    <owners>chadly</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectUrl>https://github.com/chadly/Geocoding.net</projectUrl>
+    <description>
+      Includes a portable GeoCoding? domain model along with a generic IGeoCoder service interface. Current implementations include: Google Maps, Yahoo! PlaceFinder, Bing Maps (aka Virtual Earth).
+      The API returns latitude/longitude coordinates and normalized address information. This can be used to perform address validation, real time mapping of user-entered addresses, distance calculations, and much more.
+    </description>
+    <tags>geocoding geocode geocoder maps address validation normalization</tags>
+  </metadata>
+</package>
