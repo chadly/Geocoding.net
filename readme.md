@@ -1,7 +1,7 @@
 Generic C# GeoCoding API
 ========================
 
-Includes a portable GeoCoding domain model along with a generic IGeoCoder service interface.  Current implementations include:
+Includes a model and interface for communicating with three popular Geocoding providers.  Current implementations include:
 
   * [Google Maps](https://developers.google.com/maps/) - [docs](https://developers.google.com/maps/documentation/geocoding/)
   * [Yahoo! PlaceFinder](http://developer.yahoo.com/geo/placefinder/) - [docs](http://developer.yahoo.com/geo/placefinder/guide/index.html)
