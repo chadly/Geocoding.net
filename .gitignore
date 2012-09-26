@@ -1,3 +1,5 @@
+/bin
+/lib
 AssemblyInfoCommon.cs
 app.config
 docs
