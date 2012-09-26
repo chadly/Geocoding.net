@@ -1,3 +1,7 @@
+Version 2.1
+	-- Adding Provider property to address to make it easier to determine which provider an address came from when querying multiple providers at once.
+	-- Enabling nuget and producing nuspec as build output.
+
 Version 2.0
 	-- Updating GoogleGeoCoder to Google Maps API v3
 	-- Updating YahooGeoCoder to Yahoo PlaceFinder API.
