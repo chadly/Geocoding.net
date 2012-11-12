@@ -14,7 +14,7 @@ namespace GeoCoding.Microsoft
 	public class BingMapsGeoCoder : IGeoCoder
 	{
 		private string BingKey;
-		private static string UNFORMATTED_QUERY = "http://dev.virtualearth.net/REST/v1/Locations/{0}?key={1}";
+		private static string UNFORMATTED_QUERY = "http://dev.virtualearth.net/REST/v1/Locations?q={0}&key={1}";
 		private static string FORMATTED_QUERY = "http://dev.virtualearth.net/REST/v1/Locations?{0}&key={1}";
 		private static string COUNTRY = "countryRegion={0}";
 		private static string ADMIN = "adminDistrict={0}";
@@ -149,7 +149,7 @@ namespace GeoCoding.Microsoft
 			if (string.IsNullOrEmpty(toEncode)){
 				return string.Empty;
 			}
-			return HttpUtility.UrlPathEncode(toEncode).Replace("#", "%23");
+            return HttpUtility.UrlEncode(toEncode);
 		}
 	}
 }
