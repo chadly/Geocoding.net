@@ -15,6 +15,7 @@ namespace GeoCoding.Microsoft
 	{
 		const string UNFORMATTED_QUERY = "http://dev.virtualearth.net/REST/v1/Locations/{0}?key={1}";
 		const string FORMATTED_QUERY = "http://dev.virtualearth.net/REST/v1/Locations?{0}&key={1}";
+		const string QUERY = "q={0}";
 		const string COUNTRY = "countryRegion={0}";
 		const string ADMIN = "adminDistrict={0}";
 		const string ZIP = "postalCode={0}";
@@ -32,7 +33,10 @@ namespace GeoCoding.Microsoft
 		{
 			try
 			{
-				var response = GetResponse(string.Format(UNFORMATTED_QUERY, BingUrlEncode(address), bingKey));
+				var parameters = new StringBuilder();
+				AppendParameter(parameters, address, QUERY, true);
+
+				var response = GetResponse(string.Format(FORMATTED_QUERY, parameters.ToString(), bingKey));
 				return ParseResponse(response);
 			}
 			catch (Exception ex)
@@ -170,7 +174,7 @@ namespace GeoCoding.Microsoft
 			if (string.IsNullOrEmpty(toEncode))
 				return string.Empty;
 
-			return HttpUtility.UrlPathEncode(toEncode).Replace("#", "%23");
+			return HttpUtility.UrlEncode(toEncode);
 		}
 	}
 }

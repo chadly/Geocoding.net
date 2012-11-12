@@ -53,6 +53,15 @@ namespace GeoCoding.Tests
 		}
 
 		[Fact]
+		public void CanGeoCodeWithSpecialCharacters()
+		{
+			var addresses = geoCoder.GeoCode("Fried St & 2nd St, Gretna, LA 70053");
+
+			//asserting no exceptions are thrown and that we get something
+			Assert.NotEmpty(addresses);
+		}
+
+		[Fact]
 		public void CanReverseGeoCode()
 		{
 			Address[] addresses = geoCoder.ReverseGeocode(38.8976777, -77.036517).ToArray();
