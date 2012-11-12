@@ -7,6 +7,7 @@
     <major>1</major>
     <minor>4</minor>
     <build>2</build>
+    <revision>0</revision>
   </PropertyGroup>
 
   <!-- Define order of solutions to build -->
@@ -59,13 +60,6 @@
   </Target>
 
   <Target Name="Version">
-    <SvnVersion
-      LocalPath="$(MSBuildProjectDirectory)"
-      UseLastCommittedRevision="true"
-      ToolPath="$(svnToolPath)">
-      <Output TaskParameter="Revision" PropertyName="revision" />
-    </SvnVersion>
-
     <CreateProperty Value="$(major).$(minor).$(build).$(revision)">
       <Output TaskParameter="Value" PropertyName="versionString" />
     </CreateProperty>
