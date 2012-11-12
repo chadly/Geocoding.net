@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -39,7 +40,7 @@ namespace GeoCoding.Google
 
 		public IEnumerable<GoogleAddress> ReverseGeoCode(double latitude, double longitude)
 		{
-			HttpWebRequest request = BuildWebRequest("latlng", String.Format("{0},{1}", latitude, longitude));
+			HttpWebRequest request = BuildWebRequest("latlng", String.Format(CultureInfo.InvariantCulture, "{0},{1}", latitude, longitude));
 			return ProcessRequest(request);
 		}
 

@@ -45,6 +45,17 @@ namespace GeoCoding.Tests
 			addresses[0].AssertCanadianPrimeMinister();
 		}
 
+		[Theory]
+		[InlineData("en-US")]
+		[InlineData("cs-CZ")]
+		public void CanReverseGeoCodeAddressUnderDifferentCultures(string cultureName)
+		{
+			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(cultureName);
+
+			Address[] addresses = geoCoder.ReverseGeocode(38.8976777, -77.036517).ToArray();
+			addresses[0].AssertWhiteHouseArea();
+		}
+
 		[Fact]
 		public void ShouldNotBlowUpOnBadAddress()
 		{

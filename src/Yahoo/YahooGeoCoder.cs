@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -61,7 +62,7 @@ namespace GeoCoding.Yahoo
 
 		public IEnumerable<YahooAddress> ReverseGeoCode(double latitude, double longitude)
 		{
-			string url = String.Format(ServiceUrlReverse, String.Format("{0} {1}", latitude, longitude), appId);
+			string url = String.Format(ServiceUrlReverse, String.Format(CultureInfo.InvariantCulture, "{0} {1}", latitude, longitude), appId);
 
 			HttpWebRequest request = BuildWebRequest(url);
 			return ProcessRequest(request);

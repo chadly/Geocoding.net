@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Runtime.Serialization.Json;
@@ -82,7 +83,7 @@ namespace GeoCoding.Microsoft
 		{
 			try
 			{
-				var response = GetResponse(string.Format(UNFORMATTED_QUERY, String.Format("{0},{1}", latitude, longitude), bingKey));
+				var response = GetResponse(string.Format(UNFORMATTED_QUERY, String.Format(CultureInfo.InvariantCulture, "{0},{1}", latitude, longitude), bingKey));
 				return ParseResponse(response);
 			}
 			catch (Exception ex)
