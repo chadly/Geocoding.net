@@ -6,7 +6,7 @@
     <copyright>Copyright © 2008 - 2011 Chad Lee</copyright>
     <major>1</major>
     <minor>4</minor>
-    <build>1</build>
+    <build>2</build>
   </PropertyGroup>
 
   <!-- Define order of solutions to build -->
