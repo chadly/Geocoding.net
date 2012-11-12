@@ -1,3 +1,7 @@
+Version 2.1.1
+	-- Fixing issue with bing maps geocoder blowing up when geocoding addresses with ampersands.
+	-- Fixing issue #2 - reverse geocoding not working correctly in non-US cultures.
+
 Version 2.1
 	-- Adding Provider property to address to make it easier to determine which provider an address came from when querying multiple providers at once.
 	-- Enabling nuget and producing nuspec as build output.
