@@ -9,6 +9,8 @@ Includes a model and interface for communicating with three popular Geocoding pr
 
 The API returns latitude/longitude coordinates and normalized address information.  This can be used to perform address validation, real time mapping of user-entered addresses, distance calculations, and much more.
 
+See latest [release notes](https://github.com/chadly/Geocoding.net/wiki/Release-Notes).
+
 ### Simple Example
 
 ```c#
