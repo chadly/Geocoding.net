@@ -22,39 +22,7 @@ It can also be used to return address information from latitude/longitude coordi
 How to Build from Source
 ------------------------
 
-In order to compile the solution in Visual Studio, you must first run the build in MSBuild. The build process generates some files that are needed to compile in Visual Studio.
-
-The easiest way to run the build is just to run build.bat. This will run a basic Debug build without running any tests.
-
-
-### How to Build from Visual Studio 2010 Command Prompt
-
-Here are some sample build commands (these should be run from the working copy root directory):
-
-_Debug Build with tests_
-
-    msbuild geocoding.build
-
-_Debug Build without tests_
-
-    msbuild geocoding.build /t:Compile
-
-_Release Build_
-
-    msbuild geocoding.build /p:Configuration=Release
-
-_Copy & Merge Release Build to Output Dir (no tests)_
-
-    msbuild geocoding.build /t:ILMerge /p:Configuration=Release
-
-_Generate AssemblyInfoCommon file_
-
-    msbuild geocoding.build /t:Version
-
-_Generate App.config from template file_
-
-    msbuild geocoding.build /t:CopyTemplateFiles
-
+In order to compile the solution in Visual Studio, you must first run build.bat. This will run a basic Debug build without running any tests. The build process generates some files that are needed to compile in Visual Studio.
 
 ### Service Tests
-You will need to generate API keys for each respective service to run the service tests. Edit App.config in Core.Tests and put in your API keys.
+You will need to generate API keys for each respective service to run the service tests. Edit App.config in the Tests project and put in your API keys.
