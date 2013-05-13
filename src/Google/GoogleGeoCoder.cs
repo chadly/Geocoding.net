@@ -174,8 +174,10 @@ namespace GeoCoding.Google
 
             try
             {
-                var response = (HttpWebResponse)requestState.request.EndGetResponse(result);
-                return ProcessWebResponse(response);
+                using (var response = (HttpWebResponse)requestState.request.EndGetResponse(result))
+                {
+                    return ProcessWebResponse(response);
+                }
             }
             catch (GoogleGeoCodingException)
             {
