@@ -20,6 +20,11 @@ namespace GeoCoding
             get { return northEast; }
         }
 
+        public Bounds(double southWestLatitude, double southWestLongitude, double northEastLatitude, double northEastLongitude)
+            : this(new Location(southWestLatitude, southWestLongitude), new Location(northEastLatitude, northEastLongitude))
+        {
+        }
+
         public Bounds(Location southWest, Location northEast)
         {
             if (southWest == null)
@@ -27,6 +32,9 @@ namespace GeoCoding
 
             if (northEast == null)
                 throw new ArgumentNullException("northEast");
+
+            if (southWest.Latitude > northEast.Latitude)
+                throw new ArgumentException("southWest latitude cannot be greater than northEast latitude");
 
             this.southWest = southWest;
             this.northEast = northEast;
