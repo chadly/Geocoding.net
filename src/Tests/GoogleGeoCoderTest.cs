@@ -2,6 +2,7 @@
 using GeoCoding.Google;
 using Xunit;
 using Xunit.Extensions;
+using System.Net;
 
 namespace GeoCoding.Tests
 {
@@ -11,7 +12,7 @@ namespace GeoCoding.Tests
 
 		protected override IGeoCoder CreateGeoCoder()
 		{
-			geoCoder = new GoogleGeoCoder();
+            geoCoder = new GoogleGeoCoder();
 			return geoCoder;
 		}
 
