@@ -27,6 +27,12 @@ namespace GeoCoding.Microsoft
 
 		readonly string bingKey;
 
+        public WebProxy Proxy { get; set; }
+        public string Culture { get; set; }
+        public Location UserLocation { get; set; }
+        public Bounds UserMapView { get; set; }
+        public IPAddress UserIP { get; set; }
+
 		public BingMapsGeoCoder(string bingKey)
 		{
 			this.bingKey = bingKey;
@@ -35,7 +41,9 @@ namespace GeoCoding.Microsoft
         private string GetQueryUrl(string address)
         {
             var parameters = new StringBuilder();
-            AppendParameter(parameters, address, QUERY, true);
+            bool first = true;
+            first = AppendParameter(parameters, address, QUERY, first);
+            first = AppendGlobalParameters(parameters, first);
 
             return string.Format(FORMATTED_QUERY, parameters.ToString(), bingKey);
         }
@@ -49,13 +57,55 @@ namespace GeoCoding.Microsoft
             first = AppendParameter(parameters, postalCode, ZIP, first);
             first = AppendParameter(parameters, country, COUNTRY, first);
             first = AppendParameter(parameters, street, ADDRESS, first);
+            first = AppendGlobalParameters(parameters, first);
 
             return string.Format(FORMATTED_QUERY, parameters.ToString(), bingKey);
         }
 
         private string GetQueryUrl(double latitude, double longitude)
         {
-            return string.Format(UNFORMATTED_QUERY, String.Format(CultureInfo.InvariantCulture, "{0},{1}", latitude, longitude), bingKey);
+            var builder = new StringBuilder(string.Format(UNFORMATTED_QUERY, String.Format(CultureInfo.InvariantCulture, "{0},{1}", latitude, longitude), bingKey));
+            AppendGlobalParameters(builder, false);
+            return builder.ToString();
+        }
+
+        private IEnumerable<KeyValuePair<string, string>> GetGlobalParameters()
+        {
+            if (!String.IsNullOrEmpty(Culture))
+                yield return new KeyValuePair<string,string>("c", Culture);
+
+            if (UserLocation != null)
+                yield return new KeyValuePair<string,string>("userLocation", UserLocation.ToString());
+
+            if (UserMapView != null)
+                yield return new KeyValuePair<string, string>("userMapView", string.Concat(UserMapView.SouthWest.ToString(), ",", UserMapView.NorthEast.ToString()));
+
+            if (UserIP != null)
+                yield return new KeyValuePair<string,string>("userIp", UserIP.ToString());
+        }
+
+        private bool AppendGlobalParameters(StringBuilder parameters, bool first)
+        {
+            var values = GetGlobalParameters().ToArray();
+
+            if (!first) parameters.Append("&");
+            parameters.Append(BuildQueryString(values));
+
+            return first && !values.Any();
+        }
+
+        private string BuildQueryString(IEnumerable<KeyValuePair<string, string>> parameters)
+        {
+            var builder = new StringBuilder();
+            foreach (var pair in parameters)
+            {
+                if (builder.Length > 0) builder.Append("&");
+
+                builder.Append(BingUrlEncode(pair.Key));
+                builder.Append("=");
+                builder.Append(BingUrlEncode(pair.Value));
+            }
+            return builder.ToString();
         }
 
 		public IEnumerable<BingAddress> GeoCode(string address)
@@ -239,10 +289,16 @@ namespace GeoCoding.Microsoft
 			}
 		}
 
+        private HttpWebRequest CreateRequest(string url)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Proxy = Proxy;
+            return request;
+        }
+
 		private Json.Response GetResponse(string queryURL)
 		{
-			HttpWebRequest request = WebRequest.Create(queryURL) as HttpWebRequest;
-			using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+            using (HttpWebResponse response = CreateRequest(queryURL).GetResponse() as HttpWebResponse)
 			{
 				DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(Json.Response));
 				return jsonSerializer.ReadObject(response.GetResponseStream()) as Json.Response;
@@ -251,7 +307,7 @@ namespace GeoCoding.Microsoft
 
         private Task<Json.Response> GetResponseAsync(string queryURL, CancellationToken? cancellationToken = null)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(queryURL);
+            HttpWebRequest request = CreateRequest(queryURL);
 
             if (cancellationToken != null)
             {
