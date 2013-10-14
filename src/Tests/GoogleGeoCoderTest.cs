@@ -2,6 +2,7 @@
 using GeoCoding.Google;
 using Xunit;
 using Xunit.Extensions;
+using System.Net;
 
 namespace GeoCoding.Tests
 {
@@ -11,7 +12,7 @@ namespace GeoCoding.Tests
 
 		protected override IGeoCoder CreateGeoCoder()
 		{
-			geoCoder = new GoogleGeoCoder();
+            geoCoder = new GoogleGeoCoder();
 			return geoCoder;
 		}
 
@@ -26,5 +27,37 @@ namespace GeoCoding.Tests
 			GoogleAddress[] addresses = geoCoder.GeoCode(address).ToArray();
 			Assert.Equal(type, addresses[0].Type);
 		}
+
+        [Theory]
+        [InlineData("United States", "fr", "États-Unis")]
+        [InlineData("Montreal", "en", "Montreal, QC, Canada")]
+        [InlineData("Montreal", "fr", "Montréal, QC, Canada")]
+        [InlineData("Montreal", "de", "Montreal, Québec, Kanada")]
+        public void ApplyLanguage(string address, string language, string result)
+        {
+            geoCoder.Language = language;
+            GoogleAddress[] addresses = geoCoder.GeoCode(address).ToArray();
+            Assert.Equal(result, addresses[0].FormattedAddress);
+        }
+
+        [Theory]
+        [InlineData("Toledo", "us", "Toledo, OH, USA")]
+        [InlineData("Toledo", "es", "Toledo, Spain")]
+        public void ApplyRegionBias(string address, string regionBias, string result)
+        {
+            geoCoder.RegionBias = regionBias;
+            GoogleAddress[] addresses = geoCoder.GeoCode(address).ToArray();
+            Assert.Equal(result, addresses[0].FormattedAddress);
+        }
+
+        [Theory]
+        [InlineData("Winnetka", 46, -90, 47, -91, "Winnetka, IL, USA")]
+        [InlineData("Winnetka", 34.172684, -118.604794, 34.236144, -118.500938, "Winnetka, Los Angeles, CA, USA")]
+        public void ApplyBoundsBias(string address, double biasLatitude1, double biasLongitude1, double biasLatitude2, double biasLongitude2, string result)
+        {
+            geoCoder.BoundsBias = new Bounds(biasLatitude1, biasLongitude1, biasLatitude2, biasLongitude2);
+            GoogleAddress[] addresses = geoCoder.GeoCode(address).ToArray();
+            Assert.Equal(result, addresses[0].FormattedAddress);
+        }
 	}
 }
