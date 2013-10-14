@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Threading;
 using Xunit;
 using Xunit.Extensions;
+using System.Net;
 
 namespace GeoCoding.Tests
 {

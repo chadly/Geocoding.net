@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GeoCoding.Tests</RootNamespace>
     <AssemblyName>GeoCoding.Tests</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\geocoding.snk</AssemblyOriginatorKeyFile>
@@ -33,6 +33,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -76,9 +77,12 @@
       <Link>Properties\AssemblyInfoCommon.cs</Link>
     </Compile>
     <Compile Include="AddressAssertionExtensions.cs" />
+    <Compile Include="AsyncGeoCoderTest.cs" />
+    <Compile Include="BingMapsAsyncTest.cs" />
     <Compile Include="BingMapsTest.cs" />
     <Compile Include="DistanceTest.cs" />
     <Compile Include="GeoCoderTest.cs" />
+    <Compile Include="GoogleAsyncGeoCoderTest.cs" />
     <Compile Include="GoogleGeoCoderTest.cs" />
     <Compile Include="LocationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
