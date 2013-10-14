@@ -66,8 +66,6 @@
       <Link>Properties\AssemblyInfoCommon.cs</Link>
     </Compile>
     <Compile Include="Address.cs" />
-    <Compile Include="Distance.cs" />
-    <Compile Include="DistanceUnits.cs" />
     <Compile Include="AsyncGeoCoderExtensions.cs" />
     <Compile Include="Bounds.cs" />
     <Compile Include="Distance.cs" />
