@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Globalization;
 using Xunit;
 using Xunit.Extensions;
 
 namespace GeoCoding.Tests
 {
-    public abstract class AsyncGeoCoderTest
-    {
-        readonly IAsyncGeoCoder asyncGeoCoder;
+	public abstract class AsyncGeoCoderTest
+	{
+		readonly IAsyncGeoCoder asyncGeoCoder;
 
-        public AsyncGeoCoderTest()
+		public AsyncGeoCoderTest()
 		{
 			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-us");
 
-            asyncGeoCoder = CreateAsyncGeoCoder();
+			asyncGeoCoder = CreateAsyncGeoCoder();
 		}
 
 		protected abstract IAsyncGeoCoder CreateAsyncGeoCoder();
@@ -26,20 +23,20 @@ namespace GeoCoding.Tests
 		public void CanGeoCodeAddress()
 		{
 			asyncGeoCoder.GeoCodeAsync("1600 pennsylvania ave washington dc").ContinueWith(task =>
-            {
-                Address[] addresses = task.Result.ToArray();
-                addresses[0].AssertWhiteHouse();
-            });
+			{
+				Address[] addresses = task.Result.ToArray();
+				addresses[0].AssertWhiteHouse();
+			});
 		}
 
 		[Fact]
 		public void CanGeoCodeNormalizedAddress()
 		{
-            asyncGeoCoder.GeoCodeAsync("1600 pennsylvania ave", "washington", "dc", null, null).ContinueWith(task =>
-            {
-                Address[] addresses = task.Result.ToArray();
-                addresses[0].AssertWhiteHouse();
-            });
+			asyncGeoCoder.GeoCodeAsync("1600 pennsylvania ave", "washington", "dc", null, null).ContinueWith(task =>
+			{
+				Address[] addresses = task.Result.ToArray();
+				addresses[0].AssertWhiteHouse();
+			});
 		}
 
 		[Theory]
@@ -49,11 +46,11 @@ namespace GeoCoding.Tests
 		{
 			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(cultureName);
 
-            asyncGeoCoder.GeoCodeAsync("24 sussex drive ottawa, ontario").ContinueWith(task =>
-            {
-                Address[] addresses = task.Result.ToArray();
-                addresses[0].AssertCanadianPrimeMinister();
-            });
+			asyncGeoCoder.GeoCodeAsync("24 sussex drive ottawa, ontario").ContinueWith(task =>
+			{
+				Address[] addresses = task.Result.ToArray();
+				addresses[0].AssertCanadianPrimeMinister();
+			});
 		}
 
 		[Theory]
@@ -63,43 +60,43 @@ namespace GeoCoding.Tests
 		{
 			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(cultureName);
 
-            asyncGeoCoder.ReverseGeocodeAsync(38.8976777, -77.036517).ContinueWith(task =>
-            {
-                Address[] addresses = task.Result.ToArray();
-                addresses[0].AssertWhiteHouseArea();
-            });
+			asyncGeoCoder.ReverseGeocodeAsync(38.8976777, -77.036517).ContinueWith(task =>
+			{
+				Address[] addresses = task.Result.ToArray();
+				addresses[0].AssertWhiteHouseArea();
+			});
 		}
 
 		[Fact]
 		public void ShouldNotBlowUpOnBadAddress()
 		{
-            asyncGeoCoder.GeoCodeAsync("sdlkf;jasl;kjfldksjfasldf").ContinueWith(task =>
-            {
-                var addresses = task.Result;
-                Assert.Empty(addresses);
-            });
+			asyncGeoCoder.GeoCodeAsync("sdlkf;jasl;kjfldksjfasldf").ContinueWith(task =>
+			{
+				var addresses = task.Result;
+				Assert.Empty(addresses);
+			});
 		}
 
 		[Fact]
 		public void CanGeoCodeWithSpecialCharacters()
 		{
-            asyncGeoCoder.GeoCodeAsync("Fried St & 2nd St, Gretna, LA 70053").ContinueWith(task =>
-            {
-                var addresses = task.Result;
+			asyncGeoCoder.GeoCodeAsync("Fried St & 2nd St, Gretna, LA 70053").ContinueWith(task =>
+			{
+				var addresses = task.Result;
 
-                //asserting no exceptions are thrown and that we get something
-                Assert.NotEmpty(addresses);
-            });
+				//asserting no exceptions are thrown and that we get something
+				Assert.NotEmpty(addresses);
+			});
 		}
 
 		[Fact]
 		public void CanReverseGeoCode()
 		{
-            asyncGeoCoder.ReverseGeocodeAsync(38.8976777, -77.036517).ContinueWith(task =>
-            {
-                Address[] addresses = task.Result.ToArray();
-                addresses[0].AssertWhiteHouseArea();
-            });
+			asyncGeoCoder.ReverseGeocodeAsync(38.8976777, -77.036517).ContinueWith(task =>
+			{
+				Address[] addresses = task.Result.ToArray();
+				addresses[0].AssertWhiteHouseArea();
+			});
 		}
-    }
+	}
 }

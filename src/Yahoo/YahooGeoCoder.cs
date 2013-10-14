@@ -14,7 +14,7 @@ namespace GeoCoding.Yahoo
 	/// </remarks>
 	public class YahooGeoCoder : IGeoCoder
 	{
-		public const string ServiceUrl = "http://where.yahooapis.com/geocode?q={0}&appid={1}";		
+		public const string ServiceUrl = "http://where.yahooapis.com/geocode?q={0}&appid={1}";
 		public const string ServiceUrlNormal = "http://where.yahooapis.com/geocode?street={0}&city={1}&state={2}&postal={3}&country={4}&appid={5}";
 		public const string ServiceUrlReverse = "http://where.yahooapis.com/geocode?q={0}&appid={1}&gflags=R";
 
