@@ -78,6 +78,7 @@
     </Compile>
     <Compile Include="AddressAssertionExtensions.cs" />
     <Compile Include="AsyncGeoCoderTest.cs" />
+    <Compile Include="BingMapsAsyncTest.cs" />
     <Compile Include="BingMapsTest.cs" />
     <Compile Include="DistanceTest.cs" />
     <Compile Include="GeoCoderTest.cs" />
