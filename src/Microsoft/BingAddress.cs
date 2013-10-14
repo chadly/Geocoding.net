@@ -38,6 +38,16 @@ namespace GeoCoding.Microsoft
 			get { return postalCode ?? ""; }
 		}
 
+		public EntityType Type
+		{
+			get { return type; }
+		}
+
+		public ConfidenceLevel Confidence
+		{
+			get { return confidence; }
+		}
+
 		public BingAddress(string formattedAddress, Location coordinates, string addressLine, string adminDistrict, string adminDistrict2,
 			string countryRegion, string locality, string postalCode, EntityType type, ConfidenceLevel confidence)
 			: base(formattedAddress, coordinates, "Bing")
