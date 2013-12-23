@@ -32,3 +32,5 @@ In order to compile the solution in Visual Studio, you must first run build.bat.
 
 ### Service Tests
 You will need to generate API keys for each respective service to run the service tests. Edit App.config in the Tests project and put in your API keys.
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/chadly/geocoding.net/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
