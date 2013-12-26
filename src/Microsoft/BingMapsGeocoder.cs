@@ -272,9 +272,11 @@ namespace GeoCoding.Microsoft
 
 		private IEnumerable<BingAddress> ParseResponse(Json.Response response)
 		{
+			var list = new List<BingAddress>();
+
 			foreach (Json.Location location in response.ResourceSets[0].Resources)
 			{
-				yield return new BingAddress(
+				list.Add(new BingAddress(
 					location.Address.FormattedAddress,
 					new Location(location.Point.Coordinates[0], location.Point.Coordinates[1]),
 					location.Address.AddressLine,
@@ -285,8 +287,10 @@ namespace GeoCoding.Microsoft
 					location.Address.PostalCode,
 					(EntityType)Enum.Parse(typeof(EntityType), location.EntityType),
 					EvaluateConfidence(location.Confidence)
-				);
+				));
 			}
+
+			return list;
 		}
 
 		private HttpWebRequest CreateRequest(string url)

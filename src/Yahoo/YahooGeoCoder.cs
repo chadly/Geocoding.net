@@ -126,7 +126,7 @@ namespace GeoCoding.Yahoo
 			if (error != YahooError.NoError)
 				throw new YahooGeoCodingException(error);
 
-			return ParseAddresses(nav.Select("/ResultSet/Result"));
+			return ParseAddresses(nav.Select("/ResultSet/Result")).ToArray();
 		}
 
 		private XPathDocument LoadXmlResponse(WebResponse response)

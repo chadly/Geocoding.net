@@ -267,7 +267,7 @@ namespace GeoCoding.Google
 				throw new GoogleGeoCodingException(status);
 
 			if (status == GoogleStatus.Ok)
-				return ParseAddresses(nav.Select("/GeocodeResponse/result"));
+				return ParseAddresses(nav.Select("/GeocodeResponse/result")).ToArray();
 
 			return new GoogleAddress[0];
 		}
