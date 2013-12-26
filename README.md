@@ -1,5 +1,4 @@
-Generic C# GeoCoding API
-========================
+#Generic C# GeoCoding API
 
 Includes a model and interface for communicating with three popular Geocoding providers.  Current implementations include:
 
@@ -11,30 +10,47 @@ The API returns latitude/longitude coordinates and normalized address informatio
 
 See latest [release notes](https://github.com/chadly/Geocoding.net/wiki/Release-Notes).
 
-### Simple Example
+##Installation
 
-```c#
+Install via nuget:
+
+```
+Install-Package Geocoding.net
+```
+
+Or download the [latest release](https://github.com/chadly/Geocoding.net/releases) and add a reference to `Geocoding.dll` in your project.
+
+##Simple Example
+
+```csharp
 IGeoCoder geoCoder = new GoogleGeoCoder() { ApiKey = "this-is-my-optional-google-api-key" };
 Address[] addresses = geoCoder.GeoCode("123 Main St");
 ```
 
 It can also be used to return address information from latitude/longitude coordinates (aka reverse geocoding):
 
-```c#
+```csharp
 IGeoCoder geoCoder = new YahooGeoCoder("my-app-ID");
 Address[] addresses = geoCoder.ReverseGeoCode(38.8976777, -77.036517);
 ```
 
-Note: Google allows anonymous access to it's API, but if you start hitting rate limits, you must [sign up for a new Server API Key](https://developers.google.com/maps/documentation/javascript/tutorial#api_key).
+##API Keys
 
-How to Build from Source
-------------------------
+Google allows anonymous access to it's API, but if you start hitting rate limits, you must [sign up for a new Server API Key](https://developers.google.com/maps/documentation/javascript/tutorial#api_key).
+
+Bing [requires an API key](http://msdn.microsoft.com/en-us/library/ff428642.aspx) to access its service.
+
+You will need a [consumer secret and consumer key](http://developer.yahoo.com/boss/geo/BOSS_Signup.pdf) (PDF) for Yahoo.
+
+
+##How to Build from Source
 
 In order to compile the solution in Visual Studio, you must first run build.bat. This will run a basic Debug build without running any tests. The build process generates some files that are needed to compile in Visual Studio.
 
 ### Service Tests
 You will need to generate API keys for each respective service to run the service tests. Edit App.config in the Tests project and put in your API keys.
 
+------------------------------------------
 
 Help support development: `1K33yhGwx3zLopyJuAHWDn8XrMjM6Twwr8`
 
