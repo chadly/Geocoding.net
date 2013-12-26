@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Configuration;
+using System.Linq;
 using GeoCoding.Google;
 using Xunit;
 using Xunit.Extensions;

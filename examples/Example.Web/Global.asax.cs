@@ -31,7 +31,12 @@ namespace Example.Web
 			//register your geocoder implementation here -- note: it will use the last one registered
 			builder.Register(c => new BingMapsGeoCoder("my-bing-maps-key")).As<IGeoCoder>();
 			builder.Register(c => new YahooGeoCoder("my-yahoo-app-id")).As<IGeoCoder>();
-			builder.Register(c => new GoogleGeoCoder()).As<IGeoCoder>();
+			builder.Register(c => new GoogleGeoCoder
+			{
+				//https://developers.google.com/maps/documentation/javascript/tutorial#api_key
+				//except create a "server key"
+				ApiKey = "google-api-key-is-optional"
+			}).As<IGeoCoder>();
 
 			return builder.Build();
 		}

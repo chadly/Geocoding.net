@@ -3,5 +3,6 @@
   <appSettings>
     <add key="yahooAppId" value="your-app-id-here" />
     <add key="bingMapsKey" value="your-key-here" />
+		<add key="googleApiKey" value="your-key-here" />
   </appSettings>
 </configuration>

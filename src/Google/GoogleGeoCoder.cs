@@ -17,7 +17,8 @@ namespace GeoCoding.Google
 	/// </remarks>
 	public class GoogleGeoCoder : IGeoCoder, IAsyncGeoCoder
 	{
-		public bool UseSsl { get; set; }
+		public string ApiKey { get; set; }
+
 		public WebProxy Proxy { get; set; }
 		public string Language { get; set; }
 		public string RegionBias { get; set; }
@@ -28,18 +29,26 @@ namespace GeoCoding.Google
 			get
 			{
 				var builder = new StringBuilder();
-				builder.Append(UseSsl ? "https:" : "http:");
-				builder.Append("//maps.googleapis.com/maps/api/geocode/xml?{0}={1}&sensor=false");
-				if (!string.IsNullOrEmpty(Language))
+				builder.Append("https://maps.googleapis.com/maps/api/geocode/xml?{0}={1}&sensor=false");
+
+				if (!String.IsNullOrEmpty(Language))
 				{
 					builder.Append("&language=");
 					builder.Append(HttpUtility.UrlEncode(Language));
 				}
-				if (!string.IsNullOrEmpty(RegionBias))
+
+				if (!String.IsNullOrEmpty(RegionBias))
 				{
 					builder.Append("&region=");
 					builder.Append(HttpUtility.UrlEncode(RegionBias));
 				}
+
+				if (!String.IsNullOrEmpty(ApiKey))
+				{
+					builder.Append("&key=");
+					builder.Append(HttpUtility.UrlEncode(ApiKey));
+				}
+
 				if (BoundsBias != null)
 				{
 					builder.Append("&bounds=");
@@ -51,6 +60,7 @@ namespace GeoCoding.Google
 					builder.Append(",");
 					builder.Append(BoundsBias.NorthEast.Longitude.ToString(CultureInfo.InvariantCulture));
 				}
+
 				return builder.ToString();
 			}
 		}
