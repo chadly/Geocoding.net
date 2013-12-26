@@ -31,7 +31,6 @@
 
     <buildDir Condition="'$(buildDir)'==''">$(MSBuildProjectDirectory)\..\bin\$(configuration)</buildDir>
     <libDir>$(MSBuildProjectDirectory)\..\lib</libDir>
-		<examplesDir>$(MSBuildProjectDirectory)\..\examples\build</examplesDir>
 
     <snkFile>$(MSBuildProjectDirectory)\geocoding.snk</snkFile>
   </PropertyGroup>
@@ -41,10 +40,6 @@
   <UsingTask AssemblyFile="$(libDir)\ILMerge.MSBuild.Tasks.1.0.0.3\tools\ILMerge.MSBuild.Tasks.dll" TaskName="ILMerge.MSBuild.Tasks.ILMerge" />
 
   <!-- ========= Public Targets ===================================================== -->
-
-  <Target Name="Build">
-    <CallTarget Targets="CleanBuildDir;Compile;Test;Merge;CopyOutputToExamples" />
-  </Target>
 
   <Target Name="CleanBuildDir">
     <RemoveDir Directories="$(buildDir)" />
@@ -89,11 +84,11 @@
           Condition="!Exists('%(templateFiles.RootDir)%(templateFiles.Directory)%(templateFiles.Filename)')" />
   </Target>
 
-  <Target Name="Compile" DependsOnTargets="Version;CopyTemplateFiles">
+  <Target Name="Build" DependsOnTargets="CleanBuildDir;Version;CopyTemplateFiles">
     <MSBuild Projects="@(vssolutions)" Properties="Configuration=$(configuration)" />
   </Target>
 
-  <Target Name="Test" DependsOnTargets="Compile">
+  <Target Name="Test" DependsOnTargets="Build">
     <MakeDir Directories="$(buildDir)" />
 
     <CreateItem Include="$(MSBuildProjectDirectory)\**\*Tests.csproj">
@@ -114,7 +109,7 @@
     <Copy SourceFiles="@(mergeOutputToCopy)" DestinationFiles="@(mergeOutputToCopy -> '$(buildDir)\%(Filename)%(Extension)')" />
   </Target>
 
-  <Target Name="Merge" DependsOnTargets="Compile;CopyOutputToBuildDir">
+  <Target Name="Merge" DependsOnTargets="Build;CopyOutputToBuildDir">
     <CreateItem Include="$(buildDir)\Geocoding.*.dll">
       <Output TaskParameter="Include" ItemName="mergeAsm" />
     </CreateItem>
@@ -126,11 +121,14 @@
     <Delete Files="@(mergeAsm -> '%(RootDir)%(Directory)%(Filename).pdb')" />
   </Target>
 
-	<Target Name="CopyOutputToExamples" DependsOnTargets="Merge">
-		<CreateItem Include="$(buildDir)\*.*">
+	<Target Name="Pack" DependsOnTargets="Merge">
+		<CreateItem Include="$(buildDir)\Geocoding.dll">
 			<Output TaskParameter="Include" ItemName="mergedOutput" />
 		</CreateItem>
 
-		<Copy SourceFiles="@(mergedOutput)" DestinationFiles="@(mergedOutput -> '$(examplesDir)\%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(mergedOutput)" DestinationFiles="@(mergedOutput -> '$(buildDir)\lib\net40\%(Filename)%(Extension)')" />
+		<Delete Files="@(mergedOutput)" />
+
+		<Exec Command="&quot;$(libDir)\nuget.exe&quot; pack geocoding.nuspec" WorkingDirectory="$(buildDir)" />
 	</Target>
 </Project>
