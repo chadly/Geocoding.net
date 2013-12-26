@@ -4,7 +4,7 @@ Generic C# GeoCoding API
 Includes a model and interface for communicating with three popular Geocoding providers.  Current implementations include:
 
   * [Google Maps](https://developers.google.com/maps/) - [docs](https://developers.google.com/maps/documentation/geocoding/)
-  * [Yahoo! PlaceFinder](http://developer.yahoo.com/geo/placefinder/) - [docs](http://developer.yahoo.com/geo/placefinder/guide/index.html)
+  * [Yahoo! BOSS Geo Services](http://developer.yahoo.com/boss/geo/) - [docs](http://developer.yahoo.com/geo/placefinder/guide/index.html)
   * [Bing Maps (aka Virtual Earth)](http://www.microsoft.com/maps/) - [docs](http://msdn.microsoft.com/en-us/library/ff701715.aspx)
 
 The API returns latitude/longitude coordinates and normalized address information.  This can be used to perform address validation, real time mapping of user-entered addresses, distance calculations, and much more.

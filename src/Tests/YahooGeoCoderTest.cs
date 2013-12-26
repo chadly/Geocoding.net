@@ -7,7 +7,10 @@ namespace GeoCoding.Tests
 	{
 		protected override IGeoCoder CreateGeoCoder()
 		{
-			return new YahooGeoCoder(ConfigurationManager.AppSettings["yahooAppId"]);
+			return new YahooGeoCoder(
+				ConfigurationManager.AppSettings["yahooConsumerKey"],
+				ConfigurationManager.AppSettings["yahooConsumerSecret"]
+			);
 		}
 	}
 }
