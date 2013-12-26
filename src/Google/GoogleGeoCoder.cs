@@ -300,7 +300,7 @@ namespace GeoCoding.Google
 				GoogleAddressType type = EvaluateType((string)nav.Evaluate("string(type)"));
 				string formattedAddress = (string)nav.Evaluate("string(formatted_address)");
 
-				var components = ParseComponents(nav.Select("address_component"));
+				var components = ParseComponents(nav.Select("address_component")).ToArray();
 
 				double latitude = (double)nav.Evaluate("number(geometry/location/lat)");
 				double longitude = (double)nav.Evaluate("number(geometry/location/lng)");
@@ -309,7 +309,7 @@ namespace GeoCoding.Google
 				bool isPartialMatch;
 				bool.TryParse((string)nav.Evaluate("string(partial_match)"), out isPartialMatch);
 
-				yield return new GoogleAddress(type, formattedAddress, components.ToArray(), coordinates, isPartialMatch);
+				yield return new GoogleAddress(type, formattedAddress, components, coordinates, isPartialMatch);
 			}
 		}
 
@@ -323,7 +323,8 @@ namespace GeoCoding.Google
 				string shortName = (string)nav.Evaluate("string(short_name)");
 				var types = ParseComponentTypes(nav.Select("type")).ToArray();
 
-				yield return new GoogleAddressComponent(types, longName, shortName);
+				if (types.Any()) //don't return an address component with no type
+					yield return new GoogleAddressComponent(types, longName, shortName);
 			}
 		}
 

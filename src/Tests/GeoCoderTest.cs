@@ -77,5 +77,15 @@ namespace GeoCoding.Tests
 			Address[] addresses = geoCoder.ReverseGeocode(38.8976777, -77.036517).ToArray();
 			addresses[0].AssertWhiteHouseArea();
 		}
+
+		[Theory]
+		[InlineData("1 Robert Wood Johnson Hosp New Brunswick, NJ 08901 USA")]
+		[InlineData("miss, MO")]
+		//https://github.com/chadly/Geocoding.net/issues/6
+		public void CanGeoCodeInvalidZipCodes(string address)
+		{
+			Address[] addresses = geoCoder.GeoCode(address).ToArray();
+			Assert.NotEmpty(addresses);
+		}
 	}
 }
