@@ -48,5 +48,13 @@ namespace GeoCoding.Tests
 			BingAddress[] addresses = geoCoder.GeoCode(address).ToArray();
 			Assert.Equal(country, addresses[0].CountryRegion);
 		}
+
+		[Fact]
+		//https://github.com/chadly/Geocoding.net/issues/8
+		public void CanReverseGeoCodeIssue8()
+		{
+			BingAddress[] addresses = geoCoder.ReverseGeoCode(38.8976777, -77.036517).ToArray();
+			Assert.NotEmpty(addresses);
+		}
 	}
 }
