@@ -1,7 +1,6 @@
 /bin
 /lib
 /examples/packages
-/examples/build
 AssemblyInfoCommon.cs
 app.config
 docs
