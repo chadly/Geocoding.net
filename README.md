@@ -36,7 +36,7 @@ Address[] addresses = geocoder.ReverseGeocode(38.8976777, -77.036517);
 
 ###More Examples
 
-A more in-depth runnable example of how this library can be integrated into an MVC4 application can be found in the [examples folder](https://github.com/chadly/Geocoding.net/tree/master/examples) of this repository. Download it and run locally.
+A more in-depth runnable example of how this library can be integrated into an MVC4 application can be found in the [latest release package](https://github.com/chadly/Geocoding.net/releases/latest). Download it and run locally.
 
 
 ##API Keys
