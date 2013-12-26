@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Configuration;
+using System.Linq;
 using Geocoding.Google;
 using Xunit;
 using Xunit.Extensions;
@@ -11,7 +12,10 @@ namespace Geocoding.Tests
 
 		protected override IAsyncGeocoder CreateAsyncGeocoder()
 		{
-			geoCoder = new GoogleGeocoder();
+			geoCoder = new GoogleGeocoder
+			{
+				ApiKey = ConfigurationManager.AppSettings["googleApiKey"]
+			};
 			return geoCoder;
 		}
 
