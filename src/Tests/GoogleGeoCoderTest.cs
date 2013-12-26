@@ -12,7 +12,10 @@ namespace GeoCoding.Tests
 
 		protected override IGeoCoder CreateGeoCoder()
 		{
-			geoCoder = new GoogleGeoCoder();
+			geoCoder = new GoogleGeoCoder
+			{
+				ApiKey = ConfigurationManager.AppSettings["googleApiKey"]
+			};
 			return geoCoder;
 		}
 
