@@ -30,7 +30,7 @@ Address[] addresses = geoCoder.GeoCode("123 Main St");
 It can also be used to return address information from latitude/longitude coordinates (aka reverse geocoding):
 
 ```csharp
-IGeoCoder geoCoder = new YahooGeoCoder("my-app-ID");
+IGeoCoder geoCoder = new YahooGeoCoder("consumer-key", "consumer-secret");
 Address[] addresses = geoCoder.ReverseGeoCode(38.8976777, -77.036517);
 ```
 
