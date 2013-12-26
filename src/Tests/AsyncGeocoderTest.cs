@@ -4,25 +4,25 @@ using System.Threading;
 using Xunit;
 using Xunit.Extensions;
 
-namespace GeoCoding.Tests
+namespace Geocoding.Tests
 {
-	public abstract class AsyncGeoCoderTest
+	public abstract class AsyncGeocoderTest
 	{
-		readonly IAsyncGeoCoder asyncGeoCoder;
+		readonly IAsyncGeocoder asyncGeocoder;
 
-		public AsyncGeoCoderTest()
+		public AsyncGeocoderTest()
 		{
 			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-us");
 
-			asyncGeoCoder = CreateAsyncGeoCoder();
+			asyncGeocoder = CreateAsyncGeocoder();
 		}
 
-		protected abstract IAsyncGeoCoder CreateAsyncGeoCoder();
+		protected abstract IAsyncGeocoder CreateAsyncGeocoder();
 
 		[Fact]
-		public void CanGeoCodeAddress()
+		public void CanGeocodeAddress()
 		{
-			asyncGeoCoder.GeoCodeAsync("1600 pennsylvania ave washington dc").ContinueWith(task =>
+			asyncGeocoder.GeocodeAsync("1600 pennsylvania ave washington dc").ContinueWith(task =>
 			{
 				Address[] addresses = task.Result.ToArray();
 				addresses[0].AssertWhiteHouse();
@@ -30,9 +30,9 @@ namespace GeoCoding.Tests
 		}
 
 		[Fact]
-		public void CanGeoCodeNormalizedAddress()
+		public void CanGeocodeNormalizedAddress()
 		{
-			asyncGeoCoder.GeoCodeAsync("1600 pennsylvania ave", "washington", "dc", null, null).ContinueWith(task =>
+			asyncGeocoder.GeocodeAsync("1600 pennsylvania ave", "washington", "dc", null, null).ContinueWith(task =>
 			{
 				Address[] addresses = task.Result.ToArray();
 				addresses[0].AssertWhiteHouse();
@@ -42,11 +42,11 @@ namespace GeoCoding.Tests
 		[Theory]
 		[InlineData("en-US")]
 		[InlineData("cs-CZ")]
-		public void CanGeoCodeAddressUnderDifferentCultures(string cultureName)
+		public void CanGeocodeAddressUnderDifferentCultures(string cultureName)
 		{
 			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(cultureName);
 
-			asyncGeoCoder.GeoCodeAsync("24 sussex drive ottawa, ontario").ContinueWith(task =>
+			asyncGeocoder.GeocodeAsync("24 sussex drive ottawa, ontario").ContinueWith(task =>
 			{
 				Address[] addresses = task.Result.ToArray();
 				addresses[0].AssertCanadianPrimeMinister();
@@ -56,11 +56,11 @@ namespace GeoCoding.Tests
 		[Theory]
 		[InlineData("en-US")]
 		[InlineData("cs-CZ")]
-		public void CanReverseGeoCodeAddressUnderDifferentCultures(string cultureName)
+		public void CanReverseGeocodeAddressUnderDifferentCultures(string cultureName)
 		{
 			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(cultureName);
 
-			asyncGeoCoder.ReverseGeocodeAsync(38.8976777, -77.036517).ContinueWith(task =>
+			asyncGeocoder.ReverseGeocodeAsync(38.8976777, -77.036517).ContinueWith(task =>
 			{
 				Address[] addresses = task.Result.ToArray();
 				addresses[0].AssertWhiteHouseArea();
@@ -70,7 +70,7 @@ namespace GeoCoding.Tests
 		[Fact]
 		public void ShouldNotBlowUpOnBadAddress()
 		{
-			asyncGeoCoder.GeoCodeAsync("sdlkf;jasl;kjfldksjfasldf").ContinueWith(task =>
+			asyncGeocoder.GeocodeAsync("sdlkf;jasl;kjfldksjfasldf").ContinueWith(task =>
 			{
 				var addresses = task.Result;
 				Assert.Empty(addresses);
@@ -78,9 +78,9 @@ namespace GeoCoding.Tests
 		}
 
 		[Fact]
-		public void CanGeoCodeWithSpecialCharacters()
+		public void CanGeocodeWithSpecialCharacters()
 		{
-			asyncGeoCoder.GeoCodeAsync("Fried St & 2nd St, Gretna, LA 70053").ContinueWith(task =>
+			asyncGeocoder.GeocodeAsync("Fried St & 2nd St, Gretna, LA 70053").ContinueWith(task =>
 			{
 				var addresses = task.Result;
 
@@ -90,9 +90,9 @@ namespace GeoCoding.Tests
 		}
 
 		[Fact]
-		public void CanReverseGeoCode()
+		public void CanReverseGeocode()
 		{
-			asyncGeoCoder.ReverseGeocodeAsync(38.8976777, -77.036517).ContinueWith(task =>
+			asyncGeocoder.ReverseGeocodeAsync(38.8976777, -77.036517).ContinueWith(task =>
 			{
 				Address[] addresses = task.Result.ToArray();
 				addresses[0].AssertWhiteHouseArea();

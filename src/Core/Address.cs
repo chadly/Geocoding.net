@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace GeoCoding
+namespace Geocoding
 {
 	public abstract class Address
 	{

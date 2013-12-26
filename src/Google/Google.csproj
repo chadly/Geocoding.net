@@ -8,8 +8,8 @@
     <ProjectGuid>{2E608F4E-29F7-4AC3-922F-23D971312CAE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GeoCoding.Google</RootNamespace>
-    <AssemblyName>GeoCoding.Google</AssemblyName>
+    <RootNamespace>Geocoding.Google</RootNamespace>
+    <AssemblyName>Geocoding.Google</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -53,8 +53,8 @@
     <Compile Include="GoogleAddress.cs" />
     <Compile Include="GoogleAddressComponent.cs" />
     <Compile Include="GoogleAddressType.cs" />
-    <Compile Include="GoogleGeoCoder.cs" />
-    <Compile Include="GoogleGeoCodingException.cs" />
+    <Compile Include="GoogleGeocoder.cs" />
+    <Compile Include="GoogleGeocodingException.cs" />
     <Compile Include="GoogleStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

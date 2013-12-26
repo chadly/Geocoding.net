@@ -1,7 +1,7 @@
 ﻿using Xunit;
 using Xunit.Extensions;
 
-namespace GeoCoding.Tests
+namespace Geocoding.Tests
 {
 	public class DistanceTest
 	{

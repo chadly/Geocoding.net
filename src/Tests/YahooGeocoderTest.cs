@@ -1,13 +1,13 @@
 ﻿using System.Configuration;
-using GeoCoding.Yahoo;
+using Geocoding.Yahoo;
 
-namespace GeoCoding.Tests
+namespace Geocoding.Tests
 {
-	public class YahooGeoCoderTest : GeoCoderTest
+	public class YahooGeocoderTest : GeocoderTest
 	{
-		protected override IGeoCoder CreateGeoCoder()
+		protected override IGeocoder CreateGeocoder()
 		{
-			return new YahooGeoCoder(
+			return new YahooGeocoder(
 				ConfigurationManager.AppSettings["yahooConsumerKey"],
 				ConfigurationManager.AppSettings["yahooConsumerSecret"]
 			);

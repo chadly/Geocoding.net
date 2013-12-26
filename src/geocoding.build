@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <projectName>GeoCoding.Net</projectName>
-    <company>GeoCoding.Net</company>
+    <projectName>Geocoding.Net</projectName>
+    <company>Geocoding.Net</company>
     <copyright>Copyright © 2008 - 2013 Chad Lee</copyright>
     <major>3</major>
     <minor>0</minor>
@@ -14,7 +14,7 @@
 
   <!-- Define order of solutions to build -->
   <ItemGroup>
-    <vssolutions Include="GeoCoding.sln" />
+    <vssolutions Include="Geocoding.sln" />
   </ItemGroup>
 
   <!-- Define outputs -->
@@ -102,8 +102,8 @@
 
     <!-- run unit tests -->
     <xunit Condition="@(tests) != ''"
-      Assembly="@(tests -> '%(RootDir)%(Directory)bin\$(configuration)\GeoCoding.%(Filename).dll')"
-      Html="$(buildDir)\GeoCoding.%(tests.Filename).html" />
+      Assembly="@(tests -> '%(RootDir)%(Directory)bin\$(configuration)\Geocoding.%(Filename).dll')"
+      Html="$(buildDir)\Geocoding.%(tests.Filename).html" />
   </Target>
 
   <Target Name="CopyOutputToBuildDir">
@@ -115,12 +115,12 @@
   </Target>
 
   <Target Name="Merge" DependsOnTargets="Compile;CopyOutputToBuildDir">
-    <CreateItem Include="$(buildDir)\GeoCoding.*.dll">
+    <CreateItem Include="$(buildDir)\Geocoding.*.dll">
       <Output TaskParameter="Include" ItemName="mergeAsm" />
     </CreateItem>
 
-    <ILMerge Condition="'$(Configuration)'=='Debug'" InputAssemblies="@(mergeAsm)" OutputFile="$(buildDir)\GeoCoding.dll" SnkFile="$(snkFile)" DebugInfo="true" />
-    <ILMerge Condition="'$(Configuration)'=='Release'" InputAssemblies="@(mergeAsm)" OutputFile="$(buildDir)\GeoCoding.dll" SnkFile="$(snkFile)" DebugInfo="false" />
+    <ILMerge Condition="'$(Configuration)'=='Debug'" InputAssemblies="@(mergeAsm)" OutputFile="$(buildDir)\Geocoding.dll" SnkFile="$(snkFile)" DebugInfo="true" />
+    <ILMerge Condition="'$(Configuration)'=='Release'" InputAssemblies="@(mergeAsm)" OutputFile="$(buildDir)\Geocoding.dll" SnkFile="$(snkFile)" DebugInfo="false" />
 
     <Delete Files="@(mergeAsm)" />
     <Delete Files="@(mergeAsm -> '%(RootDir)%(Directory)%(Filename).pdb')" />

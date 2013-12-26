@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GeoCoding.Microsoft
+namespace Geocoding.Microsoft
 {
 	/// <remarks>
 	/// http://msdn.microsoft.com/en-us/library/ff728811.aspx

@@ -8,8 +8,8 @@
     <ProjectGuid>{BB5F66AC-286B-4BA5-86EC-6DED28426132}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GeoCoding.Tests</RootNamespace>
-    <AssemblyName>GeoCoding.Tests</AssemblyName>
+    <RootNamespace>Geocoding.Tests</RootNamespace>
+    <AssemblyName>Geocoding.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -78,16 +78,16 @@
       <Link>Properties\AssemblyInfoCommon.cs</Link>
     </Compile>
     <Compile Include="AddressAssertionExtensions.cs" />
-    <Compile Include="AsyncGeoCoderTest.cs" />
+    <Compile Include="AsyncGeocoderTest.cs" />
     <Compile Include="BingMapsAsyncTest.cs" />
     <Compile Include="BingMapsTest.cs" />
     <Compile Include="DistanceTest.cs" />
-    <Compile Include="GeoCoderTest.cs" />
-    <Compile Include="GoogleAsyncGeoCoderTest.cs" />
-    <Compile Include="GoogleGeoCoderTest.cs" />
+    <Compile Include="GeocoderTest.cs" />
+    <Compile Include="GoogleAsyncGeocoderTest.cs" />
+    <Compile Include="GoogleGeocoderTest.cs" />
     <Compile Include="LocationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="YahooGeoCoderTest.cs" />
+    <Compile Include="YahooGeocoderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Google\Google.csproj">

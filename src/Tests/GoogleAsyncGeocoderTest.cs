@@ -1,17 +1,17 @@
 ﻿using System.Linq;
-using GeoCoding.Google;
+using Geocoding.Google;
 using Xunit;
 using Xunit.Extensions;
 
-namespace GeoCoding.Tests
+namespace Geocoding.Tests
 {
-	public class GoogleAsyncGeoCoderTest : AsyncGeoCoderTest
+	public class GoogleAsyncGeocoderTest : AsyncGeocoderTest
 	{
-		GoogleGeoCoder geoCoder;
+		GoogleGeocoder geoCoder;
 
-		protected override IAsyncGeoCoder CreateAsyncGeoCoder()
+		protected override IAsyncGeocoder CreateAsyncGeocoder()
 		{
-			geoCoder = new GoogleGeoCoder();
+			geoCoder = new GoogleGeocoder();
 			return geoCoder;
 		}
 
@@ -23,7 +23,7 @@ namespace GeoCoding.Tests
 		[InlineData("1600 pennsylvania ave washington dc", GoogleAddressType.StreetAddress)]
 		public void CanParseAddressTypes(string address, GoogleAddressType type)
 		{
-			geoCoder.GeoCodeAsync(address).ContinueWith(task =>
+			geoCoder.GeocodeAsync(address).ContinueWith(task =>
 			{
 				GoogleAddress[] addresses = task.Result.ToArray();
 				Assert.Equal(type, addresses[0].Type);

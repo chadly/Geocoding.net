@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace GeoCoding.Microsoft
+namespace Geocoding.Microsoft
 {
-	public class BingGeoCodingException : Exception
+	public class BingGeocodingException : Exception
 	{
 		const string defaultMessage = "There was an error processing the geocoding request. See InnerException for more information.";
 
-		public BingGeoCodingException(Exception innerException)
+		public BingGeocodingException(Exception innerException)
 			: base(defaultMessage, innerException) { }
 	}
 }

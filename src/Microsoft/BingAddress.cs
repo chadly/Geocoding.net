@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GeoCoding.Microsoft
+namespace Geocoding.Microsoft
 {
 	public class BingAddress : Address
 	{

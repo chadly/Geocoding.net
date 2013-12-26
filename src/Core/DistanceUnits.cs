@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GeoCoding
+namespace Geocoding
 {
 	public enum DistanceUnits
 	{

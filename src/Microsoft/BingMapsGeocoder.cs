@@ -9,12 +9,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace GeoCoding.Microsoft
+namespace Geocoding.Microsoft
 {
 	/// <remarks>
 	/// http://msdn.microsoft.com/en-us/library/ff701715.aspx
 	/// </remarks>
-	public class BingMapsGeoCoder : IGeoCoder, IAsyncGeoCoder
+	public class BingMapsGeocoder : IGeocoder, IAsyncGeocoder
 	{
 		const string UNFORMATTED_QUERY = "http://dev.virtualearth.net/REST/v1/Locations/{0}?key={1}";
 		const string FORMATTED_QUERY = "http://dev.virtualearth.net/REST/v1/Locations?{0}&key={1}";
@@ -33,7 +33,7 @@ namespace GeoCoding.Microsoft
 		public Bounds UserMapView { get; set; }
 		public IPAddress UserIP { get; set; }
 
-		public BingMapsGeoCoder(string bingKey)
+		public BingMapsGeocoder(string bingKey)
 		{
 			this.bingKey = bingKey;
 		}
@@ -108,7 +108,7 @@ namespace GeoCoding.Microsoft
 			return builder.ToString();
 		}
 
-		public IEnumerable<BingAddress> GeoCode(string address)
+		public IEnumerable<BingAddress> Geocode(string address)
 		{
 			try
 			{
@@ -118,11 +118,11 @@ namespace GeoCoding.Microsoft
 			}
 			catch (Exception ex)
 			{
-				throw new BingGeoCodingException(ex);
+				throw new BingGeocodingException(ex);
 			}
 		}
 
-		public IEnumerable<BingAddress> GeoCode(string street, string city, string state, string postalCode, string country)
+		public IEnumerable<BingAddress> Geocode(string street, string city, string state, string postalCode, string country)
 		{
 			try
 			{
@@ -132,19 +132,19 @@ namespace GeoCoding.Microsoft
 			}
 			catch (Exception ex)
 			{
-				throw new BingGeoCodingException(ex);
+				throw new BingGeocodingException(ex);
 			}
 		}
 
-		public IEnumerable<BingAddress> ReverseGeoCode(Location location)
+		public IEnumerable<BingAddress> ReverseGeocode(Location location)
 		{
 			if (location == null)
 				throw new ArgumentNullException("location");
 
-			return ReverseGeoCode(location.Latitude, location.Longitude);
+			return ReverseGeocode(location.Latitude, location.Longitude);
 		}
 
-		public IEnumerable<BingAddress> ReverseGeoCode(double latitude, double longitude)
+		public IEnumerable<BingAddress> ReverseGeocode(double latitude, double longitude)
 		{
 			try
 			{
@@ -154,32 +154,32 @@ namespace GeoCoding.Microsoft
 			}
 			catch (Exception ex)
 			{
-				throw new BingGeoCodingException(ex);
+				throw new BingGeocodingException(ex);
 			}
 		}
 
-		public Task<IEnumerable<BingAddress>> GeoCodeAsync(string address)
+		public Task<IEnumerable<BingAddress>> GeocodeAsync(string address)
 		{
 			var url = GetQueryUrl(address);
 			return GetResponseAsync(url)
 				.ContinueWith(task => ParseResponse(task.Result));
 		}
 
-		public Task<IEnumerable<BingAddress>> GeoCodeAsync(string address, CancellationToken cancellationToken)
+		public Task<IEnumerable<BingAddress>> GeocodeAsync(string address, CancellationToken cancellationToken)
 		{
 			var url = GetQueryUrl(address);
 			return GetResponseAsync(url, cancellationToken)
 				.ContinueWith(task => ParseResponse(task.Result), cancellationToken);
 		}
 
-		public Task<IEnumerable<BingAddress>> GeoCodeAsync(string street, string city, string state, string postalCode, string country)
+		public Task<IEnumerable<BingAddress>> GeocodeAsync(string street, string city, string state, string postalCode, string country)
 		{
 			var url = GetQueryUrl(street, city, state, postalCode, country);
 			return GetResponseAsync(url)
 				.ContinueWith(task => ParseResponse(task.Result));
 		}
 
-		public Task<IEnumerable<BingAddress>> GeoCodeAsync(string street, string city, string state, string postalCode, string country, CancellationToken cancellationToken)
+		public Task<IEnumerable<BingAddress>> GeocodeAsync(string street, string city, string state, string postalCode, string country, CancellationToken cancellationToken)
 		{
 			var url = GetQueryUrl(street, city, state, postalCode, country);
 			return GetResponseAsync(url, cancellationToken)
@@ -200,57 +200,57 @@ namespace GeoCoding.Microsoft
 				.ContinueWith(task => ParseResponse(task.Result), cancellationToken);
 		}
 
-		IEnumerable<Address> IGeoCoder.GeoCode(string address)
+		IEnumerable<Address> IGeocoder.Geocode(string address)
 		{
-			return GeoCode(address).Cast<Address>();
+			return Geocode(address).Cast<Address>();
 		}
 
-		IEnumerable<Address> IGeoCoder.GeoCode(string street, string city, string state, string postalCode, string country)
+		IEnumerable<Address> IGeocoder.Geocode(string street, string city, string state, string postalCode, string country)
 		{
-			return GeoCode(street, city, state, postalCode, country).Cast<Address>();
+			return Geocode(street, city, state, postalCode, country).Cast<Address>();
 		}
 
-		IEnumerable<Address> IGeoCoder.ReverseGeocode(Location location)
+		IEnumerable<Address> IGeocoder.ReverseGeocode(Location location)
 		{
-			return ReverseGeoCode(location).Cast<Address>();
+			return ReverseGeocode(location).Cast<Address>();
 		}
 
-		IEnumerable<Address> IGeoCoder.ReverseGeocode(double latitude, double longitude)
+		IEnumerable<Address> IGeocoder.ReverseGeocode(double latitude, double longitude)
 		{
-			return ReverseGeoCode(latitude, longitude).Cast<Address>();
+			return ReverseGeocode(latitude, longitude).Cast<Address>();
 		}
 
-		Task<IEnumerable<Address>> IAsyncGeoCoder.GeoCodeAsync(string address)
+		Task<IEnumerable<Address>> IAsyncGeocoder.GeocodeAsync(string address)
 		{
-			return GeoCodeAsync(address)
+			return GeocodeAsync(address)
 				.ContinueWith(task => task.Result.Cast<Address>());
 		}
 
-		Task<IEnumerable<Address>> IAsyncGeoCoder.GeoCodeAsync(string address, CancellationToken cancellationToken)
+		Task<IEnumerable<Address>> IAsyncGeocoder.GeocodeAsync(string address, CancellationToken cancellationToken)
 		{
-			return GeoCodeAsync(address, cancellationToken)
+			return GeocodeAsync(address, cancellationToken)
 				.ContinueWith(task => task.Result.Cast<Address>(), cancellationToken);
 		}
 
-		Task<IEnumerable<Address>> IAsyncGeoCoder.GeoCodeAsync(string street, string city, string state, string postalCode, string country)
+		Task<IEnumerable<Address>> IAsyncGeocoder.GeocodeAsync(string street, string city, string state, string postalCode, string country)
 		{
-			return GeoCodeAsync(street, city, state, postalCode, country)
+			return GeocodeAsync(street, city, state, postalCode, country)
 				.ContinueWith(task => task.Result.Cast<Address>());
 		}
 
-		Task<IEnumerable<Address>> IAsyncGeoCoder.GeoCodeAsync(string street, string city, string state, string postalCode, string country, CancellationToken cancellationToken)
+		Task<IEnumerable<Address>> IAsyncGeocoder.GeocodeAsync(string street, string city, string state, string postalCode, string country, CancellationToken cancellationToken)
 		{
-			return GeoCodeAsync(street, city, state, postalCode, country, cancellationToken)
+			return GeocodeAsync(street, city, state, postalCode, country, cancellationToken)
 				.ContinueWith(task => task.Result.Cast<Address>(), cancellationToken);
 		}
 
-		Task<IEnumerable<Address>> IAsyncGeoCoder.ReverseGeocodeAsync(double latitude, double longitude)
+		Task<IEnumerable<Address>> IAsyncGeocoder.ReverseGeocodeAsync(double latitude, double longitude)
 		{
 			return ReverseGeocodeAsync(latitude, longitude)
 				.ContinueWith(task => task.Result.Cast<Address>());
 		}
 
-		Task<IEnumerable<Address>> IAsyncGeoCoder.ReverseGeocodeAsync(double latitude, double longitude, CancellationToken cancellationToken)
+		Task<IEnumerable<Address>> IAsyncGeocoder.ReverseGeocodeAsync(double latitude, double longitude, CancellationToken cancellationToken)
 		{
 			return ReverseGeocodeAsync(latitude, longitude, cancellationToken)
 				.ContinueWith(task => task.Result.Cast<Address>(), cancellationToken);
@@ -335,7 +335,7 @@ namespace GeoCoding.Microsoft
 			}
 			catch (Exception ex)
 			{
-				throw new BingGeoCodingException(ex);
+				throw new BingGeocodingException(ex);
 			}
 		}
 
@@ -352,7 +352,7 @@ namespace GeoCoding.Microsoft
 					return jsonSerializer.ReadObject(response.GetResponseStream()) as Json.Response;
 				}
 			}
-			catch (BingGeoCodingException)
+			catch (BingGeocodingException)
 			{
 				//let these pass through
 				throw;
@@ -360,7 +360,7 @@ namespace GeoCoding.Microsoft
 			catch (Exception ex)
 			{
 				//wrap in google exception
-				throw new BingGeoCodingException(ex);
+				throw new BingGeocodingException(ex);
 			}
 		}
 

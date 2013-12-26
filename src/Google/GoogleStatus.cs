@@ -1,6 +1,6 @@
 using System;
 
-namespace GeoCoding.Google
+namespace Geocoding.Google
 {
 	public enum GoogleStatus
 	{

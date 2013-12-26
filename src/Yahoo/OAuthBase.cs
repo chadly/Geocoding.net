@@ -5,7 +5,7 @@ using System.Text;
 using System.Web;
 
 //http://oauth.googlecode.com/svn/code/csharp/OAuthBase.cs
-namespace GeoCoding.Yahoo {
+namespace Geocoding.Yahoo {
 	public class OAuthBase {
 
         /// <summary>

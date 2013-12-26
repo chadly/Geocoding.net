@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace GeoCoding.Tests
+namespace Geocoding.Tests
 {
 	public class LocationTest
 	{

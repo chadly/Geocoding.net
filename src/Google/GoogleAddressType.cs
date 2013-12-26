@@ -1,6 +1,6 @@
 using System;
 
-namespace GeoCoding.Google
+namespace Geocoding.Google
 {
 	/// <remarks>
 	/// http://code.google.com/apis/maps/documentation/geocoding/#Types

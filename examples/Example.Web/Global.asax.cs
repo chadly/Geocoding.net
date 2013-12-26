@@ -3,10 +3,10 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
-using GeoCoding;
-using GeoCoding.Google;
-using GeoCoding.Microsoft;
-using GeoCoding.Yahoo;
+using Geocoding;
+using Geocoding.Google;
+using Geocoding.Microsoft;
+using Geocoding.Yahoo;
 
 namespace Example.Web
 {
@@ -29,14 +29,19 @@ namespace Example.Web
 			builder.RegisterControllers(Assembly.GetExecutingAssembly());
 
 			//register your geocoder implementation here -- note: it will use the last one registered
-			builder.Register(c => new BingMapsGeoCoder("my-bing-maps-key")).As<IGeoCoder>();
-			builder.Register(c => new YahooGeoCoder("my-yahoo-app-id")).As<IGeoCoder>();
-			builder.Register(c => new GoogleGeoCoder
+
+			//http://msdn.microsoft.com/en-us/library/ff428642.aspx
+			builder.Register(c => new BingMapsGeocoder("my-bing-maps-key")).As<IGeocoder>();
+
+			//http://developer.yahoo.com/boss/geo/BOSS_Signup.pdf
+			builder.Register(c => new YahooGeocoder("my-yahoo-consumer-key", "my-yahoo-consumer-secret")).As<IGeocoder>();
+
+			//https://developers.google.com/maps/documentation/javascript/tutorial#api_key
+			//a server key is optional with Google
+			builder.Register(c => new GoogleGeocoder
 			{
-				//https://developers.google.com/maps/documentation/javascript/tutorial#api_key
-				//except create a "server key"
-				ApiKey = "google-api-key-is-optional"
-			}).As<IGeoCoder>();
+				//ApiKey = "google-api-key-is-optional"
+			}).As<IGeocoder>();
 
 			return builder.Build();
 		}

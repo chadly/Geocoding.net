@@ -1,3 +1,3 @@
 ﻿using System.Reflection;
 
-[assembly: AssemblyTitle("GeoCoding Yahoo API")]
+[assembly: AssemblyTitle("Geocoding Yahoo API")]

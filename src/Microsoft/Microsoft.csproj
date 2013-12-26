@@ -8,8 +8,8 @@
     <ProjectGuid>{74BCB608-4674-452F-A50C-7EE61AC47EAF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GeoCoding.Microsoft</RootNamespace>
-    <AssemblyName>GeoCoding.Microsoft</AssemblyName>
+    <RootNamespace>Geocoding.Microsoft</RootNamespace>
+    <AssemblyName>Geocoding.Microsoft</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -62,7 +62,7 @@
       <Link>Properties\AssemblyInfoCommon.cs</Link>
     </Compile>
     <Compile Include="BingAddress.cs" />
-    <Compile Include="BingGeoCodingException.cs" />
+    <Compile Include="BingGeocodingException.cs" />
     <Compile Include="BingMapsGeocoder.cs" />
     <Compile Include="EntityType.cs" />
     <Compile Include="Json.cs" />

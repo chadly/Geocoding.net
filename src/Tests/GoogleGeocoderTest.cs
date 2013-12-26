@@ -1,22 +1,22 @@
 ﻿using System.Configuration;
 using System.Linq;
-using GeoCoding.Google;
+using Geocoding.Google;
 using Xunit;
 using Xunit.Extensions;
 
-namespace GeoCoding.Tests
+namespace Geocoding.Tests
 {
-	public class GoogleGeoCoderTest : GeoCoderTest
+	public class GoogleGeocoderTest : GeocoderTest
 	{
-		GoogleGeoCoder geoCoder;
+		GoogleGeocoder geocoder;
 
-		protected override IGeoCoder CreateGeoCoder()
+		protected override IGeocoder CreateGeocoder()
 		{
-			geoCoder = new GoogleGeoCoder
+			geocoder = new GoogleGeocoder
 			{
 				ApiKey = ConfigurationManager.AppSettings["googleApiKey"]
 			};
-			return geoCoder;
+			return geocoder;
 		}
 
 		[Theory]
@@ -27,7 +27,7 @@ namespace GeoCoding.Tests
 		[InlineData("1600 pennsylvania ave washington dc", GoogleAddressType.StreetAddress)]
 		public void CanParseAddressTypes(string address, GoogleAddressType type)
 		{
-			GoogleAddress[] addresses = geoCoder.GeoCode(address).ToArray();
+			GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
 			Assert.Equal(type, addresses[0].Type);
 		}
 
@@ -38,8 +38,8 @@ namespace GeoCoding.Tests
 		[InlineData("Montreal", "de", "Montreal, Québec, Kanada")]
 		public void ApplyLanguage(string address, string language, string result)
 		{
-			geoCoder.Language = language;
-			GoogleAddress[] addresses = geoCoder.GeoCode(address).ToArray();
+			geocoder.Language = language;
+			GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
 			Assert.Equal(result, addresses[0].FormattedAddress);
 		}
 
@@ -48,8 +48,8 @@ namespace GeoCoding.Tests
 		[InlineData("Toledo", "es", "Toledo, Spain")]
 		public void ApplyRegionBias(string address, string regionBias, string result)
 		{
-			geoCoder.RegionBias = regionBias;
-			GoogleAddress[] addresses = geoCoder.GeoCode(address).ToArray();
+			geocoder.RegionBias = regionBias;
+			GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
 			Assert.Equal(result, addresses[0].FormattedAddress);
 		}
 
@@ -58,8 +58,8 @@ namespace GeoCoding.Tests
 		[InlineData("Winnetka", 34.172684, -118.604794, 34.236144, -118.500938, "Winnetka, Los Angeles, CA, USA")]
 		public void ApplyBoundsBias(string address, double biasLatitude1, double biasLongitude1, double biasLatitude2, double biasLongitude2, string result)
 		{
-			geoCoder.BoundsBias = new Bounds(biasLatitude1, biasLongitude1, biasLatitude2, biasLongitude2);
-			GoogleAddress[] addresses = geoCoder.GeoCode(address).ToArray();
+			geocoder.BoundsBias = new Bounds(biasLatitude1, biasLongitude1, biasLatitude2, biasLongitude2);
+			GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
 			Assert.Equal(result, addresses[0].FormattedAddress);
 		}
 	}

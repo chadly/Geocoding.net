@@ -1,18 +1,18 @@
 ﻿using System.Configuration;
 using System.Linq;
-using GeoCoding.Microsoft;
+using Geocoding.Microsoft;
 using Xunit;
 using Xunit.Extensions;
 
-namespace GeoCoding.Tests
+namespace Geocoding.Tests
 {
-	public class BingMapsTest : GeoCoderTest
+	public class BingMapsTest : GeocoderTest
 	{
-		BingMapsGeoCoder geoCoder;
+		BingMapsGeocoder geoCoder;
 
-		protected override IGeoCoder CreateGeoCoder()
+		protected override IGeocoder CreateGeocoder()
 		{
-			geoCoder = new BingMapsGeoCoder(ConfigurationManager.AppSettings["bingMapsKey"]);
+			geoCoder = new BingMapsGeocoder(ConfigurationManager.AppSettings["bingMapsKey"]);
 			return geoCoder;
 		}
 
@@ -23,7 +23,7 @@ namespace GeoCoding.Tests
 		public void ApplyCulture(string address, string culture, string result)
 		{
 			geoCoder.Culture = culture;
-			BingAddress[] addresses = geoCoder.GeoCode(address).ToArray();
+			BingAddress[] addresses = geoCoder.Geocode(address).ToArray();
 			Assert.Equal(result, addresses[0].FormattedAddress);
 		}
 
@@ -34,7 +34,7 @@ namespace GeoCoding.Tests
 		public void ApplyUserLocation(string address, double userLatitude, double userLongitude, string country)
 		{
 			geoCoder.UserLocation = new Location(userLatitude, userLongitude);
-			BingAddress[] addresses = geoCoder.GeoCode(address).ToArray();
+			BingAddress[] addresses = geoCoder.Geocode(address).ToArray();
 			Assert.Equal(country, addresses[0].CountryRegion);
 		}
 
@@ -45,15 +45,15 @@ namespace GeoCoding.Tests
 		public void ApplyUserMapView(string address, double userLatitude1, double userLongitude1, double userLatitude2, double userLongitude2, string country)
 		{
 			geoCoder.UserMapView = new Bounds(userLatitude1, userLongitude1, userLatitude2, userLongitude2);
-			BingAddress[] addresses = geoCoder.GeoCode(address).ToArray();
+			BingAddress[] addresses = geoCoder.Geocode(address).ToArray();
 			Assert.Equal(country, addresses[0].CountryRegion);
 		}
 
 		[Fact]
 		//https://github.com/chadly/Geocoding.net/issues/8
-		public void CanReverseGeoCodeIssue8()
+		public void CanReverseGeocodeIssue8()
 		{
-			BingAddress[] addresses = geoCoder.ReverseGeoCode(38.8976777, -77.036517).ToArray();
+			BingAddress[] addresses = geoCoder.ReverseGeocode(38.8976777, -77.036517).ToArray();
 			Assert.NotEmpty(addresses);
 		}
 	}

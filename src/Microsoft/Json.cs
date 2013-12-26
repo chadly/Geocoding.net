@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace GeoCoding.Microsoft.Json
+namespace Geocoding.Microsoft.Json
 {
 	[DataContract]
 	public class Address

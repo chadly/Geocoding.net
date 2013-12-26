@@ -1,4 +1,4 @@
-#Generic C# GeoCoding API
+#Generic C# Geocoding API
 
 Includes a model and interface for communicating with three popular Geocoding providers.  Current implementations include:
 
@@ -23,15 +23,15 @@ Or download the [latest release](https://github.com/chadly/Geocoding.net/release
 ##Simple Example
 
 ```csharp
-IGeoCoder geoCoder = new GoogleGeoCoder() { ApiKey = "this-is-my-optional-google-api-key" };
-Address[] addresses = geoCoder.GeoCode("123 Main St");
+IGeocoder geocoder = new GoogleGeocoder() { ApiKey = "this-is-my-optional-google-api-key" };
+Address[] addresses = geocoder.Geocode("123 Main St");
 ```
 
 It can also be used to return address information from latitude/longitude coordinates (aka reverse geocoding):
 
 ```csharp
-IGeoCoder geoCoder = new YahooGeoCoder("consumer-key", "consumer-secret");
-Address[] addresses = geoCoder.ReverseGeoCode(38.8976777, -77.036517);
+IGeocoder geocoder = new YahooGeocoder("consumer-key", "consumer-secret");
+Address[] addresses = geocoder.ReverseGeocode(38.8976777, -77.036517);
 ```
 
 ###More Examples

@@ -1,6 +1,6 @@
 using System;
 
-namespace GeoCoding.Yahoo
+namespace Geocoding.Yahoo
 {
 	public class YahooAddress : Address
 	{

@@ -8,8 +8,8 @@
     <ProjectGuid>{B2863E87-3983-46EF-8B3E-37A4475ECA13}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GeoCoding.Yahoo</RootNamespace>
-    <AssemblyName>GeoCoding.Yahoo</AssemblyName>
+    <RootNamespace>Geocoding.Yahoo</RootNamespace>
+    <AssemblyName>Geocoding.Yahoo</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -54,8 +54,8 @@
     <Compile Include="YahooAddress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="YahooError.cs" />
-    <Compile Include="YahooGeoCoder.cs" />
-    <Compile Include="YahooGeoCodingException.cs" />
+    <Compile Include="YahooGeocoder.cs" />
+    <Compile Include="YahooGeocodingException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\geocoding.snk">

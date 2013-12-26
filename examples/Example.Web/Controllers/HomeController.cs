@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using GeoCoding;
+using Geocoding;
 
 namespace Example.Web.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly IGeoCoder geoCoder;
+		readonly IGeocoder geoCoder;
 
-		public HomeController(IGeoCoder geoCoder)
+		public HomeController(IGeocoder geoCoder)
 		{
 			this.geoCoder = geoCoder;
 		}
@@ -24,7 +24,7 @@ namespace Example.Web.Controllers
 			if (String.IsNullOrEmpty(address))
 				return View("Index");
 
-			var addresses = geoCoder.GeoCode(address).ToArray();
+			var addresses = geoCoder.Geocode(address).ToArray();
 			return View("Index", addresses);
 		}
 	}

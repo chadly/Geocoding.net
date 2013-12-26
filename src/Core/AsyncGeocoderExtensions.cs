@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GeoCoding
+namespace Geocoding
 {
-	public static class AsyncGeoCoderExtensions
+	public static class AsyncGeocoderExtensions
 	{
-		public static Task<IEnumerable<Address>> ReverseGeocodeAsync(this IAsyncGeoCoder geoCoder, Location location)
+		public static Task<IEnumerable<Address>> ReverseGeocodeAsync(this IAsyncGeocoder geoCoder, Location location)
 		{
 			if (location == null)
 				throw new ArgumentNullException("location");
@@ -15,7 +15,7 @@ namespace GeoCoding
 			return geoCoder.ReverseGeocodeAsync(location.Latitude, location.Longitude);
 		}
 
-		public static Task<IEnumerable<Address>> ReverseGeocodeAsync(this IAsyncGeoCoder geoCoder, Location location, CancellationToken cancellationToken)
+		public static Task<IEnumerable<Address>> ReverseGeocodeAsync(this IAsyncGeocoder geoCoder, Location location, CancellationToken cancellationToken)
 		{
 			if (location == null)
 				throw new ArgumentNullException("location");

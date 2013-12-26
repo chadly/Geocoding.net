@@ -1,20 +1,20 @@
 ﻿using System;
 
-namespace GeoCoding.Google
+namespace Geocoding.Google
 {
-	public class GoogleGeoCodingException : Exception
+	public class GoogleGeocodingException : Exception
 	{
 		const string defaultMessage = "There was an error processing the geocoding request. See Status or InnerException for more information.";
 
 		public GoogleStatus Status { get; private set; }
 
-		public GoogleGeoCodingException(GoogleStatus status)
+		public GoogleGeocodingException(GoogleStatus status)
 			: base(defaultMessage)
 		{
 			this.Status = status;
 		}
 
-		public GoogleGeoCodingException(Exception innerException)
+		public GoogleGeocodingException(Exception innerException)
 			: base(defaultMessage, innerException)
 		{
 			this.Status = GoogleStatus.Error;
