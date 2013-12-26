@@ -1,5 +1,4 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using GeoCoding.Yahoo;
 
 namespace GeoCoding.Tests
@@ -8,7 +7,10 @@ namespace GeoCoding.Tests
 	{
 		protected override IGeoCoder CreateGeoCoder()
 		{
-			return new YahooGeoCoder(ConfigurationManager.AppSettings["yahooAppId"]);
+			return new YahooGeoCoder(
+				ConfigurationManager.AppSettings["yahooConsumerKey"],
+				ConfigurationManager.AppSettings["yahooConsumerSecret"]
+			);
 		}
 	}
 }

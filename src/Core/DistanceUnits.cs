@@ -2,9 +2,9 @@
 
 namespace GeoCoding
 {
-    public enum DistanceUnits
-    {
-        Miles,
-        Kilometers
-    }
+	public enum DistanceUnits
+	{
+		Miles,
+		Kilometers
+	}
 }

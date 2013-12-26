@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>@Page.Title</title>
+    <link href="@Url.Content("~/content/site.css")" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="page">
+        <div id="header">
+            <div id="menucontainer">
+                <ul id="menu">              
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="main">
+            @RenderBody()
+
+            <div id="footer">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

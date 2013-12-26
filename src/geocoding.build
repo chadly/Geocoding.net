@@ -3,10 +3,10 @@
   <PropertyGroup>
     <projectName>GeoCoding.Net</projectName>
     <company>GeoCoding.Net</company>
-    <copyright>Copyright © 2008 - 2012 Chad Lee</copyright>
-    <major>2</major>
-    <minor>1</minor>
-    <patch>1</patch>
+    <copyright>Copyright © 2008 - 2013 Chad Lee</copyright>
+    <major>3</major>
+    <minor>0</minor>
+    <patch>0</patch>
     <!-- build number comes from teamcity -->
     <build Condition="'$(BUILD_NUMBER)'==''">0</build>
     <build Condition="'$(BUILD_NUMBER)'!=''">$(BUILD_NUMBER)</build>
@@ -15,7 +15,6 @@
   <!-- Define order of solutions to build -->
   <ItemGroup>
     <vssolutions Include="GeoCoding.sln" />
-    <vssolutions Include="Examples\Examples.sln" />
   </ItemGroup>
 
   <!-- Define outputs -->
@@ -32,6 +31,7 @@
 
     <buildDir Condition="'$(buildDir)'==''">$(MSBuildProjectDirectory)\..\bin\$(configuration)</buildDir>
     <libDir>$(MSBuildProjectDirectory)\..\lib</libDir>
+		<examplesDir>$(MSBuildProjectDirectory)\..\examples\build</examplesDir>
 
     <snkFile>$(MSBuildProjectDirectory)\geocoding.snk</snkFile>
   </PropertyGroup>
@@ -43,7 +43,7 @@
   <!-- ========= Public Targets ===================================================== -->
 
   <Target Name="Build">
-    <CallTarget Targets="CleanBuildDir;Compile;Test;Merge" />
+    <CallTarget Targets="CleanBuildDir;Compile;Test;Merge;CopyOutputToExamples" />
   </Target>
 
   <Target Name="CleanBuildDir">
@@ -125,4 +125,12 @@
     <Delete Files="@(mergeAsm)" />
     <Delete Files="@(mergeAsm -> '%(RootDir)%(Directory)%(Filename).pdb')" />
   </Target>
+
+	<Target Name="CopyOutputToExamples" DependsOnTargets="Merge">
+		<CreateItem Include="$(buildDir)\*.*">
+			<Output TaskParameter="Include" ItemName="mergedOutput" />
+		</CreateItem>
+
+		<Copy SourceFiles="@(mergedOutput)" DestinationFiles="@(mergedOutput -> '$(examplesDir)\%(Filename)%(Extension)')" />
+	</Target>
 </Project>

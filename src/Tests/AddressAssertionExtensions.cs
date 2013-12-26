@@ -7,7 +7,11 @@ namespace GeoCoding.Tests
 	{
 		public static void AssertWhiteHouse(this Address address)
 		{
-			Assert.True(address.FormattedAddress.Contains("The White House") || address.FormattedAddress.Contains("1600 Pennsylvania Ave NW"));
+			Assert.True(
+				address.FormattedAddress.Contains("The White House") ||
+				address.FormattedAddress.Contains("1600 Pennsylvania Ave NW") ||
+				address.FormattedAddress.Contains("1600 Pennsylvania Avenue Northwest")
+			);
 			AssertWhiteHouseArea(address);
 		}
 

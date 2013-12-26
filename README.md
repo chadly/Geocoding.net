@@ -4,7 +4,7 @@ Generic C# GeoCoding API
 Includes a model and interface for communicating with three popular Geocoding providers.  Current implementations include:
 
   * [Google Maps](https://developers.google.com/maps/) - [docs](https://developers.google.com/maps/documentation/geocoding/)
-  * [Yahoo! PlaceFinder](http://developer.yahoo.com/geo/placefinder/) - [docs](http://developer.yahoo.com/geo/placefinder/guide/index.html)
+  * [Yahoo! BOSS Geo Services](http://developer.yahoo.com/boss/geo/) - [docs](http://developer.yahoo.com/geo/placefinder/guide/index.html)
   * [Bing Maps (aka Virtual Earth)](http://www.microsoft.com/maps/) - [docs](http://msdn.microsoft.com/en-us/library/ff701715.aspx)
 
 The API returns latitude/longitude coordinates and normalized address information.  This can be used to perform address validation, real time mapping of user-entered addresses, distance calculations, and much more.
@@ -14,7 +14,7 @@ See latest [release notes](https://github.com/chadly/Geocoding.net/wiki/Release-
 ### Simple Example
 
 ```c#
-IGeoCoder geoCoder = new GoogleGeoCoder("my-api-key");
+IGeoCoder geoCoder = new GoogleGeoCoder() { ApiKey = "this-is-my-optional-google-api-key" };
 Address[] addresses = geoCoder.GeoCode("123 Main St");
 ```
 
@@ -24,6 +24,8 @@ It can also be used to return address information from latitude/longitude coordi
 IGeoCoder geoCoder = new YahooGeoCoder("my-app-ID");
 Address[] addresses = geoCoder.ReverseGeoCode(38.8976777, -77.036517);
 ```
+
+Note: Google allows anonymous access to it's API, but if you start hitting rate limits, you must [sign up for a new Server API Key](https://developers.google.com/maps/documentation/javascript/tutorial#api_key).
 
 How to Build from Source
 ------------------------

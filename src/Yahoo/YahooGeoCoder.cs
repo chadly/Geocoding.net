@@ -14,23 +14,32 @@ namespace GeoCoding.Yahoo
 	/// </remarks>
 	public class YahooGeoCoder : IGeoCoder
 	{
-		public const string ServiceUrl = "http://where.yahooapis.com/geocode?q={0}&appid={1}";		
-		public const string ServiceUrlNormal = "http://where.yahooapis.com/geocode?street={0}&city={1}&state={2}&postal={3}&country={4}&appid={5}";
-		public const string ServiceUrlReverse = "http://where.yahooapis.com/geocode?q={0}&appid={1}&gflags=R";
+		public const string ServiceUrl = "http://yboss.yahooapis.com/geo/placefinder?q={0}";
+		public const string ServiceUrlNormal = "http://yboss.yahooapis.com/geo/placefinder?street={0}&city={1}&state={2}&postal={3}&country={4}";
+		public const string ServiceUrlReverse = "http://yboss.yahooapis.com/geo/placefinder?q={0}&gflags=R";
 
-		readonly string appId;
+		readonly string consumerKey, consumerSecret;
 
-		public string AppId
+		public string ConsumerKey
 		{
-			get { return appId; }
+			get { return consumerKey; }
 		}
 
-		public YahooGeoCoder(string appId)
+		public string ConsumerSecret
 		{
-			if (String.IsNullOrEmpty(appId))
-				throw new ArgumentNullException("appId");
+			get { return consumerSecret; }
+		}
 
-			this.appId = appId;
+		public YahooGeoCoder(string consumerKey, string consumerSecret)
+		{
+			if (String.IsNullOrEmpty(consumerKey))
+				throw new ArgumentNullException("consumerKey");
+
+			if (String.IsNullOrEmpty(consumerSecret))
+				throw new ArgumentNullException("consumerSecret");
+
+			this.consumerKey = consumerKey;
+			this.consumerSecret = consumerSecret;
 		}
 
 		public IEnumerable<YahooAddress> GeoCode(string address)
@@ -38,7 +47,7 @@ namespace GeoCoding.Yahoo
 			if (String.IsNullOrEmpty(address))
 				throw new ArgumentNullException("address");
 
-			string url = String.Format(ServiceUrl, HttpUtility.UrlEncode(address), appId);
+			string url = String.Format(ServiceUrl, HttpUtility.UrlEncode(address));
 
 			HttpWebRequest request = BuildWebRequest(url);
 			return ProcessRequest(request);
@@ -46,7 +55,7 @@ namespace GeoCoding.Yahoo
 
 		public IEnumerable<YahooAddress> GeoCode(string street, string city, string state, string postalCode, string country)
 		{
-			string url = String.Format(ServiceUrlNormal, HttpUtility.UrlEncode(street), HttpUtility.UrlEncode(city), HttpUtility.UrlEncode(state), HttpUtility.UrlEncode(postalCode), HttpUtility.UrlEncode(country), appId);
+			string url = String.Format(ServiceUrlNormal, HttpUtility.UrlEncode(street), HttpUtility.UrlEncode(city), HttpUtility.UrlEncode(state), HttpUtility.UrlEncode(postalCode), HttpUtility.UrlEncode(country));
 
 			HttpWebRequest request = BuildWebRequest(url);
 			return ProcessRequest(request);
@@ -62,7 +71,7 @@ namespace GeoCoding.Yahoo
 
 		public IEnumerable<YahooAddress> ReverseGeoCode(double latitude, double longitude)
 		{
-			string url = String.Format(ServiceUrlReverse, String.Format(CultureInfo.InvariantCulture, "{0} {1}", latitude, longitude), appId);
+			string url = String.Format(ServiceUrlReverse, String.Format(CultureInfo.InvariantCulture, "{0} {1}", latitude, longitude));
 
 			HttpWebRequest request = BuildWebRequest(url);
 			return ProcessRequest(request);
@@ -111,9 +120,35 @@ namespace GeoCoding.Yahoo
 
 		private HttpWebRequest BuildWebRequest(string url)
 		{
+			url = GenerateOAuthSignature(new Uri(url));
 			HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
 			req.Method = "GET";
 			return req;
+		}
+
+		string GenerateOAuthSignature(Uri uri)
+		{
+			string url, param;
+
+			var oAuth = new OAuthBase();
+			var nonce = oAuth.GenerateNonce();
+			var timeStamp = oAuth.GenerateTimeStamp();
+
+			var signature = oAuth.GenerateSignature(
+				uri,
+				consumerKey,
+				consumerSecret,
+				string.Empty,
+				string.Empty,
+				"GET",
+				timeStamp,
+				nonce,
+				OAuthBase.SignatureTypes.HMACSHA1,
+				out url,
+				out param
+			);
+
+			return String.Format("{0}?{1}&oauth_signature={2}", url, param, signature);
 		}
 
 		private IEnumerable<YahooAddress> ProcessWebResponse(WebResponse response)
@@ -126,7 +161,7 @@ namespace GeoCoding.Yahoo
 			if (error != YahooError.NoError)
 				throw new YahooGeoCodingException(error);
 
-			return ParseAddresses(nav.Select("/ResultSet/Result"));
+			return ParseAddresses(nav.Select("/ResultSet/Result")).ToArray();
 		}
 
 		private XPathDocument LoadXmlResponse(WebResponse response)
@@ -210,7 +245,7 @@ namespace GeoCoding.Yahoo
 
 		public override string ToString()
 		{
-			return String.Format("Yahoo GeoCoder: {0}", appId);
+			return String.Format("Yahoo GeoCoder: {0}, {1}", consumerKey, consumerSecret);
 		}
 	}
 }
