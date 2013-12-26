@@ -1,8 +1,11 @@
 /bin
 /lib
+/examples/packages
+/examples/build
 AssemblyInfoCommon.cs
 app.config
 docs
+nuget.exe
 
 #################
 ## Visual Studio
