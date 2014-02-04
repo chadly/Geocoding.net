@@ -17,7 +17,31 @@ namespace Geocoding.Google
 	/// </remarks>
 	public class GoogleGeocoder : IGeocoder, IAsyncGeocoder
 	{
-		public string ApiKey { get; set; }
+		string apiKey;
+		BusinessKey businessKey;
+		const string keyMessage = "Only one of BusinessKey or ApiKey should be set on the GoogleGeocoder.";
+
+		public string ApiKey
+		{
+			get { return apiKey; }
+			set
+			{
+				if (businessKey != null)
+					throw new InvalidOperationException(keyMessage);
+				apiKey = value;
+			}
+		}
+
+		public BusinessKey BusinessKey
+		{
+			get { return businessKey; }
+			set
+			{
+				if (!String.IsNullOrEmpty(apiKey))
+					throw new InvalidOperationException(keyMessage);
+				businessKey = value;
+			}
+		}
 
 		public WebProxy Proxy { get; set; }
 		public string Language { get; set; }
@@ -47,6 +71,12 @@ namespace Geocoding.Google
 				{
 					builder.Append("&key=");
 					builder.Append(HttpUtility.UrlEncode(ApiKey));
+				}
+
+				if (BusinessKey != null)
+				{
+					builder.Append("&client=");
+					builder.Append(HttpUtility.UrlEncode(BusinessKey.ClientId));
 				}
 
 				if (BoundsBias != null)
@@ -260,6 +290,10 @@ namespace Geocoding.Google
 		private HttpWebRequest BuildWebRequest(string type, string value)
 		{
 			string url = String.Format(ServiceUrl, type, value);
+
+			if (BusinessKey != null)
+				url = BusinessKey.GenerateSignature(url);
+
 			HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
 			req.Proxy = Proxy;
 			req.Method = "GET";

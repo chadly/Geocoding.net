@@ -20,11 +20,13 @@ Install-Package Geocoding.net
 
 Or download the [latest release](https://github.com/chadly/Geocoding.net/releases) and add a reference to `Geocoding.dll` in your project.
 
-##Simple Example
+##Example Usage
+
+###Simple Example
 
 ```csharp
 IGeocoder geocoder = new GoogleGeocoder() { ApiKey = "this-is-my-optional-google-api-key" };
-Address[] addresses = geocoder.Geocode("123 Main St");
+Address[] addresses = geocoder.Geocode("1600 pennsylvania ave washington dc");
 ```
 
 It can also be used to return address information from latitude/longitude coordinates (aka reverse geocoding):
@@ -34,10 +36,21 @@ IGeocoder geocoder = new YahooGeocoder("consumer-key", "consumer-secret");
 Address[] addresses = geocoder.ReverseGeocode(38.8976777, -77.036517);
 ```
 
+###Using Provider-Specific Data
+
+```csharp
+GoogleGeocoder geocoder = new GoogleGeocoder();
+GoogleAddress[] addresses = geocoder.Geocode("1600 pennsylvania ave washington dc");
+
+var country = addresses.Where(a => !a.IsPartialMatch).Select(a => a[GoogleAddressType.Country]).First();
+Console.WriteLine("Country: " + country.LongName + ", " + country.ShortName); //Country: United States, US
+```
+
+The Microsoft and Yahoo implementations each provide their own address class as well, `BingAddress` and `YahooAddress`.
+
 ###More Examples
 
 A more in-depth runnable example of how this library can be integrated into an MVC4 application can be found in the [latest release package](https://github.com/chadly/Geocoding.net/releases/latest). Download it and run locally.
-
 
 ##API Keys
 

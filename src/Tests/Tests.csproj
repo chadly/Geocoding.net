@@ -84,6 +84,7 @@
     <Compile Include="DistanceTest.cs" />
     <Compile Include="GeocoderTest.cs" />
     <Compile Include="GoogleAsyncGeocoderTest.cs" />
+    <Compile Include="GoogleBusinessKeyTest.cs" />
     <Compile Include="GoogleGeocoderTest.cs" />
     <Compile Include="LocationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

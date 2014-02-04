@@ -50,6 +50,7 @@
     <Compile Include="..\AssemblyInfoCommon.cs">
       <Link>Properties\AssemblyInfoCommon.cs</Link>
     </Compile>
+    <Compile Include="BusinessKey.cs" />
     <Compile Include="GoogleAddress.cs" />
     <Compile Include="GoogleAddressComponent.cs" />
     <Compile Include="GoogleAddressType.cs" />

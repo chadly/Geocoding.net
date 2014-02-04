@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Geocoding.Google
 {
@@ -21,6 +23,11 @@ namespace Geocoding.Google
 		public bool IsPartialMatch
 		{
 			get { return isPartialMatch; }
+		}
+
+		public GoogleAddressComponent this[GoogleAddressType type]
+		{
+			get { return Components.FirstOrDefault(c => c.Types.Contains(type)); }
 		}
 
 		public GoogleAddress(GoogleAddressType type, string formattedAddress, GoogleAddressComponent[] components, Location coordinates, bool isPartialMatch)
