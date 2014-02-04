@@ -3,9 +3,9 @@
   <PropertyGroup>
     <projectName>Geocoding.Net</projectName>
     <company>Geocoding.Net</company>
-    <copyright>Copyright © 2008 - 2013 Chad Lee</copyright>
+    <copyright>Copyright © 2008 - 2014 Chad Lee</copyright>
     <major>3</major>
-    <minor>0</minor>
+    <minor>1</minor>
     <patch>0</patch>
     <!-- build number comes from teamcity -->
     <build Condition="'$(BUILD_NUMBER)'==''">0</build>
