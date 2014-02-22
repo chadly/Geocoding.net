@@ -8,10 +8,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{891021E5
 		..\build-with-tests.bat = ..\build-with-tests.bat
 		..\build.bat = ..\build.bat
 		..\clean.bat = ..\clean.bat
+		common.targets = common.targets
 		geocoding.build = geocoding.build
 		..\pack.bat = ..\pack.bat
 		.nuget\packages.config = .nuget\packages.config
 		..\readme.md = ..\readme.md
+		test.targets = test.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core Framework", "Core Framework", "{2104CCA2-94D4-4C56-9A5E-FAF9D9538817}"

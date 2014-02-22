@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+	<PropertyGroup>
+		<MSBuildCommunityTasksPath>$(MSBuildThisFileDirectory)..\lib\MSBuildTasks.1.4.0.65\tools\</MSBuildCommunityTasksPath>
+
+		<major Condition="'$(major)'==''">1</major>
+		<minor Condition="'$(minor)'==''">0</minor>
+    <patch Condition="'$(patch)'==''">0</patch>
+		<build Condition="'$(BUILD_NUMBER)'==''">0</build>
+		<build Condition="'$(BUILD_NUMBER)'!=''">$(BUILD_NUMBER)</build>
+	</PropertyGroup>
+
+	<Import Project="$(MSBuildCommunityTasksPath)MSBuild.Community.Tasks.Targets" Condition="exists('$(MSBuildCommunityTasksPath)MSBuild.Community.Tasks.Targets')" />
+
+	<Target Name="CopyTemplateFiles" BeforeTargets="BeforeBuild">
+		<CreateItem Include="$(MSBuildProjectDirectory)\**\*.config.temp">
+			<Output TaskParameter="Include" ItemName="templateFiles" />
+		</CreateItem>
+
+		<Copy SourceFiles="@(templateFiles -> '%(FullPath)')"
+			DestinationFiles="@(templateFiles -> '%(RootDir)%(Directory)%(Filename)')"
+			Condition="!Exists('%(templateFiles.RootDir)%(templateFiles.Directory)%(templateFiles.Filename)')" />
+	</Target>
+
+	<Target Name="CleanTemplateFiles" AfterTargets="Clean">
+		<CreateItem Include="$(MSBuildProjectDirectory)\**\*.config.temp">
+			<Output TaskParameter="Include" ItemName="templateFiles" />
+		</CreateItem>
+		<Delete Files="@(templateFiles -> '%(RootDir)%(Directory)%(Filename)')" />
+	</Target>
+
+	<Target Name="Version" Condition="$(BUILD_NUMBER) != 0 or !Exists('Properties\AssemblyVersion.cs')" BeforeTargets="BeforeBuild">
+		<CreateProperty Value="$(major).$(minor).$(patch).$(build)">
+			<Output TaskParameter="Value" PropertyName="versionString" />
+		</CreateProperty>
+
+		<AssemblyInfo
+      CodeLanguage="CS"
+      OutputFile="Properties\AssemblyVersion.cs"
+      AssemblyConfiguration="$(configuration)"
+      AssemblyVersion="$(versionString)"
+      AssemblyFileVersion="$(versionString)" />
+	</Target>
+
+	<Target Name="CleanVersionFiles" AfterTargets="Clean">
+		<Delete Files="Properties\AssemblyVersion.cs" />
+	</Target>
+</Project>

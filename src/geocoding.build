@@ -1,125 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <projectName>Geocoding.Net</projectName>
-    <company>Geocoding.Net</company>
-    <copyright>Copyright © 2008 - 2014 Chad Lee</copyright>
-    <major>3</major>
-    <minor>1</minor>
-    <patch>0</patch>
-    <!-- build number comes from teamcity -->
-    <build Condition="'$(BUILD_NUMBER)'==''">0</build>
-    <build Condition="'$(BUILD_NUMBER)'!=''">$(BUILD_NUMBER)</build>
-  </PropertyGroup>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+	<PropertyGroup>
+		<!-- abide by semantic versioning when changing these version numbers: http://semver.org/ -->
+		<major>3</major>
+		<minor>1</minor>
+		<patch>0</patch>
+		<!-- build number comes from teamcity -->
+		<build Condition="'$(BUILD_NUMBER)'==''">0</build>
+		<build Condition="'$(BUILD_NUMBER)'!=''">$(BUILD_NUMBER)</build>
+	
+		<configuration Condition="'$(configuration)'==''">Debug</configuration>
 
-  <!-- Define order of solutions to build -->
-  <ItemGroup>
-    <vssolutions Include="Geocoding.sln" />
-  </ItemGroup>
+		<buildOptions>Configuration=$(configuration);major=$(major);minor=$(minor);patch=$(patch);BUILD_NUMBER=$(BUILD_NUMBER)</buildOptions>
+		<versionString>v$(major).$(minor).$(patch).$(BUILD_NUMBER)</versionString>
+	</PropertyGroup>
 
-  <!-- Define outputs -->
-  <ItemGroup>
-    <merge Include="Core\Core.csproj" />
-    <merge Include="Google\Google.csproj" />
-    <merge Include="Yahoo\Yahoo.csproj" />
-    <merge Include="Microsoft\Microsoft.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<solutions Include="Geocoding.sln" />
+	</ItemGroup>
 
-  <PropertyGroup>
-    <!-- default configuration is "Debug"; the other is "Release" -->
-    <configuration Condition="'$(configuration)'==''">Debug</configuration>
+	<Target Name="Build">
+		<MSBuild Projects="@(solutions)" Properties="$(buildOptions)" />
+	</Target>
 
-    <buildDir Condition="'$(buildDir)'==''">$(MSBuildProjectDirectory)\..\bin\$(configuration)</buildDir>
-    <libDir>$(MSBuildProjectDirectory)\..\lib</libDir>
+	<Target Name="Clean">
+		<MSBuild Projects="@(solutions)" Targets="Clean" Properties="$(buildOptions)" />
+	</Target>
 
-    <snkFile>$(MSBuildProjectDirectory)\geocoding.snk</snkFile>
-  </PropertyGroup>
+	<Target Name="Test" DependsOnTargets="Build">
+		<ItemGroup>
+			<testProjects Include="**\*Tests.csproj" />
+		</ItemGroup>
 
-  <UsingTask AssemblyFile="$(libDir)\MSBuildTasks.1.4.0.45\tools\MSBuild.Community.Tasks.dll" TaskName="MSBuild.Community.Tasks.AssemblyInfo" />
-  <UsingTask AssemblyFile="$(libDir)\xunit.1.9.1\lib\net20\xunit.runner.msbuild.dll" TaskName="Xunit.Runner.MSBuild.xunit" />
-  <UsingTask AssemblyFile="$(libDir)\ILMerge.MSBuild.Tasks.1.0.0.3\tools\ILMerge.MSBuild.Tasks.dll" TaskName="ILMerge.MSBuild.Tasks.ILMerge" />
+		<MSBuild Projects="@(testProjects)" Targets="Test" Properties="$(buildOptions)" />
+	</Target>
 
-  <!-- ========= Public Targets ===================================================== -->
+	<Target Name="Merge" DependsOnTargets="Build;CopyOutputToBuildDir">
+		<CreateItem Include="$(buildDir)\Geocoding.*.dll">
+			<Output TaskParameter="Include" ItemName="mergeAsm" />
+		</CreateItem>
 
-  <Target Name="CleanBuildDir">
-    <RemoveDir Directories="$(buildDir)" />
-  </Target>
+		<ILMerge Condition="'$(Configuration)'=='Debug'" InputAssemblies="@(mergeAsm)" OutputFile="$(buildDir)\Geocoding.dll" SnkFile="$(snkFile)" DebugInfo="true" />
+		<ILMerge Condition="'$(Configuration)'=='Release'" InputAssemblies="@(mergeAsm)" OutputFile="$(buildDir)\Geocoding.dll" SnkFile="$(snkFile)" DebugInfo="false" />
 
-  <Target Name="Clean" DependsOnTargets="CleanBuildDir">
-    <Exec Command="FOR /F &quot;tokens=*&quot; %%G IN ('DIR /B /AD /S bin') DO RMDIR /S /Q &quot;%%G&quot;" />
-    <Exec Command="FOR /F &quot;tokens=*&quot; %%G IN ('DIR /B /AD /S obj') DO RMDIR /S /Q &quot;%%G&quot;" />
-
-    <Delete Files="AssemblyInfoCommon.cs" />
-
-    <CreateItem Include="$(MSBuildProjectDirectory)\**\*.config.temp">
-      <Output TaskParameter="Include" ItemName="templateFiles" />
-    </CreateItem>
-    <Delete Files="@(templateFiles -> '%(RootDir)%(Directory)%(Filename)')" />
-  </Target>
-
-  <Target Name="Version">
-    <CreateProperty Value="$(major).$(minor).$(patch).$(build)">
-      <Output TaskParameter="Value" PropertyName="versionString" />
-    </CreateProperty>
-
-    <AssemblyInfo
-      CodeLanguage="CS"
-      OutputFile="AssemblyInfoCommon.cs"
-      AssemblyProduct="$(projectName)"
-      AssemblyCompany="$(company)"
-      AssemblyCopyright="$(copyright)"
-      AssemblyConfiguration="$(configuration)"
-      ComVisible="false"
-      AssemblyVersion="$(versionString)"
-      AssemblyFileVersion="$(versionString)"/>
-  </Target>
-
-  <Target Name="CopyTemplateFiles">
-    <CreateItem Include="$(MSBuildProjectDirectory)\**\*.config.temp">
-      <Output TaskParameter="Include" ItemName="templateFiles" />
-    </CreateItem>
-
-    <Copy SourceFiles="@(templateFiles -> '%(FullPath)')"
-          DestinationFiles="@(templateFiles -> '%(RootDir)%(Directory)%(Filename)')"
-          Condition="!Exists('%(templateFiles.RootDir)%(templateFiles.Directory)%(templateFiles.Filename)')" />
-  </Target>
-
-  <Target Name="Build" DependsOnTargets="CleanBuildDir;Version;CopyTemplateFiles">
-    <MSBuild Projects="@(vssolutions)" Properties="Configuration=$(configuration)" />
-  </Target>
-
-  <Target Name="Test" DependsOnTargets="Build">
-    <MakeDir Directories="$(buildDir)" />
-
-    <CreateItem Include="$(MSBuildProjectDirectory)\**\*Tests.csproj">
-      <Output TaskParameter="Include" ItemName="tests" />
-    </CreateItem>
-
-    <!-- run unit tests -->
-    <xunit Condition="@(tests) != ''"
-      Assembly="@(tests -> '%(RootDir)%(Directory)bin\$(configuration)\Geocoding.%(Filename).dll')"
-      Html="$(buildDir)\Geocoding.%(tests.Filename).html" />
-  </Target>
-
-  <Target Name="CopyOutputToBuildDir">
-    <CreateItem Include="@(merge -> '%(RootDir)%(Directory)bin\$(Configuration)\*.*')">
-      <Output TaskParameter="Include" ItemName="mergeOutputToCopy" />
-    </CreateItem>
-
-    <Copy SourceFiles="@(mergeOutputToCopy)" DestinationFiles="@(mergeOutputToCopy -> '$(buildDir)\%(Filename)%(Extension)')" />
-  </Target>
-
-  <Target Name="Merge" DependsOnTargets="Build;CopyOutputToBuildDir">
-    <CreateItem Include="$(buildDir)\Geocoding.*.dll">
-      <Output TaskParameter="Include" ItemName="mergeAsm" />
-    </CreateItem>
-
-    <ILMerge Condition="'$(Configuration)'=='Debug'" InputAssemblies="@(mergeAsm)" OutputFile="$(buildDir)\Geocoding.dll" SnkFile="$(snkFile)" DebugInfo="true" />
-    <ILMerge Condition="'$(Configuration)'=='Release'" InputAssemblies="@(mergeAsm)" OutputFile="$(buildDir)\Geocoding.dll" SnkFile="$(snkFile)" DebugInfo="false" />
-
-    <Delete Files="@(mergeAsm)" />
-    <Delete Files="@(mergeAsm -> '%(RootDir)%(Directory)%(Filename).pdb')" />
-  </Target>
+		<Delete Files="@(mergeAsm)" />
+		<Delete Files="@(mergeAsm -> '%(RootDir)%(Directory)%(Filename).pdb')" />
+	</Target>
 
 	<Target Name="Pack" DependsOnTargets="Merge">
 		<CreateItem Include="$(buildDir)\Geocoding.dll">

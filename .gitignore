@@ -5,6 +5,7 @@ AssemblyInfoCommon.cs
 app.config
 docs
 nuget.exe
+AssemblyVersion.cs
 
 #################
 ## Visual Studio
@@ -102,3 +103,4 @@ Thumbs.db
 
 # Folder config file
 Desktop.ini
+.directory
