@@ -23,7 +23,7 @@ namespace Geocoding.Google
 
 		public override string ToString()
 		{
-			return String.Format("{0}: {1}", Types[0], LongName);
+			return string.Format("{0}: {1}", Types[0], LongName);
 		}
 	}
 }

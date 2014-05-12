@@ -1,51 +1,66 @@
-﻿using System;
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Geocoding
 {
 	public class Location
 	{
-		readonly double latitude;
-		readonly double longitude;
+		double latitude;
+		double longitude;
 
-		public double Latitude
+		[JsonProperty("lat")]
+		public virtual double Latitude
 		{
 			get { return latitude; }
+			set
+			{
+				if (value < -90 || value > 90)
+					throw new ArgumentOutOfRangeException("Latitude", value, "Value must be between -90(inclusive) and 90(inclusive).");
+				if (double.IsNaN(value))
+					throw new ArgumentException("Latitude must be a valid number.", "Latitude");
+
+				latitude = value;
+			}
 		}
 
-		public double Longitude
+		[JsonProperty("lng")]
+		public virtual double Longitude
 		{
 			get { return longitude; }
+			set
+			{
+				if (value <= -180 || value > 180)
+					throw new ArgumentOutOfRangeException("Longitude", value, "Value must be between -180 and 180 (inclusive).");
+				if (double.IsNaN(value))
+					throw new ArgumentException("Longitude must be a valid number.", "Longitude");
+
+				longitude = value;
+			}
 		}
 
+		protected Location()
+			: this(0, 0)
+		{
+		}
 		public Location(double latitude, double longitude)
 		{
-			if (longitude <= -180 || longitude > 180)
-				throw new ArgumentOutOfRangeException("longitude", longitude, "Value must be between -180 and 180 (inclusive).");
-
-			if (latitude < -90 || latitude > 90)
-				throw new ArgumentOutOfRangeException("latitude", latitude, "Value must be between -90(inclusive) and 90(inclusive).");
-
-			if (double.IsNaN(longitude))
-				throw new ArgumentException("Longitude must be a valid number.", "longitude");
-
-			if (double.IsNaN(latitude))
-				throw new ArgumentException("Latitude must be a valid number.", "latitude");
-
-			this.latitude = latitude;
-			this.longitude = longitude;
+			Latitude = latitude;
+			Longitude = longitude;
 		}
 
-		private double ToRadian(double val)
+		protected virtual double ToRadian(double val)
 		{
 			return (Math.PI / 180.0) * val;
 		}
 
-		public Distance DistanceBetween(Location location)
+		public virtual Distance DistanceBetween(Location location)
 		{
 			return DistanceBetween(location, DistanceUnits.Miles);
 		}
 
-		public Distance DistanceBetween(Location location, DistanceUnits units)
+		public virtual Distance DistanceBetween(Location location, DistanceUnits units)
 		{
 			double earthRadius = (units == DistanceUnits.Miles) ? Distance.EarthRadiusInMiles : Distance.EarthRadiusInKilometers;
 
@@ -83,7 +98,7 @@ namespace Geocoding
 
 		public override string ToString()
 		{
-			return String.Format("{0}, {1}", latitude, longitude);
+			return string.Format("{0}, {1}", latitude, longitude);
 		}
 	}
 }

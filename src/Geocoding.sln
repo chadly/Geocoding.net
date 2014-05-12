@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{891021E5-7521-4F93-9946-B7B630DF3192}"
 	ProjectSection(SolutionItems) = preProject
 		..\build-with-tests.bat = ..\build-with-tests.bat
@@ -22,13 +20,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{BB5F66AC-286B-4BA5-86EC-6DED28426132}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google", "Google\Google.csproj", "{2E608F4E-29F7-4AC3-922F-23D971312CAE}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIs", "APIs", "{F742864D-9400-4CE2-957A-DBD0A0237277}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Google", "Google\Google.csproj", "{2E608F4E-29F7-4AC3-922F-23D971312CAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yahoo", "Yahoo\Yahoo.csproj", "{B2863E87-3983-46EF-8B3E-37A4475ECA13}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft", "Microsoft\Microsoft.csproj", "{74BCB608-4674-452F-A50C-7EE61AC47EAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapQuest", "MapQuest\MapQuest.csproj", "{B37FC059-5E9E-4893-994A-64D835D2A54F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B59E8640-AAE1-4447-AB9B-5CB3AD7A4549}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +64,10 @@ Global
 		{74BCB608-4674-452F-A50C-7EE61AC47EAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74BCB608-4674-452F-A50C-7EE61AC47EAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74BCB608-4674-452F-A50C-7EE61AC47EAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B37FC059-5E9E-4893-994A-64D835D2A54F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B37FC059-5E9E-4893-994A-64D835D2A54F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B37FC059-5E9E-4893-994A-64D835D2A54F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B37FC059-5E9E-4893-994A-64D835D2A54F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,5 +79,9 @@ Global
 		{2E608F4E-29F7-4AC3-922F-23D971312CAE} = {F742864D-9400-4CE2-957A-DBD0A0237277}
 		{B2863E87-3983-46EF-8B3E-37A4475ECA13} = {F742864D-9400-4CE2-957A-DBD0A0237277}
 		{74BCB608-4674-452F-A50C-7EE61AC47EAF} = {F742864D-9400-4CE2-957A-DBD0A0237277}
+		{B37FC059-5E9E-4893-994A-64D835D2A54F} = {F742864D-9400-4CE2-957A-DBD0A0237277}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Tests\Tests.csproj
 	EndGlobalSection
 EndGlobal

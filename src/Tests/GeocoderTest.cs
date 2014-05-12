@@ -19,24 +19,25 @@ namespace Geocoding.Tests
 
 		protected abstract IGeocoder CreateGeocoder();
 
-		[Fact]
-		public void CanGeocodeAddress()
+		[Theory]
+		[InlineData("1600 pennsylvania ave nw, washington dc")]
+		public virtual void CanGeocodeAddress(string address)
 		{
-			Address[] addresses = geocoder.Geocode("1600 pennsylvania ave washington dc").ToArray();
+			Address[] addresses = geocoder.Geocode(address).ToArray();
 			addresses[0].AssertWhiteHouse();
 		}
 
 		[Fact]
-		public void CanGeocodeNormalizedAddress()
+		public virtual void CanGeocodeNormalizedAddress()
 		{
-			Address[] addresses = geocoder.Geocode("1600 pennsylvania ave", "washington", "dc", null, null).ToArray();
+			Address[] addresses = geocoder.Geocode("1600 pennsylvania ave nw", "washington", "dc", null, null).ToArray();
 			addresses[0].AssertWhiteHouse();
 		}
 
 		[Theory]
 		[InlineData("en-US")]
 		[InlineData("cs-CZ")]
-		public void CanGeocodeAddressUnderDifferentCultures(string cultureName)
+		public virtual void CanGeocodeAddressUnderDifferentCultures(string cultureName)
 		{
 			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(cultureName);
 
@@ -47,7 +48,7 @@ namespace Geocoding.Tests
 		[Theory]
 		[InlineData("en-US")]
 		[InlineData("cs-CZ")]
-		public void CanReverseGeocodeAddressUnderDifferentCultures(string cultureName)
+		public virtual void CanReverseGeocodeAddressUnderDifferentCultures(string cultureName)
 		{
 			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(cultureName);
 
@@ -56,23 +57,24 @@ namespace Geocoding.Tests
 		}
 
 		[Fact]
-		public void ShouldNotBlowUpOnBadAddress()
+		public virtual void ShouldNotBlowUpOnBadAddress()
 		{
-			var addresses = geocoder.Geocode("sdlkf;jasl;kjfldksjfasldf");
+			Address[] addresses = geocoder.Geocode("sdlkf;jasl;kjfldksj,fasldf").ToArray();
 			Assert.Empty(addresses);
 		}
 
-		[Fact]
-		public void CanGeocodeWithSpecialCharacters()
+		[Theory]
+		[InlineData("Fried St & 2nd St, Gretna, LA 70053")]
+		public virtual void CanGeocodeWithSpecialCharacters(string address)
 		{
-			var addresses = geocoder.Geocode("Fried St & 2nd St, Gretna, LA 70053");
+			Address[] addresses = geocoder.Geocode(address).ToArray();
 
 			//asserting no exceptions are thrown and that we get something
 			Assert.NotEmpty(addresses);
 		}
 
 		[Fact]
-		public void CanReverseGeocode()
+		public virtual void CanReverseGeocode()
 		{
 			Address[] addresses = geocoder.ReverseGeocode(38.8976777, -77.036517).ToArray();
 			addresses[0].AssertWhiteHouseArea();
@@ -82,7 +84,7 @@ namespace Geocoding.Tests
 		[InlineData("1 Robert Wood Johnson Hosp New Brunswick, NJ 08901 USA")]
 		[InlineData("miss, MO")]
 		//https://github.com/chadly/Geocoding.net/issues/6
-		public void CanGeocodeInvalidZipCodes(string address)
+		public virtual void CanGeocodeInvalidZipCodes(string address)
 		{
 			Address[] addresses = geocoder.Geocode(address).ToArray();
 			Assert.NotEmpty(addresses);

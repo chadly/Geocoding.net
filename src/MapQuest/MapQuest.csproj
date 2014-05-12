@@ -5,15 +5,17 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{74BCB608-4674-452F-A50C-7EE61AC47EAF}</ProjectGuid>
+    <ProjectGuid>{B37FC059-5E9E-4893-994A-64D835D2A54F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Geocoding.Microsoft</RootNamespace>
-    <AssemblyName>Geocoding.Microsoft</AssemblyName>
+    <RootNamespace>Geocoding.MapQuest</RootNamespace>
+    <AssemblyName>Geocoding.MapQuest</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,36 +43,39 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Core" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Runtime.Serialization">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.ServiceModel">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.ServiceModel.Web">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BingAddress.cs" />
-    <Compile Include="BingGeocodingException.cs" />
-    <Compile Include="BingMapsGeocoder.cs" />
-    <Compile Include="EntityType.cs" />
-    <Compile Include="Json.cs" />
-    <Compile Include="ConfidenceLevel.cs" />
-    <Compile Include="AuthenticationResultCode.cs" />
+    <Compile Include="DataFormat.cs" />
+    <Compile Include="BatchGeocodeRequest.cs" />
+    <Compile Include="GeocodeRequest.cs" />
+    <Compile Include="LocationRequest.cs" />
+    <Compile Include="BaseRequest.cs" />
+    <Compile Include="ResponseInfo.cs" />
+    <Compile Include="MapQuestLocation.cs" />
+    <Compile Include="LocationType.cs" />
+    <Compile Include="MapQuestGeocoder.cs" />
+    <Compile Include="Quality.cs" />
+    <Compile Include="RequestOptions.cs" />
+    <Compile Include="MapQuestResponse.cs" />
+    <Compile Include="MapQuestResult.cs" />
+    <Compile Include="ReverseGeocodeRequest.cs" />
+    <Compile Include="SideOfStreet.cs" />
+    <Compile Include="ResponseStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\geocoding.snk">
       <Link>Properties\geocoding.snk</Link>
     </None>
+    <None Include="ClassDiagram.cd" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
@@ -80,4 +85,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(ProjectDir)..\common.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
 </Project>

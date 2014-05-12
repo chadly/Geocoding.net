@@ -32,10 +32,10 @@ namespace Geocoding.Yahoo
 
 		public YahooGeocoder(string consumerKey, string consumerSecret)
 		{
-			if (String.IsNullOrEmpty(consumerKey))
+			if (string.IsNullOrEmpty(consumerKey))
 				throw new ArgumentNullException("consumerKey");
 
-			if (String.IsNullOrEmpty(consumerSecret))
+			if (string.IsNullOrEmpty(consumerSecret))
 				throw new ArgumentNullException("consumerSecret");
 
 			this.consumerKey = consumerKey;
@@ -44,10 +44,10 @@ namespace Geocoding.Yahoo
 
 		public IEnumerable<YahooAddress> Geocode(string address)
 		{
-			if (String.IsNullOrEmpty(address))
+			if (string.IsNullOrEmpty(address))
 				throw new ArgumentNullException("address");
 
-			string url = String.Format(ServiceUrl, HttpUtility.UrlEncode(address));
+			string url = string.Format(ServiceUrl, HttpUtility.UrlEncode(address));
 
 			HttpWebRequest request = BuildWebRequest(url);
 			return ProcessRequest(request);
@@ -55,7 +55,7 @@ namespace Geocoding.Yahoo
 
 		public IEnumerable<YahooAddress> Geocode(string street, string city, string state, string postalCode, string country)
 		{
-			string url = String.Format(ServiceUrlNormal, HttpUtility.UrlEncode(street), HttpUtility.UrlEncode(city), HttpUtility.UrlEncode(state), HttpUtility.UrlEncode(postalCode), HttpUtility.UrlEncode(country));
+			string url = string.Format(ServiceUrlNormal, HttpUtility.UrlEncode(street), HttpUtility.UrlEncode(city), HttpUtility.UrlEncode(state), HttpUtility.UrlEncode(postalCode), HttpUtility.UrlEncode(country));
 
 			HttpWebRequest request = BuildWebRequest(url);
 			return ProcessRequest(request);
@@ -71,7 +71,7 @@ namespace Geocoding.Yahoo
 
 		public IEnumerable<YahooAddress> ReverseGeocode(double latitude, double longitude)
 		{
-			string url = String.Format(ServiceUrlReverse, String.Format(CultureInfo.InvariantCulture, "{0} {1}", latitude, longitude));
+			string url = string.Format(ServiceUrlReverse, string.Format(CultureInfo.InvariantCulture, "{0} {1}", latitude, longitude));
 
 			HttpWebRequest request = BuildWebRequest(url);
 			return ProcessRequest(request);
@@ -121,7 +121,7 @@ namespace Geocoding.Yahoo
 		private HttpWebRequest BuildWebRequest(string url)
 		{
 			url = GenerateOAuthSignature(new Uri(url));
-			HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+			var req = WebRequest.Create(url) as HttpWebRequest;
 			req.Method = "GET";
 			return req;
 		}
@@ -148,7 +148,7 @@ namespace Geocoding.Yahoo
 				out param
 			);
 
-			return String.Format("{0}?{1}&oauth_signature={2}", url, param, signature);
+			return string.Format("{0}?{1}&oauth_signature={2}", url, param, signature);
 		}
 
 		private IEnumerable<YahooAddress> ProcessWebResponse(WebResponse response)
@@ -231,8 +231,8 @@ namespace Geocoding.Yahoo
 			lines[2] = (string)nav.Evaluate("string(line3)");
 			lines[3] = (string)nav.Evaluate("string(line4)");
 
-			lines = lines.Select(s => (s ?? "").Trim()).Where(s => !String.IsNullOrEmpty(s)).ToArray();
-			return String.Join(", ", lines);
+			lines = lines.Select(s => (s ?? "").Trim()).Where(s => !string.IsNullOrEmpty(s)).ToArray();
+			return string.Join(", ", lines);
 		}
 
 		private YahooError EvaluateError(int errorCode)
@@ -245,7 +245,7 @@ namespace Geocoding.Yahoo
 
 		public override string ToString()
 		{
-			return String.Format("Yahoo Geocoder: {0}, {1}", consumerKey, consumerSecret);
+			return string.Format("Yahoo Geocoder: {0}, {1}", consumerKey, consumerSecret);
 		}
 	}
 }

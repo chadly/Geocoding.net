@@ -143,7 +143,7 @@ namespace Geocoding.Yahoo {
                 if (unreservedChars.IndexOf(symbol) != -1) {
                     result.Append(symbol);
                 } else {
-                    result.Append('%' + String.Format("{0:X2}", (int)symbol));
+                    result.Append('%' + string.Format("{0:X2}", (int)symbol));
                 }
             }
 

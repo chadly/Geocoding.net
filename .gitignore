@@ -3,6 +3,7 @@
 /examples/packages
 AssemblyInfoCommon.cs
 app.config
+app.config.temp
 docs
 nuget.exe
 AssemblyVersion.cs
@@ -104,3 +105,4 @@ Thumbs.db
 # Folder config file
 Desktop.ini
 .directory
+*.userprefs

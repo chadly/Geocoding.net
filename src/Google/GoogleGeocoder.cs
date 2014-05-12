@@ -21,6 +21,16 @@ namespace Geocoding.Google
 		BusinessKey businessKey;
 		const string keyMessage = "Only one of BusinessKey or ApiKey should be set on the GoogleGeocoder.";
 
+		public GoogleGeocoder(BusinessKey businessKey)
+		{
+			BusinessKey = businessKey;
+		}
+
+		public GoogleGeocoder(string apiKey)
+		{
+			ApiKey = apiKey;
+		}
+
 		public string ApiKey
 		{
 			get { return apiKey; }
@@ -28,6 +38,9 @@ namespace Geocoding.Google
 			{
 				if (businessKey != null)
 					throw new InvalidOperationException(keyMessage);
+				if (string.IsNullOrWhiteSpace(value))
+					throw new ArgumentException("ApiKey can not be null or empty");
+
 				apiKey = value;
 			}
 		}
@@ -37,8 +50,11 @@ namespace Geocoding.Google
 			get { return businessKey; }
 			set
 			{
-				if (!String.IsNullOrEmpty(apiKey))
+				if (!string.IsNullOrEmpty(apiKey))
 					throw new InvalidOperationException(keyMessage);
+				if (value == null)
+					throw new ArgumentException("BusinessKey can not be null");
+
 				businessKey = value;
 			}
 		}
@@ -55,19 +71,19 @@ namespace Geocoding.Google
 				var builder = new StringBuilder();
 				builder.Append("https://maps.googleapis.com/maps/api/geocode/xml?{0}={1}&sensor=false");
 
-				if (!String.IsNullOrEmpty(Language))
+				if (!string.IsNullOrEmpty(Language))
 				{
 					builder.Append("&language=");
 					builder.Append(HttpUtility.UrlEncode(Language));
 				}
 
-				if (!String.IsNullOrEmpty(RegionBias))
+				if (!string.IsNullOrEmpty(RegionBias))
 				{
 					builder.Append("&region=");
 					builder.Append(HttpUtility.UrlEncode(RegionBias));
 				}
 
-				if (!String.IsNullOrEmpty(ApiKey))
+				if (!string.IsNullOrEmpty(ApiKey))
 				{
 					builder.Append("&key=");
 					builder.Append(HttpUtility.UrlEncode(ApiKey));
@@ -97,7 +113,7 @@ namespace Geocoding.Google
 
 		public IEnumerable<GoogleAddress> Geocode(string address)
 		{
-			if (String.IsNullOrEmpty(address))
+			if (string.IsNullOrEmpty(address))
 				throw new ArgumentNullException("address");
 
 			HttpWebRequest request = BuildWebRequest("address", HttpUtility.UrlEncode(address));
@@ -120,7 +136,7 @@ namespace Geocoding.Google
 
 		public Task<IEnumerable<GoogleAddress>> GeocodeAsync(string address)
 		{
-			if (String.IsNullOrEmpty(address))
+			if (string.IsNullOrEmpty(address))
 				throw new ArgumentNullException("address");
 
 			HttpWebRequest request = BuildWebRequest("address", HttpUtility.UrlEncode(address));
@@ -129,7 +145,7 @@ namespace Geocoding.Google
 
 		public Task<IEnumerable<GoogleAddress>> GeocodeAsync(string address, CancellationToken cancellationToken)
 		{
-			if (String.IsNullOrEmpty(address))
+			if (string.IsNullOrEmpty(address))
 				throw new ArgumentNullException("address");
 
 			HttpWebRequest request = BuildWebRequest("address", HttpUtility.UrlEncode(address));
@@ -150,12 +166,12 @@ namespace Geocoding.Google
 
 		private string BuildAddress(string street, string city, string state, string postalCode, string country)
 		{
-			return String.Format("{0} {1}, {2} {3}, {4}", street, city, state, postalCode, country);
+			return string.Format("{0} {1}, {2} {3}, {4}", street, city, state, postalCode, country);
 		}
 
 		private string BuildGeolocation(double latitude, double longitude)
 		{
-			return String.Format(CultureInfo.InvariantCulture, "{0},{1}", latitude, longitude);
+			return string.Format(CultureInfo.InvariantCulture, "{0},{1}", latitude, longitude);
 		}
 
 		private IEnumerable<GoogleAddress> ProcessRequest(HttpWebRequest request)
@@ -289,12 +305,12 @@ namespace Geocoding.Google
 
 		private HttpWebRequest BuildWebRequest(string type, string value)
 		{
-			string url = String.Format(ServiceUrl, type, value);
+			string url = string.Format(ServiceUrl, type, value);
 
 			if (BusinessKey != null)
 				url = BusinessKey.GenerateSignature(url);
 
-			HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+			var req = WebRequest.Create(url) as HttpWebRequest;
 			req.Proxy = Proxy;
 			req.Method = "GET";
 			return req;

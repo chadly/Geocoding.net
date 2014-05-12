@@ -7,17 +7,24 @@ namespace Geocoding.Tests
 	{
 		public static void AssertWhiteHouse(this Address address)
 		{
+			string adr = address.FormattedAddress.ToLower();
 			Assert.True(
-				address.FormattedAddress.Contains("The White House") ||
-				address.FormattedAddress.Contains("1600 Pennsylvania Ave NW") ||
-				address.FormattedAddress.Contains("1600 Pennsylvania Avenue Northwest")
+				adr.Contains("The White House") ||
+				adr.Contains("1600 pennsylvania ave nw") ||
+				adr.Contains("1600 pennsylvania avenue northwest") ||
+				adr.Contains("1600 pennsylvania avenue nw") ||
+				adr.Contains("1600 pennsylvania ave northwest")
 			);
 			AssertWhiteHouseArea(address);
 		}
 
 		public static void AssertWhiteHouseArea(this Address address)
 		{
-			Assert.True(address.FormattedAddress.Contains("Washington, DC"));
+			string adr = address.FormattedAddress.ToLower();
+			Assert.True(
+				adr.Contains("washington") &&
+				(adr.Contains("dc") || adr.Contains("district of columbia"))
+			);
 
 			//just hoping that each geocoder implementation gets it somewhere near the vicinity
 			double lat = Math.Round(address.Coordinates.Latitude, 2);
@@ -29,9 +36,11 @@ namespace Geocoding.Tests
 
 		public static void AssertCanadianPrimeMinister(this Address address)
 		{
-			Assert.True(address.FormattedAddress.Contains("24 Sussex"));
-			Assert.True(address.FormattedAddress.Contains("Ottawa, ON"));
-			Assert.True(address.FormattedAddress.Contains("K1M"));
+			string adr = address.FormattedAddress.ToLower();
+			Assert.True(adr.Contains("24 sussex"));
+			Assert.True(adr.Contains(" ottawa"));
+			Assert.True(adr.Contains(" on"));
+			Assert.True(adr.Contains("k1m"));
 		}
 	}
 }
