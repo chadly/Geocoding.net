@@ -64,7 +64,7 @@ namespace Geocoding.Tests
 		}
 
 		[Theory]
-		[InlineData("Fried St & 2nd St, Gretna, LA 70053")]
+		[InlineData("Wilshire & Bundy, Los Angeles")]
 		public virtual void CanGeocodeWithSpecialCharacters(string address)
 		{
 			Address[] addresses = geocoder.Geocode(address).ToArray();

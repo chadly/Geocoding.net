@@ -54,11 +54,10 @@ namespace Geocoding.MapQuest
 			else
 			{
 				return from l in locs
-					   where l != null
+					   where l != null && l.Quality < Quality.COUNTRY
 					   let q = (int)l.Quality
 					   let c = string.IsNullOrWhiteSpace(l.Confidence) ? "ZZZZZZ" : l.Confidence
-					   orderby q ascending
-					   orderby c ascending
+					   orderby q ascending, c ascending
 					   select l;
 			}
 		}
