@@ -239,7 +239,7 @@ namespace Geocoding.MapQuest
 			if (adr.IsNullOrEmpty())
 				throw new ArgumentException("Atleast one none blank item is required in addresses");
 
-			var f = new BatchGeocodeRequest(key, adr);
+			var f = new BatchGeocodeRequest(key, adr) { UseOSM = this.UseOSM };
 			MapQuestResponse res = Execute(f);
 			return HandleBatchResponse(res);
 		}
