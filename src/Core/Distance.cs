@@ -100,7 +100,7 @@ namespace Geocoding
 
 		public override string ToString()
 		{
-			return String.Format("{0} {1}", value, units);
+			return string.Format("{0} {1}", value, units);
 		}
 
 		#region Operators

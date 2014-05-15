@@ -35,6 +35,9 @@ namespace Geocoding.Microsoft
 
 		public BingMapsGeocoder(string bingKey)
 		{
+			if (string.IsNullOrWhiteSpace(bingKey))
+				throw new ArgumentException("bingKey can not be null or empty");
+
 			this.bingKey = bingKey;
 		}
 
@@ -64,14 +67,14 @@ namespace Geocoding.Microsoft
 
 		private string GetQueryUrl(double latitude, double longitude)
 		{
-			var builder = new StringBuilder(string.Format(UNFORMATTED_QUERY, String.Format(CultureInfo.InvariantCulture, "{0},{1}", latitude, longitude), bingKey));
+			var builder = new StringBuilder(string.Format(UNFORMATTED_QUERY, string.Format(CultureInfo.InvariantCulture, "{0},{1}", latitude, longitude), bingKey));
 			AppendGlobalParameters(builder, false);
 			return builder.ToString();
 		}
 
 		private IEnumerable<KeyValuePair<string, string>> GetGlobalParameters()
 		{
-			if (!String.IsNullOrEmpty(Culture))
+			if (!string.IsNullOrEmpty(Culture))
 				yield return new KeyValuePair<string, string>("c", Culture);
 
 			if (UserLocation != null)
@@ -295,7 +298,7 @@ namespace Geocoding.Microsoft
 
 		private HttpWebRequest CreateRequest(string url)
 		{
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+			var request = WebRequest.Create(url) as HttpWebRequest;
 			request.Proxy = Proxy;
 			return request;
 		}

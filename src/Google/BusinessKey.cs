@@ -20,7 +20,7 @@ namespace Geocoding.Google
 
 		string CheckParam(string value, string name)
 		{
-			if (String.IsNullOrEmpty(value))
+			if (string.IsNullOrEmpty(value))
 				throw new ArgumentNullException(name, "Value cannot be null or empty.");
 
 			return value.Trim();
@@ -66,7 +66,7 @@ namespace Geocoding.Google
 
 		public override string ToString()
 		{
-			return String.Format("ClientId: {0}, SigningKey: {1}", ClientId, SigningKey);
+			return string.Format("ClientId: {0}, SigningKey: {1}", ClientId, SigningKey);
 		}
 	}
 }
