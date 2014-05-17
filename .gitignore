@@ -3,7 +3,6 @@
 /examples/packages
 AssemblyInfoCommon.cs
 app.config
-app.config.temp
 docs
 nuget.exe
 AssemblyVersion.cs
