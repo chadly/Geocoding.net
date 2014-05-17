@@ -8,5 +8,7 @@
 
 		<!-- google API key is optional -->
 		<add key="googleApiKey" value="" />
+
+		<add key="mapQuestKey" value="your-key-here" />
 	</appSettings>
 </configuration>
