@@ -227,7 +227,7 @@ namespace Geocoding.MapQuest
 			}
 		}
 
-		public ICollection<ResultItem> Geocode(IEnumerable<string> addresses)
+		public IEnumerable<ResultItem> Geocode(IEnumerable<string> addresses)
 		{
 			if (addresses == null)
 				throw new ArgumentNullException("addresses");
@@ -258,9 +258,9 @@ namespace Geocoding.MapQuest
 				return new ResultItem[0];
 		}
 
-		public ICollection<ResultItem> ReverseGeocode(IEnumerable<Location> locations)
+		public IEnumerable<ResultItem> ReverseGeocode(IEnumerable<Location> locations)
 		{
-			throw new InvalidOperationException("ReverseGeocode(...) is not available for MapQuestGeocoder.");
+			throw new NotSupportedException("ReverseGeocode(...) is not available for MapQuestGeocoder.");
 		}
 	}
 }

@@ -7,7 +7,7 @@ namespace Geocoding
 {
 	public interface IBatchGeocoder
 	{
-		ICollection<ResultItem> Geocode(IEnumerable<string> addresses);
-		ICollection<ResultItem> ReverseGeocode(IEnumerable<Location> locations);
+		IEnumerable<ResultItem> Geocode(IEnumerable<string> addresses);
+		IEnumerable<ResultItem> ReverseGeocode(IEnumerable<Location> locations);
 	}
 }

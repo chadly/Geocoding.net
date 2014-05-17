@@ -28,12 +28,12 @@ namespace Geocoding.Tests
 		{
 			Assert.NotEmpty(addresses);
 
-			ICollection<ResultItem> results = batchGeocoder.Geocode(addresses);
+			IEnumerable<ResultItem> results = batchGeocoder.Geocode(addresses);
 			Assert.NotEmpty(results);
-			Assert.Equal(addresses.Length, results.Count);
+			Assert.Equal(addresses.Length, results.Count());
 
 			var ahash = new HashSet<string>(addresses);
-			Assert.Equal(ahash.Count, results.Count);
+			Assert.Equal(ahash.Count, results.Count());
 
 			foreach (ResultItem r in results)
 			{
