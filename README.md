@@ -76,5 +76,3 @@ You will need to generate API keys for each respective service to run the servic
 ------------------------------------------
 
 Help support development: `1K33yhGwx3zLopyJuAHWDn8XrMjM6Twwr8`
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/chadly/geocoding.net/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
