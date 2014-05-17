@@ -21,6 +21,8 @@ namespace Geocoding.Google
 		BusinessKey businessKey;
 		const string keyMessage = "Only one of BusinessKey or ApiKey should be set on the GoogleGeocoder.";
 
+		public GoogleGeocoder() { }
+
 		public GoogleGeocoder(BusinessKey businessKey)
 		{
 			BusinessKey = businessKey;
