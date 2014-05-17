@@ -29,7 +29,7 @@
 		<Delete Files="@(templateFiles -> '%(RootDir)%(Directory)%(Filename)')" />
 	</Target>
 
-	<!--<Target Name="Version" Condition="$(BUILD_NUMBER) != 0 or !Exists('Properties\AssemblyVersion.cs')" BeforeTargets="BeforeBuild">
+	<Target Name="Version" Condition="$(BUILD_NUMBER) != 0 or !Exists('Properties\AssemblyVersion.cs')" BeforeTargets="BeforeBuild">
 		<CreateProperty Value="$(major).$(minor).$(patch).$(build)">
 			<Output TaskParameter="Value" PropertyName="versionString" />
 		</CreateProperty>
@@ -40,9 +40,9 @@
       AssemblyConfiguration="$(configuration)"
       AssemblyVersion="$(versionString)"
       AssemblyFileVersion="$(versionString)" />
-	</Target>-->
+	</Target>
 
-	<!--<Target Name="CleanVersionFiles" AfterTargets="Clean">
+	<Target Name="CleanVersionFiles" AfterTargets="Clean">
 		<Delete Files="Properties\AssemblyVersion.cs" />
-	</Target>-->
+	</Target>
 </Project>

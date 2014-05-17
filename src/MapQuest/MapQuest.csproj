@@ -53,11 +53,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfoCommon.cs">
+      <Link>Properties\AssemblyInfoCommon.cs</Link>
+    </Compile>
     <Compile Include="DataFormat.cs" />
     <Compile Include="BatchGeocodeRequest.cs" />
     <Compile Include="GeocodeRequest.cs" />
     <Compile Include="LocationRequest.cs" />
     <Compile Include="BaseRequest.cs" />
+    <Compile Include="Properties\AssemblyVersion.cs" />
     <Compile Include="ResponseInfo.cs" />
     <Compile Include="MapQuestLocation.cs" />
     <Compile Include="LocationType.cs" />
