@@ -13,8 +13,6 @@ namespace Geocoding.Google
 			if (types == null)
 				throw new ArgumentNullException("types");
 
-			if (types.Length < 1)
-				throw new ArgumentException("Value cannot be empty.", "types");
 
 			this.Types = types;
 			this.LongName = longName;
