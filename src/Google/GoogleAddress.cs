@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Collections.Generic;
 
 namespace Geocoding.Google
 {
@@ -9,6 +8,7 @@ namespace Geocoding.Google
 		readonly GoogleAddressType type;
 		readonly GoogleAddressComponent[] components;
 		readonly bool isPartialMatch;
+		readonly GoogleViewport viewport;
 
 		public GoogleAddressType Type
 		{
@@ -25,12 +25,17 @@ namespace Geocoding.Google
 			get { return isPartialMatch; }
 		}
 
+		public GoogleViewport Viewport
+		{
+			get { return viewport; }
+		}
+
 		public GoogleAddressComponent this[GoogleAddressType type]
 		{
 			get { return Components.FirstOrDefault(c => c.Types.Contains(type)); }
 		}
 
-		public GoogleAddress(GoogleAddressType type, string formattedAddress, GoogleAddressComponent[] components, Location coordinates, bool isPartialMatch)
+		public GoogleAddress(GoogleAddressType type, string formattedAddress, GoogleAddressComponent[] components, Location coordinates, GoogleViewport viewport, bool isPartialMatch)
 			: base(formattedAddress, coordinates, "Google")
 		{
 			if (components == null)
@@ -42,6 +47,7 @@ namespace Geocoding.Google
 			this.type = type;
 			this.components = components;
 			this.isPartialMatch = isPartialMatch;
+			this.viewport = viewport;
 		}
 	}
 }

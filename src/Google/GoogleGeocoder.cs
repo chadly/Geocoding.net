@@ -358,10 +358,20 @@ namespace Geocoding.Google
 				double longitude = (double)nav.Evaluate("number(geometry/location/lng)");
 				Location coordinates = new Location(latitude, longitude);
 
+				double neLatitude = (double)nav.Evaluate("number(geometry/viewport/northeast/lat)");
+				double neLongitude = (double)nav.Evaluate("number(geometry/viewport/northeast/lng)");
+				Location neCoordinates = new Location(neLatitude, neLongitude);
+
+				double swLatitude = (double)nav.Evaluate("number(geometry/viewport/southwest/lat)");
+				double swLongitude = (double)nav.Evaluate("number(geometry/viewport/southwest/lng)");
+				Location swCoordinates = new Location(swLatitude, swLongitude);
+
+				var viewport = new GoogleViewport { Northeast = neCoordinates, Southwest = swCoordinates };
+
 				bool isPartialMatch;
 				bool.TryParse((string)nav.Evaluate("string(partial_match)"), out isPartialMatch);
 
-				yield return new GoogleAddress(type, formattedAddress, components, coordinates, isPartialMatch);
+				yield return new GoogleAddress(type, formattedAddress, components, coordinates, viewport, isPartialMatch);
 			}
 		}
 
