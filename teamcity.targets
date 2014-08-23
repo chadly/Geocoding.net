@@ -15,6 +15,8 @@
 		<versionString>v$(major).$(minor).$(patch).$(BUILD_NUMBER)</versionString>
 	</PropertyGroup>
 
+	<UsingTask AssemblyFile="packages\ILMerge.MSBuild.Tasks.1.0.0.3\tools\ILMerge.MSBuild.Tasks.dll" TaskName="ILMerge.MSBuild.Tasks.ILMerge" />
+	
 	<ItemGroup>
 		<solutions Include="Geocoding.sln" />
 	</ItemGroup>
@@ -35,26 +37,26 @@
 		<MSBuild Projects="@(testProjects)" Targets="Test" Properties="$(buildOptions)" />
 	</Target>
 
-	<Target Name="Merge" DependsOnTargets="Build;CopyOutputToBuildDir">
-		<CreateItem Include="$(buildDir)\Geocoding.*.dll">
+	<Target Name="Merge" DependsOnTargets="Build">
+		<CreateItem Include="$(MSBuildThisFileDirectory)bin\$(Configuration)\Geocoding.*.dll">
 			<Output TaskParameter="Include" ItemName="mergeAsm" />
 		</CreateItem>
 
-		<ILMerge Condition="'$(Configuration)'=='Debug'" InputAssemblies="@(mergeAsm)" OutputFile="$(buildDir)\Geocoding.dll" SnkFile="$(snkFile)" DebugInfo="true" />
-		<ILMerge Condition="'$(Configuration)'=='Release'" InputAssemblies="@(mergeAsm)" OutputFile="$(buildDir)\Geocoding.dll" SnkFile="$(snkFile)" DebugInfo="false" />
+		<ILMerge Condition="'$(Configuration)'=='Debug'" InputAssemblies="@(mergeAsm)" OutputFile="$(MSBuildThisFileDirectory)bin\$(Configuration)\Geocoding.dll" SnkFile="$(MSBuildThisFileDirectory)geocoding.snk" DebugInfo="true" />
+		<ILMerge Condition="'$(Configuration)'=='Release'" InputAssemblies="@(mergeAsm)" OutputFile="$(MSBuildThisFileDirectory)bin\$(Configuration)\Geocoding.dll" SnkFile="$(MSBuildThisFileDirectory)geocoding.snk" DebugInfo="false" />
 
 		<Delete Files="@(mergeAsm)" />
 		<Delete Files="@(mergeAsm -> '%(RootDir)%(Directory)%(Filename).pdb')" />
 	</Target>
 
 	<Target Name="Pack" DependsOnTargets="Merge">
-		<CreateItem Include="$(buildDir)\Geocoding.dll">
+		<CreateItem Include="$(MSBuildThisFileDirectory)bin\$(Configuration)\Geocoding.dll">
 			<Output TaskParameter="Include" ItemName="mergedOutput" />
 		</CreateItem>
 
-		<Copy SourceFiles="@(mergedOutput)" DestinationFiles="@(mergedOutput -> '$(buildDir)\lib\net40\%(Filename)%(Extension)')" />
+		<Copy SourceFiles="@(mergedOutput)" DestinationFiles="@(mergedOutput -> '$(MSBuildThisFileDirectory)bin\$(Configuration)\lib\net40\%(Filename)%(Extension)')" />
 		<Delete Files="@(mergedOutput)" />
 
-		<Exec Command="&quot;$(libDir)\nuget.exe&quot; pack geocoding.nuspec" WorkingDirectory="$(buildDir)" />
+		<Exec Command="&quot;$(libDir)\nuget.exe&quot; pack geocoding.nuspec" WorkingDirectory="bin\$(Configuration)" />
 	</Target>
 </Project>
