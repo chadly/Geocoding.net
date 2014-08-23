@@ -52,13 +52,13 @@ namespace Geocoding.Tests
 		}
 
 		[Theory]
-		[InlineData("Toledo", "us", "Toledo, OH, USA")]
-		[InlineData("Toledo", "es", "Toledo, Spain")]
-		public void ApplyRegionBias(string address, string regionBias, string result)
+		[InlineData("Toledo", "us", "Toledo, OH, USA", null)]
+		[InlineData("Toledo", "es", "Toledo, Spain", "Toledo, Toledo, Spain")]
+		public void ApplyRegionBias(string address, string regionBias, string result1, string result2)
 		{
 			geocoder.RegionBias = regionBias;
 			GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
-			Assert.Equal(result, addresses[0].FormattedAddress);
+			Assert.True(result1 == addresses[0].FormattedAddress || result2 == addresses[0].FormattedAddress);
 		}
 
 		[Theory]
