@@ -149,11 +149,11 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(ProjectDir)..\common.targets" />
   <Import Project="$(ProjectDir)..\test.targets" />
-	<Target Name="GetApiKeysFromBuild" Condition="$(bingMapsKey) != ''" AfterTargets="CopyTemplateFiles">
-		<XmlPoke XmlInputPath="app.config" Query="//appSettings/add[@name='yahooConsumerKey']/@value" Value="$(yahooConsumerKey)" />
-		<XmlPoke XmlInputPath="app.config" Query="//appSettings/add[@name='yahooConsumerSecret']/@value" Value="$(yahooConsumerSecret)" />
-		<XmlPoke XmlInputPath="app.config" Query="//appSettings/add[@name='bingMapsKey']/@value" Value="$(bingMapsKey)" />
-		<XmlPoke XmlInputPath="app.config" Query="//appSettings/add[@name='googleApiKey']/@value" Value="$(googleApiKey)" />
-		<XmlPoke XmlInputPath="app.config" Query="//appSettings/add[@name='mapQuestKey']/@value" Value="$(mapQuestKey)" />
+	<Target Name="GetApiKeysFromBuild" AfterTargets="CopyTemplateFiles">
+		<XmlPoke Condition="$(yahooConsumerKey) != ''" XmlInputPath="app.config" Query="//appSettings/add[@name='yahooConsumerKey']/@value" Value="$(yahooConsumerKey)" />
+		<XmlPoke Condition="$(yahooConsumerSecret) != ''" XmlInputPath="app.config" Query="//appSettings/add[@name='yahooConsumerSecret']/@value" Value="$(yahooConsumerSecret)" />
+		<XmlPoke Condition="$(bingMapsKey) != ''" XmlInputPath="app.config" Query="//appSettings/add[@name='bingMapsKey']/@value" Value="$(bingMapsKey)" />
+		<XmlPoke Condition="$(googleApiKey) != ''" XmlInputPath="app.config" Query="//appSettings/add[@name='googleApiKey']/@value" Value="$(googleApiKey)" />
+		<XmlPoke Condition="$(mapQuestKey) != ''" XmlInputPath="app.config" Query="//appSettings/add[@name='mapQuestKey']/@value" Value="$(mapQuestKey)" />
 	</Target>
 </Project>
