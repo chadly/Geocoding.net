@@ -1,5 +1,7 @@
 #Generic C# Geocoding API
 
+<img src="http://chadly.net/builds/app/rest/builds/buildType:(id:GeocodingNe_Build)/statusIcon"/>
+
 Includes a model and interface for communicating with five popular Geocoding providers.  Current implementations include:
 
   * [Google Maps](https://developers.google.com/maps/) - [docs](https://developers.google.com/maps/documentation/geocoding/)
