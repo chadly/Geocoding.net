@@ -368,10 +368,20 @@ namespace Geocoding.Google
 
 				var viewport = new GoogleViewport { Northeast = neCoordinates, Southwest = swCoordinates };
 
+            double bounds_neLatitude = (double)nav.Evaluate("number(geometry/bounds/northeast/lat)");
+            double bounds_neLongitude = (double)nav.Evaluate("number(geometry/bounds/northeast/lng)");
+            Location bounds_neCoordinates = new Location(bounds_neLatitude, bounds_neLongitude);
+
+            double bounds_swLatitude = (double)nav.Evaluate("number(geometry/bounds/southwest/lat)");
+            double bounds_swLongitude = (double)nav.Evaluate("number(geometry/bounds/southwest/lng)");
+            Location bounds_swCoordinates = new Location(bounds_swLatitude, bounds_swLongitude);
+
+            var bounds = new GoogleBounds { Northeast = bounds_neCoordinates, Southwest = bounds_swCoordinates };
+
 				bool isPartialMatch;
 				bool.TryParse((string)nav.Evaluate("string(partial_match)"), out isPartialMatch);
 
-				yield return new GoogleAddress(type, formattedAddress, components, coordinates, viewport, isPartialMatch);
+            yield return new GoogleAddress(type, formattedAddress, components, coordinates, viewport, bounds, isPartialMatch);
 			}
 		}
 
