@@ -6,8 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{891021E5-7521-4F93-9946-B7B630DF3192}"
 	ProjectSection(SolutionItems) = preProject
 		common.targets = common.targets
+		LICENSE.md = LICENSE.md
 		.nuget\packages.config = .nuget\packages.config
-		..\readme.md = ..\readme.md
+		README.md = README.md
 		teamcity.targets = teamcity.targets
 		test.targets = test.targets
 	EndProjectSection
