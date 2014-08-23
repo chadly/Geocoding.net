@@ -11,7 +11,7 @@
 
 		<configuration Condition="'$(configuration)'==''">Debug</configuration>
 
-		<buildOptions>Configuration=$(configuration);major=$(major);minor=$(minor);patch=$(patch);BUILD_NUMBER=$(BUILD_NUMBER)</buildOptions>
+		<buildOptions>Configuration=$(configuration);major=$(major);minor=$(minor);patch=$(patch);BUILD_NUMBER=$(BUILD_NUMBER);yahooConsumerKey=$(yahooConsumerKey);yahooConsumerSecret=$(yahooConsumerSecret);bingMapsKey=$(bingMapsKey);googleApiKey=$(googleApiKey);mapQuestKey=$(mapQuestKey)</buildOptions>
 		<versionString>v$(major).$(minor).$(patch).$(BUILD_NUMBER)</versionString>
 	</PropertyGroup>
 
