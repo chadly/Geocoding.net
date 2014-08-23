@@ -57,6 +57,7 @@
     <Compile Include="GoogleGeocoder.cs" />
     <Compile Include="GoogleGeocodingException.cs" />
     <Compile Include="GoogleStatus.cs" />
+    <Compile Include="GoogleBounds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyVersion.cs" />
     <Compile Include="GoogleViewport.cs" />
