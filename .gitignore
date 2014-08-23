@@ -1,5 +1,5 @@
 /bin
-/lib
+/packages
 /examples/packages
 AssemblyInfoCommon.cs
 app.config

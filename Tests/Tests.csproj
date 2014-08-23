@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{654812CF-D009-4420-B9EC-D07B030926A1}</ProjectGuid>
+    <ProjectGuid>{BB5F66AC-286B-4BA5-86EC-6DED28426132}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Geocoding</RootNamespace>
-    <AssemblyName>Geocoding.Core</AssemblyName>
+    <RootNamespace>Geocoding.Tests</RootNamespace>
+    <AssemblyName>Geocoding.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -46,7 +46,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -58,41 +57,72 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Newtonsoft.Json.6.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="xunit">
+      <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.extensions">
+      <HintPath>..\packages\xunit.extensions.1.9.2\lib\net20\xunit.extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfoCommon.cs">
       <Link>Properties\AssemblyInfoCommon.cs</Link>
     </Compile>
-    <Compile Include="Address.cs" />
-    <Compile Include="AsyncGeocoderExtensions.cs" />
-    <Compile Include="Bounds.cs" />
-    <Compile Include="Distance.cs" />
-    <Compile Include="DistanceUnits.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="IAsyncGeocoder.cs" />
-    <Compile Include="IBatchGeocoder.cs" />
-    <Compile Include="IGeocoder.cs" />
-    <Compile Include="Location.cs" />
-    <Compile Include="ParsedAddress.cs" />
+    <Compile Include="AddressAssertionExtensions.cs" />
+    <Compile Include="AsyncGeocoderTest.cs" />
+    <Compile Include="BatchGeocoderTest.cs" />
+    <Compile Include="BingMapsAsyncTest.cs" />
+    <Compile Include="BingMapsTest.cs" />
+    <Compile Include="DistanceTest.cs" />
+    <Compile Include="GeocoderTest.cs" />
+    <Compile Include="GoogleAsyncGeocoderTest.cs" />
+    <Compile Include="GoogleBusinessKeyTest.cs" />
+    <Compile Include="GoogleGeocoderTest.cs" />
+    <Compile Include="LocationTest.cs" />
+    <Compile Include="MapQuestBatchGeocoderTest.cs" />
+    <Compile Include="MapQuestGeocoderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyVersion.cs" />
-    <Compile Include="ResultItem.cs" />
+    <Compile Include="YahooGeocoderTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\geocoding.nuspec">
-      <Link>geocoding.nuspec</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <ProjectReference Include="..\Google\Google.csproj">
+      <Project>{2E608F4E-29F7-4AC3-922F-23D971312CAE}</Project>
+      <Name>Google</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MapQuest\MapQuest.csproj">
+      <Project>{B37FC059-5E9E-4893-994A-64D835D2A54F}</Project>
+      <Name>MapQuest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft\Microsoft.csproj">
+      <Project>{74BCB608-4674-452F-A50C-7EE61AC47EAF}</Project>
+      <Name>Microsoft</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Yahoo\Yahoo.csproj">
+      <Project>{B2863E87-3983-46EF-8B3E-37A4475ECA13}</Project>
+      <Name>Yahoo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{654812CF-D009-4420-B9EC-D07B030926A1}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="..\geocoding.snk">
       <Link>Properties\geocoding.snk</Link>
+    </None>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -113,7 +143,10 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(ProjectDir)..\common.targets" />
+  <Import Project="$(ProjectDir)..\test.targets" />
 </Project>

@@ -8,7 +8,7 @@
 		<!-- build number comes from teamcity -->
 		<build Condition="'$(BUILD_NUMBER)'==''">0</build>
 		<build Condition="'$(BUILD_NUMBER)'!=''">$(BUILD_NUMBER)</build>
-	
+
 		<configuration Condition="'$(configuration)'==''">Debug</configuration>
 
 		<buildOptions>Configuration=$(configuration);major=$(major);minor=$(minor);patch=$(patch);BUILD_NUMBER=$(BUILD_NUMBER)</buildOptions>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
 	<PropertyGroup>
-		<MSBuildCommunityTasksPath>$(MSBuildThisFileDirectory)..\lib\MSBuildTasks.1.4.0.65\tools\</MSBuildCommunityTasksPath>
+		<MSBuildCommunityTasksPath>$(MSBuildThisFileDirectory)packages\MSBuildTasks.1.4.0.65\tools\</MSBuildCommunityTasksPath>
 
 		<major Condition="'$(major)'==''">1</major>
 		<minor Condition="'$(minor)'==''">0</minor>
