@@ -1,7 +1,6 @@
 /bin
 /packages
 /examples/packages
-AssemblyInfoCommon.cs
 app.config
 docs
 nuget.exe
