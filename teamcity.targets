@@ -1,32 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
 	<PropertyGroup>
-		<!-- abide by semantic versioning when changing these version numbers: http://semver.org/ -->
+		<configuration Condition="'$(configuration)'==''">Debug</configuration>
+
+		<prerelease Condition="$(branch) == 'master'"></prerelease>
+		<prerelease Condition="$(branch) != 'master'">$(branch)</prerelease>
+		<build Condition="$(BUILD_NUMBER) == ''">0</build>
+		<build Condition="$(BUILD_NUMBER) != ''">$(BUILD_NUMBER)</build>
+
+		<!-- make sure to change the version in geocoding.nuspec as well!!! -->
+		<!-- TODO: get the build script to update the nuspec version automagically -->
 		<major>3</major>
 		<minor>1</minor>
 		<patch>0</patch>
-		<!-- build number comes from teamcity -->
-		<build Condition="'$(BUILD_NUMBER)'==''">0</build>
-		<build Condition="'$(BUILD_NUMBER)'!=''">$(BUILD_NUMBER)</build>
 
-		<configuration Condition="'$(configuration)'==''">Debug</configuration>
-
-		<buildOptions>Configuration=$(configuration);major=$(major);minor=$(minor);patch=$(patch);BUILD_NUMBER=$(BUILD_NUMBER);yahooConsumerKey=$(yahooConsumerKey);yahooConsumerSecret=$(yahooConsumerSecret);bingMapsKey=$(bingMapsKey);googleApiKey=$(googleApiKey);mapQuestKey=$(mapQuestKey)</buildOptions>
-		<versionString>v$(major).$(minor).$(patch).$(BUILD_NUMBER)</versionString>
+		<buildOptions>Configuration=$(configuration);major=$(major);minor=$(minor);patch=$(patch);prerelease=$(prerelease);build=$(build);yahooConsumerKey=$(yahooConsumerKey);yahooConsumerSecret=$(yahooConsumerSecret);bingMapsKey=$(bingMapsKey);googleApiKey=$(googleApiKey);mapQuestKey=$(mapQuestKey)</buildOptions>
 	</PropertyGroup>
 
 	<UsingTask AssemblyFile="packages\ILMerge.MSBuild.Tasks.1.0.0.3\tools\ILMerge.MSBuild.Tasks.dll" TaskName="ILMerge.MSBuild.Tasks.ILMerge" />
-	
+
 	<ItemGroup>
 		<solutions Include="Geocoding.sln" />
 	</ItemGroup>
 
 	<Target Name="Build">
 		<MSBuild Projects="@(solutions)" Properties="$(buildOptions)" />
-	</Target>
-
-	<Target Name="Clean">
-		<MSBuild Projects="@(solutions)" Targets="Clean" Properties="$(buildOptions)" />
 	</Target>
 
 	<Target Name="Test" DependsOnTargets="Build">
@@ -47,16 +45,5 @@
 
 		<Delete Files="@(mergeAsm)" />
 		<Delete Files="@(mergeAsm -> '%(RootDir)%(Directory)%(Filename).pdb')" />
-	</Target>
-
-	<Target Name="Pack" DependsOnTargets="Merge">
-		<CreateItem Include="$(MSBuildThisFileDirectory)bin\$(Configuration)\Geocoding.dll">
-			<Output TaskParameter="Include" ItemName="mergedOutput" />
-		</CreateItem>
-
-		<Copy SourceFiles="@(mergedOutput)" DestinationFiles="@(mergedOutput -> '$(MSBuildThisFileDirectory)bin\$(Configuration)\lib\net40\%(Filename)%(Extension)')" />
-		<Delete Files="@(mergedOutput)" />
-
-		<Exec Command="&quot;$(libDir)\nuget.exe&quot; pack geocoding.nuspec" WorkingDirectory="bin\$(Configuration)" />
 	</Target>
 </Project>

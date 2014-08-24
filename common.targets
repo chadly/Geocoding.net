@@ -5,9 +5,14 @@
 
 		<major Condition="'$(major)'==''">1</major>
 		<minor Condition="'$(minor)'==''">0</minor>
-    <patch Condition="'$(patch)'==''">0</patch>
-		<build Condition="'$(BUILD_NUMBER)'==''">0</build>
-		<build Condition="'$(BUILD_NUMBER)'!=''">$(BUILD_NUMBER)</build>
+		<patch Condition="'$(patch)'==''">0</patch>
+		<build Condition="'$(build)'==''">0</build>
+
+		<version>$(major).$(minor).$(patch)</version>
+		<fileVersion>$(major).$(minor).$(patch).$(build)</fileVersion>
+
+		<nugetVersion Condition="$(prerelease) == ''">$(major).$(minor).$(patch)</nugetVersion>
+		<nugetVersion Condition="$(prerelease) != ''">$(major).$(minor).$(patch)-$(prerelease)</nugetVersion>
 	</PropertyGroup>
 
 	<Import Project="$(MSBuildCommunityTasksPath)MSBuild.Community.Tasks.Targets" Condition="exists('$(MSBuildCommunityTasksPath)MSBuild.Community.Tasks.Targets')" />
@@ -29,17 +34,14 @@
 		<Delete Files="@(templateFiles -> '%(RootDir)%(Directory)%(Filename)')" />
 	</Target>
 
-	<Target Name="Version" Condition="$(BUILD_NUMBER) != 0 or !Exists('Properties\AssemblyVersion.cs')" BeforeTargets="BeforeBuild">
-		<CreateProperty Value="$(major).$(minor).$(patch).$(build)">
-			<Output TaskParameter="Value" PropertyName="versionString" />
-		</CreateProperty>
-
+	<Target Name="Version" Condition="!Exists('Properties\AssemblyVersion.cs')" BeforeTargets="BeforeBuild">
 		<AssemblyInfo
-      CodeLanguage="CS"
-      OutputFile="Properties\AssemblyVersion.cs"
-      AssemblyConfiguration="$(configuration)"
-      AssemblyVersion="$(versionString)"
-      AssemblyFileVersion="$(versionString)" />
+			CodeLanguage="CS"
+			OutputFile="Properties\AssemblyVersion.cs"
+			AssemblyConfiguration="$(configuration)"
+			AssemblyVersion="$(version)"
+			AssemblyFileVersion="$(fileVersion)"
+			AssemblyInformationalVersion="$(nugetVersion)" />
 	</Target>
 
 	<Target Name="CleanVersionFiles" AfterTargets="Clean">
