@@ -41,9 +41,6 @@ namespace Geocoding.Google
 			if (components == null)
 				throw new ArgumentNullException("components");
 
-			if (components.Length < 1)
-				throw new ArgumentException("Value cannot be empty.", "components");
-
 			this.type = type;
 			this.components = components;
 			this.isPartialMatch = isPartialMatch;

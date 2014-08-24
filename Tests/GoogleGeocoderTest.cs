@@ -33,6 +33,7 @@ namespace Geocoding.Tests
 		[InlineData("New York, New York", GoogleAddressType.Locality)]
 		[InlineData("90210, US", GoogleAddressType.PostalCode)]
 		[InlineData("1600 pennsylvania ave washington dc", GoogleAddressType.StreetAddress)]
+        [InlineData("muswellbrook 2 New South Wales Australia", GoogleAddressType.Unknown)]
 		public void CanParseAddressTypes(string address, GoogleAddressType type)
 		{
 			GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
