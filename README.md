@@ -14,7 +14,7 @@ See latest [release notes](https://github.com/chadly/Geocoding.net/wiki/Release-
 
 ##Installation
 
-Install via nuget:
+Install [via nuget](http://www.nuget.org/packages/Geocoding.net/):
 
 ```
 Install-Package Geocoding.net
