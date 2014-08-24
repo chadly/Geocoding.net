@@ -28,23 +28,23 @@ Or download the [latest release](https://github.com/chadly/Geocoding.net/release
 
 ```csharp
 IGeocoder geocoder = new GoogleGeocoder() { ApiKey = "this-is-my-optional-google-api-key" };
-Address[] addresses = geocoder.Geocode("C");
-Console.WriteLine("Formatted: " + addresses[0].FormattedAddress); //Formatted: 1600 Pennslyvania Avenue Northwest, Presiden'ts Park, Washington, DC 20500, USA
-Console.WriteLine("Coordinates: " + addresses[0].Coordinates.Latitude + ", " + addresses[0].Coordinates.Longitude); //Coordinates: 38.8978378, -77.0365123
+IEnumerable<Address> addresses = geocoder.Geocode("1600 pennsylvania ave washington dc");
+Console.WriteLine("Formatted: " + addresses.First().FormattedAddress); //Formatted: 1600 Pennslyvania Avenue Northwest, Presiden'ts Park, Washington, DC 20500, USA
+Console.WriteLine("Coordinates: " + addresses.First().Coordinates.Latitude + ", " + addresses.First().Coordinates.Longitude); //Coordinates: 38.8978378, -77.0365123
 ```
 
 It can also be used to return address information from latitude/longitude coordinates (aka reverse geocoding):
 
 ```csharp
 IGeocoder geocoder = new YahooGeocoder("consumer-key", "consumer-secret");
-Address[] addresses = geocoder.ReverseGeocode(38.8976777, -77.036517);
+IEnumerable<Address> addresses = geocoder.ReverseGeocode(38.8976777, -77.036517);
 ```
 
 ###Using Provider-Specific Data
 
 ```csharp
 GoogleGeocoder geocoder = new GoogleGeocoder();
-GoogleAddress[] addresses = geocoder.Geocode("1600 pennsylvania ave washington dc");
+IEnumerable<GoogleAddress> addresses = geocoder.Geocode("1600 pennsylvania ave washington dc");
 
 var country = addresses.Where(a => !a.IsPartialMatch).Select(a => a[GoogleAddressType.Country]).First();
 Console.WriteLine("Country: " + country.LongName + ", " + country.ShortName); //Country: United States, US
