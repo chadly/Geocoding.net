@@ -1,8 +1,4 @@
-#Generic C# Geocoding API
-
-<a href="http://chadly.net/builds/viewType.html?buildTypeId=GeocodingNe_Build&guest=1">
- <img src="http://chadly.net/builds/app/rest/builds/buildType:(id:GeocodingNe_Build)/statusIcon"/>
-</a>
+#Generic C# Geocoding API [![Build Status](http://chadly.net/builds/app/rest/builds/buildType:(id:GeocodingNe_Build)/statusIcon)](http://chadly.net/builds/viewType.html?buildTypeId=GeocodingNe_Build&guest=1)
 
 Includes a model and interface for communicating with five popular Geocoding providers.  Current implementations include:
 
