@@ -26,7 +26,7 @@ namespace Geocoding.MapQuest
 			set { useOSM = value; }
 		}
 
-        public WebProxy Proxy { get; set; }
+		public WebProxy Proxy { get; set; }
 
 		public MapQuestGeocoder(string key)
 		{
@@ -171,9 +171,9 @@ namespace Geocoding.MapQuest
 			request.Method = f.RequestVerb;
 			request.ContentType = "application/" + f.InputFormat;
 			request.Expect = "application/" + f.OutputFormat;
-            
-            if(Proxy != null)
-                request.Proxy = Proxy;
+
+			if (Proxy != null)
+				request.Proxy = Proxy;
 
 			if (hasBody)
 			{
