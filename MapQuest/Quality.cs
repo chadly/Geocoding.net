@@ -50,6 +50,12 @@ namespace Geocoding.MapQuest
 		/// <summary>
 		/// A1	Admin area, largest. For USA, a country.
 		/// </summary>
-		COUNTRY = 9,		
+		COUNTRY = 9,
+        /// <summary>
+        /// Admin area. For USA, a neighborhood.
+        /// </summary>
+        NEIGHBORHOOD = 10,
+
+        UNKNOWN = 11
 	}
 }
