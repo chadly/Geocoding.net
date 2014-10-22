@@ -27,7 +27,7 @@
 	</ItemGroup>
 
 	<Target Name="Build">
-		<!--<TeamCitySetBuildNumber BuildNumber="$(semver)" />-->
+		<TeamCitySetBuildNumber BuildNumber="$(semver)" />
 		<MSBuild Projects="@(solutions)" Properties="$(buildOptions)" />
 	</Target>
 
