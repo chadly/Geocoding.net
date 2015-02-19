@@ -299,7 +299,10 @@ namespace Geocoding.Microsoft
 		private HttpWebRequest CreateRequest(string url)
 		{
 			var request = WebRequest.Create(url) as HttpWebRequest;
-			request.Proxy = Proxy;
+			if(this.Proxy != null) 
+			{
+				request.Proxy = this.Proxy;
+			}
 			return request;
 		}
 
