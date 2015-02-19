@@ -313,7 +313,10 @@ namespace Geocoding.Google
 				url = BusinessKey.GenerateSignature(url);
 
 			var req = WebRequest.Create(url) as HttpWebRequest;
-			req.Proxy = Proxy;
+			if(this.Proxy != null) 
+			{
+				req.Proxy = Proxy;
+			}
 			req.Method = "GET";
 			return req;
 		}
