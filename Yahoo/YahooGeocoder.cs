@@ -30,6 +30,8 @@ namespace Geocoding.Yahoo
 			get { return consumerSecret; }
 		}
 
+		public IWebProxy Proxy { get; set; }
+
 		public YahooGeocoder(string consumerKey, string consumerSecret)
 		{
 			if (string.IsNullOrEmpty(consumerKey))
@@ -123,6 +125,10 @@ namespace Geocoding.Yahoo
 			url = GenerateOAuthSignature(new Uri(url));
 			var req = WebRequest.Create(url) as HttpWebRequest;
 			req.Method = "GET";
+			if (this.Proxy != null)
+			{
+				req.Proxy = this.Proxy;
+			}
 			return req;
 		}
 

@@ -61,7 +61,7 @@ namespace Geocoding.Google
 			}
 		}
 
-		public WebProxy Proxy { get; set; }
+		public IWebProxy Proxy { get; set; }
 		public string Language { get; set; }
 		public string RegionBias { get; set; }
 		public Bounds BoundsBias { get; set; }

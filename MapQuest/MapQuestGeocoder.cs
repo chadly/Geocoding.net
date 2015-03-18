@@ -26,7 +26,7 @@ namespace Geocoding.MapQuest
 			set { useOSM = value; }
 		}
 
-		public WebProxy Proxy { get; set; }
+		public IWebProxy Proxy { get; set; }
 
 		public MapQuestGeocoder(string key)
 		{

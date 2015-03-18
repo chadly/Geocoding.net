@@ -27,7 +27,7 @@ namespace Geocoding.Microsoft
 
 		readonly string bingKey;
 
-		public WebProxy Proxy { get; set; }
+		public IWebProxy Proxy { get; set; }
 		public string Culture { get; set; }
 		public Location UserLocation { get; set; }
 		public Bounds UserMapView { get; set; }
