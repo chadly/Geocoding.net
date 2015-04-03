@@ -30,6 +30,8 @@ namespace Geocoding.Google
 		PostBox,
 		StreetNumber,
 		Floor,
-		Room
+		Room,
+        PostalTown
+
 	}
 }
