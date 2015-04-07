@@ -446,6 +446,7 @@ namespace Geocoding.Google
 				case "floor": return GoogleAddressType.Floor;
 				case "room": return GoogleAddressType.Room;
                 case "postal_town" : return GoogleAddressType.PostalTown;
+                case "establishment" : return GoogleAddressType.Establishment;
 
 				default: return GoogleAddressType.Unknown;
 			}

@@ -1,5 +1,3 @@
-using System;
-
 namespace Geocoding.Google
 {
 	/// <remarks>
@@ -31,7 +29,7 @@ namespace Geocoding.Google
 		StreetNumber,
 		Floor,
 		Room,
-        PostalTown
-
+        PostalTown,
+	    Establishment
 	}
 }
