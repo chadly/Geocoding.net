@@ -10,7 +10,7 @@ Includes a model and interface for communicating with five popular Geocoding pro
 
 The API returns latitude/longitude coordinates and normalized address information.  This can be used to perform address validation, real time mapping of user-entered addresses, distance calculations, and much more.
 
-See latest [release notes](https://github.com/chadly/Geocoding.net/wiki/Release-Notes).
+See latest [release notes](https://github.com/chadly/Geocoding.net/releases/latest).
 
 ##Installation
 
@@ -20,7 +20,7 @@ Install [via nuget](http://www.nuget.org/packages/Geocoding.net/):
 Install-Package Geocoding.net
 ```
 
-Or download the [latest release](https://github.com/chadly/Geocoding.net/releases) and add a reference to `Geocoding.dll` in your project.
+Or download the [latest release](https://github.com/chadly/Geocoding.net/releases/latest) and add a reference to `Geocoding.dll` in your project.
 
 ##Example Usage
 
