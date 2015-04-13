@@ -313,7 +313,7 @@ namespace Geocoding.Google
 				url = BusinessKey.GenerateSignature(url);
 
 			var req = WebRequest.Create(url) as HttpWebRequest;
-			if(this.Proxy != null) 
+			if (this.Proxy != null)
 			{
 				req.Proxy = Proxy;
 			}
@@ -445,8 +445,8 @@ namespace Geocoding.Google
 				case "street_number": return GoogleAddressType.StreetNumber;
 				case "floor": return GoogleAddressType.Floor;
 				case "room": return GoogleAddressType.Room;
-                case "postal_town" : return GoogleAddressType.PostalTown;
-                case "establishment" : return GoogleAddressType.Establishment;
+				case "postal_town": return GoogleAddressType.PostalTown;
+				case "establishment": return GoogleAddressType.Establishment;
 
 				default: return GoogleAddressType.Unknown;
 			}

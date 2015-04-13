@@ -29,7 +29,7 @@ namespace Geocoding.Google
 		StreetNumber,
 		Floor,
 		Room,
-        PostalTown,
-	    Establishment
+		PostalTown,
+		Establishment
 	}
 }
