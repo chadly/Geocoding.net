@@ -17,7 +17,8 @@ namespace Geocoding
 			set
 			{
 				if (value < -90 || value > 90)
-					throw new ArgumentOutOfRangeException("Latitude", value, "Value must be between -90(inclusive) and 90(inclusive).");
+					throw new ArgumentOutOfRangeException("Latitude", value, "Value must be between -90 and 90 inclusive.");
+
 				if (double.IsNaN(value))
 					throw new ArgumentException("Latitude must be a valid number.", "Latitude");
 
@@ -31,8 +32,9 @@ namespace Geocoding
 			get { return longitude; }
 			set
 			{
-				if (value <= -180 || value > 180)
-					throw new ArgumentOutOfRangeException("Longitude", value, "Value must be between -180 and 180 (inclusive).");
+				if (value < -180 || value > 180)
+					throw new ArgumentOutOfRangeException("Longitude", value, "Value must be between -180 and 180 inclusive.");
+
 				if (double.IsNaN(value))
 					throw new ArgumentException("Longitude must be a valid number.", "Longitude");
 
