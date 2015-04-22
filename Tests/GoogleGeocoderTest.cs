@@ -40,6 +40,19 @@ namespace Geocoding.Tests
 			Assert.Equal(type, addresses[0].Type);
 		}
 
+        [Theory]
+        [InlineData("United States", GoogleLocationType.Approximate)]
+        [InlineData("Illinois, US", GoogleLocationType.Approximate)]
+        [InlineData("Ingalls Corners Road, Canastota, NY 13032, USA", GoogleLocationType.GeometricCenter)]
+        [InlineData("51 Harry S. Truman Parkway, Annapolis, MD 21401, USA", GoogleLocationType.RangeInterpolated)]
+        [InlineData("1600 pennsylvania ave washington dc", GoogleLocationType.Rooftop)]
+        [InlineData("muswellbrook 2 New South Wales Australia", GoogleLocationType.Approximate)]
+        public void CanParseLocationTypes(string address, GoogleLocationType type)
+        {
+            GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
+            Assert.Equal(type, addresses[0].LocationType);
+        }
+
 		[Theory]
 		[InlineData("United States", "fr", "États-Unis")]
 		[InlineData("Montreal", "en", "Montreal, QC, Canada")]

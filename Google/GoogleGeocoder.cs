@@ -371,10 +371,12 @@ namespace Geocoding.Google
 
 				var viewport = new GoogleViewport { Northeast = neCoordinates, Southwest = swCoordinates };
 
+                GoogleLocationType locationType = EvaluateLocationType((string)nav.Evaluate("string(geometry/location_type)"));
+
 				bool isPartialMatch;
 				bool.TryParse((string)nav.Evaluate("string(partial_match)"), out isPartialMatch);
 
-				yield return new GoogleAddress(type, formattedAddress, components, coordinates, viewport, isPartialMatch);
+				yield return new GoogleAddress(type, formattedAddress, components, coordinates, viewport, isPartialMatch, locationType);
 			}
 		}
 
@@ -451,6 +453,22 @@ namespace Geocoding.Google
 				default: return GoogleAddressType.Unknown;
 			}
 		}
+
+        /// <remarks>
+        /// https://developers.google.com/maps/documentation/geocoding/?csw=1#Results
+        /// </remarks>
+        private GoogleLocationType EvaluateLocationType(string type)
+        {
+            switch (type)
+            {
+                case "ROOFTOP": return GoogleLocationType.Rooftop;
+                case "RANGE_INTERPOLATED": return GoogleLocationType.RangeInterpolated;
+                case "GEOMETRIC_CENTER": return GoogleLocationType.GeometricCenter;
+                case "APPROXIMATE": return GoogleLocationType.Approximate;
+
+                default: return GoogleLocationType.Unknown;
+            }
+        }
 
 		protected class RequestState
 		{
