@@ -30,6 +30,12 @@ namespace Geocoding.Google
 		Floor,
 		Room,
 		PostalTown,
-		Establishment
+		Establishment,
+		SubLocalityLevel1,
+		SubLocalityLevel2,
+		SubLocalityLevel3,
+		SubLocalityLevel4,
+		SubLocalityLevel5,
+		PostalCodeSuffix
 	}
 }
