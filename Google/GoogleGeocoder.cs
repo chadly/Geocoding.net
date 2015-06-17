@@ -449,6 +449,12 @@ namespace Geocoding.Google
 				case "room": return GoogleAddressType.Room;
 				case "postal_town": return GoogleAddressType.PostalTown;
 				case "establishment": return GoogleAddressType.Establishment;
+				case "sublocality_level_1": return GoogleAddressType.SubLocalityLevel1;
+				case "sublocality_level_2": return GoogleAddressType.SubLocalityLevel2;
+				case "sublocality_level_3": return GoogleAddressType.SubLocalityLevel3;
+				case "sublocality_level_4": return GoogleAddressType.SubLocalityLevel4;
+				case "sublocality_level_5": return GoogleAddressType.SubLocalityLevel5;
+				case "postal_code_suffix": return GoogleAddressType.PostalCodeSuffix;
 
 				default: return GoogleAddressType.Unknown;
 			}
