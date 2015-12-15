@@ -202,7 +202,7 @@ namespace Geocoding.Google
 			if (cancellationToken != null)
 			{
 				cancellationToken.Value.ThrowIfCancellationRequested();
-				cancellationToken.Value.Register(() => request.Abort());
+				cancellationToken.Value.Register(request.Abort);
 			}
 
 			var requestState = new RequestState(request, cancellationToken);
@@ -371,7 +371,9 @@ namespace Geocoding.Google
 				bool isPartialMatch;
 				bool.TryParse((string)nav.Evaluate("string(partial_match)"), out isPartialMatch);
 
-				yield return new GoogleAddress(type, formattedAddress, components, coordinates, viewport, isPartialMatch);
+			    GoogleLocationType locationType = EvaluateLocationType((string) nav.Evaluate("string(geometry/location_type)"));
+
+				yield return new GoogleAddress(type, formattedAddress, components, coordinates, viewport, isPartialMatch, locationType);
 			}
 		}
 
@@ -446,6 +448,18 @@ namespace Geocoding.Google
 				default: return GoogleAddressType.Unknown;
 			}
 		}
+
+	    private GoogleLocationType EvaluateLocationType(string locationType)
+	    {
+	        switch (locationType)
+	        {
+	            case "ROOFTOP": return GoogleLocationType.Rooftop;
+                case "RANGE_INTERPOLATED": return GoogleLocationType.RangeInterpolated;
+                case "GEOMETRIC_CENTER": return GoogleLocationType.GeometricCenter;
+                case "APPROXIMATE": return GoogleLocationType.Approximate;
+	        }
+            return GoogleLocationType.Approximate;  // if we don't know, use the lowest level
+	    }
 
 		protected class RequestState
 		{
