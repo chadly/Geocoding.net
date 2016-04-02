@@ -1,13 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{891021E5-7521-4F93-9946-B7B630DF3192}"
 	ProjectSection(SolutionItems) = preProject
 		common.targets = common.targets
 		LICENSE.md = LICENSE.md
-		.nuget\packages.config = .nuget\packages.config
 		README.md = README.md
 		teamcity.targets = teamcity.targets
 		test.targets = test.targets
@@ -28,11 +27,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft", "Microsoft\Microsoft.csproj", "{74BCB608-4674-452F-A50C-7EE61AC47EAF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapQuest", "MapQuest\MapQuest.csproj", "{B37FC059-5E9E-4893-994A-64D835D2A54F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9F62DA27-AF69-4288-9D69-C56614DE66A3}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
