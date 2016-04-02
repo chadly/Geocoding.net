@@ -12,7 +12,7 @@ The API returns latitude/longitude coordinates and normalized address informatio
 
 See latest [release notes](https://github.com/chadly/Geocoding.net/releases/latest).
 
-:warning: There are some open issues ([#29](https://github.com/chadly/Geocoding.net/issues/29), [#45](https://github.com/chadly/Geocoding.net/issues/45), [#48](https://github.com/chadly/Geocoding.net/issues/48)),  with MapQuest which have some workarounds. If you would like to hep fix the issues, PRs are welcome.
+:warning: There are some open issues ([#29](https://github.com/chadly/Geocoding.net/issues/29), [#45](https://github.com/chadly/Geocoding.net/issues/45), [#48](https://github.com/chadly/Geocoding.net/issues/48)) regarding MapQuest which have some workarounds. If you would like to help fix the issues, PRs are welcome.
 
 ##Installation
 
