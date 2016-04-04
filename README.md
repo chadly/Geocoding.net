@@ -7,8 +7,11 @@ Includes a model and interface for communicating with five popular Geocoding pro
   * [Bing Maps (aka Virtual Earth)](http://www.microsoft.com/maps/) - [docs](http://msdn.microsoft.com/en-us/library/ff701715.aspx)
   * MapQuest [(Comercial API)](http://www.mapquestapi.com/) - [docs](http://www.mapquestapi.com/geocoding/)
   * MapQuest [(OpenStreetMap)](http://open.mapquestapi.com/) - [docs](http://open.mapquestapi.com/geocoding/)
+  * :warning: [GeoNames](http://www.geonames.org/) - [docs](http://www.geonames.org/export/web-services.html)
 
 The API returns latitude/longitude coordinates and normalized address information.  This can be used to perform address validation, real time mapping of user-entered addresses, distance calculations, and much more.
+
+:warning: GeoNames doesn't support a detailed address search. And the postal search is separated.
 
 See latest [release notes](https://github.com/chadly/Geocoding.net/releases/latest).
 
@@ -65,6 +68,10 @@ Bing [requires an API key](http://msdn.microsoft.com/en-us/library/ff428642.aspx
 You will need a [consumer secret and consumer key](http://developer.yahoo.com/boss/geo/BOSS_Signup.pdf) (PDF) for Yahoo.
 
 MapQuest API requires a key. Sign up here: (http://developer.mapquest.com/web/products/open)
+
+Nominatim need an email address (no registration required).
+
+GeoNames requires a registration. Sign up here: (http://www.geonames.org/login)
 
 ##How to Build from Source
 
