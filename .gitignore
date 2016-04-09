@@ -6,6 +6,10 @@ docs
 nuget.exe
 AssemblyVersion.cs
 
+.vs
+/artifacts
+project.lock.json
+
 #################
 ## Visual Studio
 #################
