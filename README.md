@@ -5,8 +5,8 @@ Includes a model and interface for communicating with five popular Geocoding pro
   * [Google Maps](https://developers.google.com/maps/) - [docs](https://developers.google.com/maps/documentation/geocoding/)
   * [Yahoo! BOSS Geo Services](http://developer.yahoo.com/boss/geo/) - [docs](http://developer.yahoo.com/geo/placefinder/guide/index.html)
   * [Bing Maps (aka Virtual Earth)](http://www.microsoft.com/maps/) - [docs](http://msdn.microsoft.com/en-us/library/ff701715.aspx)
-  * MapQuest [(Comercial API)](http://www.mapquestapi.com/) - [docs](http://www.mapquestapi.com/geocoding/)
-  * MapQuest [(OpenStreetMap)](http://open.mapquestapi.com/) - [docs](http://open.mapquestapi.com/geocoding/)
+  * :warning: MapQuest [(Comercial API)](http://www.mapquestapi.com/) - [docs](http://www.mapquestapi.com/geocoding/)
+  * :warning: MapQuest [(OpenStreetMap)](http://open.mapquestapi.com/) - [docs](http://open.mapquestapi.com/geocoding/)
   * :warning: [GeoNames](http://www.geonames.org/) - [docs](http://www.geonames.org/export/web-services.html)
 
 The API returns latitude/longitude coordinates and normalized address information.  This can be used to perform address validation, real time mapping of user-entered addresses, distance calculations, and much more.
@@ -14,6 +14,8 @@ The API returns latitude/longitude coordinates and normalized address informatio
 :warning: GeoNames doesn't support a detailed address search. And the postal search is separated.
 
 See latest [release notes](https://github.com/chadly/Geocoding.net/releases/latest).
+
+:warning: There are some open issues ([#29](https://github.com/chadly/Geocoding.net/issues/29), [#45](https://github.com/chadly/Geocoding.net/issues/45), [#48](https://github.com/chadly/Geocoding.net/issues/48)) regarding MapQuest which have some workarounds. If you would like to help fix the issues, PRs are welcome.
 
 ##Installation
 
