@@ -1,11 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{891021E5-7521-4F93-9946-B7B630DF3192}"
 	ProjectSection(SolutionItems) = preProject
 		common.targets = common.targets
+		global.json = global.json
 		LICENSE.md = LICENSE.md
 		.nuget\packages.config = .nuget\packages.config
 		README.md = README.md
@@ -15,28 +16,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{891021E5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{34C54BE7-9268-46F1-BD1E-CDC98B9DBDA2}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Core", "src\Core\Core.xproj", "{654812CF-D009-4420-B9EC-D07B030926A1}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Geocoding.Core", "src\Geocoding.Core\Geocoding.Core.xproj", "{654812CF-D009-4420-B9EC-D07B030926A1}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Tests", "src\Tests\Tests.xproj", "{BB5F66AC-286B-4BA5-86EC-6DED28426132}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Geocoding.Tests", "test\Geocoding.Tests\Geocoding.Tests.xproj", "{BB5F66AC-286B-4BA5-86EC-6DED28426132}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIs", "APIs", "{F742864D-9400-4CE2-957A-DBD0A0237277}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Google", "src\Google\Google.xproj", "{2E608F4E-29F7-4AC3-922F-23D971312CAE}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Geocoding.Google", "src\Geocoding.Google\Geocoding.Google.xproj", "{2E608F4E-29F7-4AC3-922F-23D971312CAE}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Yahoo", "src\Yahoo\Yahoo.xproj", "{B2863E87-3983-46EF-8B3E-37A4475ECA13}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Geocoding.Yahoo", "src\Geocoding.Yahoo\Geocoding.Yahoo.xproj", "{B2863E87-3983-46EF-8B3E-37A4475ECA13}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Microsoft", "src\Microsoft\Microsoft.xproj", "{74BCB608-4674-452F-A50C-7EE61AC47EAF}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Geocoding.Microsoft", "src\Geocoding.Microsoft\Geocoding.Microsoft.xproj", "{74BCB608-4674-452F-A50C-7EE61AC47EAF}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MapQuest", "src\MapQuest\MapQuest.xproj", "{B37FC059-5E9E-4893-994A-64D835D2A54F}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Geocoding.MapQuest", "src\Geocoding.MapQuest\Geocoding.MapQuest.xproj", "{B37FC059-5E9E-4893-994A-64D835D2A54F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DE89B874-8DC7-4C00-B47E-6C1D5B42CFDA}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nominatim", "src\Nominatim\Nominatim.xproj", "{2477A5B6-50EC-49C9-9790-BDBBD87DE886}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GeoNames", "src\GeoNames\GeoNames.xproj", "{718E3463-9A7D-463C-B847-049A48B419F1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1CFB5A27-9364-4505-9416-47889664A218}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,27 +62,17 @@ Global
 		{B37FC059-5E9E-4893-994A-64D835D2A54F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B37FC059-5E9E-4893-994A-64D835D2A54F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B37FC059-5E9E-4893-994A-64D835D2A54F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2477A5B6-50EC-49C9-9790-BDBBD87DE886}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2477A5B6-50EC-49C9-9790-BDBBD87DE886}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2477A5B6-50EC-49C9-9790-BDBBD87DE886}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2477A5B6-50EC-49C9-9790-BDBBD87DE886}.Release|Any CPU.Build.0 = Release|Any CPU
-		{718E3463-9A7D-463C-B847-049A48B419F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{718E3463-9A7D-463C-B847-049A48B419F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{718E3463-9A7D-463C-B847-049A48B419F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{718E3463-9A7D-463C-B847-049A48B419F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{654812CF-D009-4420-B9EC-D07B030926A1} = {34C54BE7-9268-46F1-BD1E-CDC98B9DBDA2}
-		{BB5F66AC-286B-4BA5-86EC-6DED28426132} = {34C54BE7-9268-46F1-BD1E-CDC98B9DBDA2}
+		{BB5F66AC-286B-4BA5-86EC-6DED28426132} = {1CFB5A27-9364-4505-9416-47889664A218}
 		{F742864D-9400-4CE2-957A-DBD0A0237277} = {34C54BE7-9268-46F1-BD1E-CDC98B9DBDA2}
 		{2E608F4E-29F7-4AC3-922F-23D971312CAE} = {F742864D-9400-4CE2-957A-DBD0A0237277}
 		{B2863E87-3983-46EF-8B3E-37A4475ECA13} = {F742864D-9400-4CE2-957A-DBD0A0237277}
 		{74BCB608-4674-452F-A50C-7EE61AC47EAF} = {F742864D-9400-4CE2-957A-DBD0A0237277}
 		{B37FC059-5E9E-4893-994A-64D835D2A54F} = {F742864D-9400-4CE2-957A-DBD0A0237277}
-		{2477A5B6-50EC-49C9-9790-BDBBD87DE886} = {F742864D-9400-4CE2-957A-DBD0A0237277}
-		{718E3463-9A7D-463C-B847-049A48B419F1} = {F742864D-9400-4CE2-957A-DBD0A0237277}
 	EndGlobalSection
 EndGlobal

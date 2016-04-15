@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0-*",
+  "description": "Tests Class Library",
+  "authors": [ "platzer.m" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "frameworks": {
+    "dnxcore50": {
+      "dependencies": {
+
+      }
+    }
+  },
+  "dependencies": {
+    "Geocoding.Core": "1.0.0-*",
+    "Geocoding.Google": "1.0.0-*",
+    "Geocoding.MapQuest": "1.0.0-*",
+    "Geocoding.Microsoft": "1.0.0-*",
+    "Geocoding.Yahoo": "1.0.0-*",
+    "Microsoft.CSharp": "4.0.1-beta-23516",
+    "Microsoft.Framework.Configuration": "1.0.0-rc1-15678",
+    "Microsoft.Framework.Configuration.Json": "1.0.0-rc1-15678",
+    "System.Collections": "4.0.11-beta-23516",
+    "System.Linq": "4.0.1-beta-23516",
+    "System.Runtime": "4.0.21-beta-23516",
+    "System.Runtime.WindowsRuntime": "4.0.11-rc2-23826",
+    "System.Threading": "4.0.11-beta-23516",
+    "System.Threading.Thread": "4.0.0-beta-23516",
+    "xunit": "2.1.0",
+    "xunit.runner.dnx": "2.1.0-rc1-build204",
+  },
+  "commands": {
+    "test": "xunit.runner.dnx"
+  }
+}
