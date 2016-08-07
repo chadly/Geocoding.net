@@ -10,14 +10,11 @@
   "releaseNotes": "https://github.com/chadly/Geocoding.net/releases/latest",
 
   "frameworks": {
-    "net451": {
-      "frameworkAssemblies": {
-        "System.Security": "4.0.0.0",
-        "System.XML": "4.0.0.0"
-      }
-    }
+    "netcoreapp1.0": {}
   },
   "dependencies": {
+    "System.Xml.XPath": "4.0.1",
+    "System.Net.Http": "4.1.0",
     "Geocoding.Core": "4.0.0-*"
   }
 }

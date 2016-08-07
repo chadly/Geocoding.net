@@ -10,7 +10,7 @@
   "releaseNotes": "https://github.com/chadly/Geocoding.net/releases/latest",
 
   "frameworks": {
-    "dnx451": { }
+    "netcoreapp1.0": { }
   },
   "dependencies": {
     "Geocoding.Core": "4.0.0-*",

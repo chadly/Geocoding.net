@@ -5,16 +5,15 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Xml.XPath;
+using System.Net.Http;
 
 namespace Geocoding.Google
 {
 	/// <remarks>
 	/// http://code.google.com/apis/maps/documentation/geocoding/
 	/// </remarks>
-	public class GoogleGeocoder : IGeocoder, IAsyncGeocoder
+	public class GoogleGeocoder : IGeocoder
 	{
 		string apiKey;
 		BusinessKey businessKey;
@@ -117,7 +116,7 @@ namespace Geocoding.Google
 			if (string.IsNullOrEmpty(address))
 				throw new ArgumentNullException("address");
 
-			HttpWebRequest request = BuildWebRequest("address", WebUtility.UrlEncode(address));
+			var request = BuildWebRequest("address", WebUtility.UrlEncode(address));
 			return ProcessRequest(request);
 		}
 
@@ -131,38 +130,8 @@ namespace Geocoding.Google
 
 		public IEnumerable<GoogleAddress> ReverseGeocode(double latitude, double longitude)
 		{
-			HttpWebRequest request = BuildWebRequest("latlng", BuildGeolocation(latitude, longitude));
+			var request = BuildWebRequest("latlng", BuildGeolocation(latitude, longitude));
 			return ProcessRequest(request);
-		}
-
-		public Task<IEnumerable<GoogleAddress>> GeocodeAsync(string address)
-		{
-			if (string.IsNullOrEmpty(address))
-				throw new ArgumentNullException("address");
-
-			HttpWebRequest request = BuildWebRequest("address", WebUtility.UrlEncode(address));
-			return ProcessRequestAsync(request);
-		}
-
-		public Task<IEnumerable<GoogleAddress>> GeocodeAsync(string address, CancellationToken cancellationToken)
-		{
-			if (string.IsNullOrEmpty(address))
-				throw new ArgumentNullException("address");
-
-			HttpWebRequest request = BuildWebRequest("address", WebUtility.UrlEncode(address));
-			return ProcessRequestAsync(request, cancellationToken);
-		}
-
-		public Task<IEnumerable<GoogleAddress>> ReverseGeocodeAsync(double latitude, double longitude)
-		{
-			HttpWebRequest request = BuildWebRequest("latlng", BuildGeolocation(latitude, longitude));
-			return ProcessRequestAsync(request);
-		}
-
-		public Task<IEnumerable<GoogleAddress>> ReverseGeocodeAsync(double latitude, double longitude, CancellationToken cancellationToken)
-		{
-			HttpWebRequest request = BuildWebRequest("latlng", BuildGeolocation(latitude, longitude));
-			return ProcessRequestAsync(request, cancellationToken);
 		}
 
 		private string BuildAddress(string street, string city, string state, string postalCode, string country)
@@ -175,13 +144,13 @@ namespace Geocoding.Google
 			return string.Format(CultureInfo.InvariantCulture, "{0},{1}", latitude, longitude);
 		}
 
-		private IEnumerable<GoogleAddress> ProcessRequest(HttpWebRequest request)
+		private IEnumerable<GoogleAddress> ProcessRequest(HttpRequestMessage request)
 		{
 			try
 			{
-				using (WebResponse response = request.GetResponse())
+				using (var client = BuildClient())
 				{
-					return ProcessWebResponse(response);
+					return ProcessWebResponse(client.SendAsync(request).Result);
 				}
 			}
 			catch (GoogleGeocodingException)
@@ -196,56 +165,14 @@ namespace Geocoding.Google
 			}
 		}
 
-		private Task<IEnumerable<GoogleAddress>> ProcessRequestAsync(HttpWebRequest request, CancellationToken? cancellationToken = null)
+		HttpClient BuildClient()
 		{
-			if (cancellationToken != null)
-			{
-				cancellationToken.Value.ThrowIfCancellationRequested();
-				cancellationToken.Value.Register(() => request.Abort());
-			}
+			if (this.Proxy == null)
+				return new HttpClient();
 
-			var requestState = new RequestState(request, cancellationToken);
-			return Task.Factory.FromAsync(
-				(callback, asyncState) => SendRequestAsync((RequestState)asyncState, callback),
-				result => ProcessResponseAsync((RequestState)result.AsyncState, result),
-				requestState
-			);
-		}
-
-		private IAsyncResult SendRequestAsync(RequestState requestState, AsyncCallback callback)
-		{
-			try
-			{
-				return requestState.request.BeginGetResponse(callback, requestState);
-			}
-			catch (Exception ex)
-			{
-				throw new GoogleGeocodingException(ex);
-			}
-		}
-
-		private IEnumerable<GoogleAddress> ProcessResponseAsync(RequestState requestState, IAsyncResult result)
-		{
-			if (requestState.cancellationToken != null)
-				requestState.cancellationToken.Value.ThrowIfCancellationRequested();
-
-			try
-			{
-				using (var response = (HttpWebResponse)requestState.request.EndGetResponse(result))
-				{
-					return ProcessWebResponse(response);
-				}
-			}
-			catch (GoogleGeocodingException)
-			{
-				//let these pass through
-				throw;
-			}
-			catch (Exception ex)
-			{
-				//wrap in google exception
-				throw new GoogleGeocodingException(ex);
-			}
+			var handler = new HttpClientHandler();
+			handler.Proxy = this.Proxy;
+			return new HttpClient(handler);
 		}
 
 		IEnumerable<Address> IGeocoder.Geocode(string address)
@@ -268,59 +195,17 @@ namespace Geocoding.Google
 			return ReverseGeocode(latitude, longitude).Cast<Address>();
 		}
 
-		Task<IEnumerable<Address>> IAsyncGeocoder.GeocodeAsync(string address)
-		{
-			return GeocodeAsync(address)
-				.ContinueWith(task => task.Result.Cast<Address>());
-		}
-
-		Task<IEnumerable<Address>> IAsyncGeocoder.GeocodeAsync(string address, CancellationToken cancellationToken)
-		{
-			return GeocodeAsync(address, cancellationToken)
-				.ContinueWith(task => task.Result.Cast<Address>(), cancellationToken);
-		}
-
-		Task<IEnumerable<Address>> IAsyncGeocoder.GeocodeAsync(string street, string city, string state, string postalCode, string country)
-		{
-			return GeocodeAsync(BuildAddress(street, city, state, postalCode, country))
-				.ContinueWith(task => task.Result.Cast<Address>());
-		}
-
-		Task<IEnumerable<Address>> IAsyncGeocoder.GeocodeAsync(string street, string city, string state, string postalCode, string country, CancellationToken cancellationToken)
-		{
-			return GeocodeAsync(BuildAddress(street, city, state, postalCode, country), cancellationToken)
-				.ContinueWith(task => task.Result.Cast<Address>(), cancellationToken);
-		}
-
-		Task<IEnumerable<Address>> IAsyncGeocoder.ReverseGeocodeAsync(double latitude, double longitude)
-		{
-			return ReverseGeocodeAsync(latitude, longitude)
-				.ContinueWith(task => task.Result.Cast<Address>());
-		}
-
-		Task<IEnumerable<Address>> IAsyncGeocoder.ReverseGeocodeAsync(double latitude, double longitude, CancellationToken cancellationToken)
-		{
-			return ReverseGeocodeAsync(latitude, longitude, cancellationToken)
-				.ContinueWith(task => task.Result.Cast<Address>(), cancellationToken);
-		}
-
-		private HttpWebRequest BuildWebRequest(string type, string value)
+		private HttpRequestMessage BuildWebRequest(string type, string value)
 		{
 			string url = string.Format(ServiceUrl, type, value);
 
 			if (BusinessKey != null)
 				url = BusinessKey.GenerateSignature(url);
 
-			var req = WebRequest.Create(url) as HttpWebRequest;
-			if (this.Proxy != null)
-			{
-				req.Proxy = Proxy;
-			}
-			req.Method = "GET";
-			return req;
+			return new HttpRequestMessage(HttpMethod.Get, url);
 		}
 
-		private IEnumerable<GoogleAddress> ProcessWebResponse(WebResponse response)
+		private IEnumerable<GoogleAddress> ProcessWebResponse(HttpResponseMessage response)
 		{
 			XPathDocument xmlDoc = LoadXmlResponse(response);
 			XPathNavigator nav = xmlDoc.CreateNavigator();
@@ -336,9 +221,9 @@ namespace Geocoding.Google
 			return new GoogleAddress[0];
 		}
 
-		private XPathDocument LoadXmlResponse(WebResponse response)
+		private XPathDocument LoadXmlResponse(HttpResponseMessage response)
 		{
-			using (Stream stream = response.GetResponseStream())
+			using (Stream stream = response.Content.ReadAsStreamAsync().Result)
 			{
 				XPathDocument doc = new XPathDocument(stream);
 				return doc;
@@ -370,7 +255,7 @@ namespace Geocoding.Google
 
 				var viewport = new GoogleViewport { Northeast = neCoordinates, Southwest = swCoordinates };
 
-                GoogleLocationType locationType = EvaluateLocationType((string)nav.Evaluate("string(geometry/location_type)"));
+				GoogleLocationType locationType = EvaluateLocationType((string)nav.Evaluate("string(geometry/location_type)"));
 
 				bool isPartialMatch;
 				bool.TryParse((string)nav.Evaluate("string(partial_match)"), out isPartialMatch);
@@ -459,33 +344,19 @@ namespace Geocoding.Google
 			}
 		}
 
-        /// <remarks>
-        /// https://developers.google.com/maps/documentation/geocoding/?csw=1#Results
-        /// </remarks>
-        private GoogleLocationType EvaluateLocationType(string type)
-        {
-            switch (type)
-            {
-                case "ROOFTOP": return GoogleLocationType.Rooftop;
-                case "RANGE_INTERPOLATED": return GoogleLocationType.RangeInterpolated;
-                case "GEOMETRIC_CENTER": return GoogleLocationType.GeometricCenter;
-                case "APPROXIMATE": return GoogleLocationType.Approximate;
-
-                default: return GoogleLocationType.Unknown;
-            }
-        }
-
-		protected class RequestState
+		/// <remarks>
+		/// https://developers.google.com/maps/documentation/geocoding/?csw=1#Results
+		/// </remarks>
+		private GoogleLocationType EvaluateLocationType(string type)
 		{
-			public readonly HttpWebRequest request;
-			public readonly CancellationToken? cancellationToken;
-
-			public RequestState(HttpWebRequest request, CancellationToken? cancellationToken)
+			switch (type)
 			{
-				if (request == null) throw new ArgumentNullException("request");
+				case "ROOFTOP": return GoogleLocationType.Rooftop;
+				case "RANGE_INTERPOLATED": return GoogleLocationType.RangeInterpolated;
+				case "GEOMETRIC_CENTER": return GoogleLocationType.GeometricCenter;
+				case "APPROXIMATE": return GoogleLocationType.Approximate;
 
-				this.request = request;
-				this.cancellationToken = cancellationToken;
+				default: return GoogleLocationType.Unknown;
 			}
 		}
 	}

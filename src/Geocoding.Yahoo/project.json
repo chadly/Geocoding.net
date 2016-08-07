@@ -10,7 +10,7 @@
   "releaseNotes": "https://github.com/chadly/Geocoding.net/releases/latest",
 
   "frameworks": {
-    "net451": {
+    "netcoreapp1.0": {
       "frameworkAssemblies": {
         "System.XML": "4.0.0.0"
       }
