@@ -16,8 +16,12 @@ namespace Geocoding.Google
 		{
 			get { return type; }
 		}
+        public string PlaceId
+        {
+            get { return place_id; }
+        }
 
-	    public GoogleLocationType LocationType
+        public GoogleLocationType LocationType
 	    {
 	        get { return locationType; }
 	    }
