@@ -11,13 +11,12 @@
 
   "frameworks": {
     "netcoreapp1.0": {
-      "frameworkAssemblies": {
-        "System.Runtime.Serialization": "4.0.0.0",
-        "System.XML": "4.0.0.0"
-      }
+      "imports": ["dnxcore50", "portable-net45+netcore45+wp8+wp81+wpa81"]
     }
   },
   "dependencies": {
-    "Geocoding.Core": "4.0.0-*"
+    "Geocoding.Core": "4.0.0-*",
+    "System.Net.Http": "4.1.0",
+    "Microsoft.AspNet.WebApi.Client": "5.2.3"
   }
 }
