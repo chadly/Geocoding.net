@@ -19,5 +19,9 @@ namespace Geocoding.MapQuest
 		/// Right
 		/// </summary>
 		R,
+		/// <summary>
+		/// Mixed
+		/// </summary>
+		M,
 	}
 }
