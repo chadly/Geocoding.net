@@ -353,7 +353,7 @@ namespace Geocoding.Google
 				XPathNavigator nav = nodes.Current;
 
 				GoogleAddressType type = EvaluateType((string)nav.Evaluate("string(type)"));
-                string place_id = (string)nav.Evaluate("string(place_id)");
+				string placeId = (string)nav.Evaluate("string(place_id)");
                 string formattedAddress = (string)nav.Evaluate("string(formatted_address)");
 
 				var components = ParseComponents(nav.Select("address_component")).ToArray();
@@ -377,7 +377,7 @@ namespace Geocoding.Google
 				bool isPartialMatch;
 				bool.TryParse((string)nav.Evaluate("string(partial_match)"), out isPartialMatch);
 
-				yield return new GoogleAddress(type, formattedAddress, components, coordinates, viewport, isPartialMatch, locationType, place_id);
+				yield return new GoogleAddress(type, formattedAddress, components, coordinates, viewport, isPartialMatch, locationType, placeId);
 			}
 		}
 
