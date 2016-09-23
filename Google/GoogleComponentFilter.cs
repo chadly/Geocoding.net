@@ -6,7 +6,7 @@
 
         public GoogleComponentFilter(string component, string value)
         {
-            ComponentFilter = $"{component}:{value}";
+            ComponentFilter = string.Format("{0}:{1}", component, value);
         }
     }
 }
