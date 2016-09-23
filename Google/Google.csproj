@@ -54,6 +54,8 @@
     <Compile Include="GoogleAddress.cs" />
     <Compile Include="GoogleAddressComponent.cs" />
     <Compile Include="GoogleAddressType.cs" />
+    <Compile Include="GoogleComponentFilter.cs" />
+    <Compile Include="GoogleComponentFilterType.cs" />
     <Compile Include="GoogleGeocoder.cs" />
     <Compile Include="GoogleGeocodingException.cs" />
     <Compile Include="GoogleLocationType.cs" />
