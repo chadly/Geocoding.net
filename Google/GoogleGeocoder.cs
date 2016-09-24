@@ -65,6 +65,7 @@ namespace Geocoding.Google
 		public string Language { get; set; }
 		public string RegionBias { get; set; }
 		public Bounds BoundsBias { get; set; }
+		public IList<GoogleComponentFilter> ComponentFilters { get; set; }
 
 		public string ServiceUrl
 		{
@@ -108,6 +109,12 @@ namespace Geocoding.Google
 					builder.Append(",");
 					builder.Append(BoundsBias.NorthEast.Longitude.ToString(CultureInfo.InvariantCulture));
 				}
+				
+				if (ComponentFilters != null)
+                {
+                    builder.Append("&components=");
+                    builder.Append(string.Join("|", ComponentFilters.Select(x => x.ComponentFilter)));
+                }
 
 				return builder.ToString();
 			}

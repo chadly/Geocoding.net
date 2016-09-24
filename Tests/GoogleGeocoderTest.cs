@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Configuration;
 using System.Linq;
 using Geocoding.Google;
 using Xunit;
 using Xunit.Extensions;
+using System.Collections.Generic;
 
 namespace Geocoding.Tests
 {
@@ -84,5 +85,73 @@ namespace Geocoding.Tests
 			GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
 			Assert.Equal(result, addresses[0].FormattedAddress);
 		}
+		
+		[Theory]
+        [InlineData("Wimbledon")]
+        [InlineData("Birmingham")]
+        [InlineData("Manchester")]
+        [InlineData("York")]
+        public void CanApplyGBCountryComponentFilters(string address)
+        {
+            geocoder.ComponentFilters = new List<GoogleComponentFilter>();
+
+            geocoder.ComponentFilters.Add(new GoogleComponentFilter(GoogleComponentFilterType.Country, "GB"));
+
+            GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
+
+            Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "US")));
+            Assert.True(addresses.Any(x => x.Components.Any(o => o.ShortName == "GB")));
+        }
+
+        [Theory]
+        [InlineData("Wimbledon")]
+        [InlineData("Birmingham")]
+        [InlineData("Manchester")]
+        [InlineData("York")]
+        public void CanApplyUSCountryComponentFilters(string address)
+        {
+            geocoder.ComponentFilters = new List<GoogleComponentFilter>();
+
+            geocoder.ComponentFilters.Add(new GoogleComponentFilter(GoogleComponentFilterType.Country, "US"));
+
+            GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
+
+            Assert.True(addresses.Any(x => x.Components.Any(o => o.ShortName == "US")));
+            Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "GB")));
+        }
+
+        [Theory]
+        [InlineData("Washington")]
+        [InlineData("Franklin")]
+        public void CanApplyAdministrativeAreaComponentFilters(string address)
+        {
+            geocoder.ComponentFilters = new List<GoogleComponentFilter>();
+
+            geocoder.ComponentFilters.Add(new GoogleComponentFilter(GoogleComponentFilterType.AdministrativeArea, "KS"));
+
+            GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
+
+            // Assert we only got addresses in Kansas
+            Assert.True(addresses.Any(x => x.Components.Any(o => o.ShortName == "KS"))); 
+            Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "MA"))); 
+            Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "LA")));
+            Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "NJ")));
+        }
+
+        [Theory]
+        [InlineData("Rothwell")]
+        public void CanApplyPostalCodeComponentFilters(string address)
+        {
+            geocoder.ComponentFilters = new List<GoogleComponentFilter>();
+
+            geocoder.ComponentFilters.Add(new GoogleComponentFilter(GoogleComponentFilterType.PostalCode, "NN14"));
+
+            GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
+
+            // Assert we only got Rothwell, Northamptonshire
+            Assert.True(addresses.Any(x => x.Components.Any(o => o.ShortName == "Northamptonshire")));
+            Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "West Yorkshire")));
+            Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "Moreton Bay")));
+        }
 	}
 }
