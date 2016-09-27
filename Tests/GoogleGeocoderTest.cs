@@ -34,25 +34,25 @@ namespace Geocoding.Tests
 		[InlineData("New York, New York", GoogleAddressType.Locality)]
 		[InlineData("90210, US", GoogleAddressType.PostalCode)]
 		[InlineData("1600 pennsylvania ave washington dc", GoogleAddressType.StreetAddress)]
-        [InlineData("muswellbrook 2 New South Wales Australia", GoogleAddressType.Unknown)]
+		[InlineData("muswellbrook 2 New South Wales Australia", GoogleAddressType.Unknown)]
 		public void CanParseAddressTypes(string address, GoogleAddressType type)
 		{
 			GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
 			Assert.Equal(type, addresses[0].Type);
 		}
 
-        [Theory]
-        [InlineData("United States", GoogleLocationType.Approximate)]
-        [InlineData("Illinois, US", GoogleLocationType.Approximate)]
-        [InlineData("Ingalls Corners Road, Canastota, NY 13032, USA", GoogleLocationType.GeometricCenter)]
-        [InlineData("51 Harry S. Truman Parkway, Annapolis, MD 21401, USA", GoogleLocationType.RangeInterpolated)]
-        [InlineData("1600 pennsylvania ave washington dc", GoogleLocationType.Rooftop)]
-        [InlineData("muswellbrook 2 New South Wales Australia", GoogleLocationType.Approximate)]
-        public void CanParseLocationTypes(string address, GoogleLocationType type)
-        {
-            GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
-            Assert.Equal(type, addresses[0].LocationType);
-        }
+		[Theory]
+		[InlineData("United States", GoogleLocationType.Approximate)]
+		[InlineData("Illinois, US", GoogleLocationType.Approximate)]
+		[InlineData("Ingalls Corners Road, Canastota, NY 13032, USA", GoogleLocationType.GeometricCenter)]
+		[InlineData("51 Harry S. Truman Parkway, Annapolis, MD 21401, USA", GoogleLocationType.RangeInterpolated)]
+		[InlineData("1600 pennsylvania ave washington dc", GoogleLocationType.Rooftop)]
+		[InlineData("muswellbrook 2 New South Wales Australia", GoogleLocationType.Approximate)]
+		public void CanParseLocationTypes(string address, GoogleLocationType type)
+		{
+			GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
+			Assert.Equal(type, addresses[0].LocationType);
+		}
 
 		[Theory]
 		[InlineData("United States", "fr", "États-Unis")]
@@ -85,73 +85,73 @@ namespace Geocoding.Tests
 			GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
 			Assert.Equal(result, addresses[0].FormattedAddress);
 		}
-		
+
 		[Theory]
-        [InlineData("Wimbledon")]
-        [InlineData("Birmingham")]
-        [InlineData("Manchester")]
-        [InlineData("York")]
-        public void CanApplyGBCountryComponentFilters(string address)
-        {
-            geocoder.ComponentFilters = new List<GoogleComponentFilter>();
+		[InlineData("Wimbledon")]
+		[InlineData("Birmingham")]
+		[InlineData("Manchester")]
+		[InlineData("York")]
+		public void CanApplyGBCountryComponentFilters(string address)
+		{
+			geocoder.ComponentFilters = new List<GoogleComponentFilter>();
 
-            geocoder.ComponentFilters.Add(new GoogleComponentFilter(GoogleComponentFilterType.Country, "GB"));
+			geocoder.ComponentFilters.Add(new GoogleComponentFilter(GoogleComponentFilterType.Country, "GB"));
 
-            GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
+			GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
 
-            Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "US")));
-            Assert.True(addresses.Any(x => x.Components.Any(o => o.ShortName == "GB")));
-        }
+			Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "US")));
+			Assert.True(addresses.Any(x => x.Components.Any(o => o.ShortName == "GB")));
+		}
 
-        [Theory]
-        [InlineData("Wimbledon")]
-        [InlineData("Birmingham")]
-        [InlineData("Manchester")]
-        [InlineData("York")]
-        public void CanApplyUSCountryComponentFilters(string address)
-        {
-            geocoder.ComponentFilters = new List<GoogleComponentFilter>();
+		[Theory]
+		[InlineData("Wimbledon")]
+		[InlineData("Birmingham")]
+		[InlineData("Manchester")]
+		[InlineData("York")]
+		public void CanApplyUSCountryComponentFilters(string address)
+		{
+			geocoder.ComponentFilters = new List<GoogleComponentFilter>();
 
-            geocoder.ComponentFilters.Add(new GoogleComponentFilter(GoogleComponentFilterType.Country, "US"));
+			geocoder.ComponentFilters.Add(new GoogleComponentFilter(GoogleComponentFilterType.Country, "US"));
 
-            GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
+			GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
 
-            Assert.True(addresses.Any(x => x.Components.Any(o => o.ShortName == "US")));
-            Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "GB")));
-        }
+			Assert.True(addresses.Any(x => x.Components.Any(o => o.ShortName == "US")));
+			Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "GB")));
+		}
 
-        [Theory]
-        [InlineData("Washington")]
-        [InlineData("Franklin")]
-        public void CanApplyAdministrativeAreaComponentFilters(string address)
-        {
-            geocoder.ComponentFilters = new List<GoogleComponentFilter>();
+		[Theory]
+		[InlineData("Washington")]
+		[InlineData("Franklin")]
+		public void CanApplyAdministrativeAreaComponentFilters(string address)
+		{
+			geocoder.ComponentFilters = new List<GoogleComponentFilter>();
 
-            geocoder.ComponentFilters.Add(new GoogleComponentFilter(GoogleComponentFilterType.AdministrativeArea, "KS"));
+			geocoder.ComponentFilters.Add(new GoogleComponentFilter(GoogleComponentFilterType.AdministrativeArea, "KS"));
 
-            GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
+			GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
 
-            // Assert we only got addresses in Kansas
-            Assert.True(addresses.Any(x => x.Components.Any(o => o.ShortName == "KS"))); 
-            Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "MA"))); 
-            Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "LA")));
-            Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "NJ")));
-        }
+			// Assert we only got addresses in Kansas
+			Assert.True(addresses.Any(x => x.Components.Any(o => o.ShortName == "KS")));
+			Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "MA")));
+			Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "LA")));
+			Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "NJ")));
+		}
 
-        [Theory]
-        [InlineData("Rothwell")]
-        public void CanApplyPostalCodeComponentFilters(string address)
-        {
-            geocoder.ComponentFilters = new List<GoogleComponentFilter>();
+		[Theory]
+		[InlineData("Rothwell")]
+		public void CanApplyPostalCodeComponentFilters(string address)
+		{
+			geocoder.ComponentFilters = new List<GoogleComponentFilter>();
 
-            geocoder.ComponentFilters.Add(new GoogleComponentFilter(GoogleComponentFilterType.PostalCode, "NN14"));
+			geocoder.ComponentFilters.Add(new GoogleComponentFilter(GoogleComponentFilterType.PostalCode, "NN14"));
 
-            GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
+			GoogleAddress[] addresses = geocoder.Geocode(address).ToArray();
 
-            // Assert we only got Rothwell, Northamptonshire
-            Assert.True(addresses.Any(x => x.Components.Any(o => o.ShortName == "Northamptonshire")));
-            Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "West Yorkshire")));
-            Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "Moreton Bay")));
-        }
+			// Assert we only got Rothwell, Northamptonshire
+			Assert.True(addresses.Any(x => x.Components.Any(o => o.ShortName == "Northamptonshire")));
+			Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "West Yorkshire")));
+			Assert.False(addresses.Any(x => x.Components.Any(o => o.ShortName == "Moreton Bay")));
+		}
 	}
 }
