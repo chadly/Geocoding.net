@@ -11,7 +11,7 @@
 		<!-- make sure to change the version in geocoding.nuspec as well!!! -->
 		<!-- TODO: get the build script to update the nuspec version automagically -->
 		<major>3</major>
-		<minor>5</minor>
+		<minor>6</minor>
 		<patch>0</patch>
 
 		<buildOptions>Configuration=$(configuration);major=$(major);minor=$(minor);patch=$(patch);prerelease=$(prerelease);build=$(build);yahooConsumerKey=$(yahooConsumerKey);yahooConsumerSecret=$(yahooConsumerSecret);bingMapsKey=$(bingMapsKey);googleApiKey=$(googleApiKey);mapQuestKey=$(mapQuestKey)</buildOptions>
