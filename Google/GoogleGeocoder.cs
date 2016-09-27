@@ -65,6 +65,7 @@ namespace Geocoding.Google
 		public string Language { get; set; }
 		public string RegionBias { get; set; }
 		public Bounds BoundsBias { get; set; }
+		public IList<GoogleComponentFilter> ComponentFilters { get; set; }
 
 		public string ServiceUrl
 		{
@@ -107,6 +108,12 @@ namespace Geocoding.Google
 					builder.Append(BoundsBias.NorthEast.Latitude.ToString(CultureInfo.InvariantCulture));
 					builder.Append(",");
 					builder.Append(BoundsBias.NorthEast.Longitude.ToString(CultureInfo.InvariantCulture));
+				}
+
+				if (ComponentFilters != null)
+				{
+					builder.Append("&components=");
+					builder.Append(string.Join("|", ComponentFilters.Select(x => x.ComponentFilter)));
 				}
 
 				return builder.ToString();
@@ -354,7 +361,7 @@ namespace Geocoding.Google
 
 				GoogleAddressType type = EvaluateType((string)nav.Evaluate("string(type)"));
 				string placeId = (string)nav.Evaluate("string(place_id)");
-                string formattedAddress = (string)nav.Evaluate("string(formatted_address)");
+				string formattedAddress = (string)nav.Evaluate("string(formatted_address)");
 
 				var components = ParseComponents(nav.Select("address_component")).ToArray();
 
@@ -372,7 +379,7 @@ namespace Geocoding.Google
 
 				var viewport = new GoogleViewport { Northeast = neCoordinates, Southwest = swCoordinates };
 
-                GoogleLocationType locationType = EvaluateLocationType((string)nav.Evaluate("string(geometry/location_type)"));
+				GoogleLocationType locationType = EvaluateLocationType((string)nav.Evaluate("string(geometry/location_type)"));
 
 				bool isPartialMatch;
 				bool.TryParse((string)nav.Evaluate("string(partial_match)"), out isPartialMatch);
@@ -461,21 +468,21 @@ namespace Geocoding.Google
 			}
 		}
 
-        /// <remarks>
-        /// https://developers.google.com/maps/documentation/geocoding/?csw=1#Results
-        /// </remarks>
-        private GoogleLocationType EvaluateLocationType(string type)
-        {
-            switch (type)
-            {
-                case "ROOFTOP": return GoogleLocationType.Rooftop;
-                case "RANGE_INTERPOLATED": return GoogleLocationType.RangeInterpolated;
-                case "GEOMETRIC_CENTER": return GoogleLocationType.GeometricCenter;
-                case "APPROXIMATE": return GoogleLocationType.Approximate;
+		/// <remarks>
+		/// https://developers.google.com/maps/documentation/geocoding/?csw=1#Results
+		/// </remarks>
+		private GoogleLocationType EvaluateLocationType(string type)
+		{
+			switch (type)
+			{
+				case "ROOFTOP": return GoogleLocationType.Rooftop;
+				case "RANGE_INTERPOLATED": return GoogleLocationType.RangeInterpolated;
+				case "GEOMETRIC_CENTER": return GoogleLocationType.GeometricCenter;
+				case "APPROXIMATE": return GoogleLocationType.Approximate;
 
-                default: return GoogleLocationType.Unknown;
-            }
-        }
+				default: return GoogleLocationType.Unknown;
+			}
+		}
 
 		protected class RequestState
 		{
