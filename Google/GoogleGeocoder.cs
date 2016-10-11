@@ -96,6 +96,11 @@ namespace Geocoding.Google
 				{
 					builder.Append("&client=");
 					builder.Append(HttpUtility.UrlEncode(BusinessKey.ClientId));
+					if (BusinessKey.HasChannel)
+					{
+						builder.Append("&channel=");
+						builder.Append(HttpUtility.UrlEncode(BusinessKey.Channel));
+					}
 				}
 
 				if (BoundsBias != null)

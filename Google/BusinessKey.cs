@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Geocoding.Google
 {
@@ -12,10 +13,48 @@ namespace Geocoding.Google
 		public string ClientId { get; set; }
 		public string SigningKey { get; set; }
 
-		public BusinessKey(string clientId, string signingKey)
+		/// <summary>
+		/// More details about channel
+		/// https://developers.google.com/maps/documentation/directions/get-api-key
+		/// https://developers.google.com/maps/premium/reports/usage-reports#channels
+		/// </summary>
+		private string channel;
+		public string Channel
+		{
+			get
+			{
+				return channel;
+			}
+			set
+			{
+				if (string.IsNullOrWhiteSpace(value))
+				{
+					return;
+				}
+				string formattedChannel = value.Trim().ToLower();
+				if (Regex.IsMatch(formattedChannel, @"^[a-z_0-9.-]+$"))
+				{
+					channel = formattedChannel;
+				}
+				else
+				{
+					throw new ArgumentException("Must be an ASCII alphanumeric string; can include a period (.), underscore (_) and hyphen (-) character", "channel");
+				}
+			}
+		}
+		public bool HasChannel
+		{
+			get
+			{
+				return !string.IsNullOrEmpty(Channel);
+			}
+		}
+
+		public BusinessKey(string clientId, string signingKey, string channel = null)
 		{
 			this.ClientId = CheckParam(clientId, "clientId");
 			this.SigningKey = CheckParam(signingKey, "signingKey");
+			this.Channel = channel;
 		}
 
 		string CheckParam(string value, string name)
