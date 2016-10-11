@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Geocoding.MapQuest;
 using System.Configuration;
-using Xunit;
-using Xunit.Extensions;
-
-using Geocoding.MapQuest;
 
 namespace Geocoding.Tests
 {
@@ -15,7 +8,7 @@ namespace Geocoding.Tests
 		protected override IBatchGeocoder CreateBatchGeocoder()
 		{
 			string k = ConfigurationManager.AppSettings["mapQuestKey"];
-			return new MapQuest.MapQuestGeocoder(k);
+			return new MapQuest.MapQuestGeocoder(k) { UseOSM = false };
 		}
 	}
 }

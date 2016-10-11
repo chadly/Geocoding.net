@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Geocoding.MapQuest;
 using System.Configuration;
-using Xunit;
 using Xunit.Extensions;
-
-using Geocoding.MapQuest;
 
 namespace Geocoding.Tests
 {
@@ -15,7 +9,7 @@ namespace Geocoding.Tests
 		protected override IGeocoder CreateGeocoder()
 		{
 			string k = ConfigurationManager.AppSettings["mapQuestKey"];
-			return new MapQuestGeocoder(k);
+			return new MapQuestGeocoder(k) { UseOSM = false };
 		}
 
 		[Theory]
