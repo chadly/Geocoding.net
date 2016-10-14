@@ -40,5 +40,8 @@ namespace Geocoding.Tests
 
 		[Fact(Skip = "oauth not working for yahoo - see issue #27")]
 		public override void CanGeocodeInvalidZipCodes(string address) { }
+
+		[Fact(Skip = "oauth not working for yahoo - see issue #27")]
+		public override void CanHandleStreetIntersectionsByAmpersand(string address) { }
 	}
 }
