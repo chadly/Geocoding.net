@@ -7,6 +7,7 @@ using Geocoding;
 using Geocoding.Google;
 using Geocoding.Microsoft;
 using Geocoding.Yahoo;
+using Geocoding.MapQuest;
 
 namespace Example.Web
 {
@@ -42,6 +43,8 @@ namespace Example.Web
 			{
 				//ApiKey = "google-api-key-is-optional"
 			}).As<IGeocoder>();
+
+			builder.Register(c => new MapQuestGeocoder("mapquest-key") { UseOSM = true }).As<IGeocoder>();
 
 			return builder.Build();
 		}
