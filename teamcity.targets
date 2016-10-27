@@ -40,7 +40,7 @@
 	</Target>
 
 	<Target Name="Merge" DependsOnTargets="Build">
-		<CreateItem Include="$(MSBuildThisFileDirectory)bin\$(Configuration)\Geocoding.*.dll">
+		<CreateItem Include="$(MSBuildThisFileDirectory)bin\$(Configuration)\Geocoding.*.dll" Exclude="$(MSBuildThisFileDirectory)bin\$(Configuration)\Geocoding.Tests*">
 			<Output TaskParameter="Include" ItemName="mergeAsm" />
 		</CreateItem>
 
