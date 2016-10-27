@@ -37,14 +37,14 @@ namespace Example.Web
 			//http://developer.yahoo.com/boss/geo/BOSS_Signup.pdf
 			builder.Register(c => new YahooGeocoder("my-yahoo-consumer-key", "my-yahoo-consumer-secret")).As<IGeocoder>();
 
+			builder.Register(c => new MapQuestGeocoder("mapquest-key") { UseOSM = true }).As<IGeocoder>();
+
 			//https://developers.google.com/maps/documentation/javascript/tutorial#api_key
 			//a server key is optional with Google
 			builder.Register(c => new GoogleGeocoder
 			{
 				//ApiKey = "google-api-key-is-optional"
 			}).As<IGeocoder>();
-
-			builder.Register(c => new MapQuestGeocoder("mapquest-key") { UseOSM = true }).As<IGeocoder>();
 
 			return builder.Build();
 		}
