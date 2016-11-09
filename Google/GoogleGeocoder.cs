@@ -386,10 +386,24 @@ namespace Geocoding.Google
 
 				GoogleLocationType locationType = EvaluateLocationType((string)nav.Evaluate("string(geometry/location_type)"));
 
-				bool isPartialMatch;
+			    Bounds bounds = null;
+			    if (nav.SelectSingleNode("geometry/bounds") != null)
+			    {
+                    double neBoundsLatitude = (double)nav.Evaluate("number(geometry/bounds/northeast/lat)");
+                    double neBoundsLongitude = (double)nav.Evaluate("number(geometry/bounds/northeast/lng)");
+                    Location neBoundsCoordinates = new Location(neBoundsLatitude, neBoundsLongitude);
+
+                    double swBoundsLatitude = (double)nav.Evaluate("number(geometry/bounds/southwest/lat)");
+                    double swBoundsLongitude = (double)nav.Evaluate("number(geometry/bounds/southwest/lng)");
+                    Location swBoundsCoordinates = new Location(swBoundsLatitude, swBoundsLongitude);
+
+                    bounds = new Bounds(swBoundsCoordinates, neBoundsCoordinates);
+                }
+
+                bool isPartialMatch;
 				bool.TryParse((string)nav.Evaluate("string(partial_match)"), out isPartialMatch);
 
-				yield return new GoogleAddress(type, formattedAddress, components, coordinates, viewport, isPartialMatch, locationType, placeId);
+				yield return new GoogleAddress(type, formattedAddress, components, coordinates, viewport, bounds, isPartialMatch, locationType, placeId);
 			}
 		}
 
