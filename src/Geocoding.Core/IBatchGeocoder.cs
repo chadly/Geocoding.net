@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Geocoding
 {
 	public interface IBatchGeocoder
 	{
-		IEnumerable<ResultItem> Geocode(IEnumerable<string> addresses);
-		IEnumerable<ResultItem> ReverseGeocode(IEnumerable<Location> locations);
+		Task<IEnumerable<ResultItem>> Geocode(IEnumerable<string> addresses);
+        Task<IEnumerable<ResultItem>> ReverseGeocode(IEnumerable<Location> locations);
 	}
 }

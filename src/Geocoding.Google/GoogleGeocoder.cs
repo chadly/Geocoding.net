@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Xml.XPath;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Geocoding.Google
 {
@@ -111,32 +112,32 @@ namespace Geocoding.Google
 			}
 		}
 
-		public IEnumerable<GoogleAddress> Geocode(string address)
+		public async Task<IEnumerable<GoogleAddress>> Geocode(string address)
 		{
 			if (string.IsNullOrEmpty(address))
 				throw new ArgumentNullException("address");
 
 			var request = BuildWebRequest("address", WebUtility.UrlEncode(address));
-			return ProcessRequest(request);
+			return await ProcessRequest(request).ConfigureAwait(false);
 		}
 
-		public IEnumerable<GoogleAddress> ReverseGeocode(Location location)
+		public async Task<IEnumerable<GoogleAddress>> ReverseGeocode(Location location)
 		{
 			if (location == null)
 				throw new ArgumentNullException("location");
 
-			return ReverseGeocode(location.Latitude, location.Longitude);
+			return await ReverseGeocode(location.Latitude, location.Longitude).ConfigureAwait(false);
 		}
 
-		public IEnumerable<GoogleAddress> ReverseGeocode(double latitude, double longitude)
+		public async Task<IEnumerable<GoogleAddress>> ReverseGeocode(double latitude, double longitude)
 		{
 			var request = BuildWebRequest("latlng", BuildGeolocation(latitude, longitude));
-			return ProcessRequest(request);
+			return await ProcessRequest(request).ConfigureAwait(false);
 		}
 
 		private string BuildAddress(string street, string city, string state, string postalCode, string country)
 		{
-			return string.Format("{0} {1}, {2} {3}, {4}", street, city, state, postalCode, country);
+			return $"{street} {city}, {state} {postalCode}, {country}";
 		}
 
 		private string BuildGeolocation(double latitude, double longitude)
@@ -144,13 +145,13 @@ namespace Geocoding.Google
 			return string.Format(CultureInfo.InvariantCulture, "{0},{1}", latitude, longitude);
 		}
 
-		private IEnumerable<GoogleAddress> ProcessRequest(HttpRequestMessage request)
+        private async Task<IEnumerable<GoogleAddress>> ProcessRequest(HttpRequestMessage request)
 		{
 			try
 			{
 				using (var client = BuildClient())
 				{
-					return ProcessWebResponse(client.SendAsync(request).Result);
+					return await ProcessWebResponse(await client.SendAsync(request).ConfigureAwait(false)).ConfigureAwait(false);
 				}
 			}
 			catch (GoogleGeocodingException)
@@ -175,25 +176,25 @@ namespace Geocoding.Google
 			return new HttpClient(handler);
 		}
 
-		IEnumerable<Address> IGeocoder.Geocode(string address)
+		async Task<IEnumerable<Address>> IGeocoder.Geocode(string address)
 		{
-			return Geocode(address).Cast<Address>();
+		    return await Geocode(address).ConfigureAwait(false);
 		}
 
-		IEnumerable<Address> IGeocoder.Geocode(string street, string city, string state, string postalCode, string country)
-		{
-			return Geocode(BuildAddress(street, city, state, postalCode, country)).Cast<Address>();
-		}
+        async Task<IEnumerable<Address>> IGeocoder.Geocode(string street, string city, string state, string postalCode, string country)
+        {
+            return await Geocode(BuildAddress(street, city, state, postalCode, country)).ConfigureAwait(false);
+        }
 
-		IEnumerable<Address> IGeocoder.ReverseGeocode(Location location)
-		{
-			return ReverseGeocode(location).Cast<Address>();
-		}
+        async Task<IEnumerable<Address>> IGeocoder.ReverseGeocode(Location location)
+        {
+            return await ReverseGeocode(location).ConfigureAwait(false);
+        }
 
-		IEnumerable<Address> IGeocoder.ReverseGeocode(double latitude, double longitude)
-		{
-			return ReverseGeocode(latitude, longitude).Cast<Address>();
-		}
+        async Task<IEnumerable<Address>> IGeocoder.ReverseGeocode(double latitude, double longitude)
+        {
+            return await ReverseGeocode(latitude, longitude).ConfigureAwait(false);
+        }
 
 		private HttpRequestMessage BuildWebRequest(string type, string value)
 		{
@@ -205,9 +206,9 @@ namespace Geocoding.Google
 			return new HttpRequestMessage(HttpMethod.Get, url);
 		}
 
-		private IEnumerable<GoogleAddress> ProcessWebResponse(HttpResponseMessage response)
+		private async Task<IEnumerable<GoogleAddress>> ProcessWebResponse(HttpResponseMessage response)
 		{
-			XPathDocument xmlDoc = LoadXmlResponse(response);
+			XPathDocument xmlDoc = await LoadXmlResponse(response).ConfigureAwait(false);
 			XPathNavigator nav = xmlDoc.CreateNavigator();
 
 			GoogleStatus status = EvaluateStatus((string)nav.Evaluate("string(/GeocodeResponse/status)"));
@@ -221,9 +222,9 @@ namespace Geocoding.Google
 			return new GoogleAddress[0];
 		}
 
-		private XPathDocument LoadXmlResponse(HttpResponseMessage response)
+		private async Task<XPathDocument> LoadXmlResponse(HttpResponseMessage response)
 		{
-			using (Stream stream = response.Content.ReadAsStreamAsync().Result)
+			using (Stream stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
 			{
 				XPathDocument doc = new XPathDocument(stream);
 				return doc;

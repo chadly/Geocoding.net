@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
 using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Geocoding.Microsoft
 {
@@ -109,12 +111,12 @@ namespace Geocoding.Microsoft
 			return builder.ToString();
 		}
 
-		public IEnumerable<BingAddress> Geocode(string address)
+		public async Task<IEnumerable<BingAddress>> Geocode(string address)
 		{
 			try
 			{
 				var url = GetQueryUrl(address);
-				var response = GetResponse(url);
+				var response = await GetResponse(url);
 				return ParseResponse(response);
 			}
 			catch (Exception ex)
@@ -123,12 +125,12 @@ namespace Geocoding.Microsoft
 			}
 		}
 
-		public IEnumerable<BingAddress> Geocode(string street, string city, string state, string postalCode, string country)
+        public async Task<IEnumerable<BingAddress>> Geocode(string street, string city, string state, string postalCode, string country)
 		{
 			try
 			{
 				var url = GetQueryUrl(street, city, state, postalCode, country);
-				var response = GetResponse(url);
+				var response = await GetResponse(url).ConfigureAwait(false);
 				return ParseResponse(response);
 			}
 			catch (Exception ex)
@@ -137,20 +139,20 @@ namespace Geocoding.Microsoft
 			}
 		}
 
-		public IEnumerable<BingAddress> ReverseGeocode(Location location)
+        public async Task<IEnumerable<BingAddress>> ReverseGeocode(Location location)
 		{
 			if (location == null)
 				throw new ArgumentNullException("location");
 
-			return ReverseGeocode(location.Latitude, location.Longitude);
+			return await ReverseGeocode(location.Latitude, location.Longitude).ConfigureAwait(false);
 		}
 
-		public IEnumerable<BingAddress> ReverseGeocode(double latitude, double longitude)
+		public async Task<IEnumerable<BingAddress>> ReverseGeocode(double latitude, double longitude)
 		{
 			try
 			{
 				var url = GetQueryUrl(latitude, longitude);
-				var response = GetResponse(url);
+				var response = await GetResponse(url).ConfigureAwait(false);
 				return ParseResponse(response);
 			}
 			catch (Exception ex)
@@ -159,25 +161,25 @@ namespace Geocoding.Microsoft
 			}
 		}
 
-		IEnumerable<Address> IGeocoder.Geocode(string address)
+		async Task<IEnumerable<Address>> IGeocoder.Geocode(string address)
 		{
-			return Geocode(address).Cast<Address>();
+		    return await Geocode(address).ConfigureAwait(false);
 		}
 
-		IEnumerable<Address> IGeocoder.Geocode(string street, string city, string state, string postalCode, string country)
-		{
-			return Geocode(street, city, state, postalCode, country).Cast<Address>();
-		}
+        async Task<IEnumerable<Address>> IGeocoder.Geocode(string street, string city, string state, string postalCode, string country)
+        {
+            return await Geocode(street, city, state, postalCode, country).ConfigureAwait(false);
+        }
 
-		IEnumerable<Address> IGeocoder.ReverseGeocode(Location location)
-		{
-			return ReverseGeocode(location).Cast<Address>();
-		}
+        async Task<IEnumerable<Address>> IGeocoder.ReverseGeocode(Location location)
+        {
+            return await ReverseGeocode(location).ConfigureAwait(false);
+        }
 
-		IEnumerable<Address> IGeocoder.ReverseGeocode(double latitude, double longitude)
-		{
-			return ReverseGeocode(latitude, longitude).Cast<Address>();
-		}
+        async Task<IEnumerable<Address>> IGeocoder.ReverseGeocode(double latitude, double longitude)
+        {
+            return await ReverseGeocode(latitude, longitude).ConfigureAwait(false);
+        }
 
 		private bool AppendParameter(StringBuilder sb, string parameter, string format, bool first)
 		{
@@ -231,12 +233,16 @@ namespace Geocoding.Microsoft
 			return new HttpClient(handler);
 		}
 
-		private Json.Response GetResponse(string queryURL)
+		private async Task<Json.Response> GetResponse(string queryURL)
 		{
 			using (var client = BuildClient())
 			{
-				var response = client.SendAsync(CreateRequest(queryURL)).Result;
-				return response.Content.ReadAsAsync<Json.Response>().Result;
+				var response = await client.SendAsync(CreateRequest(queryURL)).ConfigureAwait(false);
+			    using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+			    {
+                    var serializer = new JsonSerializer();
+			        return serializer.Deserialize<Json.Response>(new JsonTextReader(new StreamReader(stream)));
+			    }
 			}
 		}
 
