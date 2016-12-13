@@ -16,6 +16,7 @@
     },
     "dependencies": {
         "Geocoding.Core": { "target": "project" },
-        "System.Net.Http": "4.3.0"
+        "System.Net.Http": "4.3.0",
+        "System.Runtime.Serialization.Json": "4.3.0"
     }
 }

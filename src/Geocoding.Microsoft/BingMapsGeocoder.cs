@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -239,10 +240,10 @@ namespace Geocoding.Microsoft
 			{
 				var response = await client.SendAsync(CreateRequest(queryURL)).ConfigureAwait(false);
 			    using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
-			    {
-                    var serializer = new JsonSerializer();
-			        return serializer.Deserialize<Json.Response>(new JsonTextReader(new StreamReader(stream)));
-			    }
+                {
+                    var serializer = new  DataContractJsonSerializer(typeof(Json.Response));
+                    return (Json.Response)serializer.ReadObject(stream);
+                }
 			}
 		}
 
