@@ -5,14 +5,14 @@ Includes a model and interface for communicating with five popular Geocoding pro
   * [Google Maps](https://developers.google.com/maps/) - [docs](https://developers.google.com/maps/documentation/geocoding/)
   * [Yahoo! BOSS Geo Services](http://developer.yahoo.com/boss/geo/) - [docs](http://developer.yahoo.com/geo/placefinder/guide/index.html)
   * [Bing Maps (aka Virtual Earth)](http://www.microsoft.com/maps/) - [docs](http://msdn.microsoft.com/en-us/library/ff701715.aspx)
-  * :warning: MapQuest [(Comercial API)](http://www.mapquestapi.com/) - [docs](http://www.mapquestapi.com/geocoding/)
+  * :warning: MapQuest [(Commercial API)](http://www.mapquestapi.com/) - [docs](http://www.mapquestapi.com/geocoding/)
   * :warning: MapQuest [(OpenStreetMap)](http://open.mapquestapi.com/) - [docs](http://open.mapquestapi.com/geocoding/)
 
 The API returns latitude/longitude coordinates and normalized address information.  This can be used to perform address validation, real time mapping of user-entered addresses, distance calculations, and much more.
 
 See latest [release notes](https://github.com/chadly/Geocoding.net/releases/latest).
 
-:warning: There are some open issues ([#29](https://github.com/chadly/Geocoding.net/issues/29), [#45](https://github.com/chadly/Geocoding.net/issues/45), [#48](https://github.com/chadly/Geocoding.net/issues/48)) regarding MapQuest which have some workarounds. If you would like to help fix the issues, PRs are welcome.
+:warning: There is a potential issue ([#29](https://github.com/chadly/Geocoding.net/issues/29)) regarding MapQuest that has a workaround. If you would like to help fix the issue, PRs are welcome.
 
 ##Installation
 
@@ -31,8 +31,8 @@ Or download the [latest release](https://github.com/chadly/Geocoding.net/release
 ```csharp
 IGeocoder geocoder = new GoogleGeocoder() { ApiKey = "this-is-my-optional-google-api-key" };
 IEnumerable<Address> addresses = geocoder.Geocode("1600 pennsylvania ave washington dc");
-Console.WriteLine("Formatted: " + addresses.First().FormattedAddress); //Formatted: 1600 Pennslyvania Avenue Northwest, Presiden'ts Park, Washington, DC 20500, USA
-Console.WriteLine("Coordinates: " + addresses.First().Coordinates.Latitude + ", " + addresses.First().Coordinates.Longitude); //Coordinates: 38.8978378, -77.0365123
+Console.WriteLine("Formatted: " + addresses.First().FormattedAddress); //Formatted: 1600 Pennsylvania Ave SE, Washington, DC 20003, USA
+Console.WriteLine("Coordinates: " + addresses.First().Coordinates.Latitude + ", " + addresses.First().Coordinates.Longitude); //Coordinates: 38.8791981, -76.9818437
 ```
 
 It can also be used to return address information from latitude/longitude coordinates (aka reverse geocoding):

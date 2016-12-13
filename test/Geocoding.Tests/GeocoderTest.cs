@@ -64,8 +64,21 @@ namespace Geocoding.Tests
 		}
 
 		[Theory]
-		[InlineData("Wilshire & Bundy, Los Angeles")]
+		[InlineData("40 1/2 Road")]
+		[InlineData("B's Farm RD")]
+		[InlineData("Wilshire & Bundy Plaza, Los Angeles")]
 		public virtual void CanGeocodeWithSpecialCharacters(string address)
+		{
+			Address[] addresses = geocoder.Geocode(address).ToArray();
+
+			//asserting no exceptions are thrown and that we get something
+			Assert.NotEmpty(addresses);
+		}
+
+		[Theory]
+		[InlineData("Wilshire & Centinela, Los Angeles")]
+		[InlineData("Fried St & 2nd St, Gretna, LA 70053")]
+		public virtual void CanHandleStreetIntersectionsByAmpersand(string address)
 		{
 			Address[] addresses = geocoder.Geocode(address).ToArray();
 

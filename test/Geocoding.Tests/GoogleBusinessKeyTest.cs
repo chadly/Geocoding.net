@@ -1,6 +1,7 @@
 ﻿using System;
 using Geocoding.Google;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Geocoding.Tests
 {
@@ -72,6 +73,56 @@ namespace Geocoding.Tests
 
 			Assert.NotNull(signedUrl);
 			Assert.Equal("http://maps.googleapis.com/maps/api/geocode/json?address=New+York&sensor=false&client=clientID&signature=KrU1TzVQM7Ur0i8i7K3huiw3MsA=", signedUrl);
+		}
+
+		[Theory]
+		[InlineData("   Channel_1   ")]
+		[InlineData(" channel-1")]
+		[InlineData("CUSTOMER ")]
+		public void Should_trim_and_lower_channel_name(string channel)
+		{
+			var key = new BusinessKey("client-id", "signature", channel);
+			Assert.Equal(channel.Trim().ToLower(), key.Channel);
+		}
+
+		[Theory]
+		[InlineData(null)]
+		[InlineData("channel_1-2.")]
+		public void Doesnt_throw_exception_on_alphanumeric_perioric_underscore_hyphen_character_in_channel(string channel)
+		{
+			Assert.DoesNotThrow(delegate
+			{
+				new BusinessKey("client-id", "signature", channel);
+			});
+		}
+
+		[Theory]
+		[InlineData("channel 1")]
+		[InlineData("channel&1")]
+		public void Should_throw_exception_on_special_characters_in_channel(string channel)
+		{
+			Assert.Throws<ArgumentException>(delegate
+			{
+				new BusinessKey("client-id", "signature", channel);
+			});
+		}
+
+		[Fact]
+		public void ServiceUrl_should_contains_channel_name()
+		{
+			var channel = "channel1";
+			var key = new BusinessKey("client-id", "signature", channel);
+			var geocoder = new GoogleGeocoder(key);
+
+			Assert.Contains("channel="+channel, geocoder.ServiceUrl);
+		}
+
+		[Fact]
+		public void ServiceUrl_doesnt_contains_channel_on_apikey()
+		{
+			var geocoder = new GoogleGeocoder("apikey");
+
+			Assert.DoesNotContain("channel=", geocoder.ServiceUrl);
 		}
 	}
 }

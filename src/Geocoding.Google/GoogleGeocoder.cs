@@ -64,6 +64,7 @@ namespace Geocoding.Google
 		public string Language { get; set; }
 		public string RegionBias { get; set; }
 		public Bounds BoundsBias { get; set; }
+		public IList<GoogleComponentFilter> ComponentFilters { get; set; }
 
 		public string ServiceUrl
 		{
@@ -94,6 +95,11 @@ namespace Geocoding.Google
 				{
 					builder.Append("&client=");
 					builder.Append(WebUtility.UrlEncode(BusinessKey.ClientId));
+					if (BusinessKey.HasChannel)
+					{
+						builder.Append("&channel=");
+						builder.Append(HttpUtility.UrlEncode(BusinessKey.Channel));
+					}
 				}
 
 				if (BoundsBias != null)
@@ -106,6 +112,12 @@ namespace Geocoding.Google
 					builder.Append(BoundsBias.NorthEast.Latitude.ToString(CultureInfo.InvariantCulture));
 					builder.Append(",");
 					builder.Append(BoundsBias.NorthEast.Longitude.ToString(CultureInfo.InvariantCulture));
+				}
+
+				if (ComponentFilters != null)
+				{
+					builder.Append("&components=");
+					builder.Append(string.Join("|", ComponentFilters.Select(x => x.ComponentFilter)));
 				}
 
 				return builder.ToString();
@@ -238,6 +250,7 @@ namespace Geocoding.Google
 				XPathNavigator nav = nodes.Current;
 
 				GoogleAddressType type = EvaluateType((string)nav.Evaluate("string(type)"));
+				string placeId = (string)nav.Evaluate("string(place_id)");
 				string formattedAddress = (string)nav.Evaluate("string(formatted_address)");
 
 				var components = ParseComponents(nav.Select("address_component")).ToArray();
@@ -261,7 +274,7 @@ namespace Geocoding.Google
 				bool isPartialMatch;
 				bool.TryParse((string)nav.Evaluate("string(partial_match)"), out isPartialMatch);
 
-				yield return new GoogleAddress(type, formattedAddress, components, coordinates, viewport, isPartialMatch, locationType);
+				yield return new GoogleAddress(type, formattedAddress, components, coordinates, viewport, isPartialMatch, locationType, placeId);
 			}
 		}
 
