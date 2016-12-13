@@ -98,7 +98,7 @@ namespace Geocoding.Google
 					if (BusinessKey.HasChannel)
 					{
 						builder.Append("&channel=");
-						builder.Append(HttpUtility.UrlEncode(BusinessKey.Channel));
+						builder.Append(WebUtility.UrlEncode(BusinessKey.Channel));
 					}
 				}
 
@@ -124,7 +124,7 @@ namespace Geocoding.Google
 			}
 		}
 
-		public async Task<IEnumerable<GoogleAddress>> Geocode(string address)
+		public async Task<IEnumerable<GoogleAddress>> GeocodeAsync(string address)
 		{
 			if (string.IsNullOrEmpty(address))
 				throw new ArgumentNullException("address");
@@ -133,15 +133,15 @@ namespace Geocoding.Google
 			return await ProcessRequest(request).ConfigureAwait(false);
 		}
 
-		public async Task<IEnumerable<GoogleAddress>> ReverseGeocode(Location location)
+		public async Task<IEnumerable<GoogleAddress>> ReverseGeocodeAsync(Location location)
 		{
 			if (location == null)
 				throw new ArgumentNullException("location");
 
-			return await ReverseGeocode(location.Latitude, location.Longitude).ConfigureAwait(false);
+			return await ReverseGeocodeAsync(location.Latitude, location.Longitude).ConfigureAwait(false);
 		}
 
-		public async Task<IEnumerable<GoogleAddress>> ReverseGeocode(double latitude, double longitude)
+		public async Task<IEnumerable<GoogleAddress>> ReverseGeocodeAsync(double latitude, double longitude)
 		{
 			var request = BuildWebRequest("latlng", BuildGeolocation(latitude, longitude));
 			return await ProcessRequest(request).ConfigureAwait(false);
@@ -188,24 +188,24 @@ namespace Geocoding.Google
 			return new HttpClient(handler);
 		}
 
-		async Task<IEnumerable<Address>> IGeocoder.Geocode(string address)
+		async Task<IEnumerable<Address>> IGeocoder.GeocodeAsync(string address)
 		{
-		    return await Geocode(address).ConfigureAwait(false);
+		    return await GeocodeAsync(address).ConfigureAwait(false);
 		}
 
-        async Task<IEnumerable<Address>> IGeocoder.Geocode(string street, string city, string state, string postalCode, string country)
+        async Task<IEnumerable<Address>> IGeocoder.GeocodeAsync(string street, string city, string state, string postalCode, string country)
         {
-            return await Geocode(BuildAddress(street, city, state, postalCode, country)).ConfigureAwait(false);
+            return await GeocodeAsync(BuildAddress(street, city, state, postalCode, country)).ConfigureAwait(false);
         }
 
-        async Task<IEnumerable<Address>> IGeocoder.ReverseGeocode(Location location)
+        async Task<IEnumerable<Address>> IGeocoder.ReverseGeocodeAsync(Location location)
         {
-            return await ReverseGeocode(location).ConfigureAwait(false);
+            return await ReverseGeocodeAsync(location).ConfigureAwait(false);
         }
 
-        async Task<IEnumerable<Address>> IGeocoder.ReverseGeocode(double latitude, double longitude)
+        async Task<IEnumerable<Address>> IGeocoder.ReverseGeocodeAsync(double latitude, double longitude)
         {
-            return await ReverseGeocode(latitude, longitude).ConfigureAwait(false);
+            return await ReverseGeocodeAsync(latitude, longitude).ConfigureAwait(false);
         }
 
 		private HttpRequestMessage BuildWebRequest(string type, string value)

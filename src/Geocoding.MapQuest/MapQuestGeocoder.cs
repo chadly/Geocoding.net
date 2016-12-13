@@ -64,17 +64,17 @@ namespace Geocoding.MapQuest
 			}
 		}
 
-		public async Task<IEnumerable<Address>> Geocode(string address)
+		public async Task<IEnumerable<Address>> GeocodeAsync(string address)
 		{
 			if (string.IsNullOrWhiteSpace(address))
 				throw new ArgumentException("address can not be null or empty!");
 
 			var f = new GeocodeRequest(key, address) { UseOSM = this.UseOSM };
-			MapQuestResponse res = await Execute(f);
+			MapQuestResponse res = await Execute(f).ConfigureAwait(false);
 			return HandleSingleResponse(res);
 		}
 
-		public async Task<IEnumerable<Address>> Geocode(string street, string city, string state, string postalCode, string country)
+		public async Task<IEnumerable<Address>> GeocodeAsync(string street, string city, string state, string postalCode, string country)
 		{
 			var sb = new StringBuilder ();
 			if (!string.IsNullOrWhiteSpace (street))
@@ -98,28 +98,28 @@ namespace Geocoding.MapQuest
 			if (s.Last () == ',')
 				s = s.Remove (s.Length - 1);
 
-			return await Geocode (s);
+			return await GeocodeAsync(s).ConfigureAwait(false);
 		}
 
-		public async Task<IEnumerable<Address>> ReverseGeocode(Location location)
+		public async Task<IEnumerable<Address>> ReverseGeocodeAsync(Location location)
 		{
 			if (location == null)
 				throw new ArgumentNullException ("location");
 
 			var f = new ReverseGeocodeRequest(key, location) { UseOSM = this.UseOSM };
-			MapQuestResponse res = await Execute(f);
+			MapQuestResponse res = await Execute(f).ConfigureAwait(false);
 			return HandleSingleResponse(res);
 		}
 
-		public async Task<IEnumerable<Address>>  ReverseGeocode(double latitude, double longitude)
+		public async Task<IEnumerable<Address>>  ReverseGeocodeAsync(double latitude, double longitude)
 		{
-			return await ReverseGeocode(new Location(latitude, longitude));
+			return await ReverseGeocodeAsync(new Location(latitude, longitude)).ConfigureAwait(false);
 		}
 
 		public async Task<MapQuestResponse> Execute(BaseRequest f)
 		{
-			HttpWebRequest request = await Send(f);
-			MapQuestResponse r = await Parse(request);
+			HttpWebRequest request = await Send(f).ConfigureAwait(false);
+			MapQuestResponse r = await Parse(request).ConfigureAwait(false);
 			if (r != null && !r.Results.IsNullOrEmpty())
 			{
 				foreach (MapQuestResult o in r.Results)
@@ -178,7 +178,7 @@ namespace Geocoding.MapQuest
 			{
 				byte[] buffer = Encoding.UTF8.GetBytes(f.RequestBody);
 				//request.Headers.ContentLength = buffer.Length;
-				using (Stream rs = await request.GetRequestStreamAsync())
+				using (Stream rs = await request.GetRequestStreamAsync().ConfigureAwait(false))
 				{
 					rs.Write(buffer, 0, buffer.Length);
 					rs.Flush();
@@ -196,7 +196,7 @@ namespace Geocoding.MapQuest
 			try
 			{
 				string json;
-				using (HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse)
+				using (HttpWebResponse response = await request.GetResponseAsync().ConfigureAwait(false) as HttpWebResponse)
 				{
 					if ((int)response.StatusCode >= 300) //error
 						throw new Exception((int)response.StatusCode + " " + response.StatusDescription);
@@ -230,7 +230,7 @@ namespace Geocoding.MapQuest
 			}
 		}
 
-		public async Task<IEnumerable<ResultItem>> Geocode(IEnumerable<string> addresses)
+		public async Task<IEnumerable<ResultItem>> GeocodeAsync(IEnumerable<string> addresses)
 		{
 			if (addresses == null)
 				throw new ArgumentNullException("addresses");
@@ -243,7 +243,7 @@ namespace Geocoding.MapQuest
 				throw new ArgumentException("Atleast one none blank item is required in addresses");
 
 			var f = new BatchGeocodeRequest(key, adr) { UseOSM = this.UseOSM };
-			MapQuestResponse res = await Execute(f);
+			MapQuestResponse res = await Execute(f).ConfigureAwait(false);
 			return HandleBatchResponse(res);
 		}
 
@@ -261,9 +261,9 @@ namespace Geocoding.MapQuest
 				return new ResultItem[0];
 		}
 
-		public Task<IEnumerable<ResultItem>> ReverseGeocode(IEnumerable<Location> locations)
+		public Task<IEnumerable<ResultItem>> ReverseGeocodeAsync(IEnumerable<Location> locations)
 		{
-			throw new NotSupportedException("ReverseGeocode(...) is not available for MapQuestGeocoder.");
+			throw new NotSupportedException("ReverseGeocodeAsync(...) is not available for MapQuestGeocoder.");
 		}
 	}
 }

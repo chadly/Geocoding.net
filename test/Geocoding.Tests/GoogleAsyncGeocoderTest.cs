@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Geocoding.Google;
 using Xunit;
 
@@ -16,7 +17,7 @@ namespace Geocoding.Tests
 			this.settings = settings;
 		}
 
-		protected override IAsyncGeocoder CreateAsyncGeocoder()
+		protected override IGeocoder CreateAsyncGeocoder()
 		{
 			string apiKey = settings.GoogleApiKey;
 
@@ -38,13 +39,11 @@ namespace Geocoding.Tests
 		[InlineData("New York, New York", GoogleAddressType.Locality)]
 		[InlineData("90210, US", GoogleAddressType.PostalCode)]
 		[InlineData("1600 pennsylvania ave washington dc", GoogleAddressType.StreetAddress)]
-		public void CanParseAddressTypes(string address, GoogleAddressType type)
+		public async Task CanParseAddressTypes(string address, GoogleAddressType type)
 		{
-			geoCoder.GeocodeAsync(address).ContinueWith(task =>
-			{
-				GoogleAddress[] addresses = task.Result.ToArray();
-				Assert.Equal(type, addresses[0].Type);
-			});
+		    var result = await geoCoder.GeocodeAsync(address);
+			GoogleAddress[] addresses = result.ToArray();
+			Assert.Equal(type, addresses[0].Type);
 		}
 	}
 }

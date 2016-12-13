@@ -44,7 +44,7 @@ namespace Geocoding.Yahoo
 			this.consumerSecret = consumerSecret;
 		}
 
-		public async Task<IEnumerable<YahooAddress>> Geocode(string address)
+		public async Task<IEnumerable<YahooAddress>> GeocodeAsync(string address)
 		{
 			if (string.IsNullOrEmpty(address))
 				throw new ArgumentNullException("address");
@@ -52,38 +52,38 @@ namespace Geocoding.Yahoo
 			string url = string.Format(ServiceUrl, WebUtility.UrlEncode(address));
 
 			HttpWebRequest request = BuildWebRequest(url);
-			return await ProcessRequest(request);
+			return await ProcessRequest(request).ConfigureAwait(false);
 		}
 
-		public async Task<IEnumerable<YahooAddress>> Geocode(string street, string city, string state, string postalCode, string country)
+		public async Task<IEnumerable<YahooAddress>> GeocodeAsync(string street, string city, string state, string postalCode, string country)
 		{
 			string url = string.Format(ServiceUrlNormal, WebUtility.UrlEncode(street), WebUtility.UrlEncode(city), WebUtility.UrlEncode(state), WebUtility.UrlEncode(postalCode), WebUtility.UrlEncode(country));
 
 			HttpWebRequest request = BuildWebRequest(url);
-			return await ProcessRequest(request);
+			return await ProcessRequest(request).ConfigureAwait(false);
 		}
 
-		public async Task<IEnumerable<YahooAddress>> ReverseGeocode(Location location)
+		public async Task<IEnumerable<YahooAddress>> ReverseGeocodeAsync(Location location)
 		{
 			if (location == null)
 				throw new ArgumentNullException("location");
 
-			return await ReverseGeocode(location.Latitude, location.Longitude);
+			return await ReverseGeocodeAsync(location.Latitude, location.Longitude).ConfigureAwait(false);
 		}
 
-		public async Task<IEnumerable<YahooAddress>> ReverseGeocode(double latitude, double longitude)
+		public async Task<IEnumerable<YahooAddress>> ReverseGeocodeAsync(double latitude, double longitude)
 		{
 			string url = string.Format(ServiceUrlReverse, string.Format(CultureInfo.InvariantCulture, "{0} {1}", latitude, longitude));
 
 			HttpWebRequest request = BuildWebRequest(url);
-			return await ProcessRequest(request);
+			return await ProcessRequest(request).ConfigureAwait(false);
 		}
 
 		private async Task<IEnumerable<YahooAddress>> ProcessRequest(HttpWebRequest request)
 		{
 			try
 			{
-				using (WebResponse response = await request.GetResponseAsync())
+				using (WebResponse response = await request.GetResponseAsync().ConfigureAwait(false))
 				{
 					return ProcessWebResponse(response);
 				}
@@ -100,24 +100,24 @@ namespace Geocoding.Yahoo
 			}
 		}
 
-        async Task<IEnumerable<Address>> IGeocoder.Geocode(string address)
+        async Task<IEnumerable<Address>> IGeocoder.GeocodeAsync(string address)
         {
-            return await Geocode(address);
+            return await GeocodeAsync(address).ConfigureAwait(false);
         }
 
-        async Task<IEnumerable<Address>> IGeocoder.Geocode(string street, string city, string state, string postalCode, string country)
+        async Task<IEnumerable<Address>> IGeocoder.GeocodeAsync(string street, string city, string state, string postalCode, string country)
         {
-            return await Geocode(street, city, state, postalCode, country);
+            return await GeocodeAsync(street, city, state, postalCode, country).ConfigureAwait(false);
         }
 
-        async Task<IEnumerable<Address>> IGeocoder.ReverseGeocode(Location location)
+        async Task<IEnumerable<Address>> IGeocoder.ReverseGeocodeAsync(Location location)
         {
-            return await ReverseGeocode(location);
+            return await ReverseGeocodeAsync(location).ConfigureAwait(false);
         }
 
-        async Task<IEnumerable<Address>> IGeocoder.ReverseGeocode(double latitude, double longitude)
+        async Task<IEnumerable<Address>> IGeocoder.ReverseGeocodeAsync(double latitude, double longitude)
         {
-            return await ReverseGeocode(latitude, longitude);
+            return await ReverseGeocodeAsync(latitude, longitude).ConfigureAwait(false);
         }
 
 		private HttpWebRequest BuildWebRequest(string url)

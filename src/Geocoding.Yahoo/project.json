@@ -17,6 +17,7 @@
     "dependencies": {
         "Geocoding.Core": { "target": "project" },
         "System.Net.Requests": "4.3.0",
+        "System.Security.Cryptography.Algorithms": "4.3.0",
         "System.Xml.XPath": "4.3.0"
     }
 }

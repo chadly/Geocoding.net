@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Extensions;
 
@@ -13,7 +14,7 @@ namespace Geocoding.Tests
 
 		public BatchGeocoderTest() 
 		{
-			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-us");
+			//Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-us");
 
 			batchGeocoder = CreateBatchGeocoder();
 		}
@@ -22,11 +23,11 @@ namespace Geocoding.Tests
 
 		[Theory]
 		[MemberData("BatchGeoCodeData")]
-		public virtual void CanGeoCodeAddress(string[] addresses)
+		public virtual async  Task CanGeoCodeAddress(string[] addresses)
 		{
 			Assert.NotEmpty(addresses);
 
-			IEnumerable<ResultItem> results = batchGeocoder.Geocode(addresses);
+			IEnumerable<ResultItem> results = await batchGeocoder.GeocodeAsync(addresses);
 			Assert.NotEmpty(results);
 			Assert.Equal(addresses.Length, results.Count());
 

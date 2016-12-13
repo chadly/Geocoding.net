@@ -14,8 +14,10 @@ namespace Geocoding.Tests
 
 		protected override IGeocoder CreateGeocoder()
 		{
-			return new MapQuestGeocoder(settings.MapQuestKey);
-			return new MapQuestGeocoder(k) { UseOSM = false };
+		    return new MapQuestGeocoder(settings.MapQuestKey)
+		    {
+		        UseOSM = false
+		    };
 		}
 	}
 }

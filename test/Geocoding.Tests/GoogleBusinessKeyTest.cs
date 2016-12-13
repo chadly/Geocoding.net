@@ -90,10 +90,7 @@ namespace Geocoding.Tests
 		[InlineData("channel_1-2.")]
 		public void Doesnt_throw_exception_on_alphanumeric_perioric_underscore_hyphen_character_in_channel(string channel)
 		{
-			Assert.DoesNotThrow(delegate
-			{
-				new BusinessKey("client-id", "signature", channel);
-			});
+			new BusinessKey("client-id", "signature", channel);
 		}
 
 		[Theory]

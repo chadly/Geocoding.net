@@ -2,6 +2,9 @@
     "version": "4.0.0-beta1",
     "title": "Geocoding.net Tests",
     "testRunner": "xunit",
+    "buildOptions": {
+        "copyToOutput"  : "settings.json"
+    },
     "dependencies": {
         "Geocoding.Google": { "target": "project" },
         "Geocoding.MapQuest": { "target": "project" },

@@ -17,27 +17,27 @@ namespace Geocoding.Tests
 
 		public string YahooConsumerKey
 		{
-			get { return config.Get<string>("yahooConsumerKey"); }
+			get { return config.GetValue<string>("yahooConsumerKey"); }
 		}
 
 		public string YahooConsumerSecret
 		{
-			get { return config.Get<string>("yahooConsumerSecret"); }
+			get { return config.GetValue<string>("yahooConsumerSecret"); }
 		}
 
 		public string BingMapsKey
 		{
-			get { return config.Get<string>("bingMapsKey"); }
+			get { return config.GetValue<string>("bingMapsKey"); }
 		}
 
 		public string GoogleApiKey
 		{
-			get { return config.Get<string>("googleApiKey"); }
+			get { return config.GetValue<string>("googleApiKey"); }
 		}
 
 		public string MapQuestKey
 		{
-			get { return config.Get<string>("mapQuestKey"); }
+			get { return config.GetValue<string>("mapQuestKey"); }
 		}
 	}
 

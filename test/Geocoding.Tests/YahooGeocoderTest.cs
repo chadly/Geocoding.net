@@ -1,4 +1,5 @@
-﻿using Geocoding.Yahoo;
+﻿using System.Threading.Tasks;
+using Geocoding.Yahoo;
 using Xunit;
 
 namespace Geocoding.Tests
@@ -25,30 +26,57 @@ namespace Geocoding.Tests
 		//see issue #27
 
 		[Fact(Skip = "oauth not working for yahoo - see issue #27")]
-		public override void CanGeocodeAddress(string address) { }
+		public override Task CanGeocodeAddress(string address)
+		{
+		    return Task.CompletedTask;
+		}
 
 		[Fact(Skip = "oauth not working for yahoo - see issue #27")]
-		public override void CanGeocodeNormalizedAddress() { }
+		public override Task CanGeocodeNormalizedAddress()
+        {
+            return Task.CompletedTask;
+        }
 
 		[Fact(Skip = "oauth not working for yahoo - see issue #27")]
-		public override void CanGeocodeAddressUnderDifferentCultures(string cultureName) { }
+		public override Task CanGeocodeAddressUnderDifferentCultures(string cultureName)
+        {
+            return Task.CompletedTask;
+        }
 
 		[Fact(Skip = "oauth not working for yahoo - see issue #27")]
-		public override void CanReverseGeocodeAddressUnderDifferentCultures(string cultureName) { }
+		public override Task CanReverseGeocodeAddressUnderDifferentCultures(string cultureName)
+        {
+            return Task.CompletedTask;
+        }
 
 		[Fact(Skip = "oauth not working for yahoo - see issue #27")]
-		public override void ShouldNotBlowUpOnBadAddress() { }
+		public override Task ShouldNotBlowUpOnBadAddress()
+        {
+            return Task.CompletedTask;
+        }
 
 		[Fact(Skip = "oauth not working for yahoo - see issue #27")]
-		public override void CanGeocodeWithSpecialCharacters(string address) { }
+		public override Task CanGeocodeWithSpecialCharacters(string address)
+        {
+            return Task.CompletedTask;
+        }
 
 		[Fact(Skip = "oauth not working for yahoo - see issue #27")]
-		public override void CanReverseGeocode() { }
+		public override Task CanReverseGeocodeAsync()
+        {
+            return Task.CompletedTask;
+        }
 
 		[Fact(Skip = "oauth not working for yahoo - see issue #27")]
-		public override void CanGeocodeInvalidZipCodes(string address) { }
+		public override Task CanGeocodeInvalidZipCodes(string address)
+        {
+            return Task.CompletedTask;
+        }
 
 		[Fact(Skip = "oauth not working for yahoo - see issue #27")]
-		public override void CanHandleStreetIntersectionsByAmpersand(string address) { }
+		public override Task CanHandleStreetIntersectionsByAmpersand(string address)
+        {
+            return Task.CompletedTask;
+        }
 	}
 }

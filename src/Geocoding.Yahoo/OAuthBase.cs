@@ -2,7 +2,6 @@ using System;
 using System.Security.Cryptography;
 using System.Collections.Generic;
 using System.Text;
-using System.Web;
 using System.Net;
 
 //http://oauth.googlecode.com/svn/code/csharp/OAuthBase.cs

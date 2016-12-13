@@ -1,23 +1,22 @@
-﻿using System.Globalization;
-using System.Linq;
-using System.Threading;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
-using Xunit.Extensions;
 
 namespace Geocoding.Tests
 {
 	public abstract class AsyncGeocoderTest
 	{
-		readonly IAsyncGeocoder asyncGeocoder;
+		readonly IGeocoder asyncGeocoder;
+        protected readonly SettingsFixture settings = new SettingsFixture();
 
-		public AsyncGeocoderTest()
+        public AsyncGeocoderTest()
 		{
-			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-us");
+			//Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-us");
 
 			asyncGeocoder = CreateAsyncGeocoder();
 		}
 
-		protected abstract IAsyncGeocoder CreateAsyncGeocoder();
+		protected abstract IGeocoder CreateAsyncGeocoder();
 
 		[Fact]
 		public void CanGeocodeAddress()
@@ -42,29 +41,25 @@ namespace Geocoding.Tests
 		[Theory]
 		[InlineData("en-US")]
 		[InlineData("cs-CZ")]
-		public void CanGeocodeAddressUnderDifferentCultures(string cultureName)
+		public async Task CanGeocodeAddressUnderDifferentCultures(string cultureName)
 		{
-			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(cultureName);
+			//Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(cultureName);
 
-			asyncGeocoder.GeocodeAsync("24 sussex drive ottawa, ontario").ContinueWith(task =>
-			{
-				Address[] addresses = task.Result.ToArray();
-				addresses[0].AssertCanadianPrimeMinister();
-			});
+		    var result = await asyncGeocoder.GeocodeAsync("24 sussex drive ottawa, ontario");
+			Address[] addresses = result.ToArray();
+			addresses[0].AssertCanadianPrimeMinister();
 		}
 
 		[Theory]
 		[InlineData("en-US")]
 		[InlineData("cs-CZ")]
-		public void CanReverseGeocodeAddressUnderDifferentCultures(string cultureName)
+		public async Task CanReverseGeocodeAddressUnderDifferentCultures(string cultureName)
 		{
-			Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(cultureName);
+			//Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(cultureName);
 
-			asyncGeocoder.ReverseGeocodeAsync(38.8976777, -77.036517).ContinueWith(task =>
-			{
-				Address[] addresses = task.Result.ToArray();
-				addresses[0].AssertWhiteHouseArea();
-			});
+		    var result = await asyncGeocoder.ReverseGeocodeAsync(38.8976777, -77.036517);
+			Address[] addresses = result.ToArray();
+			addresses[0].AssertWhiteHouseArea();
 		}
 
 		[Fact]
@@ -90,7 +85,7 @@ namespace Geocoding.Tests
 		}
 
 		[Fact]
-		public void CanReverseGeocode()
+		public void CanReverseGeocodeAsync()
 		{
 			asyncGeocoder.ReverseGeocodeAsync(38.8976777, -77.036517).ContinueWith(task =>
 			{

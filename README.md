@@ -30,7 +30,7 @@ Or download the [latest release](https://github.com/chadly/Geocoding.net/release
 
 ```csharp
 IGeocoder geocoder = new GoogleGeocoder() { ApiKey = "this-is-my-optional-google-api-key" };
-IEnumerable<Address> addresses = geocoder.Geocode("1600 pennsylvania ave washington dc");
+IEnumerable<Address> addresses = geocoder.GeocodeAsync("1600 pennsylvania ave washington dc");
 Console.WriteLine("Formatted: " + addresses.First().FormattedAddress); //Formatted: 1600 Pennsylvania Ave SE, Washington, DC 20003, USA
 Console.WriteLine("Coordinates: " + addresses.First().Coordinates.Latitude + ", " + addresses.First().Coordinates.Longitude); //Coordinates: 38.8791981, -76.9818437
 ```
@@ -39,14 +39,14 @@ It can also be used to return address information from latitude/longitude coordi
 
 ```csharp
 IGeocoder geocoder = new YahooGeocoder("consumer-key", "consumer-secret");
-IEnumerable<Address> addresses = geocoder.ReverseGeocode(38.8976777, -77.036517);
+IEnumerable<Address> addresses = geocoder.ReverseGeocodeAsync(38.8976777, -77.036517);
 ```
 
 ###Using Provider-Specific Data
 
 ```csharp
 GoogleGeocoder geocoder = new GoogleGeocoder();
-IEnumerable<GoogleAddress> addresses = geocoder.Geocode("1600 pennsylvania ave washington dc");
+IEnumerable<GoogleAddress> addresses = geocoder.GeocodeAsync("1600 pennsylvania ave washington dc");
 
 var country = addresses.Where(a => !a.IsPartialMatch).Select(a => a[GoogleAddressType.Country]).First();
 Console.WriteLine("Country: " + country.LongName + ", " + country.ShortName); //Country: United States, US
