@@ -10,11 +10,13 @@ namespace Geocoding.Tests
 	public abstract class GeocoderTest
 	{
 		readonly IGeocoder geocoder;
+		protected readonly SettingsFixture settings;
 
-		public GeocoderTest()
+		public GeocoderTest(SettingsFixture settings)
 		{
 			//Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-us");
 
+			this.settings = settings;
 			geocoder = CreateGeocoder();
 		}
 

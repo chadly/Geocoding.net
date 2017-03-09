@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Geocoding.Yahoo;
+﻿using Geocoding.Yahoo;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Geocoding.Tests
@@ -7,12 +7,8 @@ namespace Geocoding.Tests
 	[Collection("Settings")]
 	public class YahooGeocoderTest : GeocoderTest
 	{
-		readonly SettingsFixture settings;
-
 		public YahooGeocoderTest(SettingsFixture settings)
-		{
-			this.settings = settings;
-		}
+			: base(settings) { }
 
 		protected override IGeocoder CreateGeocoder()
 		{

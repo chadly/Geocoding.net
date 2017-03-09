@@ -1,22 +1,19 @@
-using System;
-using System.Linq;
 using Geocoding.Google;
-using Xunit;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace Geocoding.Tests
 {
 	[Collection("Settings")]
 	public class GoogleGeocoderTest : GeocoderTest
 	{
-		readonly SettingsFixture settings;
 		GoogleGeocoder geocoder;
 
 		public GoogleGeocoderTest(SettingsFixture settings)
-		{
-			this.settings = settings;
-		}
+			: base(settings) { }
 
 		protected override IGeocoder CreateGeocoder()
 		{
