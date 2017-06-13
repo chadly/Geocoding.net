@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace Geocoding.MapQuest
@@ -9,15 +6,10 @@ namespace Geocoding.MapQuest
 	public class ReverseGeocodeRequest : BaseRequest
 	{
 		public ReverseGeocodeRequest(string key, double latitude, double longitude)
-			: this(key, new Location(latitude, longitude))
-		{
+			: this(key, new Location(latitude, longitude)) { }
 
-		}
-
-		public ReverseGeocodeRequest(string key, Location loc) 
-			: this(key, new LocationRequest(loc))
-		{
-		}
+		public ReverseGeocodeRequest(string key, Location loc)
+			: this(key, new LocationRequest(loc)) { }
 
 		public ReverseGeocodeRequest(string key, LocationRequest loc)
 			: base(key)
@@ -31,7 +23,7 @@ namespace Geocoding.MapQuest
 		/// Latitude and longitude for the request
 		/// </summary>
 		[JsonProperty("location")]
-		public virtual LocationRequest Location 
+		public virtual LocationRequest Location
 		{
 			get { return loc; }
 			set

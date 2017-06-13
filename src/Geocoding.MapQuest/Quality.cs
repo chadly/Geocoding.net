@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Geocoding.MapQuest
+﻿namespace Geocoding.MapQuest
 {
 	public enum Quality : int
 	{
@@ -51,11 +46,11 @@ namespace Geocoding.MapQuest
 		/// A1	Admin area, largest. For USA, a country.
 		/// </summary>
 		COUNTRY = 9,
-        /// <summary>
-        /// Admin area. For USA, a neighborhood.
-        /// </summary>
-        NEIGHBORHOOD = 10,
+		/// <summary>
+		/// Admin area. For USA, a neighborhood.
+		/// </summary>
+		NEIGHBORHOOD = 10,
 
-        UNKNOWN = 11
+		UNKNOWN = 11
 	}
 }

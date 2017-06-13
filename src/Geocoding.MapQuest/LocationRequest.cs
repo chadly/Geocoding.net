@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace Geocoding.MapQuest
@@ -41,7 +38,7 @@ namespace Geocoding.MapQuest
 		/// <summary>
 		/// Latitude and longitude for reverse geocoding
 		/// </summary>
-		[JsonProperty("latLng", NullValueHandling=NullValueHandling.Ignore)]
+		[JsonProperty("latLng", NullValueHandling = NullValueHandling.Ignore)]
 		public virtual Location Location
 		{
 			get { return location; }

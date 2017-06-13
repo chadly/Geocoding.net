@@ -7,8 +7,8 @@ namespace Geocoding.MapQuest
 {
 	public class BatchGeocodeRequest : BaseRequest
 	{
-		public BatchGeocodeRequest(string key, ICollection<string> addresses) 
-			: base(key) 
+		public BatchGeocodeRequest(string key, ICollection<string> addresses)
+			: base(key)
 		{
 			if (addresses.IsNullOrEmpty())
 				throw new ArgumentException("addresses can not be null or empty");

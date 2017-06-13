@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-
-namespace Geocoding.MapQuest
+﻿namespace Geocoding.MapQuest
 {
 	public class GeocodeRequest : ReverseGeocodeRequest
 	{
@@ -13,7 +7,7 @@ namespace Geocoding.MapQuest
 		{
 		}
 
-		public GeocodeRequest(string key, LocationRequest loc) 
+		public GeocodeRequest(string key, LocationRequest loc)
 			: base(key, loc)
 		{
 		}

@@ -1,5 +1,3 @@
-using System;
-
 namespace Geocoding.MapQuest
 {
 	public enum ResponseStatus : int

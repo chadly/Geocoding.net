@@ -76,27 +76,27 @@ namespace Geocoding.MapQuest
 
 		public async Task<IEnumerable<Address>> GeocodeAsync(string street, string city, string state, string postalCode, string country)
 		{
-			var sb = new StringBuilder ();
-			if (!string.IsNullOrWhiteSpace (street))
-				sb.AppendFormat ("{0}, ", street);
-			if (!string.IsNullOrWhiteSpace (city))
-				sb.AppendFormat ("{0}, ", city);
-			if (!string.IsNullOrWhiteSpace (state))
-				sb.AppendFormat ("{0} ", state);
-			if (!string.IsNullOrWhiteSpace (postalCode))
-				sb.AppendFormat ("{0} ", postalCode);
-			if (!string.IsNullOrWhiteSpace (country))
-				sb.AppendFormat ("{0} ", country);
+			var sb = new StringBuilder();
+			if (!string.IsNullOrWhiteSpace(street))
+				sb.AppendFormat("{0}, ", street);
+			if (!string.IsNullOrWhiteSpace(city))
+				sb.AppendFormat("{0}, ", city);
+			if (!string.IsNullOrWhiteSpace(state))
+				sb.AppendFormat("{0} ", state);
+			if (!string.IsNullOrWhiteSpace(postalCode))
+				sb.AppendFormat("{0} ", postalCode);
+			if (!string.IsNullOrWhiteSpace(country))
+				sb.AppendFormat("{0} ", country);
 
 			if (sb.Length > 1)
 				sb.Length--;
 
-			string s = sb.ToString ().Trim ();
-			if (string.IsNullOrWhiteSpace (s))
-				throw new ArgumentException ("Concatenated input values can not be null or blank");
+			string s = sb.ToString().Trim();
+			if (string.IsNullOrWhiteSpace(s))
+				throw new ArgumentException("Concatenated input values can not be null or blank");
 
-			if (s.Last () == ',')
-				s = s.Remove (s.Length - 1);
+			if (s.Last() == ',')
+				s = s.Remove(s.Length - 1);
 
 			return await GeocodeAsync(s).ConfigureAwait(false);
 		}
@@ -104,14 +104,14 @@ namespace Geocoding.MapQuest
 		public async Task<IEnumerable<Address>> ReverseGeocodeAsync(Location location)
 		{
 			if (location == null)
-				throw new ArgumentNullException ("location");
+				throw new ArgumentNullException("location");
 
 			var f = new ReverseGeocodeRequest(key, location) { UseOSM = this.UseOSM };
 			MapQuestResponse res = await Execute(f).ConfigureAwait(false);
 			return HandleSingleResponse(res);
 		}
 
-		public async Task<IEnumerable<Address>>  ReverseGeocodeAsync(double latitude, double longitude)
+		public async Task<IEnumerable<Address>> ReverseGeocodeAsync(double latitude, double longitude)
 		{
 			return await ReverseGeocodeAsync(new Location(latitude, longitude)).ConfigureAwait(false);
 		}
@@ -225,8 +225,8 @@ namespace Geocoding.MapQuest
 					{
 						sb.Append(sr.ReadToEnd());
 					}
-                    throw new Exception((int)response.StatusCode + " " + sb.ToString());
-                }
+					throw new Exception((int)response.StatusCode + " " + sb.ToString());
+				}
 			}
 		}
 

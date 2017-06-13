@@ -52,16 +52,16 @@ namespace Geocoding.MapQuest
 		/// Optional settings
 		/// </summary>
 		[JsonProperty("options")]
-		public virtual RequestOptions Options 
+		public virtual RequestOptions Options
 		{
 			get { return op; }
-			protected set 
+			protected set
 			{
 				if (value == null)
 					throw new ArgumentNullException("Options");
 
-				op = value; 
-			} 
+				op = value;
+			}
 		}
 
 		/// <summary>
@@ -74,7 +74,7 @@ namespace Geocoding.MapQuest
 		/// </summary>
 		protected virtual string BaseRequestPath
 		{
-			get 
+			get
 			{
 				if (UseOSM)
 					return @"http://open.mapquestapi.com/geocoding/v1/";
@@ -95,7 +95,7 @@ namespace Geocoding.MapQuest
 				sb.Append(RequestAction);
 				sb.Append("?");
 				//no need to escape this key, it is already escaped by MapQuest at generation
-				sb.AppendFormat("key={0}&", Key); 
+				sb.AppendFormat("key={0}&", Key);
 
 				if (InputFormat != DataFormat.json)
 					sb.AppendFormat("inFormat={0}&", InputFormat);

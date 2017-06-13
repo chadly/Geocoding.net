@@ -1,5 +1,3 @@
-using System;
-
 namespace Geocoding.Yahoo
 {
 	public class YahooAddress : Address

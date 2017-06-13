@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Text;
 using System.Linq;
-using System.Collections.Generic;
+using System.Text;
 using Newtonsoft.Json;
 
 namespace Geocoding.MapQuest
@@ -17,8 +16,8 @@ namespace Geocoding.MapQuest
 
 		public MapQuestLocation(string formattedAddress, Location coordinates)
 			: base(
-				string.IsNullOrWhiteSpace(formattedAddress) ? UNKNOWN : formattedAddress, 
-				coordinates ?? new Location(0, 0), 
+				string.IsNullOrWhiteSpace(formattedAddress) ? UNKNOWN : formattedAddress,
+				coordinates ?? new Location(0, 0),
 				"MapQuest")
 		{
 			DisplayCoordinates = coordinates;
@@ -27,7 +26,7 @@ namespace Geocoding.MapQuest
 		[JsonProperty("location")]
 		public override string FormattedAddress
 		{
-			get 
+			get
 			{
 				return ToString();
 			}

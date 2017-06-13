@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Geocoding.Microsoft
+﻿namespace Geocoding.Microsoft
 {
 	public enum ConfidenceLevel
 	{

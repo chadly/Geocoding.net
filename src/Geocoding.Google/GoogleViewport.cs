@@ -1,5 +1,4 @@
-﻿
-namespace Geocoding.Google
+﻿namespace Geocoding.Google
 {
 	public class GoogleViewport
 	{

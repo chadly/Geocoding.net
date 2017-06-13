@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Geocoding
 {
 	public class ResultItem
 	{
-		public ResultItem(Address request, IEnumerable<Address> response)
-		{
-			Request = request;
-			Response = response;
-		}
-
 		Address input;
 		/// <summary>
 		/// Original input for this response
@@ -43,6 +35,12 @@ namespace Geocoding
 
 				output = value;
 			}
+		}
+
+		public ResultItem(Address request, IEnumerable<Address> response)
+		{
+			Request = request;
+			Response = response;
 		}
 	}
 }

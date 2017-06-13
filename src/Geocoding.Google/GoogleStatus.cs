@@ -1,5 +1,3 @@
-using System;
-
 namespace Geocoding.Google
 {
 	public enum GoogleStatus

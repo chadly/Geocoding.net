@@ -4,10 +4,10 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Xml.XPath;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using System.Xml.XPath;
 
 namespace Geocoding.Google
 {
@@ -157,7 +157,7 @@ namespace Geocoding.Google
 			return string.Format(CultureInfo.InvariantCulture, "{0},{1}", latitude, longitude);
 		}
 
-        private async Task<IEnumerable<GoogleAddress>> ProcessRequest(HttpRequestMessage request)
+		private async Task<IEnumerable<GoogleAddress>> ProcessRequest(HttpRequestMessage request)
 		{
 			try
 			{
@@ -190,23 +190,23 @@ namespace Geocoding.Google
 
 		async Task<IEnumerable<Address>> IGeocoder.GeocodeAsync(string address)
 		{
-		    return await GeocodeAsync(address).ConfigureAwait(false);
+			return await GeocodeAsync(address).ConfigureAwait(false);
 		}
 
-        async Task<IEnumerable<Address>> IGeocoder.GeocodeAsync(string street, string city, string state, string postalCode, string country)
-        {
-            return await GeocodeAsync(BuildAddress(street, city, state, postalCode, country)).ConfigureAwait(false);
-        }
+		async Task<IEnumerable<Address>> IGeocoder.GeocodeAsync(string street, string city, string state, string postalCode, string country)
+		{
+			return await GeocodeAsync(BuildAddress(street, city, state, postalCode, country)).ConfigureAwait(false);
+		}
 
-        async Task<IEnumerable<Address>> IGeocoder.ReverseGeocodeAsync(Location location)
-        {
-            return await ReverseGeocodeAsync(location).ConfigureAwait(false);
-        }
+		async Task<IEnumerable<Address>> IGeocoder.ReverseGeocodeAsync(Location location)
+		{
+			return await ReverseGeocodeAsync(location).ConfigureAwait(false);
+		}
 
-        async Task<IEnumerable<Address>> IGeocoder.ReverseGeocodeAsync(double latitude, double longitude)
-        {
-            return await ReverseGeocodeAsync(latitude, longitude).ConfigureAwait(false);
-        }
+		async Task<IEnumerable<Address>> IGeocoder.ReverseGeocodeAsync(double latitude, double longitude)
+		{
+			return await ReverseGeocodeAsync(latitude, longitude).ConfigureAwait(false);
+		}
 
 		private HttpRequestMessage BuildWebRequest(string type, string value)
 		{

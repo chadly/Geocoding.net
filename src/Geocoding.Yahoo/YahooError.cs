@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Geocoding.Yahoo
+﻿namespace Geocoding.Yahoo
 {
 	/// <remarks>http://developer.yahoo.com/geo/placefinder/guide/responses.html#error-codes</remarks>
 	public enum YahooError
