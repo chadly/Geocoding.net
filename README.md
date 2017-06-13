@@ -1,4 +1,4 @@
-#Generic C# Geocoding API [![Build Status](http://teamcity.chadly.net/app/rest/builds/buildType:(id:GeocodingNe_Build)/statusIcon)](http://teamcity.chadly.net/viewType.html?buildTypeId=GeocodingNe_Build&guest=1)
+# Generic C# Geocoding API [![Build Status](http://teamcity.chadly.net/app/rest/builds/buildType:(id:GeocodingNe_Build)/statusIcon)](http://teamcity.chadly.net/viewType.html?buildTypeId=GeocodingNe_Build&guest=1)
 
 Includes a model and interface for communicating with five popular Geocoding providers.  Current implementations include:
 
@@ -14,7 +14,7 @@ See latest [release notes](https://github.com/chadly/Geocoding.net/releases/late
 
 :warning: There is a potential issue ([#29](https://github.com/chadly/Geocoding.net/issues/29)) regarding MapQuest that has a workaround. If you would like to help fix the issue, PRs are welcome.
 
-##Installation
+## Installation
 
 Install [via nuget](http://www.nuget.org/packages/Geocoding.net/):
 
@@ -24,9 +24,9 @@ Install-Package Geocoding.net
 
 Or download the [latest release](https://github.com/chadly/Geocoding.net/releases/latest) and add a reference to `Geocoding.dll` in your project.
 
-##Example Usage
+## Example Usage
 
-###Simple Example
+### Simple Example
 
 ```csharp
 IGeocoder geocoder = new GoogleGeocoder() { ApiKey = "this-is-my-optional-google-api-key" };
@@ -42,7 +42,7 @@ IGeocoder geocoder = new YahooGeocoder("consumer-key", "consumer-secret");
 IEnumerable<Address> addresses = geocoder.ReverseGeocodeAsync(38.8976777, -77.036517);
 ```
 
-###Using Provider-Specific Data
+### Using Provider-Specific Data
 
 ```csharp
 GoogleGeocoder geocoder = new GoogleGeocoder();
@@ -54,11 +54,11 @@ Console.WriteLine("Country: " + country.LongName + ", " + country.ShortName); //
 
 The Microsoft and Yahoo implementations each provide their own address class as well, `BingAddress` and `YahooAddress`.
 
-###More Examples
+### More Examples
 
 A more in-depth runnable example of how this library can be integrated into an MVC4 application can be found in the [latest release package](https://github.com/chadly/Geocoding.net/releases/latest). Download it and run locally.
 
-##API Keys
+## API Keys
 
 Google allows anonymous access to it's API, but if you start hitting rate limits, you must [sign up for a new Server API Key](https://developers.google.com/maps/documentation/javascript/tutorial#api_key).
 
@@ -68,7 +68,7 @@ You will need a [consumer secret and consumer key](http://developer.yahoo.com/bo
 
 MapQuest API requires a key. Sign up here: (http://developer.mapquest.com/web/products/open)
 
-##How to Build from Source
+## How to Build from Source
 
 Open in Visual Studio 2013 and build. It should automatically restore nuget package dependencies. If you get an error about a missing `AssemblyVersion` file, close the solution and reopen it and build again. The build depends on some `.targets` files that are downloaded from nuget. If the files aren't there when VS opens, it doesn't detect that they are there once nuget downloads them without a restart.
 
