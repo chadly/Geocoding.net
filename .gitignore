@@ -1,10 +1,11 @@
 /bin
 /packages
 /examples/packages
-app.config
-docs
-nuget.exe
-AssemblyVersion.cs
+test/Geocoding.Tests/settings-override.json
+
+.vs
+/artifacts
+project.lock.json
 
 #################
 ## Visual Studio
