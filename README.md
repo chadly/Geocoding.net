@@ -19,10 +19,17 @@ See latest [release notes](https://github.com/chadly/Geocoding.net/releases/late
 Install [via nuget](http://www.nuget.org/packages/Geocoding.net/):
 
 ```
-Install-Package Geocoding.net
+Install-Package Geocoding.Core
 ```
 
-Or download the [latest release](https://github.com/chadly/Geocoding.net/releases/latest) and add a reference to `Geocoding.dll` in your project.
+and then choose which provider you want to install (or install all of them):
+
+```
+Install-Package Geocoding.Google
+Install-Package Geocoding.MapQuest
+Install-Package Geocoding.Microsoft
+Install-Package Geocoding.Yahoo
+```
 
 ## Example Usage
 
@@ -30,7 +37,7 @@ Or download the [latest release](https://github.com/chadly/Geocoding.net/release
 
 ```csharp
 IGeocoder geocoder = new GoogleGeocoder() { ApiKey = "this-is-my-optional-google-api-key" };
-IEnumerable<Address> addresses = geocoder.GeocodeAsync("1600 pennsylvania ave washington dc");
+IEnumerable<Address> addresses = await geocoder.GeocodeAsync("1600 pennsylvania ave washington dc");
 Console.WriteLine("Formatted: " + addresses.First().FormattedAddress); //Formatted: 1600 Pennsylvania Ave SE, Washington, DC 20003, USA
 Console.WriteLine("Coordinates: " + addresses.First().Coordinates.Latitude + ", " + addresses.First().Coordinates.Longitude); //Coordinates: 38.8791981, -76.9818437
 ```
@@ -39,24 +46,20 @@ It can also be used to return address information from latitude/longitude coordi
 
 ```csharp
 IGeocoder geocoder = new YahooGeocoder("consumer-key", "consumer-secret");
-IEnumerable<Address> addresses = geocoder.ReverseGeocodeAsync(38.8976777, -77.036517);
+IEnumerable<Address> addresses = await geocoder.ReverseGeocodeAsync(38.8976777, -77.036517);
 ```
 
 ### Using Provider-Specific Data
 
 ```csharp
 GoogleGeocoder geocoder = new GoogleGeocoder();
-IEnumerable<GoogleAddress> addresses = geocoder.GeocodeAsync("1600 pennsylvania ave washington dc");
+IEnumerable<GoogleAddress> addresses = await geocoder.GeocodeAsync("1600 pennsylvania ave washington dc");
 
 var country = addresses.Where(a => !a.IsPartialMatch).Select(a => a[GoogleAddressType.Country]).First();
 Console.WriteLine("Country: " + country.LongName + ", " + country.ShortName); //Country: United States, US
 ```
 
 The Microsoft and Yahoo implementations each provide their own address class as well, `BingAddress` and `YahooAddress`.
-
-### More Examples
-
-A more in-depth runnable example of how this library can be integrated into an MVC4 application can be found in the [latest release package](https://github.com/chadly/Geocoding.net/releases/latest). Download it and run locally.
 
 ## API Keys
 
