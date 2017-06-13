@@ -70,7 +70,15 @@ MapQuest API requires a key. Sign up here: (http://developer.mapquest.com/web/pr
 
 ## How to Build from Source
 
-Open in Visual Studio 2013 and build. It should automatically restore nuget package dependencies. If you get an error about a missing `AssemblyVersion` file, close the solution and reopen it and build again. The build depends on some `.targets` files that are downloaded from nuget. If the files aren't there when VS opens, it doesn't detect that they are there once nuget downloads them without a restart.
+```
+dotnet restore
+dotnet build
+```
+
+For a nice experience, use [Visual Studio Code](https://code.visualstudio.com/) to work with the project. The editor is cross platform and open source.
+
+Alternatively, if you are on Windows, you can open the solution in [Visual Studio](https://www.visualstudio.com/) and build.
 
 ### Service Tests
-You will need to generate API keys for each respective service to run the service tests. Edit App.config in the Tests project and put in your API keys.
+
+You will need to generate API keys for each respective service to run the service tests. Make a `settings-override.json` as a copy of `settings.json` in the test project and put in your API keys. Then you should be able to run the tests.
