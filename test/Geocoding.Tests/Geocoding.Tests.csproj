@@ -8,6 +8,8 @@
     <PackageId>Geocoding.Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
     <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
+    <Version>4.0.0</Version>
+    <Description>Tests</Description>
   </PropertyGroup>
 
   <ItemGroup>
