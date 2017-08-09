@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace Geocoding.Microsoft
 {
@@ -240,14 +238,8 @@ namespace Geocoding.Microsoft
 				var response = await client.SendAsync(CreateRequest(queryURL)).ConfigureAwait(false);
 				using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
 				{
-					var serializer = new JsonSerializer();
-					using (var reader = new StreamReader(stream))
-					{
-						using (var jsonTextReader = new JsonTextReader(reader))
-						{
-							return serializer.Deserialize<Json.Response>(jsonTextReader);
-						}
-					}
+					DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(Json.Response));
+					return jsonSerializer.ReadObject(stream) as Json.Response;
 				}
 			}
 		}
