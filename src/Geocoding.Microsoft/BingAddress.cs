@@ -24,19 +24,19 @@
 		public string CountryRegion
 		{
 			get { return countryRegion ?? ""; }
-        }
+		}
 
-        public string Locality
-        {
-            get { return locality ?? ""; }
-        }
+		public string Locality
+		{
+			get { return locality ?? ""; }
+		}
 
-        public string Neighborhood
-        {
-            get { return neighborhood ?? ""; }
-        }
+		public string Neighborhood
+		{
+			get { return neighborhood ?? ""; }
+		}
 
-        public string PostalCode
+		public string PostalCode
 		{
 			get { return postalCode ?? ""; }
 		}
@@ -60,7 +60,7 @@
 			this.adminDistrict2 = adminDistrict2;
 			this.countryRegion = countryRegion;
 			this.locality = locality;
-            this.neighborhood = neighborhood;
+			this.neighborhood = neighborhood;
 			this.postalCode = postalCode;
 			this.type = type;
 			this.confidence = confidence;
