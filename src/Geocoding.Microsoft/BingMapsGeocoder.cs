@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,8 +31,9 @@ namespace Geocoding.Microsoft
 		public Location UserLocation { get; set; }
 		public Bounds UserMapView { get; set; }
 		public IPAddress UserIP { get; set; }
+        public bool IncludeNeighborhood { get; set; }
 
-		public BingMapsGeocoder(string bingKey)
+        public BingMapsGeocoder(string bingKey)
 		{
 			if (string.IsNullOrWhiteSpace(bingKey))
 				throw new ArgumentException("bingKey can not be null or empty");
@@ -83,9 +85,12 @@ namespace Geocoding.Microsoft
 
 			if (UserIP != null)
 				yield return new KeyValuePair<string, string>("userIp", UserIP.ToString());
-		}
 
-		private bool AppendGlobalParameters(StringBuilder parameters, bool first)
+            if (IncludeNeighborhood)
+                yield return new KeyValuePair<string, string>("inclnb", IncludeNeighborhood ? "1" : "0");
+        }
+
+        private bool AppendGlobalParameters(StringBuilder parameters, bool first)
 		{
 			var values = GetGlobalParameters().ToArray();
 
@@ -207,6 +212,7 @@ namespace Geocoding.Microsoft
 					location.Address.AdminDistrict2,
 					location.Address.CountryRegion,
 					location.Address.Locality,
+                    location.Address.Neighborhood,
 					location.Address.PostalCode,
 					(EntityType)Enum.Parse(typeof(EntityType), location.EntityType),
 					EvaluateConfidence(location.Confidence)

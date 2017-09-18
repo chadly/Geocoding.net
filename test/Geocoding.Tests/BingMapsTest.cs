@@ -39,20 +39,29 @@ namespace Geocoding.Tests
 			geoCoder.UserLocation = new Location(userLatitude, userLongitude);
 			BingAddress[] addresses = (await geoCoder.GeocodeAsync(address)).ToArray();
 			Assert.Equal(country, addresses[0].CountryRegion);
-		}
+        }
 
-		[Theory]
-		[InlineData("Montreal", 45, -73, 46, -74, "Canada")]
-		[InlineData("Montreal", 43, 0, 44, 1, "France")]
-		[InlineData("Montreal", 46, -90, 47, -91, "United States")]
-		public async Task ApplyUserMapView(string address, double userLatitude1, double userLongitude1, double userLatitude2, double userLongitude2, string country)
-		{
-			geoCoder.UserMapView = new Bounds(userLatitude1, userLongitude1, userLatitude2, userLongitude2);
-			BingAddress[] addresses = (await geoCoder.GeocodeAsync(address)).ToArray();
-			Assert.Equal(country, addresses[0].CountryRegion);
-		}
+        [Theory]
+        [InlineData("Montreal", 45, -73, 46, -74, "Canada")]
+        [InlineData("Montreal", 43, 0, 44, 1, "France")]
+        [InlineData("Montreal", 46, -90, 47, -91, "United States")]
+        public async Task ApplyUserMapView(string address, double userLatitude1, double userLongitude1, double userLatitude2, double userLongitude2, string country)
+        {
+            geoCoder.UserMapView = new Bounds(userLatitude1, userLongitude1, userLatitude2, userLongitude2);
+            BingAddress[] addresses = (await geoCoder.GeocodeAsync(address)).ToArray();
+            Assert.Equal(country, addresses[0].CountryRegion);
+        }
 
-		[Fact]
+        [Theory]
+        [InlineData("24 sussex drive ottawa, ontario")]
+        public async Task ApplyIncludeNeighborhood(string address)
+        {
+            geoCoder.IncludeNeighborhood = true;
+            BingAddress[] addresses = (await geoCoder.GeocodeAsync(address)).ToArray();
+            Assert.NotNull(addresses[0].Neighborhood);
+        }
+
+        [Fact]
 		//https://github.com/chadly/Geocoding.net/issues/8
 		public async Task CanReverseGeocodeIssue8()
 		{
