@@ -15,9 +15,11 @@ namespace Geocoding.Microsoft.Json
 		public string CountryRegion { get; set; }
 		[DataMember(Name = "formattedAddress")]
 		public string FormattedAddress { get; set; }
-		[DataMember(Name = "locality")]
-		public string Locality { get; set; }
-		[DataMember(Name = "postalCode")]
+        [DataMember(Name = "locality")]
+        public string Locality { get; set; }
+        [DataMember(Name = "neighborhood")]
+        public string Neighborhood { get; set; }
+        [DataMember(Name = "postalCode")]
 		public string PostalCode { get; set; }
 	}
 	[DataContract]
