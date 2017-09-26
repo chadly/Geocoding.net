@@ -19,10 +19,17 @@ See latest [release notes](https://github.com/chadly/Geocoding.net/releases/late
 Install [via nuget](http://www.nuget.org/packages/Geocoding.net/):
 
 ```
-Install-Package Geocoding.net
+Install-Package Geocoding.Core
 ```
 
-Or download the [latest release](https://github.com/chadly/Geocoding.net/releases/latest) and add a reference to `Geocoding.dll` in your project.
+and then choose which provider you want to install (or install all of them):
+
+```
+Install-Package Geocoding.Google
+Install-Package Geocoding.MapQuest
+Install-Package Geocoding.Microsoft
+Install-Package Geocoding.Yahoo
+```
 
 ## Example Usage
 
@@ -30,7 +37,7 @@ Or download the [latest release](https://github.com/chadly/Geocoding.net/release
 
 ```csharp
 IGeocoder geocoder = new GoogleGeocoder() { ApiKey = "this-is-my-optional-google-api-key" };
-IEnumerable<Address> addresses = geocoder.Geocode("1600 pennsylvania ave washington dc");
+IEnumerable<Address> addresses = await geocoder.GeocodeAsync("1600 pennsylvania ave washington dc");
 Console.WriteLine("Formatted: " + addresses.First().FormattedAddress); //Formatted: 1600 Pennsylvania Ave SE, Washington, DC 20003, USA
 Console.WriteLine("Coordinates: " + addresses.First().Coordinates.Latitude + ", " + addresses.First().Coordinates.Longitude); //Coordinates: 38.8791981, -76.9818437
 ```
@@ -39,24 +46,20 @@ It can also be used to return address information from latitude/longitude coordi
 
 ```csharp
 IGeocoder geocoder = new YahooGeocoder("consumer-key", "consumer-secret");
-IEnumerable<Address> addresses = geocoder.ReverseGeocode(38.8976777, -77.036517);
+IEnumerable<Address> addresses = await geocoder.ReverseGeocodeAsync(38.8976777, -77.036517);
 ```
 
 ### Using Provider-Specific Data
 
 ```csharp
 GoogleGeocoder geocoder = new GoogleGeocoder();
-IEnumerable<GoogleAddress> addresses = geocoder.Geocode("1600 pennsylvania ave washington dc");
+IEnumerable<GoogleAddress> addresses = await geocoder.GeocodeAsync("1600 pennsylvania ave washington dc");
 
 var country = addresses.Where(a => !a.IsPartialMatch).Select(a => a[GoogleAddressType.Country]).First();
 Console.WriteLine("Country: " + country.LongName + ", " + country.ShortName); //Country: United States, US
 ```
 
 The Microsoft and Yahoo implementations each provide their own address class as well, `BingAddress` and `YahooAddress`.
-
-### More Examples
-
-A more in-depth runnable example of how this library can be integrated into an MVC4 application can be found in the [latest release package](https://github.com/chadly/Geocoding.net/releases/latest). Download it and run locally.
 
 ## API Keys
 
@@ -70,7 +73,15 @@ MapQuest API requires a key. Sign up here: (http://developer.mapquest.com/web/pr
 
 ## How to Build from Source
 
-Open in Visual Studio 2013 and build. It should automatically restore nuget package dependencies. If you get an error about a missing `AssemblyVersion` file, close the solution and reopen it and build again. The build depends on some `.targets` files that are downloaded from nuget. If the files aren't there when VS opens, it doesn't detect that they are there once nuget downloads them without a restart.
+```
+dotnet restore
+dotnet build
+```
+
+For a nice experience, use [Visual Studio Code](https://code.visualstudio.com/) to work with the project. The editor is cross platform and open source.
+
+Alternatively, if you are on Windows, you can open the solution in [Visual Studio](https://www.visualstudio.com/) and build.
 
 ### Service Tests
-You will need to generate API keys for each respective service to run the service tests. Edit App.config in the Tests project and put in your API keys.
+
+You will need to generate API keys for each respective service to run the service tests. Make a `settings-override.json` as a copy of `settings.json` in the test project and put in your API keys. Then you should be able to run the tests.
