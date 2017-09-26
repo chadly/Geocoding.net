@@ -154,7 +154,7 @@ namespace Geocoding.Google
 
 		private string BuildGeolocation(double latitude, double longitude)
 		{
-			return string.Format(CultureInfo.InvariantCulture, "{0},{1}", latitude, longitude);
+			return string.Format(CultureInfo.InvariantCulture, "{0:0.00000000},{1:0.00000000}", latitude, longitude);
 		}
 
 		private async Task<IEnumerable<GoogleAddress>> ProcessRequest(HttpRequestMessage request)
