@@ -202,7 +202,7 @@ namespace Geocoding.Microsoft
 		{
 			var list = new List<BingAddress>();
 
-			foreach (Json.Location location in response.ResourceSets[0].Resources)
+			foreach (Json.Location location in response.ResourceSets[0].Resources.OfType<Json.Location>())
 			{
 				list.Add(new BingAddress(
 					location.Address.FormattedAddress,
