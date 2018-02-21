@@ -10,16 +10,16 @@ namespace Geocoding
 		public Location SouthWest
 		{
 			get { return southWest; }
-      set { southWest = value; }
+			set { southWest = value; }
 		}
 
 		public Location NorthEast
 		{
 			get { return northEast; }
-      set { northEast = value; }
+			set { northEast = value; }
 		}
 
-    public Bounds() { }
+		public Bounds() { }
 
 		public Bounds(double southWestLatitude, double southWestLongitude, double northEastLatitude, double northEastLongitude)
 			: this(new Location(southWestLatitude, southWestLongitude), new Location(northEastLatitude, northEastLongitude)) { }
