@@ -4,18 +4,22 @@ namespace Geocoding
 {
 	public class Bounds
 	{
-		readonly Location southWest;
-		readonly Location northEast;
+		Location southWest;
+		Location northEast;
 
 		public Location SouthWest
 		{
 			get { return southWest; }
+      set { southWest = value; }
 		}
 
 		public Location NorthEast
 		{
 			get { return northEast; }
+      set { northEast = value; }
 		}
+
+    public Bounds() { }
 
 		public Bounds(double southWestLatitude, double southWestLongitude, double northEastLatitude, double northEastLongitude)
 			: this(new Location(southWestLatitude, southWestLongitude), new Location(northEastLatitude, northEastLongitude)) { }
