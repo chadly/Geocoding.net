@@ -1,29 +1,27 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Geocoding
 {
 	public class Bounds
 	{
-		Location southWest;
-		Location northEast;
+		readonly Location southWest;
+		readonly Location northEast;
 
 		public Location SouthWest
 		{
 			get { return southWest; }
-			set { southWest = value; }
 		}
 
 		public Location NorthEast
 		{
 			get { return northEast; }
-			set { northEast = value; }
 		}
-
-		public Bounds() { }
 
 		public Bounds(double southWestLatitude, double southWestLongitude, double northEastLatitude, double northEastLongitude)
 			: this(new Location(southWestLatitude, southWestLongitude), new Location(northEastLatitude, northEastLongitude)) { }
 
+		[JsonConstructor]
 		public Bounds(Location southWest, Location northEast)
 		{
 			if (southWest == null)
