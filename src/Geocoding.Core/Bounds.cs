@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Geocoding
 {
@@ -20,6 +21,7 @@ namespace Geocoding
 		public Bounds(double southWestLatitude, double southWestLongitude, double northEastLatitude, double northEastLongitude)
 			: this(new Location(southWestLatitude, southWestLongitude), new Location(northEastLatitude, northEastLongitude)) { }
 
+		[JsonConstructor]
 		public Bounds(Location southWest, Location northEast)
 		{
 			if (southWest == null)
