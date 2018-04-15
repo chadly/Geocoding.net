@@ -38,7 +38,7 @@ namespace Geocoding.Tests
         {
             geoCoder.UserLocation = new Location(userLatitude, userLongitude);
             BingAddress[] addresses = (await geoCoder.GeocodeAsync(address)).ToArray();
-            Assert.True(addresses.Any(a => country == a.CountryRegion));
+            Assert.Contains(addresses, x => x.CountryRegion == country);
         }
 
         [Theory]
@@ -48,8 +48,9 @@ namespace Geocoding.Tests
         public async Task ApplyUserMapView(string address, double userLatitude1, double userLongitude1, double userLatitude2, double userLongitude2, string country)
         {
             geoCoder.UserMapView = new Bounds(userLatitude1, userLongitude1, userLatitude2, userLongitude2);
+            geoCoder.MaxResults = 20;
             BingAddress[] addresses = (await geoCoder.GeocodeAsync(address)).ToArray();
-            Assert.Equal(country, addresses[0].CountryRegion);
+            Assert.Contains(addresses, x => x.CountryRegion == country);
         }
 
         [Theory]
