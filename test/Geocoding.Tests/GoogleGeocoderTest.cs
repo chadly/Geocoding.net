@@ -36,7 +36,7 @@ namespace Geocoding.Tests
 		[InlineData("Illinois, US", GoogleAddressType.AdministrativeAreaLevel1)]
 		[InlineData("New York, New York", GoogleAddressType.Locality)]
 		[InlineData("90210, US", GoogleAddressType.PostalCode)]
-		[InlineData("1600 pennsylvania ave washington dc", GoogleAddressType.StreetAddress)]
+		[InlineData("1600 pennsylvania ave washington dc", GoogleAddressType.Establishment)]
 		[InlineData("muswellbrook 2 New South Wales Australia", GoogleAddressType.Unknown)]
 		public async Task CanParseAddressTypes(string address, GoogleAddressType type)
 		{
