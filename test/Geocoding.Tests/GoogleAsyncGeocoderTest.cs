@@ -9,13 +9,7 @@ namespace Geocoding.Tests
 	[Collection("Settings")]
 	public class GoogleAsyncGeocoderTest : AsyncGeocoderTest
 	{
-		readonly SettingsFixture settings;
 		GoogleGeocoder geoCoder;
-
-		public GoogleAsyncGeocoderTest(SettingsFixture settings)
-		{
-			this.settings = settings;
-		}
 
 		protected override IGeocoder CreateAsyncGeocoder()
 		{
@@ -38,7 +32,7 @@ namespace Geocoding.Tests
 		[InlineData("Illinois, US", GoogleAddressType.AdministrativeAreaLevel1)]
 		[InlineData("New York, New York", GoogleAddressType.Locality)]
 		[InlineData("90210, US", GoogleAddressType.PostalCode)]
-		[InlineData("1600 pennsylvania ave washington dc", GoogleAddressType.StreetAddress)]
+		[InlineData("1600 pennsylvania ave washington dc", GoogleAddressType.Establishment)]
 		public async Task CanParseAddressTypes(string address, GoogleAddressType type)
 		{
 		    var result = await geoCoder.GeocodeAsync(address);
