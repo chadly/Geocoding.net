@@ -5,7 +5,7 @@
     <AssemblyTitle>Geocoding.net Yahoo</AssemblyTitle>
     <VersionPrefix>4.0.0-beta1</VersionPrefix>
     <Authors>chadly</Authors>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFrameworks>netstandard1.3;net46</TargetFrameworks>
     <AssemblyName>Geocoding.Yahoo</AssemblyName>
     <PackageId>Geocoding.Yahoo</PackageId>
     <PackageTags>geocoding;geocode;geocoder;maps;address;validation;normalization;google-maps;bing-maps;yahoo-placefinder;mapquest</PackageTags>
@@ -21,7 +21,7 @@
     <ProjectReference Include="..\Geocoding.Core\Geocoding.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.3'">
     <PackageReference Include="System.Net.Requests" Version="4.3.0" />
     <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.0" />
     <PackageReference Include="System.Xml.XPath" Version="4.3.0" />
