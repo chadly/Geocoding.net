@@ -5,7 +5,7 @@
     <AssemblyTitle>Geocoding.net Microsoft</AssemblyTitle>
     <VersionPrefix>4.0.0-beta1</VersionPrefix>
     <Authors>chadly</Authors>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFrameworks>netstandard1.3;net46</TargetFrameworks>
     <AssemblyName>Geocoding.Microsoft</AssemblyName>
     <PackageId>Geocoding.Microsoft</PackageId>
     <PackageTags>geocoding;geocode;geocoder;maps;address;validation;normalization;google-maps;bing-maps;yahoo-placefinder;mapquest</PackageTags>
@@ -23,8 +23,15 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.3'">
     <PackageReference Include="System.Net.Http" Version="4.3.1" />
     <PackageReference Include="System.Runtime.Serialization.Json" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net46'">
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
 
 </Project>
