@@ -1,8 +1,9 @@
 ﻿using System;
+using Geocoding.Core;
 
 namespace Geocoding.Yahoo
 {
-	public class YahooGeocodingException : Exception
+	public class YahooGeocodingException : GeocodingException
 	{
 		const string defaultMessage = "There was an error processing the geocoding request. See ErrorCode or InnerException for more information.";
 

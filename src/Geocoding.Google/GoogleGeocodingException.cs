@@ -1,8 +1,9 @@
 ﻿using System;
+using Geocoding.Core;
 
 namespace Geocoding.Google
 {
-	public class GoogleGeocodingException : Exception
+	public class GoogleGeocodingException : GeocodingException
 	{
 		const string defaultMessage = "There was an error processing the geocoding request. See Status or InnerException for more information.";
 
