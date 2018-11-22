@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading;
@@ -50,9 +49,8 @@ namespace Geocoding.Here
 		private string GetQueryUrl(string address)
 		{
 			var parameters = new StringBuilder();
-			bool first = true;
-			first = AppendParameter(parameters, address, SEARCHTEXT, first);
-			first = AppendGlobalParameters(parameters, first);
+			var first = AppendParameter(parameters, address, SEARCHTEXT, true);
+			AppendGlobalParameters(parameters, first);
 
 			return string.Format(GEOCODING_QUERY, appId, appCode, parameters.ToString());
 		}
@@ -60,13 +58,12 @@ namespace Geocoding.Here
 		private string GetQueryUrl(string street, string city, string state, string postalCode, string country)
 		{
 			var parameters = new StringBuilder();
-			bool first = true;
-			first = AppendParameter(parameters, street, STREET, first);
+			var first = AppendParameter(parameters, street, STREET, true);
 			first = AppendParameter(parameters, city, CITY, first);
 			first = AppendParameter(parameters, state, STATE, first);
 			first = AppendParameter(parameters, postalCode, POSTAL_CODE, first);
 			first = AppendParameter(parameters, country, COUNTRY, first);
-			first = AppendGlobalParameters(parameters, first);
+			AppendGlobalParameters(parameters, first);
 
 			return string.Format(GEOCODING_QUERY, appId, appCode, parameters.ToString());
 		}
@@ -74,9 +71,8 @@ namespace Geocoding.Here
 		private string GetQueryUrl(double latitude, double longitude)
 		{
 			var parameters = new StringBuilder();
-			bool first = true;
-			first = AppendParameter(parameters, string.Format(CultureInfo.InvariantCulture, "{0},{1}", latitude, longitude), PROX, first);
-			first = AppendGlobalParameters(parameters, first);
+			var first = AppendParameter(parameters, string.Format(CultureInfo.InvariantCulture, "{0},{1}", latitude, longitude), PROX, true);
+			AppendGlobalParameters(parameters, first);
 
 			return string.Format(REVERSE_GEOCODING_QUERY, appId, appCode, parameters.ToString());
 		}
@@ -148,7 +144,7 @@ namespace Geocoding.Here
 		public async Task<IEnumerable<HereAddress>> ReverseGeocodeAsync(Location location, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			if (location == null)
-				throw new ArgumentNullException("location");
+				throw new ArgumentNullException(nameof(location));
 
 			return await ReverseGeocodeAsync(location.Latitude, location.Longitude, cancellationToken).ConfigureAwait(false);
 		}
@@ -203,14 +199,12 @@ namespace Geocoding.Here
 
 		private IEnumerable<HereAddress> ParseResponse(Json.Response response)
 		{
-			var list = new List<HereAddress>();
-
-			foreach (Json.View view in response.View)
+			foreach (var view in response.View)
 			{
-				foreach (Json.Result result in view.Result)
+				foreach (var result in view.Result)
 				{
 					var location = result.Location;
-					list.Add(new HereAddress(
+					yield return new HereAddress(
 						location.Address.Label,
 						new Location(location.DisplayPosition.Latitude, location.DisplayPosition.Longitude),
 						location.Address.Street,
@@ -219,12 +213,9 @@ namespace Geocoding.Here
 						location.Address.State,
 						location.Address.PostalCode,
 						location.Address.Country,
-						(HereLocationType)Enum.Parse(typeof(HereLocationType), location.LocationType, true))
-					);
+						(HereLocationType)Enum.Parse(typeof(HereLocationType), location.LocationType, true));
 				}
 			}
-
-			return list;
 		}
 
 		private HttpRequestMessage CreateRequest(string url)
@@ -232,13 +223,12 @@ namespace Geocoding.Here
 			return new HttpRequestMessage(HttpMethod.Get, url);
 		}
 
-		HttpClient BuildClient()
+		private HttpClient BuildClient()
 		{
 			if (this.Proxy == null)
 				return new HttpClient();
 
-			var handler = new HttpClientHandler();
-			handler.Proxy = this.Proxy;
+			var handler = new HttpClientHandler {Proxy = this.Proxy};
 			return new HttpClient(handler);
 		}
 
@@ -249,7 +239,7 @@ namespace Geocoding.Here
 				var response = await client.SendAsync(CreateRequest(queryURL), cancellationToken).ConfigureAwait(false);
 				using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
 				{
-					DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(Json.ServerResponse));
+					var jsonSerializer = new DataContractJsonSerializer(typeof(Json.ServerResponse));
 					var serverResponse = (Json.ServerResponse)jsonSerializer.ReadObject(stream);
 
 					return serverResponse.Response;
