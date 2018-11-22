@@ -9,6 +9,12 @@ namespace Geocoding.Here.Json
 	{
 		[DataMember(Name = "Response")]
 		public Response Response { get; set; }
+		[DataMember(Name = "Details")]
+		public string Details { get; set; }
+		[DataMember(Name = "type")]
+		public string ErrorType { get; set; }
+		[DataMember(Name = "subtype")]
+		public string ErrorSubtype { get; set; }
 	}
 
 	[DataContract]

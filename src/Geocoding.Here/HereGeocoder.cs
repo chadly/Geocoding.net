@@ -242,6 +242,11 @@ namespace Geocoding.Here
 					var jsonSerializer = new DataContractJsonSerializer(typeof(Json.ServerResponse));
 					var serverResponse = (Json.ServerResponse)jsonSerializer.ReadObject(stream);
 
+					if (serverResponse.ErrorType != null)
+					{
+						throw new HereGeocodingException(serverResponse.Details, serverResponse.ErrorType, serverResponse.ErrorType);
+					}
+
 					return serverResponse.Response;
 				}
 			}
