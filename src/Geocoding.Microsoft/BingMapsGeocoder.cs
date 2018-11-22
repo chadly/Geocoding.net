@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Geocoding.Microsoft
@@ -119,12 +120,12 @@ namespace Geocoding.Microsoft
 			return builder.ToString();
 		}
 
-		public async Task<IEnumerable<BingAddress>> GeocodeAsync(string address)
+		public async Task<IEnumerable<BingAddress>> GeocodeAsync(string address, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			try
 			{
 				var url = GetQueryUrl(address);
-				var response = await GetResponse(url).ConfigureAwait(false);
+				var response = await GetResponse(url, cancellationToken).ConfigureAwait(false);
 				return ParseResponse(response);
 			}
 			catch (Exception ex)
@@ -133,12 +134,12 @@ namespace Geocoding.Microsoft
 			}
 		}
 
-		public async Task<IEnumerable<BingAddress>> GeocodeAsync(string street, string city, string state, string postalCode, string country)
+		public async Task<IEnumerable<BingAddress>> GeocodeAsync(string street, string city, string state, string postalCode, string country, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			try
 			{
 				var url = GetQueryUrl(street, city, state, postalCode, country);
-				var response = await GetResponse(url).ConfigureAwait(false);
+				var response = await GetResponse(url, cancellationToken).ConfigureAwait(false);
 				return ParseResponse(response);
 			}
 			catch (Exception ex)
@@ -147,20 +148,20 @@ namespace Geocoding.Microsoft
 			}
 		}
 
-		public async Task<IEnumerable<BingAddress>> ReverseGeocodeAsync(Location location)
+		public async Task<IEnumerable<BingAddress>> ReverseGeocodeAsync(Location location, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			if (location == null)
 				throw new ArgumentNullException("location");
 
-			return await ReverseGeocodeAsync(location.Latitude, location.Longitude).ConfigureAwait(false);
+			return await ReverseGeocodeAsync(location.Latitude, location.Longitude, cancellationToken).ConfigureAwait(false);
 		}
 
-		public async Task<IEnumerable<BingAddress>> ReverseGeocodeAsync(double latitude, double longitude)
+		public async Task<IEnumerable<BingAddress>> ReverseGeocodeAsync(double latitude, double longitude, CancellationToken cancellationToken = default(CancellationToken))
 		{
 			try
 			{
 				var url = GetQueryUrl(latitude, longitude);
-				var response = await GetResponse(url).ConfigureAwait(false);
+				var response = await GetResponse(url, cancellationToken).ConfigureAwait(false);
 				return ParseResponse(response);
 			}
 			catch (Exception ex)
@@ -169,24 +170,24 @@ namespace Geocoding.Microsoft
 			}
 		}
 
-		async Task<IEnumerable<Address>> IGeocoder.GeocodeAsync(string address)
+		async Task<IEnumerable<Address>> IGeocoder.GeocodeAsync(string address, CancellationToken cancellationToken)
 		{
-			return await GeocodeAsync(address).ConfigureAwait(false);
+			return await GeocodeAsync(address, cancellationToken).ConfigureAwait(false);
 		}
 
-		async Task<IEnumerable<Address>> IGeocoder.GeocodeAsync(string street, string city, string state, string postalCode, string country)
+		async Task<IEnumerable<Address>> IGeocoder.GeocodeAsync(string street, string city, string state, string postalCode, string country, CancellationToken cancellationToken)
 		{
-			return await GeocodeAsync(street, city, state, postalCode, country).ConfigureAwait(false);
+			return await GeocodeAsync(street, city, state, postalCode, country, cancellationToken).ConfigureAwait(false);
 		}
 
-		async Task<IEnumerable<Address>> IGeocoder.ReverseGeocodeAsync(Location location)
+		async Task<IEnumerable<Address>> IGeocoder.ReverseGeocodeAsync(Location location, CancellationToken cancellationToken)
 		{
-			return await ReverseGeocodeAsync(location).ConfigureAwait(false);
+			return await ReverseGeocodeAsync(location, cancellationToken).ConfigureAwait(false);
 		}
 
-		async Task<IEnumerable<Address>> IGeocoder.ReverseGeocodeAsync(double latitude, double longitude)
+		async Task<IEnumerable<Address>> IGeocoder.ReverseGeocodeAsync(double latitude, double longitude, CancellationToken cancellationToken)
 		{
-			return await ReverseGeocodeAsync(latitude, longitude).ConfigureAwait(false);
+			return await ReverseGeocodeAsync(latitude, longitude, cancellationToken).ConfigureAwait(false);
 		}
 
 		private bool AppendParameter(StringBuilder sb, string parameter, string format, bool first)
@@ -242,11 +243,11 @@ namespace Geocoding.Microsoft
 			return new HttpClient(handler);
 		}
 
-		private async Task<Json.Response> GetResponse(string queryURL)
+		private async Task<Json.Response> GetResponse(string queryURL, CancellationToken cancellationToken)
 		{
 			using (var client = BuildClient())
 			{
-				var response = await client.SendAsync(CreateRequest(queryURL)).ConfigureAwait(false);
+				var response = await client.SendAsync(CreateRequest(queryURL), cancellationToken).ConfigureAwait(false);
 				using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
 				{
 					DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(Json.Response));
