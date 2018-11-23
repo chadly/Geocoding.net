@@ -72,7 +72,7 @@ namespace Geocoding.Tests
 		public async Task CanReverseGeocodeAsync()
 		{
 			var addresses = await asyncGeocoder.ReverseGeocodeAsync(38.8976777, -77.036517);
-			addresses.First().AssertWhiteHouseArea();
+			addresses.First().AssertWhiteHouse();
 		}
 	}
 }
