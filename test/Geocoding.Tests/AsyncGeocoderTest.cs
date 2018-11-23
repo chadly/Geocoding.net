@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -11,7 +12,7 @@ namespace Geocoding.Tests
 
         public AsyncGeocoderTest()
 		{
-			//Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-us");
+			CultureInfo.CurrentCulture = new CultureInfo("en-us");
 
 			asyncGeocoder = CreateAsyncGeocoder();
 		}
@@ -37,7 +38,7 @@ namespace Geocoding.Tests
 		[InlineData("cs-CZ")]
 		public async Task CanGeocodeAddressUnderDifferentCultures(string cultureName)
 		{
-			//Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(cultureName);
+			CultureInfo.CurrentCulture = new CultureInfo(cultureName);
 
 		    var addresses = await asyncGeocoder.GeocodeAsync("24 sussex drive ottawa, ontario");
 			addresses.First().AssertCanadianPrimeMinister();
@@ -48,7 +49,7 @@ namespace Geocoding.Tests
 		[InlineData("cs-CZ")]
 		public async Task CanReverseGeocodeAddressUnderDifferentCultures(string cultureName)
 		{
-			//Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(cultureName);
+			CultureInfo.CurrentCulture = new CultureInfo(cultureName);
 
 		    var addresses = await asyncGeocoder.ReverseGeocodeAsync(38.8976777, -77.036517);
 			addresses.First().AssertWhiteHouseArea();
