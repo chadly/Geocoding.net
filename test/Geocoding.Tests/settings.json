@@ -6,5 +6,8 @@
 
   "googleApiKey": "",
 
-  "mapQuestKey": ""
+  "mapQuestKey": "",
+
+  "hereAppId": "",
+  "hereAppCode": ""
 }

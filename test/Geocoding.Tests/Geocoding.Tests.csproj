@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Geocoding.Google\Geocoding.Google.csproj" />
+    <ProjectReference Include="..\..\src\Geocoding.Here\Geocoding.Here.csproj" />
     <ProjectReference Include="..\..\src\Geocoding.MapQuest\Geocoding.MapQuest.csproj" />
     <ProjectReference Include="..\..\src\Geocoding.Microsoft\Geocoding.Microsoft.csproj" />
     <ProjectReference Include="..\..\src\Geocoding.Yahoo\Geocoding.Yahoo.csproj" />

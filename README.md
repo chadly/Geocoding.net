@@ -7,6 +7,7 @@ Includes a model and interface for communicating with five popular Geocoding pro
   * [Bing Maps (aka Virtual Earth)](http://www.microsoft.com/maps/) - [docs](http://msdn.microsoft.com/en-us/library/ff701715.aspx)
   * :warning: MapQuest [(Commercial API)](http://www.mapquestapi.com/) - [docs](http://www.mapquestapi.com/geocoding/)
   * :warning: MapQuest [(OpenStreetMap)](http://open.mapquestapi.com/) - [docs](http://open.mapquestapi.com/geocoding/)
+  * [HERE](https://www.here.com/) - [docs](https://developer.here.com/documentation)
 
 The API returns latitude/longitude coordinates and normalized address information.  This can be used to perform address validation, real time mapping of user-entered addresses, distance calculations, and much more.
 
@@ -29,6 +30,7 @@ Install-Package Geocoding.Google
 Install-Package Geocoding.MapQuest
 Install-Package Geocoding.Microsoft
 Install-Package Geocoding.Yahoo
+Install-Package Geocoding.Here
 ```
 
 ## Example Usage
@@ -70,6 +72,8 @@ Bing [requires an API key](http://msdn.microsoft.com/en-us/library/ff428642.aspx
 You will need a [consumer secret and consumer key](http://developer.yahoo.com/boss/geo/BOSS_Signup.pdf) (PDF) for Yahoo.
 
 MapQuest API requires a key. Sign up here: (http://developer.mapquest.com/web/products/open)
+
+HERE requires an [app ID and app Code](https://developer.here.com/?create=Freemium-Basic&keepState=true&step=account)
 
 ## How to Build from Source
 
