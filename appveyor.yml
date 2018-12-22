@@ -15,13 +15,13 @@ services:
   - docker
 
 install:
-  - git clone -b develop --single-branch https://$github_apikey@github.com/280CapMarkets/TwoEightyCap.DevOps.Tools.git ~\tools
-  - .\~\tools\dist\tools/Init.ps1
+  #- git clone -b develop --single-branch https://$github_apikey@github.com/280CapMarkets/TwoEightyCap.DevOps.Tools.git ~\tools
+  #- .\~\tools\dist\tools/Init.ps1
   
-build_script: MSBuild /p:Version=$APPVEYOR_BUILD_VERSION /p:Configuration=Release
+build_script: msbuild /p:Version=$APPVEYOR_BUILD_VERSION /p:Configuration=Release
 test_script: 
-    - MSBuild --help
-    - MSBuild test
+    - msbuild --help
+    - msbuild test
 
 after_test: 
   - msbuild -t:pack /p:Version=$APPVEYOR_BUILD_VERSION /p:Configuration=Release -o artifacts
