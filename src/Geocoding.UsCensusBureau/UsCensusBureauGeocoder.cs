@@ -84,15 +84,25 @@ namespace Geocoding.UsCensusBureau
             var result = json[UsCensusBureauConstants.ResultKey];
             return result[UsCensusBureauConstants.AddressMatchesKey]
                 .Select(match =>
-                {
-                    var formatted = match[UsCensusBureauConstants.MatchedAddressKey].ToString();
+	            {
+		            var matched = match[UsCensusBureauConstants.MatchedAddressKey].ToString();
+                    var normalized = UpperFirstLetterOfEachWord(matched);
                     var coordinates = match[UsCensusBureauConstants.CoordinatesKey];
                     var x = double.Parse(coordinates[UsCensusBureauConstants.XKey].ToString());
                     var y = double.Parse(coordinates[UsCensusBureauConstants.YKey].ToString());
                     
-                    return new UsCensusBureauAddress(formatted, new Location(y, x));
+                    return new UsCensusBureauAddress(normalized, new Location(y, x));
                 })
                 .ToArray();
         }
+
+	    private static string UpperFirstLetterOfEachWord(string input)
+	    {
+		    var parts = input.Split(' ')
+			    .Select(s => char.ToUpper(s[0]) + s.Substring(1).ToLower())
+			    .ToArray();
+		    
+		    return string.Join(" ", parts);
+	    }
     }
 }
