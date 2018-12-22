@@ -23,7 +23,8 @@ build_script:
 test_script: 
     #- ps: dotnet test --filter 
 after_test: 
-    - ps: dotnet pack /p:Version=$env:APPVEYOR_BUILD_VERSION /p:Configuration=Release -o artifacts
+    - ps: dotnet pack /p:Version=$env:APPVEYOR_BUILD_VERSION /p:Configuration=Release -o ../../artifacts
+    - ps: dotnet nuget push artifacts\*.nupkg -k $env:nuget_apikey -s https://www.myget.org/F/280capmarkets/auth/$env:nuget_apikey/api/v3/index.json
 
 artifacts:
   - path: 'src\**\*.nupkg'
