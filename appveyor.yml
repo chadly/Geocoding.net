@@ -21,7 +21,7 @@ install:
 build_script:
     - ps: dotnet build /p:Version=$env:APPVEYOR_BUILD_VERSION /p:Configuration=Release
 test_script: 
-    - ps: dotnet test
+    #- ps: dotnet test --filter 
 after_test: 
     - ps: dotnet pack /p:Version=$env:APPVEYOR_BUILD_VERSION /p:Configuration=Release -o artifacts
 
