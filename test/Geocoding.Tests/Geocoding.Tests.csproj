@@ -23,6 +23,7 @@
     <ProjectReference Include="..\..\src\Geocoding.Here\Geocoding.Here.csproj" />
     <ProjectReference Include="..\..\src\Geocoding.MapQuest\Geocoding.MapQuest.csproj" />
     <ProjectReference Include="..\..\src\Geocoding.Microsoft\Geocoding.Microsoft.csproj" />
+    <ProjectReference Include="..\..\src\Geocoding.UsCensusBureau\Geocoding.UsCensusBureau.csproj" />
     <ProjectReference Include="..\..\src\Geocoding.Yahoo\Geocoding.Yahoo.csproj" />
   </ItemGroup>
 
