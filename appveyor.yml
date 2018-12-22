@@ -20,7 +20,7 @@ install:
   
 build_script: msbuild /p:Version=$APPVEYOR_BUILD_VERSION /p:Configuration=Release
 test_script: 
-    - msbuild -t:test
+    - msbuild test
 
 after_test: 
   - msbuild -t:pack /p:Version=$APPVEYOR_BUILD_VERSION /p:Configuration=Release -o artifacts
