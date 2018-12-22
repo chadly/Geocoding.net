@@ -15,9 +15,9 @@ services:
   - docker
 
 install:
-  - git clone -b develop --single-branch https://$github_apikey@github.com/280CapMarkets/TwoEightyCap.DevOps.Tools.git ~/tools
-  - bash ~/tools/dist/shared/version.sh
-
+  - git clone -b develop --single-branch https://$github_apikey@github.com/280CapMarkets/TwoEightyCap.DevOps.Tools.git ~\tools
+  - .\~\tools\dist\tools/Init.ps1
+  
 build_script: MSBuild /p:Version=$APPVEYOR_BUILD_VERSION /p:Configuration=Release
 test_script: 
     - MSBuild --help
