@@ -19,10 +19,12 @@ install:
   - bash ~/tools/dist/shared/version.sh
 
 build_script: MSBuild /p:Version=$APPVEYOR_BUILD_VERSION /p:Configuration=Release
-test_script: MSBuild test
+test_script: 
+    - MSBuild --help
+    - MSBuild test
 
 after_test: 
-  - bash ~/tools/dist/dotnet/publish_nuget.sh $nuget_apikey
+  - msbuild -t:pack /p:Version=$APPVEYOR_BUILD_VERSION /p:Configuration=Release -o artifacts
 
 artifacts:
   - path: 'src\**\*.nupkg'
