@@ -1,0 +1,47 @@
+version: 4.0.1-{build}
+skip_tags: true
+image: ubuntu1804
+
+environment:
+  github_apikey:
+    secure: scoX9iR0iwbkHsEc7X0doOONik+WW93s4adA4T3Zcbr2MrsEK6LWnMLfdSctATjx
+  nuget_apikey:
+    secure: i/4GCUy+iqG/ytoKAFwTXJqOjSNqnzo8gJmLiiB0dWjVG6j//71LC01FWWig5B9d
+  docker_password:
+    secure: 3BLFSWasBkoBDnePlBhgN0zzV0lRnmJ+BJ2WFEKHIKMt1f0j/CimHAZKFSzu9jvA
+  octopus_apikey:
+    secure: XUJisBpllF5tywdA3kclw3hbZqJ/MTnf90j6kTVxe8M=
+
+services:
+  - docker
+
+install:
+  - git clone -b develop --single-branch https://$github_apikey@github.com/280CapMarkets/TwoEightyCap.DevOps.Tools.git ~/tools
+  - bash ~/tools/dist/shared/version.sh
+  - bash ~/tools/dist/dotnet/install.sh
+  - bash ~/tools/dist/dotnet/sonar.sh start
+
+build_script: bash ~/tools/dist/dotnet/build.sh $nuget_apikey
+test_script: bash ~/tools/dist/dotnet/test.sh
+after_test: 
+  - bash ~/tools/dist/dotnet/sonar.sh stop
+  - bash ~/tools/dist/dotnet/publish_nuget.sh $nuget_apikey
+deploy_script: 
+  - bash ~/tools/dist/dotnet/publish_sf.sh $octopus_apikey
+  - bash ~/tools/dist/shared/publish_docker.sh $octopus_apikey $docker_password out
+
+artifacts:
+  - path: 'src\**\*.nupkg'
+    name: nuget-package
+    
+cache:
+  - $HOME/.nuget/packages -> **\*.csproj
+  - $HOME/.dotnet/tools -> **\*.csproj
+  - packages -> **\*.csproj
+
+matrix:
+  fast_finish: true
+
+notifications:
+- provider: Slack
+  incoming_webhook: https://hooks.slack.com/services/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
