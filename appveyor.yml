@@ -1,6 +1,5 @@
 version: 4.0.1-{build}
 skip_tags: true
-image: ubuntu1804
 
 environment:
   github_apikey:
@@ -18,17 +17,12 @@ services:
 install:
   - git clone -b develop --single-branch https://$github_apikey@github.com/280CapMarkets/TwoEightyCap.DevOps.Tools.git ~/tools
   - bash ~/tools/dist/shared/version.sh
-  - bash ~/tools/dist/dotnet/install.sh
-  - bash ~/tools/dist/dotnet/sonar.sh start
 
-build_script: bash ~/tools/dist/dotnet/build.sh $nuget_apikey
-test_script: bash ~/tools/dist/dotnet/test.sh
+build_script: MSBuild /p:Version=$APPVEYOR_BUILD_VERSION /p:Configuration=Release
+test_script: MSBuild test
+
 after_test: 
-  - bash ~/tools/dist/dotnet/sonar.sh stop
   - bash ~/tools/dist/dotnet/publish_nuget.sh $nuget_apikey
-deploy_script: 
-  - bash ~/tools/dist/dotnet/publish_sf.sh $octopus_apikey
-  - bash ~/tools/dist/shared/publish_docker.sh $octopus_apikey $docker_password out
 
 artifacts:
   - path: 'src\**\*.nupkg'
