@@ -18,12 +18,9 @@ install:
   #- git clone -b develop --single-branch https://$github_apikey@github.com/280CapMarkets/TwoEightyCap.DevOps.Tools.git ~\tools
   #- .\~\tools\dist\tools/Init.ps1
   
-build_script: msbuild /p:Version=$APPVEYOR_BUILD_VERSION /p:Configuration=Release
-test_script: 
-    - msbuild test
-
-after_test: 
-  - msbuild -t:pack /p:Version=$APPVEYOR_BUILD_VERSION /p:Configuration=Release -o artifacts
+build_script: dotnet build /p:Version=$APPVEYOR_BUILD_VERSION /p:Configuration=Release
+test_script: dotnet test
+after_test: dotnet pack /p:Version=$APPVEYOR_BUILD_VERSION /p:Configuration=Release -o artifacts
 
 artifacts:
   - path: 'src\**\*.nupkg'
