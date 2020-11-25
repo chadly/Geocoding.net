@@ -70,6 +70,7 @@ namespace Geocoding.Tests
 		[InlineData("40 1/2 Road")]
 		[InlineData("B's Farm RD")]
 		[InlineData("Wilshire & Bundy Plaza, Los Angeles")]
+		[InlineData("Étretat, France")]
 		public virtual async Task CanGeocodeWithSpecialCharacters(string address)
 		{
 			Address[] addresses = (await geocoder.GeocodeAsync(address)).ToArray();

@@ -70,6 +70,13 @@ namespace Geocoding.Tests
 		}
 
 		[Fact]
+		public async Task CanGeocodeWithUnicodeCharacters()
+		{
+			var addresses = await asyncGeocoder.GeocodeAsync("Étretat, France");
+			Assert.NotEmpty(addresses);
+		}
+
+		[Fact]
 		public async Task CanReverseGeocodeAsync()
 		{
 			var addresses = await asyncGeocoder.ReverseGeocodeAsync(38.8976777, -77.036517);
