@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -170,7 +170,7 @@ namespace Geocoding.MapQuest
 					break;
 			}
 			request.Method = f.RequestVerb;
-			request.ContentType = "application/" + f.InputFormat;
+			request.ContentType = "application/" + f.InputFormat + "; charset=utf-8";
 
 			if (Proxy != null)
 				request.Proxy = Proxy;
