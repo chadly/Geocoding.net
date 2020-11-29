@@ -31,25 +31,25 @@
 		/// </summary>
 		ZIP = 5,
 		/// <summary>
+		/// A6 Admin area. For USA, a neighborhood.
+		/// </summary>
+		NEIGHBORHOOD = 6,
+		/// <summary>
 		/// A5	Admin area. For USA, a city.
 		/// </summary>
-		CITY = 6,
+		CITY = 7,
 		/// <summary>
 		/// A4	Admin area. For USA, a county.
 		/// </summary>
-		COUNTY = 7,
+		COUNTY = 8,
 		/// <summary>
 		/// A3	Admin area. For USA, a state.
 		/// </summary>
-		STATE = 8,
+		STATE = 9,
 		/// <summary>
 		/// A1	Admin area, largest. For USA, a country.
 		/// </summary>
-		COUNTRY = 9,
-		/// <summary>
-		/// Admin area. For USA, a neighborhood.
-		/// </summary>
-		NEIGHBORHOOD = 10,
+		COUNTRY = 10,
 
 		UNKNOWN = 11
 	}
