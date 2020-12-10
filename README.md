@@ -7,7 +7,7 @@ Includes a model and interface for communicating with five popular Geocoding pro
   * [Bing Maps (aka Virtual Earth)](http://www.microsoft.com/maps/) - [docs](http://msdn.microsoft.com/en-us/library/ff701715.aspx)
   * :warning: MapQuest [(Commercial API)](http://www.mapquestapi.com/) - [docs](http://www.mapquestapi.com/geocoding/)
   * :warning: MapQuest [(OpenStreetMap)](http://open.mapquestapi.com/) - [docs](http://open.mapquestapi.com/geocoding/)
-  * [HERE](https://www.here.com/) - [docs](https://developer.here.com/documentation)
+  * [HERE](https://www.here.com/) - [docs](https://developer.here.com/documentation/geocoding-search-api)
 
 The API returns latitude/longitude coordinates and normalized address information.  This can be used to perform address validation, real time mapping of user-entered addresses, distance calculations, and much more.
 
@@ -73,7 +73,7 @@ You will need a [consumer secret and consumer key](http://developer.yahoo.com/bo
 
 MapQuest API requires a key. Sign up here: (http://developer.mapquest.com/web/products/open)
 
-HERE requires an [app ID and app Code](https://developer.here.com/?create=Freemium-Basic&keepState=true&step=account)
+HERE requires an [API key](https://developer.here.com/?create=Freemium-Basic&keepState=true&step=account).
 
 ## How to Build from Source
 

@@ -4,8 +4,7 @@ namespace Geocoding.Here
 {
 	public class HereAddress : Address
 	{
-		readonly string street, houseNumber, city, state, country, postalCode;
-		readonly HereLocationType type;
+		readonly string street, houseNumber, city, state, country, postalCode, resultType;
 
 		public string AddressLine
 		{
@@ -37,13 +36,13 @@ namespace Geocoding.Here
 			get { return postalCode ?? ""; }
 		}
 
-		public HereLocationType Type
+		public String ResultType
 		{
-			get { return type; }
+			get { return resultType; }
 		}
 
 		public HereAddress(string formattedAddress, Location coordinates, string street, string houseNumber, string city,
-			string state, string postalCode, string country, HereLocationType type)
+			string state, string postalCode, string country, string resultType)
 			: base(formattedAddress, coordinates, "HERE")
 		{
 			this.street = street;
@@ -52,7 +51,7 @@ namespace Geocoding.Here
 			this.state = state;
 			this.postalCode = postalCode;
 			this.country = country;
-			this.type = type;
+			this.resultType = resultType;
 		}
 	}
 }
