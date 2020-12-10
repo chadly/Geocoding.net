@@ -223,12 +223,19 @@ namespace Geocoding.Here
 					if (serverResponse.StatusCode != null)
 					{
 						throw new HereGeocodingException(
-							serverResponse.Title, 
-							serverResponse.StatusCode.Value, 
+							serverResponse.Title,
+							serverResponse.StatusCode.Value,
 							serverResponse.Cause,
 							serverResponse.Action,
 							serverResponse.CorrelationId,
 							serverResponse.RequestId);
+					}
+					else if (serverResponse.Error != null)
+					{
+						throw new HereGeocodingException(
+							serverResponse.ErrorDescription,
+							(int)response.StatusCode,
+							serverResponse.Error);
 					}
 
 					return serverResponse.Items;

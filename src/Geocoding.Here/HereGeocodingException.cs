@@ -18,6 +18,13 @@ namespace Geocoding.Here
 		{
 		}
 
+		public HereGeocodingException(string message, int statusCode, string cause)
+			: base(message)
+		{
+			StatusCode = statusCode;
+			Cause = cause;
+		}
+
 		public HereGeocodingException(string message, int statusCode, string cause, string action, string correlationId, string requestId)
 			: base(message)
 		{
