@@ -10,7 +10,8 @@ namespace Geocoding.Tests
 
 		protected override IGeocoder CreateAsyncGeocoder()
 		{
-			return new HereGeocoder(settings.HereAppId, settings.HereAppCode);
+			geoCoder = new HereGeocoder(settings.HereApiKey);
+			return geoCoder;
 		}
 	}
 }

@@ -10,10 +10,8 @@ namespace Geocoding.Tests
 			string adr = address.FormattedAddress.ToLower();
 			Assert.True(
 				adr.Contains("The White House") ||
-				adr.Contains("1600 pennsylvania ave nw") ||
-				adr.Contains("1600 pennsylvania avenue northwest") ||
-				adr.Contains("1600 pennsylvania avenue nw") ||
-				adr.Contains("1600 pennsylvania ave northwest")
+				adr.Contains("1600 pennsylvania avenue") ||
+				adr.Contains("1600 pennsylvania ave")
 			);
 			AssertWhiteHouseArea(address);
 		}
@@ -27,11 +25,9 @@ namespace Geocoding.Tests
 			);
 
 			//just hoping that each geocoder implementation gets it somewhere near the vicinity
-			double lat = Math.Round(address.Coordinates.Latitude, 2);
-			Assert.Equal(38.90, lat);
+			Assert.Equal(38.9, address.Coordinates.Latitude, 1);
 
-			double lng = Math.Round(address.Coordinates.Longitude, 2);
-			Assert.Equal(-77.04, lng);
+			Assert.Equal(-77.0, address.Coordinates.Longitude, 1);
 		}
 
 		public static void AssertCanadianPrimeMinister(this Address address)
