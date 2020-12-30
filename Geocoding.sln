@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geocoding.Tests", "test\Geo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geocoding.Here", "src\Geocoding.Here\Geocoding.Here.csproj", "{41F9E0D3-2094-4CE7-A2CD-F3CAF585A048}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geocoding.UsCensusBureau", "src\Geocoding.UsCensusBureau\Geocoding.UsCensusBureau.csproj", "{45E82D63-BEC0-4DF2-AC0E-AEB2D235ED5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{41F9E0D3-2094-4CE7-A2CD-F3CAF585A048}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41F9E0D3-2094-4CE7-A2CD-F3CAF585A048}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41F9E0D3-2094-4CE7-A2CD-F3CAF585A048}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45E82D63-BEC0-4DF2-AC0E-AEB2D235ED5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45E82D63-BEC0-4DF2-AC0E-AEB2D235ED5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45E82D63-BEC0-4DF2-AC0E-AEB2D235ED5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45E82D63-BEC0-4DF2-AC0E-AEB2D235ED5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +69,7 @@ Global
 		{27F58640-D424-40F5-945E-42BF8BC872A0} = {F742864D-9400-4CE2-957A-DBD0A0237277}
 		{9773C7DA-DD1A-490D-B4D8-CEA18804AD1E} = {F742864D-9400-4CE2-957A-DBD0A0237277}
 		{41F9E0D3-2094-4CE7-A2CD-F3CAF585A048} = {F742864D-9400-4CE2-957A-DBD0A0237277}
+		{45E82D63-BEC0-4DF2-AC0E-AEB2D235ED5B} = {F742864D-9400-4CE2-957A-DBD0A0237277}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {085E97E6-56E0-4099-94E9-10F9080F2DD1}

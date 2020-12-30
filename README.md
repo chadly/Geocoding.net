@@ -8,6 +8,7 @@ Includes a model and interface for communicating with five popular Geocoding pro
   * :warning: MapQuest [(Commercial API)](http://www.mapquestapi.com/) - [docs](http://www.mapquestapi.com/geocoding/)
   * :warning: MapQuest [(OpenStreetMap)](http://open.mapquestapi.com/) - [docs](http://open.mapquestapi.com/geocoding/)
   * [HERE](https://www.here.com/) - [docs](https://developer.here.com/documentation)
+  * [U.S. Census Geocoder](https://geocoding.geo.census.gov/) - [docs](https://geocoding.geo.census.gov/geocoder/Geocoding_Services_API.pdf) (note: US Only & reverse geocoding not supported)
 
 The API returns latitude/longitude coordinates and normalized address information.  This can be used to perform address validation, real time mapping of user-entered addresses, distance calculations, and much more.
 
