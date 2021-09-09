@@ -1,15 +1,12 @@
-﻿using System.Globalization;
-using System.Linq;
-using System.Threading;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Extensions;
 
 namespace Geocoding.Tests
 {
 	public abstract class GeocoderTest
 	{
-		readonly IGeocoder geocoder;
+		protected readonly IGeocoder geocoder;
 		protected readonly SettingsFixture settings;
 
 		public GeocoderTest(SettingsFixture settings)
