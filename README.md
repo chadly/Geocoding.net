@@ -65,7 +65,7 @@ The Microsoft and Yahoo implementations each provide their own address class as 
 
 ## API Keys
 
-Google allows anonymous access to it's API, but if you start hitting rate limits, you must [sign up for a new Server API Key](https://developers.google.com/maps/documentation/javascript/tutorial#api_key).
+Google [requires a new Server API Key](https://developers.google.com/maps/documentation/javascript/tutorial#api_key) to access its service.
 
 Bing [requires an API key](http://msdn.microsoft.com/en-us/library/ff428642.aspx) to access its service.
 
