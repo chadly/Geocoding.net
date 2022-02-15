@@ -40,14 +40,9 @@ namespace Geocoding.Tests
 			get { return config.GetValue<string>("mapQuestKey"); }
 		}
 
-		public string HereAppId
+		public string HereApiKey
 		{
-			get { return config.GetValue<string>("hereAppId"); }
-		}
-
-		public string HereAppCode
-		{
-			get { return config.GetValue<string>("hereAppCode"); }
+			get { return config.GetValue<string>("hereApiKey"); }
 		}
 	}
 
