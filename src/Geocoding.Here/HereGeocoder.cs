@@ -181,18 +181,21 @@ namespace Geocoding.Here
 
 		private IEnumerable<HereAddress> ParseResponse(IEnumerable<Json.Item> responseItems)
 		{
-			foreach (var item in responseItems)
+			if (responseItems != null)
 			{
-				yield return new HereAddress(
-					item.Address.Label,
-					new Location(item.Position.Latitude, item.Position.Longitude),
-					item.Address.Street,
-					item.Address.HouseNumber,
-					item.Address.City,
-					item.Address.State,
-					item.Address.PostalCode,
-					item.Address.CountryName,
-					item.ResultType);
+				foreach (var item in responseItems)
+				{
+					yield return new HereAddress(
+						item.Address.Label,
+						new Location(item.Position.Latitude, item.Position.Longitude),
+						item.Address.Street,
+						item.Address.HouseNumber,
+						item.Address.City,
+						item.Address.State,
+						item.Address.PostalCode,
+						item.Address.CountryName,
+						item.ResultType);
+				}
 			}
 		}
 
@@ -241,14 +244,6 @@ namespace Geocoding.Here
 					return serverResponse.Items;
 				}
 			}
-		}
-
-		private string UrlEncode(string toEncode)
-		{
-			if (string.IsNullOrEmpty(toEncode))
-				return string.Empty;
-
-			return WebUtility.UrlEncode(toEncode);
 		}
 	}
 }
